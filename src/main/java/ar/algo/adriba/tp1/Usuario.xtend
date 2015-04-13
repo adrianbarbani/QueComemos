@@ -6,7 +6,7 @@ import java.util.List
 @Accessors
 class Usuario {
 	int peso
-	int altura // en cm
+	double altura 
 	char sexo
 	String nombre
 
@@ -19,6 +19,8 @@ class Usuario {
 	List <Receta> recetasDelUsuario
 	
 	
-	def
+	def imc (){
+		this.peso/(this.altura*this.altura) //devuelve el indice de masa corporal
+	}
 	
 }
