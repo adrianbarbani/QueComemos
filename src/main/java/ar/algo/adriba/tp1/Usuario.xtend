@@ -18,4 +18,7 @@ class Usuario {
 	Rutina rutinaUsuario = new SedentariaConAlgoDeEjercicio // una rutina, de 5 posibles
 	List <Receta> recetasDelUsuario
 	
+	
+	def
+	
 }
