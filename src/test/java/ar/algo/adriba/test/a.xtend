@@ -11,7 +11,7 @@ class a {
 	@Test
 	def void Test1() {
 		federico= new Usuario
-		federico.setAltura(1.88)
+		federico.setAltura(1.88) //cambie la altura de int a double
 		federico.setPeso(83)
 		Assert.assertEquals (23.48, federico.imc(), 0.1) 	
 		
