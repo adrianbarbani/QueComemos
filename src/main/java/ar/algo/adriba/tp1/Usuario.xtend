@@ -24,7 +24,16 @@ class Usuario {
 	}
 
 	def boolean usuarioValido() {
-		this.camposObligatorios() && this.validacionDiabetico()
+		this.camposObligatorios() && this.validacionDiabetico() && this.validacionVegano()
+	}
+
+	def boolean validacionVegano() {
+		preferenciasAlimentarias.forall[Comida|noescarnivora(Comida)]
+	}
+
+	// esto deberia estar en una clase comida, despues vemos
+	def boolean noescarnivora(String Comida) {
+		Comida != 'carne' || Comida != 'pollo' || Comida != 'chivito' || Comida != 'chori'
 	}
 
 	def boolean validacionDiabetico() {
@@ -35,12 +44,15 @@ class Usuario {
 		}
 	}
 
-	def boolean validacionSexo() {
-		true //ver  pongo this.sexo != null y me dice que != no es valido para char o string.
+	def boolean validacionSexo() { // como no se banca comparar con null un caracter hacemos esto para validar el sexo. valores posibles : f, F, m, M
+		this.sexo == 'f' || this.sexo == 'm' || this.sexo == 'F' || this.sexo == 'M'
 	}
 
 	def boolean camposObligatorios() {
-		this.peso != 0 && this.altura != 0 //nombre + de 4 caracteres no se como se hace, la fecha bue hay que preguntar eso y no se como hacer si rutinaUsuario no apunta a nada. a y preguntar por &&
+
+		// agregué que mida los caracteres del nombre
+		// la fecha hay que preguntar y no se como hacer si rutinaUsuario no apunta a nada. a y preguntar por &&
+		this.peso != 0 && this.altura != 0 && this.nombre.length > 4
 	}
 
 	def boolean esDiabetico() {
@@ -60,8 +72,8 @@ class Usuario {
 		condicionesPreexistentes.empty
 	} //me dice si no tengo condiciones preexistentes (si la coleccion esta vacia)
 
-	def boolean puedosubsanar() { //VER
-		condicionesPreexistentes.AllSatisfy[] //??? como seria el allSatisfy en xtend + [:i | i.loSatisface(this)] mando a la persona
+	def boolean puedosubsanar() { // se hace con un forall pero no sé qué estabas queriendo hacer :D
+		condicionesPreexistentes.forall[i|i.loSatisface(this)] //  como seria el allSatisfy en xtend + [:i | i.loSatisface(this)] mando a la persona
 	}
 
 }
