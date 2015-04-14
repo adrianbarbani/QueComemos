@@ -81,7 +81,7 @@ class Usuario {
 	}
 	
 	def boolean esHipertenso() {
-		condicionesPreexistentes.contains(Hipertenso)
+		condicionesPreexistentes.contains("Hipertenso")
 	}
 	
 
