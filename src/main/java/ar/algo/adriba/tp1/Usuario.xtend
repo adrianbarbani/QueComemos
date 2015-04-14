@@ -55,13 +55,13 @@ class Usuario {
 		(this.imcenrango())&& ((this.notengocondiciones()) || this.puedosubsanar())} //falta el metodo de subsanar que depende de cada condicion, vemos como hacemos 
 
 	def boolean imcenrango(){
-		imc()>18 && imc()<30} //me dice si el imc esta en el rango de 18 a 30
+		this.imc()>18 && this.imc()<30} //me dice si el imc esta en el rango de 18 a 30
 		
 	def boolean notengocondiciones(){
 		condicionesPreexistentes.empty} //me dice si no tengo condiciones preexistentes (si la coleccion esta vacia)
 		
 	def boolean puedosubsanar(){ //VER
-		condicionesPreexistentes allSatisfy //??? como seria el allSatisfy en xtend + [:i | i.loSatisface(this)] mando a la persona
+		condicionesPreexistentes.AllSatisfy[] //??? como seria el allSatisfy en xtend + [:i | i.loSatisface(this)] mando a la persona
 		}
 	
 }
