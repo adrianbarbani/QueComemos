@@ -3,28 +3,36 @@ package ar.algo.adriba.tp1
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.List
 import java.util.ArrayList
+import java.util.Date
 
 @Accessors
 class Usuario {
 	int peso
 	double altura
-	char sexo
+	Sexo sexo
 	String nombre
+	Date fechaDeNacimiento
 	
 	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
 	List<String> preferenciasAlimentarias = new ArrayList<String>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 
-	Rutina rutinaUsuario = new SedentariaConAlgoDeEjercicio //ejemplo una rutina, de 5 posibles
+	Rutina rutinaUsuario = new SedentariaConAlgoDeEjercicio //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario
+	
+	new(String nombre, int peso, double altura, Date fechaDeNacimiento, Rutina rutinaUsuario){
+		sexo = new SexoIndefinido //Vamos con este por default
+		
+	}
 
 	def double imc() { // agregue el tipo
+
 		this.peso / (this.altura * this.altura) //devuelve el indice de masa corporal
 	}
 
 
-	def boolean usuarioValido() {
+	def boolean usuarioValido() { //validar el constructor
 		this.camposObligatorios() && this.validacionDiabetico() && this.validacionVegano() && this.validacionHipertenso() // falta lo de la fecha de nacimiento
 
 	}
@@ -49,13 +57,13 @@ class Usuario {
 	}
 
 
-	def boolean validacionSexo() { // como no se banca comparar con null un caracter hacemos esto para validar el sexo. valores posibles : f, F, m, M
+	def boolean validacionSexo() { // hacer una clase genero con una interface y que tenga por defecto un indefinido
 		this.sexo == 'f' || this.sexo == 'm' || this.sexo == 'F' || this.sexo == 'M'
 
 	}
 
 	def boolean camposObligatorios() {
-
+		//editar a futuro
 		// agregué que mida los caracteres del nombre
 		// la fecha hay que preguntar y no se como hacer si rutinaUsuario no apunta a nada. a y preguntar por &&
 		this.peso != 0 && this.altura != 0 && this.nombre.length > 4
