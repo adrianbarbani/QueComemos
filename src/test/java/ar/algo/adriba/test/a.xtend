@@ -4,7 +4,7 @@ import org.junit.Test
 import ar.algo.adriba.tp1.Usuario
 import org.junit.Assert
 
-class a {
+class a { // si saben cambiar el nombre de la clase haganlo por que no me acuerdo
 	
 	Usuario federico
 	
