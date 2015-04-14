@@ -10,7 +10,7 @@ class Usuario {
 	double altura 
 	char sexo
 	String nombre
-
+	
 	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
 	List<String> comidaQueLeDisgusta = new ArrayList <String>
 	List<String> preferenciasAlimentarias = new ArrayList <String>
@@ -24,18 +24,23 @@ class Usuario {
 		this.peso/(this.altura*this.altura) //devuelve el indice de masa corporal
 	}
 	
+// parte 1
 	def boolean usuarioValido () {
-		this.camposObligatorios() && this.validacionDiabetico() 
+		this.camposObligatorios() && this.validacionDiabetico() && this.validacionHipertenso() && this.validacionVegano() // falta lo de la fecha de nacimiento
 	}
+	
+	
 	
 	def boolean validacionDiabetico() {
 		if (this.esDiabetico()){
 			this.validacionSexo()
+			this.tamañoPreferencias() > 0
 		}else{
 			true
 		}
 	}
 	
+
 	def boolean validacionSexo() {
 		true //ver  pongo this.sexo != null y me dice que != no es valido para char o string.
 	}
@@ -45,13 +50,31 @@ class Usuario {
 	}
 	
 	def boolean esDiabetico(){
-		condicionesPreexistentes.contains("Diabetico")
+		condicionesPreexistentes.contains(Diabetico)// quiero saber si contenia un objeto de la clase Diabetico
+	}
+// seguir con "si el usuario es hipertenso o diabético, debe indicar al menos una preferencia"
+	
+		def tamañoPreferencias() {
+		preferenciasAlimentarias.size 
 	}
 	
+		def boolean validacionHipertenso(){
+		if (this.esHipertenso()){
+			this.tamañoPreferencias() > 0
+		}else{
+			true
+		}
+	}
 	
+	def boolean esHipertenso() {
+		condicionesPreexistentes.contains(Hipertenso)
+	}
+	
+
+	 
 	//Parte 2
 	
-	def boolean sigoRutinaSaludable (){
+  	def boolean sigoRutinaSaludable (){
 		(this.imcenrango())&& ((this.notengocondiciones()) || this.puedosubsanar())} //falta el metodo de subsanar que depende de cada condicion, vemos como hacemos 
 
 	def boolean imcenrango(){
@@ -61,7 +84,7 @@ class Usuario {
 		condicionesPreexistentes.empty} //me dice si no tengo condiciones preexistentes (si la coleccion esta vacia)
 		
 	def boolean puedosubsanar(){ //VER
-		condicionesPreexistentes.AllSatisfy[] //??? como seria el allSatisfy en xtend + [:i | i.loSatisface(this)] mando a la persona
+		condicionesPreexistentes .AllSatisfy //??? como seria el allSatisfy en xtend + [:i | i.loSatisface(this)] mando a la persona ---- se me ocurre hacer un exist negado 
 		}
 	
 }
