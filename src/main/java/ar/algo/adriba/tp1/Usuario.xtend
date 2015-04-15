@@ -4,15 +4,19 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.List
 import java.util.ArrayList
 import java.util.Date
+import java.text.SimpleDateFormat
 
 @Accessors
 class Usuario {
 	int peso
 	double altura
 	Sexo sexo
-	String nombre
-	Date fechaDeNacimiento // ver mensajes en date 
-		
+	String nombre	
+	Date fechaDeNacimiento
+	Date fechaActual
+	
+	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
+
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
 	List<String> preferenciasAlimentarias = new ArrayList<String>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
@@ -30,13 +34,18 @@ class Usuario {
 	}
 
 
+
 	def boolean usuarioValido() { 
-		this.camposObligatorios() && this.validacionCondicionesPreexistentes//falta lo de la fecha de nacimiento
+		this.camposObligatorios() && this.validacionCondicionesPreexistentes && this.validacionFecha()//falta lo de la fecha de nacimiento
 
 	}
 	
 	def boolean validacionCondicionesPreexistentes() {
-		condicionesPreexistentes.forall[condicion|condicion.validacion(this)]
+		condicionesPreexistentes.forall[condicion|condicion.validacion(this)]}
+
+	def boolean validacionFecha() {
+		this.fechaDeNacimiento.before(fechaActual) //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
+
 	}
 
 	def boolean validacionVegano() {
@@ -47,6 +56,7 @@ class Usuario {
 	def boolean noEsCarnivoro(String comida) {
 		comida != 'carne' || comida != 'pollo' || comida != 'chivito' || comida != 'chori'
 	}
+
 
 
 	def boolean camposObligatorios() {
