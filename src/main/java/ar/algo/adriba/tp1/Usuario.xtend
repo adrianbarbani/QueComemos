@@ -4,6 +4,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.List
 import java.util.ArrayList
 import java.util.Date
+import java.text.SimpleDateFormat
 
 @Accessors
 class Usuario {
@@ -12,6 +13,7 @@ class Usuario {
 	Sexo sexo
 	String nombre
 	Date fechaDeNacimiento
+	Date fechaActual
 	
 	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
@@ -33,8 +35,12 @@ class Usuario {
 
 
 	def boolean usuarioValido() { //validar el constructor
-		this.camposObligatorios() && this.validacionDiabetico() && this.validacionVegano() && this.validacionHipertenso() // falta lo de la fecha de nacimiento
-
+		this.camposObligatorios() && this.validacionDiabetico() && this.validacionVegano() && this.validacionHipertenso() && this.validacionFecha()
+		
+	}
+	
+	def boolean validacionFecha() {
+		this.fechaDeNacimiento.before(fechaActual) //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
 	}
 
 	def boolean validacionVegano() {
@@ -49,8 +55,7 @@ class Usuario {
 
 	def boolean validacionDiabetico() {
 		if (this.esDiabetico()) {
-			this.validacionSexo()
-			this.tamañoPreferencias() > 0
+			this.validacionSexo() && this.tamañoPreferencias() > 0 //agrego el &&
 		} else {
 			true
 		}
@@ -58,8 +63,9 @@ class Usuario {
 
 
 	def boolean validacionSexo() { // hacer una clase genero con una interface y que tenga por defecto un indefinido
-		this.sexo == 'f' || this.sexo == 'm' || this.sexo == 'F' || this.sexo == 'M'
-
+		//this.sexo == 'f' || this.sexo == 'm' || this.sexo == 'F' || this.sexo == 'M'
+		
+		sexo.esValido() //quedaria asi?
 	}
 
 	def boolean camposObligatorios() {
