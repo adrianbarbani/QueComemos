@@ -36,7 +36,7 @@ class Usuario {
 
 
 	def boolean usuarioValido() { 
-		this.camposObligatorios() && this.validacionCondicionesPreexistentes && this.validacionFecha()//falta lo de la fecha de nacimiento
+		this.camposObligatorios() && this.validacionCondicionesPreexistentes && this.validacionFecha()
 
 	}
 	
@@ -44,7 +44,7 @@ class Usuario {
 		condicionesPreexistentes.forall[condicion|condicion.validacion(this)]}
 
 	def boolean validacionFecha() {
-		this.fechaDeNacimiento.before(fechaActual) //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
+		fechaDeNacimiento.before(fechaActual) //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
 
 	}
 
