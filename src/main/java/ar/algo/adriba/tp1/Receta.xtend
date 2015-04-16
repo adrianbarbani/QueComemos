@@ -15,5 +15,5 @@ class Receta {
 	
 	Temporada temporada = new Navidad // new navidad es un ejemplo
 	
-		
+		//0303456 
 }
