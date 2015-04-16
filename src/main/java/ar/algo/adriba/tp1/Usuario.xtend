@@ -100,4 +100,15 @@ class Usuario {
 		preferenciasAlimentarias.exists[comida|comida.sosFruta]
 	}
 
+//------------------------------------------------------------------------------
+
+	//Parte 3 (Recetas)
+
+	def agregarReceta(Receta unaReceta){
+		if (unaReceta.esvalida()==true)
+			{
+				recetasDelUsuario.add(unaReceta)
+			}
+		else //tira error que la receta no es valida, despues lo hago
+	}
 }
