@@ -10,10 +10,21 @@ class Receta {
 	List <Ingrediente> ingredientes
 	List <Condimento> condimentos
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
-	//condiciones preexistente inadecuado
+	List <CondicionPreexistente> condicionesInadecuadas //condiciones preexistente inadecuado
 	int caloriasReceta 
+	String dificultad //es una sola palabra, no se usa para otra cosa me parece
 	
 	Temporada temporada = new Navidad // new navidad es un ejemplo
 	
-		//0303456 
+	def boolean esvalida() {
+		(this.unIngrediente() && this.rangoCalorias())
+	}
+	
+	def boolean rangoCalorias() {
+		(this.caloriasReceta>10)&&(caloriasReceta<5000) //con this. o sin this. 
+	}
+	
+	def boolean unIngrediente() {
+		ingredientes.size>0
+	}
 }
