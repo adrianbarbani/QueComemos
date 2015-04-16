@@ -8,6 +8,6 @@ class Vegano extends CondicionPreexistente {
 	}
 	
 	override loSatisface(Usuario unUsuario){
-		true //le tiene que gustar las frutas
+		unUsuario.leGustaLaFruta//le tiene que gustar las frutas
 	}
 }

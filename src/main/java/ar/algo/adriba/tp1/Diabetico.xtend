@@ -9,5 +9,11 @@ class Diabetico extends CondicionPreexistente {
 		
 	}
 	
-	//falta el loSatisface con el tema de la rutina
+	override loSatisface (Usuario unUsuario){
+		this.peso(unUsuario)<70	// falta el tema de la rutina 
+	}
+	
+	def peso(Usuario usuario) {
+		usuario.peso
+	}
 }

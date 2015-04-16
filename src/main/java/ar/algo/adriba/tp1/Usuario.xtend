@@ -14,11 +14,11 @@ class Usuario {
 	String nombre	
 	Date fechaDeNacimiento
 	Date fechaActual
-	
+	//http://yuml.me/edit/827a0257
 	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
 
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
-	List<String> preferenciasAlimentarias = new ArrayList<String>
+	List<Comida> preferenciasAlimentarias = new ArrayList<Comida> //cree la clase comida (cosa que tendria que discutir con ustedes por que hay un par de cosas raras)
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 
 	Rutina rutinaUsuario = new SedentariaConAlgoDeEjercicio //ejemplo una rutina, de 5 posibles interface
@@ -28,12 +28,8 @@ class Usuario {
 		sexo = new SexoIndefinido //Vamos con este por default
 		}
 
-	def double imc() { 
-
-		this.peso / (this.altura * this.altura) //devuelve el indice de masa corporal
-	}
-
-
+//-------------------------------------------------------------------------------------------
+	// parte1 "validar un usuario"
 
 	def boolean usuarioValido() { 
 		this.camposObligatorios() && this.validacionCondicionesPreexistentes && this.validacionFecha()
@@ -51,16 +47,18 @@ class Usuario {
 	def boolean validacionVegano() {
 		preferenciasAlimentarias.forall[comida|this.noEsCarnivoro(comida)] // preguntar
 	}
+	
+	def boolean noEsCarnivoro(Comida comida) { // ver este metodo por el tema comida lo cambie de esta forma para el punto donde pide "saber si los veganos, si le gusta las frutas"
+		(comida.sosCarne == false)
+	}
 
 	// recive los strings, hacer clase comida?
-	def boolean noEsCarnivoro(String comida) {
-		comida != 'carne' || comida != 'pollo' || comida != 'chivito' || comida != 'chori'
-	}
+	
 
 
 
 	def boolean camposObligatorios() {
-		// la fecha hay que preguntar y no se como hacer si rutinaUsuario no apunta a nada. 
+		//no se como hacer si rutinaUsuario no apunta a nada. 
 		peso != 0 && altura != 0 && nombre.length > 4
 	}
 
@@ -76,6 +74,11 @@ class Usuario {
 	
 //--------------------------------------------------------------------------------
 	//Parte 2
+	
+	def double imc() { 
+
+		this.peso / (this.altura * this.altura) //devuelve el indice de masa corporal
+	}
 	
 	def boolean sigoRutinaSaludable() {
 		this.imcenrango() && (this.notengocondiciones() || this.puedosubsanar())
@@ -93,5 +96,8 @@ class Usuario {
 		condicionesPreexistentes.forall[i|i.loSatisface(this)]  //ver esto
 	}
 
+	def boolean leGustaLaFruta(){
+		preferenciasAlimentarias.exists[comida|comida.sosFruta]
+	}
 
 }
