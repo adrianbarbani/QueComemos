@@ -37,4 +37,12 @@ class Receta {
 	}
 
 	
+	//------------------------------------------------------------------------------------------------------
+	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
+	
+	def paraQueCondicionesSoyInadecuada() //que deberia devolver? strings? o una coleccion de condiciones...
+	{
+		
+	}
+	
 }
