@@ -1,10 +1,9 @@
 package ar.algo.adriba.tp1
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.List
 import java.util.ArrayList
 import java.util.Date
-import java.text.SimpleDateFormat
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class Usuario {
@@ -121,9 +120,11 @@ class Usuario {
 				recetasDelUsuario.add(unaReceta)
 			}
 		else {
-			}//tira error que la receta no es valida, despues lo hago
+			throw new Exception("No puede agregar la receta porque es invalida ")
+		}
+			}
 	}
 	
 
 	
-}
+

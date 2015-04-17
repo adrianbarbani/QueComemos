@@ -15,6 +15,8 @@ import ar.algo.adriba.tp1.Hipertenso
 import ar.algo.adriba.tp1.Vegano
 import ar.algo.adriba.tp1.ActivaConEjercicioAdicional
 import ar.algo.adriba.tp1.ActivaSinEjercicioAdicional
+import ar.algo.adriba.tp1.Receta
+import ar.algo.adriba.tp1.Ingrediente
 
 class TestImc { // le puse un nombre descriptivo
 
@@ -33,6 +35,14 @@ class TestImc { // le puse un nombre descriptivo
 	Fruta manzana
 	carne chorizo
 	carne pollo
+	carne nalga
+
+	Receta receta1
+	Receta receta2
+
+	Ingrediente harina
+	Ingrediente huevo
+	Ingrediente panRallado
 
 	@Before // agregué el método init para los tests y metí todos los constructores y setters ahi
 	def void init() {
@@ -69,18 +79,18 @@ class TestImc { // le puse un nombre descriptivo
 			condicionesPreexistentes.add(new Diabetico)
 			preferenciasAlimentarias.add(fruta)
 		]
-		
+
 		usuario1b = new Usuario => [
 			fruta = new Fruta
-			setSexo = new Masculino
-			setNombre("UsuarioUno")
+			setSexo = new Femenino
+			setNombre("Usuario1b")
 			setAltura(1.76)
 			setPeso(65)
 			rutinaUsuario = new SedentarioConNadaDeEjercicio
 			condicionesPreexistentes.add(new Diabetico)
 			preferenciasAlimentarias.add(fruta)
 		]
-		
+
 		usuario2 = new Usuario => [
 			chorizo = new carne
 			pollo = new carne
@@ -116,29 +126,47 @@ class TestImc { // le puse un nombre descriptivo
 			condicionesPreexistentes.add(new Vegano)
 			preferenciasAlimentarias.add(manzana)
 		]
-		
-		
+
 		usuario5 = new Usuario => [
-			
 			setSexo = new Femenino
 			setNombre("UsuarioCinco")
 			setAltura(1.76)
 			setPeso(80)
 			rutinaUsuario = new ActivaConEjercicioAdicional
 			condicionesPreexistentes.add(new Hipertenso)
-			
-			]
-			
+		]
+
 		usuario6 = new Usuario => [
-			
 			setSexo = new Masculino
 			setNombre("UsuarioSeis")
 			setAltura(1.82)
 			setPeso(2)
 			rutinaUsuario = new ActivaSinEjercicioAdicional
 			condicionesPreexistentes.add(new Hipertenso)
-			
-			]
+		]
+
+		receta1 = new Receta => [
+			nalga = new carne
+			harina = new Ingrediente
+			huevo = new Ingrediente
+			panRallado = new Ingrediente
+			harina.setCalorias(25)
+			huevo.setCalorias(10)
+			panRallado.setCalorias(12)
+			nalga.setCalorias(99)
+			setNombreDelPlato("Milanesas con Pure")
+			ingredientes.add(harina)
+			ingredientes.add(huevo)
+			ingredientes.add(panRallado)
+			ingredientes.add(nalga)
+		]
+
+		receta2 = new Receta => [
+			harina = new Ingrediente
+			harina.setCalorias(9)
+			setNombreDelPlato("Milanesas Raras")
+			ingredientes.add(harina)
+		]
 	}
 
 	//-------------------Tests de entrega 0------------------
@@ -158,7 +186,7 @@ class TestImc { // le puse un nombre descriptivo
 		Assert.assertEquals(18.7, adrian.imc(), 0.1)
 	}
 
-	//-------------------------------------------------------
+	//--------------------Validacion de Usuario -----------------------------------
 	@Test
 	def void test1() { //validacion mas basica (nombre, sexo, fecha y rutina valida)
 		Assert.assertEquals(true, federico.usuarioValido())
@@ -184,6 +212,7 @@ class TestImc { // le puse un nombre descriptivo
 		Assert.assertEquals(true, usuario4.usuarioValido())
 	}
 
+	//------------------Sigo Rutina saludable---------------------
 	@Test
 	def void test5() {
 		Assert.assertEquals(true, federico.sigoRutinaSaludable())
@@ -192,31 +221,43 @@ class TestImc { // le puse un nombre descriptivo
 
 	@Test
 	def void test6VeganoConCarne() {
-		Assert.assertEquals (false, usuario3.sigoRutinaSaludable())
-	
+		Assert.assertEquals(false, usuario3.sigoRutinaSaludable())
+
 	}
+
 	@Test
 	def void test6VeganoSinCarne() {
 		Assert.assertEquals(true, usuario4.sigoRutinaSaludable())
 	}
-	
+
 	@Test
 	def void test7HipertensoBien() {
 		Assert.assertEquals(true, usuario5.sigoRutinaSaludable())
 	}
-	
+
 	@Test
 	def void test8HipertensoMal() {
 		Assert.assertEquals(false, usuario6.sigoRutinaSaludable())
 	}
-	
+
 	@Test
 	def void test9Diabetico() {
 		Assert.assertEquals(true, usuario1b.sigoRutinaSaludable())
 	}
-	
+
 	@Test
 	def void test10Diabetico() {
 		Assert.assertEquals(true, usuario1.sigoRutinaSaludable())
+	}
+
+	//----------------------Validacion de una Receta-------------------
+	@Test
+	def void test11ValidoRecetaValida() {
+		Assert.assertEquals(true, receta1.esvalida())
+	}
+
+	@Test
+	def void test12ValidoRecetaInvalida() {
+		Assert.assertEquals(false, receta2.esvalida())
 	}
 }
