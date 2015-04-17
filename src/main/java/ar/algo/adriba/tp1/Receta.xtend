@@ -15,13 +15,16 @@ class Receta {
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
 	
 	Temporada temporada = new Navidad // new navidad es un ejemplo
+
+//-----------------------------------------------------------------------------------------------------
+// Parte 1: validacion de una receta
 	
 	def boolean esvalida() {
 		(this.unIngrediente() && this.rangoCalorias())
 	}
 	
 	def boolean rangoCalorias() {
-		(this.caloriasReceta>10)&&(caloriasReceta<5000) //con this. o sin this. 
+		(caloriasReceta>10)&&(caloriasReceta<5000) //creo que no hace falta poner this por que son parametros no metodos
 	}
 	
 	def boolean unIngrediente() {

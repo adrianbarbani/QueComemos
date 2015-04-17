@@ -1,5 +1,18 @@
 package ar.algo.adriba.tp1
 
-interface Rutina {
+class Rutina {
+	
+	def boolean rutinaValida(){
+		true
+	}
+	
+	def boolean sosActivaIntesivaConEjercicioAdicional() {
+		false
+	}
+	
+	def boolean sosActiva() {
+		false
+	}
+	
 	
 }

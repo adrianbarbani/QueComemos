@@ -21,19 +21,24 @@ class Usuario {
 	List<Comida> preferenciasAlimentarias = new ArrayList<Comida> //cree la clase comida (cosa que tendria que discutir con ustedes por que hay un par de cosas raras)
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 
-	Rutina rutinaUsuario = new SedentariaConAlgoDeEjercicio //ejemplo una rutina, de 5 posibles interface
+	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList <Receta>
 	
 	new(){
 		sexo = new SexoIndefinido //Vamos con este por default
+		rutinaUsuario = new RutinaIndeterminada
 		}
 
 //-------------------------------------------------------------------------------------------
 	// parte1 "validar un usuario"
 
 	def boolean usuarioValido() { 
-		this.camposObligatorios() && this.validacionCondicionesPreexistentes && this.validacionFecha()
+		this.camposObligatorios() && this.validacionCondicionesPreexistentes && this.validacionFecha() 
 
+	}
+	
+	def rutinaEsValida() { // valido la rutina
+		rutinaUsuario.rutinaValida()
 	}
 	
 	def boolean validacionCondicionesPreexistentes() {
@@ -57,9 +62,8 @@ class Usuario {
 
 
 
-	def boolean camposObligatorios() {
-		//no se como hacer si rutinaUsuario no apunta a nada. 
-		peso != 0 && altura != 0 && nombre.length > 4
+	def boolean camposObligatorios() { 
+		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaEsValida()
 	}
 
 
@@ -100,6 +104,13 @@ class Usuario {
 		preferenciasAlimentarias.exists[comida|comida.sosFruta]
 	}
 
+	def boolean tenesUnaRutinaActivaIntensivaConEjercicioAdicional() {
+		rutinaUsuario.sosActivaIntesivaConEjercicioAdicional()
+	}
+	
+	def boolean tieneRutinaActiva() {
+		rutinaUsuario.sosActiva()
+	}
 //------------------------------------------------------------------------------
 
 	//Parte 3 (Recetas)
@@ -109,6 +120,10 @@ class Usuario {
 			{
 				recetasDelUsuario.add(unaReceta)
 			}
-		else //tira error que la receta no es valida, despues lo hago
+		else {
+			}//tira error que la receta no es valida, despues lo hago
 	}
+	
+
+	
 }
