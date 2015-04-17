@@ -33,7 +33,7 @@ class Usuario {
 	// parte1 "validar un usuario"
 
 	def boolean usuarioValido() { 
-		this.camposObligatorios() && this.validacionCondicionesPreexistentes && this.validacionFecha() 
+		this.camposObligatorios() && this.validacionCondicionesPreexistentes //&& this.validacionFecha() 
 
 	}
 	
