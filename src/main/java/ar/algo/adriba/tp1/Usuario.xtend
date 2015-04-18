@@ -1,7 +1,6 @@
 package ar.algo.adriba.tp1
 
 import java.util.ArrayList
-import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
@@ -20,40 +19,19 @@ class Usuario {
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
 
-	new() {
-		sexo = new SexoIndefinido //Vamos con este por default
-		rutinaUsuario = new RutinaIndeterminada
-	}
-
 	//-------------------------------------------------------------------------------------------
 	// parte1 "validar un usuario"
 	def boolean usuarioValido() {
-		this.camposObligatorios() && this.validacionCondicionesPreexistentes //&& this.validacionFecha() 
+		this.camposObligatorios() && this.validacionCondicionesPreexistentes && fechaDeNacimiento.esValida 
 
-	}
-
-	def rutinaEsValida() { // valido la rutina
-		rutinaUsuario.rutinaValida()
 	}
 
 	def boolean validacionCondicionesPreexistentes() {
 		condicionesPreexistentes.forall[condicion|condicion.validacion(this)]
 	}
 
-	def boolean validacionFecha() {
-		fechaDeNacimiento.esValida 
-	}
-
-	def boolean validacionVegano() {
-		preferenciasAlimentarias.forall[comida|this.noEsCarnivoro(comida)] // preguntar
-	}
-
-	def boolean noEsCarnivoro(Comida comida) { // ver este metodo por el tema comida lo cambie de esta forma para el punto donde pide "saber si los veganos, si le gusta las frutas"
-		(comida.sosCarne == false)
-	}
-
 	def boolean camposObligatorios() {
-		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaEsValida()
+		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaUsuario != null
 	}
 
 	def tamañoPreferencias() {
@@ -121,7 +99,7 @@ class Usuario {
 	}
 
 	def boolean puedoVerReceta(Receta unaReceta) {
-		(unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica() == true)
+		(unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica())
 	}
 
 	def boolean puedoModificarReceta(Receta unaReceta) {
@@ -129,10 +107,12 @@ class Usuario {
 	}
 
 	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
-		if (this.puedoModificarReceta(unaReceta)) {
+		if (unaReceta.usuarioSosDuenio(this)) {
 			unaReceta.setearValores(unaRecetaConModificaciones)
-		} else {
+		} else if (unaReceta.sosPublica()) {
 			this.modificarUnaReceta(copiar(unaReceta), unaRecetaConModificaciones)
+		} else {
+			throw new Exception("No puede modificar la receta porque es de otro usuario")
 		}
 	}
 

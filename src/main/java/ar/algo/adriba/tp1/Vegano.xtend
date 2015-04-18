@@ -4,11 +4,11 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 
 class Vegano extends CondicionPreexistente {
 	override validacion (Usuario unUsuario){
-		unUsuario.validacionVegano()
+		unUsuario.preferenciasAlimentarias.forall[comida|!(comida.sosCarne)]
 	}
 	
 	override loSatisface(Usuario unUsuario){
-		unUsuario.leGustaLaFruta//le tiene que gustar las frutas
+		unUsuario.leGustaLaFruta
 	}
 	
 	override sosInadecuada(Receta unaReceta){

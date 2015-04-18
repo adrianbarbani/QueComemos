@@ -18,10 +18,12 @@ import ar.algo.adriba.tp1.ActivaSinEjercicioAdicional
 import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Ingrediente
 import ar.algo.adriba.tp1.Celiaco
+import ar.algo.adriba.tp1.Fecha
 
 class TestImc { // le puse un nombre descriptivo
 
 	Usuario federico
+	Usuario pedro
 	Usuario marina
 	Usuario adrian
 	Usuario usuario1
@@ -31,6 +33,9 @@ class TestImc { // le puse un nombre descriptivo
 	Usuario usuario5
 	Usuario usuario6
 	Usuario usuario1b
+
+	Fecha fechaValida
+	Fecha fechaInvalida
 
 	Fruta fruta
 	Fruta manzana
@@ -48,12 +53,28 @@ class TestImc { // le puse un nombre descriptivo
 	@Before // agregué el método init para los tests y metí todos los constructores y setters ahi
 	def void init() {
 
+		// Usamos la fecha de ayer como fecha VALIDA
+		fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+
+		// Usamos la fecha de mañana como fecha INVALIDA
+		fechaInvalida = new Fecha(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+
 		federico = new Usuario => [
 			setSexo = new Masculino
 			setNombre("Federico")
 			setAltura(1.88)
 			setPeso(83)
 			rutinaUsuario = new SedentarioConNadaDeEjercicio
+			fechaDeNacimiento = fechaValida
+		]
+
+		pedro = new Usuario => [
+			setSexo = new Masculino
+			setNombre("Pedro")
+			setAltura(1.22)
+			setPeso(53)
+			rutinaUsuario = new SedentarioConNadaDeEjercicio
+			fechaDeNacimiento = fechaInvalida
 		]
 
 		adrian = new Usuario => [
@@ -79,6 +100,7 @@ class TestImc { // le puse un nombre descriptivo
 			rutinaUsuario = new ActivaSinEjercicioAdicional
 			condicionesPreexistentes.add(new Diabetico)
 			preferenciasAlimentarias.add(fruta)
+			fechaDeNacimiento = fechaValida
 		]
 
 		usuario1b = new Usuario => [
@@ -104,6 +126,7 @@ class TestImc { // le puse un nombre descriptivo
 			condicionesPreexistentes.add(new Hipertenso)
 			preferenciasAlimentarias.add(chorizo)
 			preferenciasAlimentarias.add(pollo)
+			fechaDeNacimiento = fechaValida
 		]
 
 		usuario3 = new Usuario => [
@@ -115,6 +138,7 @@ class TestImc { // le puse un nombre descriptivo
 			rutinaUsuario = new SedentarioConNadaDeEjercicio
 			condicionesPreexistentes.add(new Vegano)
 			preferenciasAlimentarias.add(chorizo)
+			fechaDeNacimiento = fechaValida
 		]
 
 		usuario4 = new Usuario => [
@@ -126,6 +150,7 @@ class TestImc { // le puse un nombre descriptivo
 			rutinaUsuario = new SedentariaConAlgoDeEjercicio
 			condicionesPreexistentes.add(new Vegano)
 			preferenciasAlimentarias.add(manzana)
+			fechaDeNacimiento = fechaValida
 		]
 
 		usuario5 = new Usuario => [
@@ -199,6 +224,11 @@ class TestImc { // le puse un nombre descriptivo
 	@Test
 	def void test1() { //validacion mas basica (nombre, sexo, fecha y rutina valida)
 		Assert.assertEquals(true, federico.usuarioValido())
+	}
+
+	@Test
+	def void testFechaInvalida() { //validacion mas basica (nombre, sexo, fecha INVALIDA y rutina valida)
+		Assert.assertEquals(false, pedro.usuarioValido())
 	}
 
 	@Test
