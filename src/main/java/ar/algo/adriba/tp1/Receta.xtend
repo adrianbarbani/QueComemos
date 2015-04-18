@@ -7,9 +7,10 @@ import java.util.List
 class Receta {
 	
 	String nombreDelPlato
-	List <Ingrediente> ingredientes
-	List <Condimento> condimentos
-	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
+	List <Comida> ingredientes
+	List <Comida> condimentos
+	List <Receta> subRecetas
+	String explicacionDeLaPreparacion 
 	List <CondicionPreexistente> condicionesInadecuadas //condiciones preexistente inadecuado
 	int caloriasReceta 
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
