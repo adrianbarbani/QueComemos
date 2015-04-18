@@ -7,16 +7,12 @@ import java.util.ArrayList
 @Accessors
 class Receta {
 
-	String nombreDelPlato
-
-	List <Comida> ingredientes
-	List <Comida> condimentos
-	List <Receta> subRecetas
-	String explicacionDeLaPreparacion 
-	List <CondicionPreexistente> condicionesInadecuadas //condiciones preexistente inadecuado
-	int caloriasReceta 
-
-	
+	String nombreDelPlato //dasdassa
+	List<Ingrediente> ingredientes = new ArrayList<Ingrediente>
+	List<Condimento> condimentos
+	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
+	List<CondicionPreexistente> condicionesInadecuadas //condiciones preexistente inadecuado
+	int caloriasReceta
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
 
 	Temporada temporada = new Navidad // new navidad es un ejemplo
