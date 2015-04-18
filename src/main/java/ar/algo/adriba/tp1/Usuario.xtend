@@ -106,7 +106,23 @@ class Usuario {
 		this.puedoVerReceta(unaReceta)
 	}
 
-	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
+	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones){
+		if (this.puedoVerReceta(unaReceta)){
+			this.EditarReceta(unaReceta, unaRecetaConModificaciones)
+		}else{
+			throw new Exception("No puede modificar la receta porque es de otro usuario")
+		}
+	}
+	
+	def EditarReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
+		if(unaReceta.usuarioSosDuenio(this)){
+			unaReceta.setearValores(unaRecetaConModificaciones)
+		}else{//si no es publica es privada
+			this.modificarUnaReceta(copiar(unaReceta), unaRecetaConModificaciones)
+		}
+	}
+	
+	/*def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
 		if (unaReceta.usuarioSosDuenio(this)) {
 			unaReceta.setearValores(unaRecetaConModificaciones)
 		} else if (unaReceta.sosPublica()) {
@@ -114,6 +130,6 @@ class Usuario {
 		} else {
 			throw new Exception("No puede modificar la receta porque es de otro usuario")
 		}
-	}
+	}*/
 
 }
