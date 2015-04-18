@@ -17,4 +17,8 @@ class Diabetico extends CondicionPreexistente {
 	def peso(Usuario usuario) {
 		usuario.peso
 	}
+	
+	override sosInadecuada(Receta unaReceta){
+		unaReceta.contenesMasDe100DeAzucar()
+	}
 }

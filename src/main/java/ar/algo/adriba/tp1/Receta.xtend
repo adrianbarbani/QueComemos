@@ -9,14 +9,17 @@ class Receta {
 
 	String nombreDelPlato //dasdassa
 	List<Ingrediente> ingredientes = new ArrayList<Ingrediente>
-	List<Condimento> condimentos
+	List<Condimento> condimentos = new ArrayList<Condimento>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
-	List<CondicionPreexistente> condicionesInadecuadas //condiciones preexistente inadecuado
+	List<CondicionPreexistente> condicionesInadecuadas /*la idea es que esta coleccion cuando se inicie tenga todas las condiciones posibles y despues
+	 * filtrarlas y que cada condicion sepa si es inadecuada para la receta o no */ 
 	int caloriasReceta
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
+	TodoElAnio temporada = new Verano // new verano es un ejemplo
 
-	Temporada temporada = new Navidad // new navidad es un ejemplo
-
+	new(){
+		this.paraQueCondicionesSoyInadecuada() // se supone que este metodo se hace para filtrar la coleccion antes tendria que meter todas las condiciones posibles en la collection
+	}
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
 	def boolean esvalida() {
@@ -40,9 +43,21 @@ class Receta {
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
 	
-	def paraQueCondicionesSoyInadecuada() //que deberia devolver? strings? o una coleccion de condiciones...
-	{
+	def paraQueCondicionesSoyInadecuada(){
 		
+		condicionesInadecuadas.filter[condicion|condicion.sosInadecuada(this)] // supuestamente esto tendria que 
+	}
+	
+	def contenesSaloCaldo() {
+		condimentos.exists[condimentos|condimentos.sosSaloCaldo]
+	}
+	
+	def contenesMasDe100DeAzucar() {
+		condimentos.exists[condimentos|condimentos.sosAzucarYtenesMasDe100gr]
+	}
+	
+	def boolean tenesCarne() {
+		ingredientes.exists[comida|comida.sosCarne]
 	}
 	
 }

@@ -13,7 +13,7 @@ class Usuario {
 	String nombre	
 	Date fechaDeNacimiento
 	Date fechaActual
-	//http://yuml.me/edit/be2f1e94 diagrama de claseshttp://yuml.me/be2f1e94
+	//http://yuml.me/edit/e4bc0498 diagrama de clases
 	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
 
 	List<String> comidaQueLeDisgusta = new ArrayList<String>

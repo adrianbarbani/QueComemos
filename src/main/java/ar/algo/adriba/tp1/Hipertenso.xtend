@@ -13,5 +13,7 @@ class Hipertenso extends CondicionPreexistente {
 	unUsuario.tenesUnaRutinaActivaIntensivaConEjercicioAdicional()
 	}
 	
-	
+	override sosInadecuada(Receta unaReceta){
+		unaReceta.contenesSaloCaldo()
+	}
 }

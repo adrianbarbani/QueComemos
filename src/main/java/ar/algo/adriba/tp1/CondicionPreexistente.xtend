@@ -8,4 +8,8 @@ class CondicionPreexistente {
 	def boolean loSatisface (Usuario unUsuario){
 		true
 	}
+	
+	def boolean sosInadecuada(Receta receta) {
+		false
+	}	
 }
