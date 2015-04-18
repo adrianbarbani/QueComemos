@@ -1,5 +1,8 @@
 package ar.algo.adriba.tp1
 
-class Ingrediente {
-	
+import org.eclipse.xtend.lib.annotations.Accessors
+
+@Accessors 
+class Ingrediente extends Comida {
+	int calorias	
 }
