@@ -123,6 +123,20 @@ class Usuario {
 			throw new Exception("No puede agregar la receta porque es invalida ")
 		}
 			}
+	
+	def boolean puedoVerReceta(Receta unaReceta){
+		(this.esMiReceta(unaReceta)) || (unaReceta.sosPublica())
+	}
+	
+	def boolean puedoModificarReceta(Receta unaReceta){
+		(this.esMiReceta(unaReceta)) || (unaReceta.sosPublica())
+	}
+	
+	def boolean esMiReceta(Receta receta) {
+		recetasDelUsuario.contains(receta)
+	}
+	
+	
 	}
 	
 

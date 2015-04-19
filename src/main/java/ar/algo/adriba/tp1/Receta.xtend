@@ -59,4 +59,8 @@ class Receta {
 		ingredientes.exists[comida|comida.sosCarne]
 	}
 	
+	def boolean sosPublica() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 }
