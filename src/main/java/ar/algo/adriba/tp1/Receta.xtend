@@ -60,7 +60,7 @@ class Receta {
 	}
 	
 	def boolean sosPublica() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		false
 	}
 	
 }
