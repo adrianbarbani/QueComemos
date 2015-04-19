@@ -60,7 +60,7 @@ class Receta {
 	}
 	
 	def boolean sosPublica() {
-		false
+		true
 	}
 	
 }
