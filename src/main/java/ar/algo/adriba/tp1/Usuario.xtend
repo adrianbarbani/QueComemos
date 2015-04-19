@@ -11,8 +11,9 @@ class Usuario {
 	double altura
 	Sexo sexo
 	String nombre
-	Date fechaDeNacimiento
-	Date fechaActual
+	Fecha fechaDeNacimiento
+// Usamos Date() para calcular la fecha actual
+//	Date fechaActual 
 
 	//http://yuml.me/edit/e4bc0498 diagrama de clases
 	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
@@ -44,9 +45,11 @@ class Usuario {
 	}
 
 	def boolean validacionFecha() {
-		fechaDeNacimiento.before(fechaActual) //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
+		fechaDeNacimiento.esValida //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
 
 	}
+	
+	
 
 	def boolean validacionVegano() {
 		preferenciasAlimentarias.forall[comida|this.noEsCarnivoro(comida)] // preguntar
