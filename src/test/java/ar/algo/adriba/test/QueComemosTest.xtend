@@ -17,6 +17,7 @@ import ar.algo.adriba.tp1.ActivaConEjercicioAdicional
 import ar.algo.adriba.tp1.ActivaSinEjercicioAdicional
 import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Ingrediente
+import ar.algo.adriba.tp1.Celiaco
 
 class TestImc { // le puse un nombre descriptivo
 
@@ -159,6 +160,11 @@ class TestImc { // le puse un nombre descriptivo
 			ingredientes.add(huevo)
 			ingredientes.add(panRallado)
 			ingredientes.add(nalga)
+			
+			condicionesInadecuadas.add(new Hipertenso)
+			condicionesInadecuadas.add(new Diabetico)
+			condicionesInadecuadas.add(new Vegano)
+			condicionesInadecuadas.add(new Celiaco)
 		]
 
 		receta2 = new Receta => [
@@ -166,6 +172,11 @@ class TestImc { // le puse un nombre descriptivo
 			harina.setCalorias(9)
 			setNombreDelPlato("Milanesas Raras")
 			ingredientes.add(harina)
+			
+			condicionesInadecuadas.add(new Hipertenso)
+			condicionesInadecuadas.add(new Diabetico)
+			condicionesInadecuadas.add(new Vegano)
+			condicionesInadecuadas.add(new Celiaco)
 		]
 	}
 
@@ -250,7 +261,7 @@ class TestImc { // le puse un nombre descriptivo
 		Assert.assertEquals(true, usuario1.sigoRutinaSaludable())
 	}
 
-	//----------------------Validacion de una Receta-------------------
+	//----------------------Validacion de una Receta/Usuario intenta agregar receta-------------------
 	@Test
 	def void test11ValidoRecetaValida() {
 		Assert.assertEquals(true, receta1.esvalida())
@@ -260,4 +271,15 @@ class TestImc { // le puse un nombre descriptivo
 	def void test12ValidoRecetaInvalida() {
 		Assert.assertEquals(false, receta2.esvalida())
 	}
+	
+	@Test
+	def void test13AgregarRecetaValida(){
+		federico.agregarReceta(receta1)
+	}
+	
+	@Test (expected=typeof(Exception))
+	def void test14AgregarRecetaInvalida()
+	{
+		federico.agregarReceta(receta2)
+	} 
 }

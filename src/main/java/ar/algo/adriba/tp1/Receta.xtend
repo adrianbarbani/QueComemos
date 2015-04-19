@@ -7,11 +7,11 @@ import java.util.ArrayList
 @Accessors
 class Receta {
 
-	String nombreDelPlato //dasdassa
+	String nombreDelPlato 
 	List<Ingrediente> ingredientes = new ArrayList<Ingrediente>
 	List<Condimento> condimentos = new ArrayList<Condimento>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
-	List<CondicionPreexistente> condicionesInadecuadas /*la idea es que esta coleccion cuando se inicie tenga todas las condiciones posibles y despues
+	List<CondicionPreexistente> condicionesInadecuadas = new ArrayList <CondicionPreexistente> /*la idea es que esta coleccion cuando se inicie tenga todas las condiciones posibles y despues
 	 * filtrarlas y que cada condicion sepa si es inadecuada para la receta o no */ 
 	int caloriasReceta
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
@@ -44,15 +44,14 @@ class Receta {
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
 	
 	def paraQueCondicionesSoyInadecuada(){
-		
 		condicionesInadecuadas.filter[condicion|condicion.sosInadecuada(this)] // supuestamente esto tendria que 
 	}
 	
-	def contenesSaloCaldo() {
+	def boolean contenesSaloCaldo() {
 		condimentos.exists[condimentos|condimentos.sosSaloCaldo]
 	}
 	
-	def contenesMasDe100DeAzucar() {
+	def boolean contenesMasDe100DeAzucar() {
 		condimentos.exists[condimentos|condimentos.sosAzucarYtenesMasDe100gr]
 	}
 	
