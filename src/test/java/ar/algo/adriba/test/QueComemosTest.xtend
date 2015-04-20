@@ -282,4 +282,10 @@ class TestImc { // le puse un nombre descriptivo
 	{
 		federico.agregarReceta(receta2)
 	} 
+	
+	@Test
+	def void test15CondicionesDeUnaReceta()
+	{
+		receta1.paraQueCondicionesSoyInadecuada()
+	}
 }
