@@ -109,7 +109,7 @@ class Usuario {
 	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
 		if (unaReceta.usuarioSosDuenio(this)) {
 			unaReceta.setearValores(unaRecetaConModificaciones)
-		} else if (unaReceta.sosPublica() == true) {
+		} else if (unaReceta.sosPublica()) {
 			this.modificarUnaReceta(copiar(unaReceta), unaRecetaConModificaciones)
 		} else {
 			throw new Exception("No puede modificar la receta porque es de otro usuario")
