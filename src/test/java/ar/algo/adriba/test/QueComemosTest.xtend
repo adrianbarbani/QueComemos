@@ -23,6 +23,7 @@ import ar.algo.adriba.tp1.Fecha
 class TestImc { // le puse un nombre descriptivo
 
 	Usuario federico
+	Usuario pedro
 	Usuario marina
 	Usuario adrian
 	Usuario usuario1
@@ -34,6 +35,7 @@ class TestImc { // le puse un nombre descriptivo
 	Usuario usuario1b
 
 	Fecha fechaValida
+	Fecha fechaInvalida
 
 	Fruta fruta
 	Fruta manzana
@@ -51,8 +53,11 @@ class TestImc { // le puse un nombre descriptivo
 	@Before // agregué el método init para los tests y metí todos los constructores y setters ahi
 	def void init() {
 
-		// Usamos la fecha de ayer como fecha valida
+		// Usamos la fecha de ayer como fecha VALIDA
 		fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+
+		// Usamos la fecha de mañana como fecha INVALIDA
+		fechaInvalida = new Fecha(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
 
 		federico = new Usuario => [
 			setSexo = new Masculino
@@ -61,6 +66,15 @@ class TestImc { // le puse un nombre descriptivo
 			setPeso(83)
 			rutinaUsuario = new SedentarioConNadaDeEjercicio
 			fechaDeNacimiento = fechaValida
+		]
+
+		pedro = new Usuario => [
+			setSexo = new Masculino
+			setNombre("Pedro")
+			setAltura(1.22)
+			setPeso(53)
+			rutinaUsuario = new SedentarioConNadaDeEjercicio
+			fechaDeNacimiento = fechaInvalida
 		]
 
 		adrian = new Usuario => [
@@ -210,6 +224,11 @@ class TestImc { // le puse un nombre descriptivo
 	@Test
 	def void test1() { //validacion mas basica (nombre, sexo, fecha y rutina valida)
 		Assert.assertEquals(true, federico.usuarioValido())
+	}
+
+	@Test
+	def void testFechaInvalida() { //validacion mas basica (nombre, sexo, fecha INVALIDA y rutina valida)
+		Assert.assertEquals(false, pedro.usuarioValido())
 	}
 
 	@Test
