@@ -111,10 +111,16 @@ class Usuario {
 	//Parte 3 (Recetas)
 	def agregarReceta(Receta unaReceta) {
 		if (unaReceta.esvalida() == true) {
-			recetasDelUsuario.add(unaReceta)
+			this.agregar(unaReceta)
+			// recetasDelUsuario.add(unaReceta)
 		} else {
 			throw new Exception("No puede agregar la receta porque es invalida ")
 		}
+	}
+	
+	// no se porque chilla esto, si está creado el constructor :(
+	def agregar(Receta unaReceta) {
+		recetasDelUsuario.add(new Receta(unaReceta))
 	}
 
 	def boolean puedoVerReceta(Receta unaReceta) {
