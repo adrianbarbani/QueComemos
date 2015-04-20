@@ -11,10 +11,14 @@ class Usuario {
 	double altura
 	Sexo sexo
 	String nombre
-	Date fechaDeNacimiento
-	Date fechaActual
 
-	//http://yuml.me/edit/74e915a3 diagrama de clases
+
+
+	Fecha fechaDeNacimiento
+// Usamos Date() para calcular la fecha actual
+//	Date fechaActual 
+
+	
 
 	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
@@ -45,9 +49,11 @@ class Usuario {
 	}
 
 	def boolean validacionFecha() {
-		fechaDeNacimiento.before(fechaActual) //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
+		fechaDeNacimiento.esValida //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
 
 	}
+	
+	
 
 	def boolean validacionVegano() {
 		preferenciasAlimentarias.forall[comida|this.noEsCarnivoro(comida)] // preguntar
@@ -57,7 +63,7 @@ class Usuario {
 		(comida.sosCarne == false)
 	}
 
-	// recive los strings, hacer clase comida?
+	
 	def boolean camposObligatorios() {
 		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaEsValida()
 	}
