@@ -99,7 +99,7 @@ class Usuario {
 	}
 
 	def boolean puedoVerReceta(Receta unaReceta) {
-		(unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica() == true)
+		(unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica())
 	}
 
 	def boolean puedoModificarReceta(Receta unaReceta) {
