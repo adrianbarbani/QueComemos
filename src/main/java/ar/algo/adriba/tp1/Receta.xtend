@@ -16,7 +16,8 @@ class Receta {
 	int caloriasReceta // esto se usa? ...
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
 	TodoElAnio temporada = new Verano // new verano es un ejemplo
-
+	List<Receta>subRecetas = new ArrayList<Receta>
+	
 	new(Receta unaReceta){		
 		nombreDelPlato = unaReceta.nombreDelPlato
 		ingredientes = unaReceta.ingredientes
@@ -47,7 +48,11 @@ class Receta {
 	}
 
 	def caloriasTotales() {
-		ingredientes.fold(0, [acum, ingrediente|acum + ingrediente.calorias]) //suma de las calorias de los ingredientes
+		ingredientes.fold(0, [acum, ingrediente|acum + ingrediente.calorias]) + this.caloriasSubRecetas //suma de las calorias de los ingredientes
+	}
+	
+	def int caloriasSubRecetas() {
+		subRecetas.fold(0,[acumulado, subRecetas|acumulado + subRecetas.caloriasReceta ]) //suma las calorias de las subrecetas
 	}
 
 	

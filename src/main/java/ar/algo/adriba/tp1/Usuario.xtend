@@ -132,7 +132,7 @@ class Usuario {
 	}
 
 	def boolean puedoModificarReceta(Receta unaReceta) {
-		(this.esMiReceta(unaReceta)) || (unaReceta.sosPublica())
+		this.puedoVerReceta(unaReceta)
 	}
 
 	def boolean esMiReceta(Receta receta) {
