@@ -1,7 +1,6 @@
 package ar.algo.adriba.tp1
 
 import java.util.ArrayList
-import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
@@ -28,7 +27,7 @@ class Usuario {
 	//-------------------------------------------------------------------------------------------
 	// parte1 "validar un usuario"
 	def boolean usuarioValido() {
-		this.camposObligatorios() && this.validacionCondicionesPreexistentes //&& this.validacionFecha() 
+		this.camposObligatorios() && this.validacionCondicionesPreexistentes && fechaDeNacimiento.esValida 
 
 	}
 
@@ -53,7 +52,7 @@ class Usuario {
 	}
 
 	def boolean camposObligatorios() {
-		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaEsValida()
+		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaEsValida() 
 	}
 
 	def tamañoPreferencias() {
