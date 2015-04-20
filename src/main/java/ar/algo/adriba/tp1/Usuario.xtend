@@ -43,14 +43,6 @@ class Usuario {
 		fechaDeNacimiento.esValida 
 	}
 
-	def boolean validacionVegano() {
-		preferenciasAlimentarias.forall[comida|this.noEsCarnivoro(comida)] // preguntar
-	}
-
-	def boolean noEsCarnivoro(Comida comida) { // ver este metodo por el tema comida lo cambie de esta forma para el punto donde pide "saber si los veganos, si le gusta las frutas"
-		(comida.sosCarne == false)
-	}
-
 	def boolean camposObligatorios() {
 		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaEsValida() 
 	}
