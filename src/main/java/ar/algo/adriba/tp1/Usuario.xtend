@@ -139,5 +139,9 @@ class Usuario {
 		recetasDelUsuario.contains(receta)
 	}
 	
-	
+	def modificarUnaReceta(Receta unaReceta){
+		if(this.puedoModificarReceta(unaReceta)){
+			unaReceta.modificar(this)
+		}
+	}
 }

@@ -13,7 +13,8 @@ class Receta {
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
 	List<CondicionPreexistente> condicionesInadecuadas = new ArrayList <CondicionPreexistente> /*la idea es que esta coleccion cuando se inicie tenga todas las condiciones posibles y despues
 	 * filtrarlas y que cada condicion sepa si es inadecuada para la receta o no */  
-	int caloriasReceta // esto se usa? ...
+	Usuario DueñoReceta 
+	int caloriasReceta // esto se usa? ...si
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
 	TodoElAnio temporada = new Verano // new verano es un ejemplo
 	List<Receta>subRecetas = new ArrayList<Receta>
@@ -76,7 +77,21 @@ class Receta {
 	}
 	
 	def boolean sosPublica() {
-		true
+		(DueñoReceta == null) //si la receta no tiene dueño es publica si la tiene no.
 	}
+	
+	def modificar(Usuario usuario) {
+		if (this.usuarioSosDueño(usuario)==false){
+			// aca lo que tendria que pasar es que al no ser el dueño de la receta se cree una copia de la receta y se guarde en la coleccion de ese usuario, a su vez esta nueva copia de receta que se crea tiene que tener en el campo dueño a ese usuario.(trate de usar el metodo clone pero no me salio)
+		}else{
+			// en el else te deja editar la receta comun 
+		}
+			
+	}
+	
+	def boolean usuarioSosDueño(Usuario usuario) {
+		usuario == DueñoReceta
+	}
+	
 	
 }
