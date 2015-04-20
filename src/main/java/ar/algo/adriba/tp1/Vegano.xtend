@@ -12,6 +12,6 @@ class Vegano extends CondicionPreexistente {
 	}
 	
 	override sosInadecuada(Receta unaReceta){
-		unaReceta.tenesCarne
+		unaReceta.tenesCarne()
 	}
 }

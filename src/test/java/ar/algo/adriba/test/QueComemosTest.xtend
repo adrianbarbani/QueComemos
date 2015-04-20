@@ -160,7 +160,6 @@ class TestImc { // le puse un nombre descriptivo
 			ingredientes.add(huevo)
 			ingredientes.add(panRallado)
 			ingredientes.add(nalga)
-			
 			condicionesInadecuadas.add(new Hipertenso)
 			condicionesInadecuadas.add(new Diabetico)
 			condicionesInadecuadas.add(new Vegano)
@@ -172,7 +171,6 @@ class TestImc { // le puse un nombre descriptivo
 			harina.setCalorias(9)
 			setNombreDelPlato("Milanesas Raras")
 			ingredientes.add(harina)
-			
 			condicionesInadecuadas.add(new Hipertenso)
 			condicionesInadecuadas.add(new Diabetico)
 			condicionesInadecuadas.add(new Vegano)
@@ -271,21 +269,19 @@ class TestImc { // le puse un nombre descriptivo
 	def void test12ValidoRecetaInvalida() {
 		Assert.assertEquals(false, receta2.esvalida())
 	}
-	
+
 	@Test
-	def void test13AgregarRecetaValida(){
+	def void test13AgregarRecetaValida() {
 		federico.agregarReceta(receta1)
 	}
-	
-	@Test (expected=typeof(Exception))
-	def void test14AgregarRecetaInvalida()
-	{
+
+	@Test(expected=typeof(Exception))
+	def void test14AgregarRecetaInvalida() {
 		federico.agregarReceta(receta2)
-	} 
-	
+	}
+
 	@Test
-	def void test15CondicionesDeUnaReceta()
-	{
+	def void test15CondicionesDeUnaReceta() {
 		receta1.paraQueCondicionesSoyInadecuada()
 	}
 }

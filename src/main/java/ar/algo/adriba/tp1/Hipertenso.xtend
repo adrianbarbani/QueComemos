@@ -8,8 +8,7 @@ class Hipertenso extends CondicionPreexistente {
 		super.validacion(unUsuario)
 	}
 
-	override loSatisface(Usuario unUsuario) {
-	
+	override loSatisface(Usuario unUsuario) {	
 	unUsuario.tenesUnaRutinaActivaIntensivaConEjercicioAdicional()
 	}
 	

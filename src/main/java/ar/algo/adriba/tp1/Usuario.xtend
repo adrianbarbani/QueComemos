@@ -11,16 +11,8 @@ class Usuario {
 	double altura
 	Sexo sexo
 	String nombre
-
-
-
 	Fecha fechaDeNacimiento
-// Usamos Date() para calcular la fecha actual
-//	Date fechaActual 
 
-	
-
-	// fecha de nacimiento, no se si no habra alguna clase por defecto que maneje fechas
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
 	List<Comida> preferenciasAlimentarias = new ArrayList<Comida> //cree la clase comida (cosa que tendria que discutir con ustedes por que hay un par de cosas raras)
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
@@ -49,11 +41,8 @@ class Usuario {
 	}
 
 	def boolean validacionFecha() {
-		fechaDeNacimiento.esValida //falta fijar el formato para la fecha y el metodo que te de la fecha actual, encontre unos en internet pero me tiraban error
-
+		fechaDeNacimiento.esValida 
 	}
-	
-	
 
 	def boolean validacionVegano() {
 		preferenciasAlimentarias.forall[comida|this.noEsCarnivoro(comida)] // preguntar
@@ -63,7 +52,6 @@ class Usuario {
 		(comida.sosCarne == false)
 	}
 
-	
 	def boolean camposObligatorios() {
 		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaEsValida()
 	}
@@ -115,33 +103,37 @@ class Usuario {
 	//Parte 3 (Recetas)
 	def agregarReceta(Receta unaReceta) {
 		if (unaReceta.esvalida() == true) {
-			this.agregar(unaReceta)
-			// recetasDelUsuario.add(unaReceta)
+			this.copiar(unaReceta)
 		} else {
 			throw new Exception("No puede agregar la receta porque es invalida ")
 		}
 	}
-	
-	// no se porque chilla esto, si está creado el constructor :(
+
 	def agregar(Receta unaReceta) {
-		recetasDelUsuario.add(new Receta(unaReceta))
+		recetasDelUsuario.add(unaReceta)
+	}
+
+	def Receta copiar(Receta unaReceta) {
+		var Receta miReceta = null
+		miReceta = new Receta(unaReceta, this)
+		this.agregar(miReceta)
+		miReceta
 	}
 
 	def boolean puedoVerReceta(Receta unaReceta) {
-		(this.esMiReceta(unaReceta)) || (unaReceta.sosPublica())
+		(unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica() == true)
 	}
 
 	def boolean puedoModificarReceta(Receta unaReceta) {
 		this.puedoVerReceta(unaReceta)
 	}
 
-	def boolean esMiReceta(Receta receta) {
-		recetasDelUsuario.contains(receta)
-	}
-	
-	def modificarUnaReceta(Receta unaReceta){
-		if(this.puedoModificarReceta(unaReceta)){
-			unaReceta.modificar(this)
+	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
+		if (this.puedoModificarReceta(unaReceta)) {
+			unaReceta.setearValores(unaRecetaConModificaciones)
+		} else {
+			this.modificarUnaReceta(copiar(unaReceta), unaRecetaConModificaciones)
 		}
 	}
+
 }
