@@ -12,13 +12,24 @@ class Receta {
 	List<Condimento> condimentos = new ArrayList<Condimento>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
 	List<CondicionPreexistente> condicionesInadecuadas = new ArrayList <CondicionPreexistente> /*la idea es que esta coleccion cuando se inicie tenga todas las condiciones posibles y despues
-	 * filtrarlas y que cada condicion sepa si es inadecuada para la receta o no */ 
-	int caloriasReceta
+	 * filtrarlas y que cada condicion sepa si es inadecuada para la receta o no */  
+	int caloriasReceta // esto se usa? ...
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
 	TodoElAnio temporada = new Verano // new verano es un ejemplo
 
+	new(Receta unaReceta){		
+		nombreDelPlato = unaReceta.nombreDelPlato
+		ingredientes = unaReceta.ingredientes
+		condimentos = unaReceta.condimentos
+		explicacionDeLaPreparacion = unaReceta.explicacionDeLaPreparacion
+		caloriasReceta = unaReceta.caloriasReceta // no se si se usa, me parece que no
+		dificultad = unaReceta.dificultad
+		temporada = unaReceta.temporada
+	}
+	
+	// este metodo podria no estar en un constructor me parece, despues veo
 	new(){
-		this.paraQueCondicionesSoyInadecuada() // se supone que este metodo se hace para filtrar la coleccion antes tendria que meter todas las condiciones posibles en la collection
+	this.paraQueCondicionesSoyInadecuada() // se supone que este metodo se hace para filtrar la coleccion antes tendria que meter todas las condiciones posibles en la collection
 	}
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
