@@ -19,11 +19,6 @@ class Usuario {
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
 
-	new() {
-		sexo = new SexoIndefinido //Vamos con este por default
-		rutinaUsuario = new RutinaIndeterminada
-	}
-
 	//-------------------------------------------------------------------------------------------
 	// parte1 "validar un usuario"
 	def boolean usuarioValido() {
@@ -31,20 +26,12 @@ class Usuario {
 
 	}
 
-	def rutinaEsValida() { // valido la rutina
-		rutinaUsuario.rutinaValida()
-	}
-
 	def boolean validacionCondicionesPreexistentes() {
 		condicionesPreexistentes.forall[condicion|condicion.validacion(this)]
 	}
 
-	def boolean validacionFecha() {
-		fechaDeNacimiento.esValida 
-	}
-
 	def boolean camposObligatorios() {
-		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaEsValida() 
+		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaUsuario != null
 	}
 
 	def tamañoPreferencias() {
