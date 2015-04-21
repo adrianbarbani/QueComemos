@@ -227,7 +227,7 @@ class Entrega1Tests {
 		federico.modificarUnaReceta(receta2, receta1)
 	}
 
-	//Punto 5: Poder construir una receta con subrecetas.
+	//Punto 5: Poder construir una receta con subrecetas
 	def void test11() {
 		receta1.agregarSubReceta(receta2)
 	}
