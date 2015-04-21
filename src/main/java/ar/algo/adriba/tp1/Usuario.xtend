@@ -31,7 +31,7 @@ class Usuario {
 		if (this.validacionCondicionesPreexistentes == true){
 			true
 		}else{
-			throw new Exception("ERROR: condiciones Preecistentes no validas")
+			throw new Exception("ERROR: condiciones Preexistentes no validas")
 		}
 	}
 	
