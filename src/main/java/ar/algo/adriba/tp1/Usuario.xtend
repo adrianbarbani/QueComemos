@@ -144,7 +144,7 @@ class Usuario {
 	}
 
 	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones){
-		if (this.puedoVerReceta(unaReceta)){
+		if (this.puedoModificarReceta(unaReceta)){
 			this.EditarReceta(unaReceta, unaRecetaConModificaciones)
 		}else{
 			throw new Exception("No puede modificar la receta porque es de otro usuario")

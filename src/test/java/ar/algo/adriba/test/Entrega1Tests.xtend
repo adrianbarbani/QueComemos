@@ -1,16 +1,13 @@
 package ar.algo.adriba.test
 
-import ar.algo.adriba.tp1.ActivaConEjercicioAdicional
 import ar.algo.adriba.tp1.Celiaco
 import ar.algo.adriba.tp1.Diabetico
 import ar.algo.adriba.tp1.Fecha
 import ar.algo.adriba.tp1.Femenino
-import ar.algo.adriba.tp1.Fruta
 import ar.algo.adriba.tp1.Hipertenso
 import ar.algo.adriba.tp1.Ingrediente
 import ar.algo.adriba.tp1.Masculino
 import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.SedentariaConAlgoDeEjercicio
 import ar.algo.adriba.tp1.SedentarioConNadaDeEjercicio
 import ar.algo.adriba.tp1.Usuario
 import ar.algo.adriba.tp1.Vegano
@@ -29,7 +26,7 @@ class Entrega1Tests {
 	Fecha fechaValida
 	Fecha fechaInvalida
 
-	Fruta manzana
+	
 	carne chorizo
 	carne pollo
 	carne nalga
@@ -97,40 +94,7 @@ class Entrega1Tests {
 			fechaDeNacimiento = fechaValida
 		]
 
-		usuario3 = new Usuario => [
-			chorizo = new carne
-			setSexo = new Femenino
-			setNombre("UsuarioTres")
-			setAltura(1.55)
-			setPeso(90)
-			rutinaUsuario = new SedentarioConNadaDeEjercicio
-			condicionesPreexistentes.add(new Vegano)
-			preferenciasAlimentarias.add(chorizo)
-			fechaDeNacimiento = fechaValida
-		]
-
-		usuario4 = new Usuario => [
-			manzana = new Fruta
-			setSexo = new Masculino
-			setNombre("UsuarioCuatro")
-			setAltura(1.81)
-			setPeso(83)
-			rutinaUsuario = new SedentariaConAlgoDeEjercicio
-			condicionesPreexistentes.add(new Vegano)
-			preferenciasAlimentarias.add(manzana)
-			fechaDeNacimiento = fechaValida
-		]
-
-		usuario5 = new Usuario => [
-			setSexo = new Femenino
-			setNombre("UsuarioCinco")
-			setAltura(1.76)
-			setPeso(80)
-			rutinaUsuario = new ActivaConEjercicioAdicional
-			condicionesPreexistentes.add(new Hipertenso)
-		]
-
-		receta1 = new Receta => [
+			receta1 = new Receta => [
 			nalga = new carne
 			harina = new Ingrediente
 			huevo = new Ingrediente
@@ -211,19 +175,20 @@ class Entrega1Tests {
 
 	@Test
 	def void test8() {
-		federico.agregarReceta(receta2)
-		Assert.assertEquals(true, federico.puedoModificarReceta(receta2))
+		federico.agregarReceta(receta1)
+		Assert.assertEquals(true, federico.puedoModificarReceta(receta1))
 	}
 
 	//Modificar una receta dada, respetando la validacion anterior
 	@Test
 	def void test9() {
-		federico.agregarReceta(receta2)
-		federico.modificarUnaReceta(receta2, receta1)
+		federico.agregarReceta(receta1)
+		federico.modificarUnaReceta(receta1, receta2)
 	}
 
 	@Test(expected=typeof(Exception))
 	def void test10() {
+		adrian.agregarReceta(receta2)
 		federico.modificarUnaReceta(receta2, receta1)
 	}
 
