@@ -20,6 +20,9 @@ import ar.algo.adriba.tp1.Ingrediente
 import ar.algo.adriba.tp1.Celiaco
 import ar.algo.adriba.tp1.Fecha
 
+
+// Estos tests son para uso del equipo, no forman parte de la entrega!
+
 class TestImc { // le puse un nombre descriptivo
 
 	Usuario federico
