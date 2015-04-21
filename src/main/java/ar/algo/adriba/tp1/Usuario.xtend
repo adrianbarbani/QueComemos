@@ -108,7 +108,7 @@ class Usuario {
 	} //me dice si no tengo condiciones preexistentes (si la coleccion esta vacia)
 
 	def boolean puedosubsanar() {
-		condicionesPreexistentes.forall[i|i.loSatisface(this)] //ver esto
+		condicionesPreexistentes.forall[i|i.loSatisface(this)] 
 	}
 
 	def boolean leGustaLaFruta() {

@@ -7,7 +7,7 @@ class Diabetico extends CondicionPreexistente {
 	override validacion(Usuario unUsuario) {
 		super.validacion(unUsuario) && unUsuario.sexo != null //hace el validacion del tamaño de la preferencia 
 
-	//agregue el &&, va?
+
 	}
 
 	override loSatisface(Usuario unUsuario) {
