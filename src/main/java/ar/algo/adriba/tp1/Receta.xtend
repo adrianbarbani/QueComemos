@@ -19,7 +19,7 @@ public class Receta {
 	Usuario duenioReceta
 	int caloriasReceta 
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
-	TodoElAnio temporada = new Verano // new verano es un ejemplo.
+	TodoElAnio temporada = new Verano // new verano es un ejemplo
 	List<Receta> subRecetas = new ArrayList<Receta>
 
 
