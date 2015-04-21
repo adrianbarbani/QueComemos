@@ -4,7 +4,7 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
-//DIAGRAMA DE CLASES -- http://yuml.me/edit/b6ba2f99 (Final).
+//DIAGRAMA DE CLASES -- http://yuml.me/edit/bfbcad0e (Final).
 @Accessors
 class Usuario {
 	int peso
