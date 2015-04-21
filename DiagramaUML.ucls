@@ -4,7 +4,7 @@
   <class id="1" language="java" name="ar.algo.adriba.tp1.Usuario" project="QueComemos" 
     file="/QueComemos/src/main/generated-sources/xtend/ar/algo/adriba/tp1/Usuario.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="652" width="295" x="-40" y="-55"/>    
+    <position height="595" width="295" x="-40" y="-55"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="ar.algo.adriba.tp1.Receta" project="QueComemos" 
     file="/QueComemos/src/main/generated-sources/xtend/ar/algo/adriba/tp1/Receta.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="418" width="373" x="338" y="-155"/>    
+    <position height="401" width="373" x="338" y="-155"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -24,7 +24,7 @@
   <class id="3" language="java" name="ar.algo.adriba.tp1.Condimento" project="QueComemos" 
     file="/QueComemos/src/main/generated-sources/xtend/ar/algo/adriba/tp1/Condimento.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="752" y="760"/>    
+    <position height="-1" width="-1" x="810" y="716"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -34,7 +34,7 @@
   <class id="4" language="java" name="ar.algo.adriba.tp1.Ingrediente" project="QueComemos" 
     file="/QueComemos/src/main/generated-sources/xtend/ar/algo/adriba/tp1/Ingrediente.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="815" y="555"/>    
+    <position height="-1" width="-1" x="857" y="483"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -134,7 +134,7 @@
   <class id="14" language="java" name="ar.algo.adriba.tp1.carne" project="QueComemos" 
     file="/QueComemos/src/main/generated-sources/xtend/ar/algo/adriba/tp1/carne.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1024" y="679"/>    
+    <position height="-1" width="-1" x="1052" y="588"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -174,7 +174,7 @@
   <class id="18" language="java" name="ar.algo.adriba.tp1.Fruta" project="QueComemos" 
     file="/QueComemos/src/main/generated-sources/xtend/ar/algo/adriba/tp1/Fruta.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="961" y="797"/>    
+    <position height="-1" width="-1" x="1015" y="729"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
