@@ -31,8 +31,8 @@ class Entrega1Tests {
 	carne pollo
 	carne nalga
 
-	Receta receta1
-	Receta receta2
+	Receta ensaladaCaprese
+	Receta papasAlHorno
 
 	Ingrediente harina
 	Ingrediente huevo
@@ -107,7 +107,7 @@ class Entrega1Tests {
 			fechaDeNacimiento = fechaValida
 		]
 
-		receta1 = new Receta => [
+		ensaladaCaprese = new Receta => [
 			nalga = new carne
 			harina = new Ingrediente
 			huevo = new Ingrediente
@@ -127,7 +127,7 @@ class Entrega1Tests {
 			condicionesInadecuadas.add(new Celiaco)
 		]
 
-		receta2 = new Receta => [
+		papasAlHorno = new Receta => [
 			harina = new Ingrediente
 			harina.setCalorias(9)
 			setNombreDelPlato("Pure")
@@ -163,55 +163,60 @@ class Entrega1Tests {
 
 	// Averiguar si un usuario sigue una rutina saludable
 	@Test
-	def void test3() {
+	def void usuarioSigueRutinaSaludable() {
 		Assert.assertEquals(true, federico.sigoRutinaSaludable())
 	}
 
 	// Punto 3 : Hacer que un usuario agregue una receta
 	@Test
-	def void test4() {
-		federico.agregarReceta(receta1)
+	def void usuarioQueAgregaUnaReceta() {
+		federico.agregarReceta(ensaladaCaprese)
 	}
 
 	// Conocer condiciones preexistentes para la que una receta es invalida
 	@Test
-	def void test5() {
-		receta1.paraQueCondicionesSoyInadecuada()
+	def void condicionesInadecuadasDeUnaReceta() {
+		ensaladaCaprese.paraQueCondicionesSoyInadecuada()
 	}
 
 	//Punto 4: Saber si un usuario puede ver una receta dada
 	@Test
-	def void test6() {
-		federico.puedoVerReceta(receta1)
+	def void usuarioPuedeVerReceta() {
+		federico.puedoVerReceta(ensaladaCaprese)
+	}
+	
+	@Test
+	def void usuarioNoPuedeVerReceta() {
+		marina.puedoVerReceta(ensaladaCaprese)
 	}
 
 	//Saber si un usuario puede modificar una receta dada
 	@Test
-	def void test7() {
-		federico.puedoModificarReceta(receta2)
+	def void usuarioPuedeModificarReceta() {
+		federico.puedoModificarReceta(papasAlHorno)
 	}
 
 	@Test
-	def void test8() {
-		federico.agregarReceta(receta1)
-		Assert.assertEquals(true, federico.puedoModificarReceta(receta1))
+	def void usuarioAgregaUnaRecetaYVemosSiPuedeModificarla() {
+		federico.agregarReceta(ensaladaCaprese)
+		Assert.assertEquals(true, federico.puedoModificarReceta(ensaladaCaprese))
 	}
 
 	//Modificar una receta dada, respetando la validacion anterior
 	@Test
-	def void test9() {
-		federico.agregarReceta(receta1)
-		federico.modificarUnaReceta(receta1, receta2)
+	def void usuarioAgregaUnaRecetaYLuegoLaModifica() {
+		federico.agregarReceta(ensaladaCaprese)
+		federico.modificarUnaReceta(ensaladaCaprese, papasAlHorno)
 	}
 
 	@Test(expected=typeof(Exception))
-	def void test10() {
-		adrian.agregarReceta(receta2)
-		federico.modificarUnaReceta(receta2, receta1)
+	def void usuarioAgregaUnaRecetaYLuegoOtroUsuarioNoPuedeModificarla() {
+		adrian.agregarReceta(papasAlHorno)
+		federico.modificarUnaReceta(papasAlHorno, ensaladaCaprese)
 	}
 
 	//Punto 5: Poder construir una receta con subrecetas.
-	def void test11() {
-		receta1.agregarSubReceta(receta2)
+	def void agregarSubrecetaAUnaReceta() {
+		ensaladaCaprese.agregarSubReceta(papasAlHorno)
 	}
 }
