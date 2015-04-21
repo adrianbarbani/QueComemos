@@ -4,7 +4,7 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
-//DIAGRAMA DE CLASES -- http://yuml.me/edit/27c749b7 (Hasta ahora).
+//DIAGRAMA DE CLASES -- http://yuml.me/edit/b6ba2f99 (Final).
 @Accessors
 class Usuario {
 	int peso
@@ -23,18 +23,54 @@ class Usuario {
 	//-------------------------------------------------------------------------------------------
 	// parte1 "validar un usuario"
 	def boolean usuarioValido() {
-		this.camposObligatorios() && this.validacionCondicionesPreexistentes && fechaDeNacimiento.esValida 
+		this.camposObligatorios() && this.condicionesPreexistentesError && fechaDeNacimiento.esValida 
 
 	}
 
+	def boolean condicionesPreexistentesError (){
+		if (this.validacionCondicionesPreexistentes == true){
+			true
+		}else{
+			throw new Exception("ERROR: condiciones Preecistentes no validas")
+		}
+	}
+	
 	def boolean validacionCondicionesPreexistentes() {
 		condicionesPreexistentes.forall[condicion|condicion.validacion(this)]
 	}
 
 	def boolean camposObligatorios() {
-		peso != 0 && altura != 0 && nombre.length > 4 && this.rutinaUsuario != null
+		this.validacionPeso/*peso!=0 */ && this.validacionAltura/*altura!=0*/ && this.validacionDeNombre/*nombre.length > 4*/ && this.rutinaUsuario != null
 	}
+	
 
+	
+//===============================================================
+// validacion de def camposObligatorios()	
+	def validacionAltura() {
+		if (altura != 0){
+			true
+		}else{
+			throw new Exception("La altura debe ser distinta de 0")
+		}
+	}
+	
+	def boolean validacionPeso() { 
+		if (peso != 0){
+			true
+		}else{
+			throw new Exception("El peso de una persona debe ser mayor que 0")
+		}
+	}
+	
+	def validacionDeNombre() {
+		if (nombre.length > 4){
+			true
+		}else{
+			throw new Exception("El nombre debe tener un minimo de 5 caracteres")
+		}
+	}
+//================================================================
 	def tamañoPreferencias() {
 		preferenciasAlimentarias.size
 	}
