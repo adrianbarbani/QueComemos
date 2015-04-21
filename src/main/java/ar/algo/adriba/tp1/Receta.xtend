@@ -23,7 +23,7 @@ public class Receta {
 	List<Receta> subRecetas = new ArrayList<Receta>
 
 
-	// Para cuando el usuario se copia la receta
+	// Para cuando el usuario se copia la receta.
 	new(Receta unaReceta, Usuario unUsuario) {
 		this.setearValores(unaReceta)
 		this.duenioReceta = unUsuario
@@ -93,6 +93,11 @@ public class Receta {
 
 	def boolean usuarioSosDuenio(Usuario unUsuario) {
 		unUsuario == duenioReceta
-	}//a
+	}
+	
+	def agregarSubReceta(Receta unaSubreceta){
+		subRecetas.add(unaSubreceta)
+	}	
+	
 
 }
