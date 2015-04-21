@@ -22,11 +22,11 @@ class Entrega1Tests {
 	Usuario pedro
 	Usuario marina
 	Usuario adrian
-	Usuario usuario2
+	Usuario usuarioFalsoVegano
+	Usuario usuarioDiabeticoConHipertension
 	Fecha fechaValida
 	Fecha fechaInvalida
 
-	
 	carne chorizo
 	carne pollo
 	carne nalga
@@ -79,7 +79,7 @@ class Entrega1Tests {
 			setPeso(55)
 		]
 
-		usuario2 = new Usuario => [
+		usuarioDiabeticoConHipertension = new Usuario => [
 			chorizo = new carne
 			pollo = new carne
 			setSexo = new Femenino
@@ -94,7 +94,20 @@ class Entrega1Tests {
 			fechaDeNacimiento = fechaValida
 		]
 
-			receta1 = new Receta => [
+		usuarioFalsoVegano = new Usuario => [
+			chorizo = new carne
+			pollo = new carne
+			setSexo = new Masculino
+			setNombre("UsuarioVeganoFalso")
+			setAltura(1.76)
+			setPeso(79)
+			rutinaUsuario = new SedentarioConNadaDeEjercicio
+			condicionesPreexistentes.add(new Vegano)
+			preferenciasAlimentarias.add(chorizo)
+			fechaDeNacimiento = fechaValida
+		]
+
+		receta1 = new Receta => [
 			nalga = new carne
 			harina = new Ingrediente
 			huevo = new Ingrediente
@@ -129,14 +142,19 @@ class Entrega1Tests {
 
 	// Punto 1: Indicar si un usuario es valido
 	@Test
-	def void test1() {
+	def void testValidacionDeUsuario() {
 		Assert.assertEquals(true, federico.usuarioValido()) //Validacion mas basica
-		Assert.assertEquals(true, usuario2.usuarioValido()) //validacion basica + condiciones preexistentes (Diabetico + Hipertenso)
+		Assert.assertEquals(true, usuarioDiabeticoConHipertension.usuarioValido()) //validacion basica + condiciones preexistentes (Diabetico + Hipertenso)
+	}
+
+	@Test(expected=typeof(Exception))
+	def void testValidacionDeUsuarioInvalido() {
+	usuarioFalsoVegano.usuarioValido() //validacion basica + condiciones preexistentes (Diabetico + Hipertenso)
 	}
 
 	// Punto 2 : Averiguar el imc de un usuario
 	@Test
-	def void test2() {
+	def void testImc() {
 		Assert.assertEquals(23.48, federico.imc(), 0.1)
 		Assert.assertEquals(21.48, marina.imc(), 0.1)
 		Assert.assertEquals(18.7, adrian.imc(), 0.1)
