@@ -93,6 +93,11 @@ public class Receta {
 
 	def boolean usuarioSosDuenio(Usuario unUsuario) {
 		unUsuario == duenioReceta
-	}//a
+	}
+	
+	def agregarSubReceta(Receta unaSubreceta){
+		subRecetas.add(unaSubreceta)
+	}	
+	
 
 }
