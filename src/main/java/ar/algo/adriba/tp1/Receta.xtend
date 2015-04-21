@@ -31,13 +31,19 @@ public class Receta {
 
 	// este metodo podria no estar en un constructor me parece, despues veo
 	new() {
-		this.paraQueCondicionesSoyInadecuada() // se supone que este metodo se hace para filtrar la coleccion antes tendria que meter todas las condiciones posibles en la collection
+		condicionesInadecuadas.add(new Diabetico) // agrego todas las condiciones posibles
+		condicionesInadecuadas.add(new Hipertenso)
+		condicionesInadecuadas.add(new Celiaco)
+		condicionesInadecuadas.add(new Vegano)
+		this.paraQueCondicionesSoyInadecuada() // las filtro
 	}
 
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
 	def boolean esvalida() {
-		(this.unIngrediente() && this.rangoCalorias())
+		if((this.unIngrediente() && this.rangoCalorias())){
+			true
+			}else{throw new Exception("Receta NO valida")}
 	}
 
 	def boolean unIngrediente() {

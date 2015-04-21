@@ -76,7 +76,11 @@ class Usuario {
 	}
 
 	def boolean sexoValido() {
-		sexo.esValido()
+		if (sexo != null){
+			true
+		}else{
+			throw new Exception("Indique un sexo")
+		}
 	}
 
 	//--------------------------------------------------------------------------------
@@ -87,9 +91,14 @@ class Usuario {
 	}
 
 	def boolean sigoRutinaSaludable() {
+		if(this.tengoUnaRutinaSaludable){
+			true
+		}else{throw new Exception("Mi rutina no es saludable")}
+	}
+	
+	def boolean tengoUnaRutinaSaludable (){
 		this.imcenrango() && (this.notengocondiciones() || this.puedosubsanar())
 	}
-
 	def boolean imcenrango() {
 		this.imc() > 18 && this.imc() < 30
 	} //me dice si el imc esta en el rango de 18 a 30
@@ -140,7 +149,9 @@ class Usuario {
 	}
 
 	def boolean puedoModificarReceta(Receta unaReceta) {
-		this.puedoVerReceta(unaReceta)
+		if (this.puedoVerReceta(unaReceta)){
+			true
+		}else{throw new Exception("Esta Receta no puede ser modificada por este usuario")}
 	}
 
 	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones){
@@ -159,14 +170,5 @@ class Usuario {
 		}
 	}
 	
-	/*def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
-		if (unaReceta.usuarioSosDuenio(this)) {
-			unaReceta.setearValores(unaRecetaConModificaciones)
-		} else if (unaReceta.sosPublica()) {
-			this.modificarUnaReceta(copiar(unaReceta), unaRecetaConModificaciones)
-		} else {
-			throw new Exception("No puede modificar la receta porque es de otro usuario")
-		}
-	}*/
 
 }
