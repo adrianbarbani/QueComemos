@@ -15,12 +15,14 @@ public class Receta {
 
 	/*la idea es que esta coleccion cuando se inicie tenga todas las condiciones posibles y despues
 	 * filtrarlas y que cada condicion sepa si es inadecuada para la receta o no */
-	 
+	List<Receta> subRecetas = new ArrayList<Receta> 
 	Usuario duenioReceta
 	int caloriasReceta 
 	String dificultad //es una sola palabra, no se usa para otra cosa me parece
-	TodoElAnio temporada = new Verano // new verano es un ejemplo
-	List<Receta> subRecetas = new ArrayList<Receta>
+	Temporada temporada   // new verano es un ejemplo
+	
+	
+	
 
 
 	// Para cuando el usuario se copia la receta.

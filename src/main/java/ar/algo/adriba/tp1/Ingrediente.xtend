@@ -4,5 +4,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors 
 class Ingrediente extends Comida {
-	int calorias	
+	int calorias
+		
 }

@@ -6,4 +6,5 @@ class Fruta extends Ingrediente{
 		true
 	}	
 
+	  
 }
