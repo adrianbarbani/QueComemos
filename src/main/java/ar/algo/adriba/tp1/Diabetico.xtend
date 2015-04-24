@@ -5,9 +5,8 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 class Diabetico extends CondicionPreexistente {
 	
 	override validacion(Usuario unUsuario) {
-		super.validacion(unUsuario) && unUsuario.sexo != null //hace el validacion del tamaño de la preferencia 
-
-
+		unUsuario.tamañoPreferencias() > 0 && unUsuario.sexo != null //hace el validacion del tamaño de la preferencia 
+	
 	}
 
 	override loSatisface(Usuario unUsuario) {

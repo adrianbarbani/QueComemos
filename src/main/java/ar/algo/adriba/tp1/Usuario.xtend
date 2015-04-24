@@ -9,78 +9,106 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Usuario {
 	int peso
 	double altura
-	Sexo sexo
+
+	//Sexo sexo
+	Object sexo
 	String nombre
 	Fecha fechaDeNacimiento
 
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
 	List<Comida> preferenciasAlimentarias = new ArrayList<Comida> //cree la clase comida (cosa que tendria que discutir con ustedes por que hay un par de cosas raras)
-	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
+	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>	
 
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
 
-	//-------------------------------------------------------------------------------------------
-	// parte1 "validar un usuario"
-	def boolean usuarioValido() {
-		this.camposObligatorios() && this.condicionesPreexistentesError && fechaDeNacimiento.esValida 
+	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
+	new(int unPeso, double unaAltura, Object unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
+		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Comida> unasPreferenciasAlimentarias) {
+
+		this => [
+			peso = unPeso
+			altura = unaAltura
+			sexo = unSexo
+			nombre = unNombre
+			fechaDeNacimiento = unaFechaDeNacimiento
+			rutinaUsuario = unaRutina
+			condicionesPreexistentes = unasCondicionesPreexistentes
+		]
+
+		if (validacionPeso() == false)
+			throw new Exception("El peso debe ser distinto de 0")
+
+		if (validacionAltura() == false)
+			throw new Exception("La altura debe ser distinta de 0")
+
+		if (validacionRutina() == false)
+			throw new Exception("La rutina no fue ingresada")
+
+		if (validacionNombre() == false)
+			throw new Exception("El nombre debe tener un minimo de 5 caracteres")
+
+		if (validacionCondicionesPreexistentes() == false)
+			throw new Exception("ERROR: condiciones Preexistentes no validas")
 
 	}
 
+	// creo el constructor vacio solo para que no se rompan todos los tests, hay que sacarlo despues!
+	new() {
+		super()
+	}
+
+	//-------------------------------------------------------------------------------------------
+	// parte1 "validar un usuario"
+	/*
+	 def boolean usuarioValido() {
+		this.camposObligatorios() && this.condicionesPreexistentesError && fechaDeNacimiento.esValida
+
+	}
+	*/
+	/*
 	def boolean condicionesPreexistentesError (){
 		if (this.validacionCondicionesPreexistentes == true){
 			true
 		}else{
 			throw new Exception("ERROR: condiciones Preexistentes no validas")
 		}
-	}
-	
+	} */
 	def boolean validacionCondicionesPreexistentes() {
-		condicionesPreexistentes.forall[condicion|condicion.validacion(this)]
+		// si no tiene condiciones devuelvo true y ya
+		if (condicionesPreexistentes.size == 0) {
+			true
+		} else {
+			condicionesPreexistentes.forall[condicion|condicion.validacion(this)]
+		}
 	}
 
+	/*
 	def boolean camposObligatorios() {
-		this.validacionPeso/*peso!=0 */ && this.validacionAltura/*altura!=0*/ && this.validacionDeNombre/*nombre.length > 4*/ && this.rutinaUsuario != null
+		this.validacionPeso && this.validacionAltura && this.validacionDeNombre && this.rutinaUsuario != null
 	}
-	
+	 */
+	//===============================================================
+	// validacion de Datos Obligatorios
+	def boolean validacionPeso() {
+		peso != 0
+	}
 
-	
-//===============================================================
-// validacion de def camposObligatorios()	
-	def validacionAltura() {
-		if (altura != 0){
-			true
-		}else{
-			throw new Exception("La altura debe ser distinta de 0")
-		}
+	def boolean validacionAltura() {
+		altura != 0
 	}
-	
-	def boolean validacionPeso() { 
-		if (peso != 0){
-			true
-		}else{
-			throw new Exception("El peso de una persona debe ser mayor que 0")
-		}
+
+	def boolean validacionNombre() {
+		nombre.length > 4
 	}
-	
-	def validacionDeNombre() {
-		if (nombre.length > 4){
-			true
-		}else{
-			throw new Exception("El nombre debe tener un minimo de 5 caracteres")
-		}
+
+	def boolean validacionRutina() {
+		rutinaUsuario != null
 	}
-//================================================================
+
+	//================================================================
 	def tamañoPreferencias() {
 		preferenciasAlimentarias.size
-	}
-
-	def boolean sexoValido() {
-		if (sexo != null){
-			true
-		}else{
-			throw new Exception("Indique un sexo")
-		}
 	}
 
 	//--------------------------------------------------------------------------------
@@ -91,14 +119,17 @@ class Usuario {
 	}
 
 	def boolean sigoRutinaSaludable() {
-		if(this.tengoUnaRutinaSaludable){
+		if (this.tengoUnaRutinaSaludable) {
 			true
-		}else{throw new Exception("Mi rutina no es saludable")}
+		} else {
+			throw new Exception("Mi rutina no es saludable")
+		}
 	}
-	
-	def boolean tengoUnaRutinaSaludable (){
+
+	def boolean tengoUnaRutinaSaludable() {
 		this.imcenrango() && (this.notengocondiciones() || this.puedosubsanar())
 	}
+
 	def boolean imcenrango() {
 		this.imc() > 18 && this.imc() < 30
 	} //me dice si el imc esta en el rango de 18 a 30
@@ -108,7 +139,7 @@ class Usuario {
 	} //me dice si no tengo condiciones preexistentes (si la coleccion esta vacia)
 
 	def boolean puedosubsanar() {
-		condicionesPreexistentes.forall[i|i.loSatisface(this)] 
+		condicionesPreexistentes.forall[i|i.loSatisface(this)]
 	}
 
 	def boolean leGustaLaFruta() {
@@ -149,26 +180,27 @@ class Usuario {
 	}
 
 	def boolean puedoModificarReceta(Receta unaReceta) {
-		if (this.puedoVerReceta(unaReceta)){
+		if (this.puedoVerReceta(unaReceta)) {
 			true
-		}else{throw new Exception("Esta Receta no puede ser modificada por este usuario")}
+		} else {
+			throw new Exception("Esta Receta no puede ser modificada por este usuario")
+		}
 	}
 
-	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones){
-		if (this.puedoModificarReceta(unaReceta)){
+	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
+		if (this.puedoModificarReceta(unaReceta)) {
 			this.EditarReceta(unaReceta, unaRecetaConModificaciones)
-		}else{
+		} else {
 			throw new Exception("No puede modificar la receta porque es de otro usuario")
 		}
 	}
-	
+
 	def EditarReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
-		if(unaReceta.usuarioSosDuenio(this)){
+		if (unaReceta.usuarioSosDuenio(this)) {
 			unaReceta.setearValores(unaRecetaConModificaciones)
-		}else{//si no es publica es privada
+		} else { //si no es publica es privada
 			this.modificarUnaReceta(copiar(unaReceta), unaRecetaConModificaciones)
 		}
 	}
-	
 
 }

@@ -8,7 +8,7 @@ class Fecha extends Date {
 		super(l)
 	}
 	
-	def boolean esValida() {
+	def boolean esAnteriorAHoy() {
 
 		this.before(new Date)
 

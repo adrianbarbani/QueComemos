@@ -5,7 +5,7 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 class Hipertenso extends CondicionPreexistente {
 
 	override validacion(Usuario unUsuario) {
-		super.validacion(unUsuario)
+		unUsuario.tamañoPreferencias() > 0
 	}
 
 	override loSatisface(Usuario unUsuario) {	

@@ -140,7 +140,9 @@ class Entrega1Tests {
 
 	}
 
-	// Punto 1: Indicar si un usuario es valido
+	// Punto 1: Indicar si un usuario es valido, ARRANCO DE NUEVO EN la clase NUEVOSTESTS
+	
+	/*
 	@Test
 	def void testValidacionDeUsuario() {
 		Assert.assertEquals(true, federico.usuarioValido()) //Validacion mas basica
@@ -160,7 +162,8 @@ class Entrega1Tests {
 		Assert.assertEquals(18.7, adrian.imc(), 0.1)
 
 	}
-
+ 
+	 */
 	// Averiguar si un usuario sigue una rutina saludable
 	@Test
 	def void usuarioSigueRutinaSaludable() {

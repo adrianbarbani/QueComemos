@@ -9,11 +9,11 @@ class Comida {
 	int cantidad
 	
 	def boolean sosCarne(){
-		false
+		nombre.matches("pollo|carne|chivito|chori")
 	}
 	
 	def boolean sosFruta(){
-		false
+		nombre.matches("frutas")
 	}
 
 }
