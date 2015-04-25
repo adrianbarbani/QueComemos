@@ -5,7 +5,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 //DIAGRAMA DE CLASES -- http://yuml.me/edit/bfbcad0e (Final).
-//http://yuml.me/edit/6bfc6007
+//http://yuml.me/edit/faa0b120
 @Accessors
 class Usuario {
 	int peso
@@ -17,15 +17,15 @@ class Usuario {
 	Fecha fechaDeNacimiento
 
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
-	List<Comida> preferenciasAlimentarias = new ArrayList<Comida> //cree la clase comida (cosa que tendria que discutir con ustedes por que hay un par de cosas raras)
+	List<Ingrediente> preferenciasAlimentarias = new ArrayList<Ingrediente> //cree la clase comida (cosa que tendria que discutir con ustedes por que hay un par de cosas raras)
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>	
 
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
-
+	
 	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
 	new(int unPeso, double unaAltura, Object unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
-		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Comida> unasPreferenciasAlimentarias) {
+		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Ingrediente> unasPreferenciasAlimentarias) {
 
 		this => [
 			peso = unPeso
@@ -94,7 +94,7 @@ class Usuario {
 	def boolean validacionPeso() {
 		peso != 0
 	}
-
+	
 	def boolean validacionAltura() {
 		altura != 0
 	}
@@ -143,6 +143,7 @@ class Usuario {
 		condicionesPreexistentes.forall[i|i.loSatisface(this)]
 	}
 
+	
 	def boolean leGustaLaFruta() {
 		preferenciasAlimentarias.exists[comida|comida.sosFruta]
 	}

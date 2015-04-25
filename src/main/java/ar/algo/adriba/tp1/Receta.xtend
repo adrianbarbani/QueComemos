@@ -18,8 +18,8 @@ public class Receta {
 	List<Receta> subRecetas = new ArrayList<Receta> 
 	Usuario duenioReceta
 	int caloriasReceta 
-	String dificultad //es una sola palabra, no se usa para otra cosa me parece
-	Temporada temporada   // new verano es un ejemplo
+	String dificultad 
+	Temporada temporada   
 	
 	
 	
@@ -63,7 +63,7 @@ public class Receta {
 	def int caloriasSubRecetas() {
 		subRecetas.fold(0, [acumulado, subRecetas|acumulado + subRecetas.caloriasReceta]) //suma las calorias de las subrecetas
 	}
-
+	 
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
 	def paraQueCondicionesSoyInadecuada() {

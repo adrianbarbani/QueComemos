@@ -1,6 +1,10 @@
 package ar.algo.adriba.tp1
 
-class Condimento extends Comida{
+class Condimento {
+	
+	String nombre
+	int cantidad
+	
 	
 	def boolean sosSaloCaldo() {
 		nombre == "Sal" || nombre == "Caldo"
