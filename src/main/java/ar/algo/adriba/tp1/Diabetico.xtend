@@ -17,3 +17,5 @@ class Diabetico extends CondicionPreexistente {
 		unaReceta.tenesDemasiadaAzucar()
 	}
 }
+
+ 

@@ -4,8 +4,8 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
-//DIAGRAMA DE CLASES -- http://yuml.me/edit/bfbcad0e (Final).
-//http://yuml.me/edit/faa0b120
+//DIAGRAMA DE CLASES (viejo) -- http://yuml.me/edit/bfbcad0e (Final).
+//http://yuml.me/edit/7755799e - nuevo diagrama
 @Accessors
 class Usuario {
 	int peso
@@ -149,7 +149,7 @@ class Usuario {
 	}
 
 	def boolean tenesUnaRutinaActivaIntensivaConEjercicioAdicional() {
-		rutinaUsuario.sosActivaIntesivaConEjercicioAdicional()
+		rutinaUsuario.sosActivaeIntesiva()
 	}
 
 	def boolean tieneRutinaActiva() {
