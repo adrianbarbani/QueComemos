@@ -25,8 +25,8 @@ class nuevosTests {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 
 	Usuario JuanCarlos
-	Sexo Femenino
-	Sexo Masculino
+	Object Femenino
+	Object Masculino
 	
 	
 	@Before
@@ -71,23 +71,23 @@ class nuevosTests {
 	@Test
 	def void sigueRutinaValida() {
 	condicionesPreexistentes.add(new Diabetico)
-	unasPreferenciasAlimentarias.add(new Ingrediente(20, "Fruta", 1))
+	unasPreferenciasAlimentarias.add(new Ingrediente(20, "frutas", 1))
 	
-	JuanCarlos = new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(40, true),
+	JuanCarlos = new Usuario(52, 1.64, Masculino, "Adrian", fechaValida, new Rutina(40, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias)
 	
-		Assert.assertEquals(true, JuanCarlos.sigoRutinaSaludable())
+		JuanCarlos.sigoRutinaSaludable()
 
 	}
 
-	@Test //(expected=typeof(Exception))
+	@Test (expected=typeof(Exception))
 	def void sigueRutinaInvalida() {
 	condicionesPreexistentes.add(new Diabetico)
-	unasPreferenciasAlimentarias.add(new Ingrediente(20, "Fruta", 1))
-	JuanCarlos = new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(35, false),
+	unasPreferenciasAlimentarias.add(new Ingrediente(20, "frutas", 1))
+	JuanCarlos = new Usuario(52, 1.64, Masculino, "Jose", fechaValida, new Rutina(35, false),
 			condicionesPreexistentes, unasPreferenciasAlimentarias)
 	
-		Assert.assertEquals(true, JuanCarlos.sigoRutinaSaludable())
+		JuanCarlos.sigoRutinaSaludable()
 	
 	}
 }

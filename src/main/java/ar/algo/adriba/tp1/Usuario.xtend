@@ -109,7 +109,7 @@ class Usuario {
 	}
 
 	//================================================================
-	def tamañoPreferencias() {
+	def int tamañoPreferencias() {
 		preferenciasAlimentarias.size
 	}
 
