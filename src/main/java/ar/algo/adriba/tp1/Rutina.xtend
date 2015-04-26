@@ -18,7 +18,7 @@ class Rutina {
 	}
 	
 	def boolean sosIntensiva() {
-		tiempoDeEjercicio>30
+		tiempoDeEjercicio>60
 	}
 	
 	def boolean sosActiva() {

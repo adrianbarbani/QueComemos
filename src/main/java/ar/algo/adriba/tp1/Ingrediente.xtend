@@ -19,7 +19,7 @@ class Ingrediente {
 	}
 	
 	def boolean sosCarne(){
-		nombre.matches("pollo|carne|chivito|chori")
+		nombre.matches("pollo||carne||chivito||chori")
 	}
 		
 }
