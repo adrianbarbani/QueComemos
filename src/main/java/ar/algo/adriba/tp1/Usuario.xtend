@@ -12,7 +12,7 @@ class Usuario {
 	double altura
 
 	//Sexo sexo
-	Object sexo
+	Sexo sexo
 	String nombre
 	Fecha fechaDeNacimiento
 
@@ -24,7 +24,7 @@ class Usuario {
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
 	
 	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
-	new(int unPeso, double unaAltura, Object unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
+	new(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
 		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Ingrediente> unasPreferenciasAlimentarias) {
 
 		this => [
