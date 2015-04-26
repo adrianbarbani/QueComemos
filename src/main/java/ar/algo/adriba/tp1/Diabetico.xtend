@@ -14,6 +14,6 @@ class Diabetico extends CondicionPreexistente {
 	}
 
 	override sosInadecuada(Receta unaReceta){
-		unaReceta.contenesMasDe100DeAzucar()
+		unaReceta.tenesDemasiadaAzucar()
 	}
 }

@@ -12,9 +12,6 @@ public class Receta {
 	List<Condimento> condimentos = new ArrayList<Condimento>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
 	List<CondicionPreexistente> condicionesInadecuadas = new ArrayList<CondicionPreexistente>
-
-	/*la idea es que esta coleccion cuando se inicie tenga todas las condiciones posibles y despues
-	 * filtrarlas y que cada condicion sepa si es inadecuada para la receta o no */
 	List<Receta> subRecetas = new ArrayList<Receta> 
 	Usuario duenioReceta
 	int caloriasReceta 
@@ -23,15 +20,6 @@ public class Receta {
 	
 	
 	
-
-
-	// Para cuando el usuario se copia la receta.
-	new(Receta unaReceta, Usuario unUsuario) {
-		this.setearValores(unaReceta)
-		this.duenioReceta = unUsuario
-	}
-
-	// este metodo podria no estar en un constructor me parece, despues veo
 	new() {
 		condicionesInadecuadas.add(new Diabetico) // agrego todas las condiciones posibles
 		condicionesInadecuadas.add(new Hipertenso)
@@ -43,9 +31,7 @@ public class Receta {
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
 	def boolean esvalida() {
-		if((this.unIngrediente() && this.rangoCalorias())){
-			true
-			}else{throw new Exception("Receta NO valida")}
+		this.unIngrediente() && this.rangoCalorias()		
 	}
 
 	def boolean unIngrediente() {
@@ -67,14 +53,14 @@ public class Receta {
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
 	def paraQueCondicionesSoyInadecuada() {
-		condicionesInadecuadas.filter[condicion|condicion.sosInadecuada(this)] // supuestamente esto tendria que 
+		condicionesInadecuadas.filter[condicion|condicion.sosInadecuada(this)] 
 	}
 
 	def boolean contenesSaloCaldo() {
 		condimentos.exists[condimentos|condimentos.sosSaloCaldo]
 	}
 
-	def boolean contenesMasDe100DeAzucar() {
+	def boolean tenesDemasiadaAzucar() {
 		condimentos.exists[condimentos|condimentos.sosAzucarYtenesMasDe100gr]
 	}
 
@@ -82,25 +68,9 @@ public class Receta {
 		ingredientes.exists[comida|comida.sosCarne]
 	}
 
-	def boolean sosPublica() {
-		(duenioReceta == null)
-	}
-
-	def void setearValores(Receta unaReceta) {
-		this => [
-		nombreDelPlato = unaReceta.nombreDelPlato
-		ingredientes = unaReceta.ingredientes
-		condimentos = unaReceta.condimentos
-		explicacionDeLaPreparacion = unaReceta.explicacionDeLaPreparacion
-		caloriasReceta = unaReceta.caloriasReceta 
-		dificultad = unaReceta.dificultad
-		temporada = unaReceta.temporada
-		subRecetas = unaReceta.subRecetas
-		]
-	}
-
+	
 	def boolean usuarioSosDuenio(Usuario unUsuario) {
-		unUsuario == duenioReceta
+		false
 	}
 	
 	def agregarSubReceta(Receta unaSubreceta){

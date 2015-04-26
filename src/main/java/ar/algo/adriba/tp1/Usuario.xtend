@@ -158,7 +158,7 @@ class Usuario {
 
 	//------------------------------------------------------------------------------
 	//Parte 3 (Recetas)
-	def agregarReceta(Receta unaReceta) {
+	def agregarReceta(RecetaPrivada unaReceta) {
 		if (unaReceta.esvalida() == true) {
 			this.copiar(unaReceta)
 		} else {
@@ -170,15 +170,15 @@ class Usuario {
 		recetasDelUsuario.add(unaReceta)
 	}
 
-	def Receta copiar(Receta unaReceta) {
-		var Receta miReceta = null
-		miReceta = new Receta(unaReceta, this)
+	def RecetaPrivada copiar(RecetaPrivada unaReceta) {
+		var RecetaPrivada miReceta = null
+		miReceta = new RecetaPrivada(unaReceta, this)
 		this.agregar(miReceta)
 		miReceta
 	}
 
 	def boolean puedoVerReceta(Receta unaReceta) {
-		(unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica())
+		(unaReceta.usuarioSosDuenio(this)) || (unaReceta == Receta)
 	}
 
 	def boolean puedoModificarReceta(Receta unaReceta) {
@@ -189,7 +189,7 @@ class Usuario {
 		}
 	}
 
-	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
+	def void modificarUnaReceta(RecetaPrivada unaReceta, Receta unaRecetaConModificaciones) {
 		if (this.puedoModificarReceta(unaReceta)) {
 			this.EditarReceta(unaReceta, unaRecetaConModificaciones)
 		} else {
@@ -197,7 +197,7 @@ class Usuario {
 		}
 	}
 
-	def EditarReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
+	def EditarReceta(RecetaPrivada unaReceta, Receta unaRecetaConModificaciones) {
 		if (unaReceta.usuarioSosDuenio(this)) {
 			unaReceta.setearValores(unaRecetaConModificaciones)
 		} else { //si no es publica es privada
