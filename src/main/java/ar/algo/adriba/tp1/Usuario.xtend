@@ -12,7 +12,9 @@ class Usuario {
 	double altura
 
 	//Sexo sexo
-	Sexo  sexo
+
+	Sexo sexo
+
 	String nombre
 	Fecha fechaDeNacimiento
 
@@ -62,20 +64,7 @@ class Usuario {
 
 	//-------------------------------------------------------------------------------------------
 	// parte1 "validar un usuario"
-	/*
-	 def boolean usuarioValido() {
-		this.camposObligatorios() && this.condicionesPreexistentesError && fechaDeNacimiento.esValida
 
-	}
-	*/
-	/*
-	def boolean condicionesPreexistentesError (){
-		if (this.validacionCondicionesPreexistentes == true){
-			true
-		}else{
-			throw new Exception("ERROR: condiciones Preexistentes no validas")
-		}
-	} */
 	def boolean validacionCondicionesPreexistentes() {
 		// si no tiene condiciones devuelvo true y ya
 		if (condicionesPreexistentes.size == 0) {
@@ -85,11 +74,7 @@ class Usuario {
 		}
 	}
 
-	/*
-	def boolean camposObligatorios() {
-		this.validacionPeso && this.validacionAltura && this.validacionDeNombre && this.rutinaUsuario != null
-	}
-	 */
+
 	//===============================================================
 	// validacion de Datos Obligatorios
 	def boolean validacionPeso() {
@@ -171,7 +156,7 @@ class Usuario {
 		recetasDelUsuario.add(unaReceta)
 	}
 
-	def RecetaPrivada copiar(RecetaPrivada unaReceta) {
+	def Receta copiar(Receta unaReceta) {
 		var RecetaPrivada miReceta = null
 		miReceta = new RecetaPrivada(unaReceta, this)
 		this.agregar(miReceta)
@@ -182,7 +167,7 @@ class Usuario {
 		(unaReceta.usuarioSosDuenio(this)) || (unaReceta == Receta)
 	}
 
-	def boolean puedoModificarReceta(Receta unaReceta) {
+	def boolean puedoModificarReceta(Receta unaReceta) {//a
 		if (this.puedoVerReceta(unaReceta)) {
 			true
 		} else {
@@ -190,7 +175,7 @@ class Usuario {
 		}
 	}
 
-	def void modificarUnaReceta(RecetaPrivada unaReceta, Receta unaRecetaConModificaciones) {
+	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {//Metodo principal
 		if (this.puedoModificarReceta(unaReceta)) {
 			this.EditarReceta(unaReceta, unaRecetaConModificaciones)
 		} else {
@@ -198,16 +183,16 @@ class Usuario {
 		}
 	}
 
-	def EditarReceta(RecetaPrivada unaReceta, Receta unaRecetaConModificaciones) {
-		if (unaReceta.usuarioSosDuenio(this)) {
+	def EditarReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
+		if (unaReceta.sosPublica!=false) {
 			unaReceta.setearValores(unaRecetaConModificaciones)
-		} else { //si no es publica es privada
-			this.modificarUnaReceta(copiar(unaReceta), unaRecetaConModificaciones)
-		}
-	}
+		} else { 
+			copiar(unaReceta).setearValores(unaRecetaConModificaciones)		
+	}}
 	
 	def boolean sexoValido() {
 		sexo!=null
 	}
 
+	
 }

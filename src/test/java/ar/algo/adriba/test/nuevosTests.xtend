@@ -25,8 +25,10 @@ class nuevosTests {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 
 	Usuario JuanCarlos
-	Sexo Femenino = new Sexo()
-	Sexo Masculino 
+
+	Sexo Femenino
+	Sexo Masculino
+
 	
 	
 	@Before
@@ -46,13 +48,13 @@ class nuevosTests {
 	//Punto 1: Validacion de usuario
 	@Test(expected=typeof(Exception))
 	def void testValidacionDeUsuarioHipertensoNoValido() {
-		new Usuario(50, 1.60, Femenino, "Marina", fechaValida, new Rutina(20, true),
+		new Usuario(50, 1.60, Femenino= new Sexo(), "Marina", fechaValida, new Rutina(20, true),
 			unasCondicionesPreexistentesConHipertension, unasPreferenciasAlimentarias)
 	}
 
 	@Test
 	def void testValidacionDeUsuarioVeganoValido() {
-		new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(30, true),
+		new Usuario(52, 1.64, Masculino= new Sexo(), "JuanCarlos", fechaValida, new Rutina(30, true),
 			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias)
 
 	}
@@ -60,7 +62,7 @@ class nuevosTests {
 	//Punto2: Indice de masa corporal
 	@Test
 	def void indiceMasaCorporal() {
-		JuanCarlos = new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(40, true),
+		JuanCarlos = new Usuario(52, 1.64, Masculino= new Sexo(), "JuanCarlos", fechaValida, new Rutina(40, true),
 			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias)
 
 		Assert.assertEquals(19.3, JuanCarlos.imc(), 0.5)
@@ -73,7 +75,7 @@ class nuevosTests {
 	condicionesPreexistentes.add(new Diabetico)
 	unasPreferenciasAlimentarias.add(new Ingrediente(20, "frutas", 1))
 	
-	JuanCarlos = new Usuario(52, 1.64, Masculino, "Adrian", fechaValida, new Rutina(40, true),
+	JuanCarlos = new Usuario(52, 1.64, Masculino= new Sexo(), "Adrian", fechaValida, new Rutina(40, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias)
 	
 		JuanCarlos.sigoRutinaSaludable()
@@ -84,7 +86,7 @@ class nuevosTests {
 	def void sigueRutinaInvalida() {
 	condicionesPreexistentes.add(new Diabetico)
 	unasPreferenciasAlimentarias.add(new Ingrediente(20, "frutas", 1))
-	JuanCarlos = new Usuario(52, 1.64, Masculino, "Jose", fechaValida, new Rutina(35, false),
+	JuanCarlos = new Usuario(52, 1.64, Masculino=new Sexo(), "Jose", fechaValida, new Rutina(35, false),
 			condicionesPreexistentes, unasPreferenciasAlimentarias)
 	
 		JuanCarlos.sigoRutinaSaludable()

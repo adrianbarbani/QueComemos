@@ -75,7 +75,24 @@ public class Receta {
 	
 	def agregarSubReceta(Receta unaSubreceta){
 		subRecetas.add(unaSubreceta)
-	}	
+	}
+	
+		def void setearValores(Receta unaReceta) {
+		this => [
+		nombreDelPlato = unaReceta.nombreDelPlato
+		ingredientes = unaReceta.ingredientes
+		condimentos = unaReceta.condimentos
+		explicacionDeLaPreparacion = unaReceta.explicacionDeLaPreparacion
+		caloriasReceta = unaReceta.caloriasReceta 
+		dificultad = unaReceta.dificultad
+		temporada = unaReceta.temporada
+		subRecetas = unaReceta.subRecetas
+		]
+	}
+	
+	def boolean sosPublica() {
+		true
+	}
 	
 
 }
