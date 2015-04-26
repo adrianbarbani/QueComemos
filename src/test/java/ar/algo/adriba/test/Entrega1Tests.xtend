@@ -27,7 +27,7 @@ class Entrega1Tests {
 	Fecha fechaValida
 	Fecha fechaInvalida
 
-	carne chorizo
+	Ingrediente chorizo
 	carne pollo
 	carne nalga
 

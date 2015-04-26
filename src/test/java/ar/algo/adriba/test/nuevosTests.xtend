@@ -25,8 +25,8 @@ class nuevosTests {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 
 	Usuario JuanCarlos
-	Object Femenino
-	Object Masculino
+	Sexo Femenino = new Sexo()
+	Sexo Masculino 
 	
 	
 	@Before
