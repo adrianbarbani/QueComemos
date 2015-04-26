@@ -184,7 +184,7 @@ class Usuario {
 	}
 
 	def EditarReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
-		if (unaReceta.sosPublica!=false) {
+		if (unaReceta.sosPublica==false) {
 			unaReceta.setearValores(unaRecetaConModificaciones)
 		} else { 
 			copiar(unaReceta).setearValores(unaRecetaConModificaciones)		
