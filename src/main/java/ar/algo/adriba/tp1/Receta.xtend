@@ -25,7 +25,7 @@ public class Receta {
 		condicionesInadecuadas.add(new Hipertenso)
 		condicionesInadecuadas.add(new Celiaco)
 		condicionesInadecuadas.add(new Vegano)
-		this.paraQueCondicionesSoyInadecuada() // las filtro
+		this.filtrarCondiciones() // las filtro
 	}
 
 	//-----------------------------------------------------------------------------------------------------
@@ -52,8 +52,12 @@ public class Receta {
 	 
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
-	def paraQueCondicionesSoyInadecuada() {
+	def filtrarCondiciones() {
 		condicionesInadecuadas.filter[condicion|condicion.sosInadecuada(this)] 
+	}
+	
+	def paraQueCondicionesSoyInadecuada() {
+		condicionesInadecuadas
 	}
 
 	def boolean contenesSaloCaldo() {
@@ -75,7 +79,11 @@ public class Receta {
 	
 	def agregarSubReceta(Receta unaSubreceta){
 		subRecetas.add(unaSubreceta)
-	}	
+	}
+	
+	def boolean soyPublica() {
+		true
+	}
 	
 
 }

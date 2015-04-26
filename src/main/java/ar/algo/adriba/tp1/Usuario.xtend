@@ -179,14 +179,18 @@ class Usuario {
 	}
 
 	def boolean puedoVerReceta(Receta unaReceta) {
-		(unaReceta.usuarioSosDuenio(this)) || (unaReceta == Receta)
+		if((unaReceta.usuarioSosDuenio(this)) || (unaReceta.soyPublica)){
+			true
+		} else {
+			throw new Exception("Esta Receta no puede ser vista o modificada por este usuario")
+		}
 	}
-
+	
 	def boolean puedoModificarReceta(Receta unaReceta) {
 		if (this.puedoVerReceta(unaReceta)) {
 			true
 		} else {
-			throw new Exception("Esta Receta no puede ser modificada por este usuario")
+			throw new Exception("Esta Receta no puede ser vista o modificada por este usuario")
 		}
 	}
 

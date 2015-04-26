@@ -11,6 +11,10 @@ class RecetaPrivada extends Receta {
 		this.setearValores(unaReceta)
 		this.duenioReceta = unUsuario
 	}
+	
+	new() {
+		
+	}
 
 	def void setearValores(Receta unaReceta) {
 		this => [
@@ -28,5 +32,13 @@ class RecetaPrivada extends Receta {
 	override boolean usuarioSosDuenio(Usuario unUsuario) {
 		unUsuario == duenioReceta
 		}
+	
+	def SetduenioReceta(Usuario usuario) {
+		duenioReceta=usuario
+	}
+	
+	override def boolean soyPublica() {
+		false
+	}
 		
 }
