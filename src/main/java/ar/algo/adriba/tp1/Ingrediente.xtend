@@ -8,6 +8,12 @@ class Ingrediente {
 	String nombre
 	int cantidad
 	
+	new (int unasCalorias, String unNombre, int unaCantidad){
+		calorias=unasCalorias
+		nombre=unNombre
+		cantidad=unaCantidad
+	}
+	
 	def boolean sosFruta(){
 		nombre.matches("frutas")
 	}

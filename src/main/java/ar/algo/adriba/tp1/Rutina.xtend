@@ -8,6 +8,11 @@ class Rutina {
 	boolean activa 
 	int tiempoDeEjercicio
 	
+	new(int valor, boolean tipo){
+		tiempoDeEjercicio=valor
+		activa=tipo
+	}
+	
 	def boolean sosActivaeIntesiva() {
 		this.sosActiva && this.sosIntensiva
 	}

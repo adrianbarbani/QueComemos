@@ -1,28 +1,34 @@
 package ar.algo.adriba.test
 
-import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Fecha
-import ar.algo.adriba.tp1.Femenino
+import ar.algo.adriba.tp1.Hipertenso
+import ar.algo.adriba.tp1.Ingrediente
 import ar.algo.adriba.tp1.Rutina
 import ar.algo.adriba.tp1.Usuario
+import ar.algo.adriba.tp1.Vegano
+import java.util.ArrayList
 import java.util.List
 import org.junit.Before
 import org.junit.Test
-import ar.algo.adriba.tp1.Vegano
+import org.junit.Assert
+import ar.algo.adriba.tp1.Sexo
 import ar.algo.adriba.tp1.Diabetico
-import java.util.ArrayList
-import ar.algo.adriba.tp1.Hipertenso
-import ar.algo.adriba.tp1.Masculino
 
 class nuevosTests {
 
 	Fecha fechaValida
 	Fecha fechaInvalida
-	List<Comida> unasPreferenciasAlimentarias = new ArrayList<Comida>
+	List<Ingrediente> unasPreferenciasAlimentarias = new ArrayList<Ingrediente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesConHipertension = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesConVeganismo = new ArrayList<CondicionPreexistente>
+	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 
+	Usuario JuanCarlos
+	Sexo Femenino
+	Sexo Masculino
+	
+	
 	@Before
 	def void init() {
 
@@ -34,17 +40,54 @@ class nuevosTests {
 
 		unasCondicionesPreexistentesConHipertension.add(new Hipertenso)
 		unasCondicionesPreexistentesConVeganismo.add(new Vegano)
+
 	}
 
+	//Punto 1: Validacion de usuario
 	@Test(expected=typeof(Exception))
 	def void testValidacionDeUsuarioHipertensoNoValido() {
-		new Usuario(50, 1.60, new Femenino, "Marina", fechaValida, new Rutina,
+		new Usuario(50, 1.60, Femenino, "Marina", fechaValida, new Rutina(20, true),
 			unasCondicionesPreexistentesConHipertension, unasPreferenciasAlimentarias)
 	}
 
 	@Test
 	def void testValidacionDeUsuarioVeganoValido() {
-		new Usuario(52, 1.64, new Masculino, "JuanCarlos", fechaValida, new Rutina,
+		new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(30, true),
 			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias)
 
 	}
+
+	//Punto2: Indice de masa corporal
+	@Test
+	def void indiceMasaCorporal() {
+		JuanCarlos = new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(40, true),
+			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias)
+
+		Assert.assertEquals(19.3, JuanCarlos.imc(), 0.5)
+
+	}
+
+	//Punto 2: Averiguar si un usuario sigue una rutina saludable
+	@Test
+	def void sigueRutinaValida() {
+	condicionesPreexistentes.add(new Diabetico)
+	unasPreferenciasAlimentarias.add(new Ingrediente(20, "Fruta", 1))
+	
+	JuanCarlos = new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(40, true),
+			condicionesPreexistentes, unasPreferenciasAlimentarias)
+	
+		Assert.assertEquals(true, JuanCarlos.sigoRutinaSaludable())
+
+	}
+
+	@Test //(expected=typeof(Exception))
+	def void sigueRutinaInvalida() {
+	condicionesPreexistentes.add(new Diabetico)
+	unasPreferenciasAlimentarias.add(new Ingrediente(20, "Fruta", 1))
+	JuanCarlos = new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(35, false),
+			condicionesPreexistentes, unasPreferenciasAlimentarias)
+	
+		Assert.assertEquals(true, JuanCarlos.sigoRutinaSaludable())
+	
+	}
+}

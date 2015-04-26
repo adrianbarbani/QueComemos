@@ -35,6 +35,7 @@ class Usuario {
 			fechaDeNacimiento = unaFechaDeNacimiento
 			rutinaUsuario = unaRutina
 			condicionesPreexistentes = unasCondicionesPreexistentes
+			preferenciasAlimentarias = unasPreferenciasAlimentarias
 		]
 
 		if (validacionPeso() == false)
