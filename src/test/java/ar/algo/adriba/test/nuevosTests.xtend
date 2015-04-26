@@ -267,5 +267,11 @@ class nuevosTests {
 			
 		Usuario.modificarUnaReceta(RecetaPublica, RecetaInvalida)
 	}
+	
+	//Punto 5: Poder crear una receta con subrecetas
+	@Test
+	def void crearRecetaConSubrecetas(){
+		RecetaValida.agregarSubReceta(RecetaPublica)
+	}
 		
 }
