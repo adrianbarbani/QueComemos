@@ -22,12 +22,14 @@ class nuevosTests {
 	Fecha fechaValida
 	Fecha fechaInvalida
 	List<Ingrediente> unasPreferenciasAlimentarias = new ArrayList<Ingrediente>
+	List<Ingrediente> unasPreferenciasAlimentarias2 = new ArrayList<Ingrediente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesConHipertension = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesConVeganismo = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
-
+	List<CondicionPreexistente> condicionesPreexistentes2 = new ArrayList<CondicionPreexistente>
 
 	Usuario Usuario
+	Usuario Usuario2
 
 	Sexo Femenino
 	Sexo Masculino
@@ -52,8 +54,13 @@ class nuevosTests {
 		unasCondicionesPreexistentesConHipertension.add(new Hipertenso)
 		unasCondicionesPreexistentesConVeganismo.add(new Vegano)
 
+		condicionesPreexistentes.add(new Hipertenso)
+		unasPreferenciasAlimentarias2.add(new Ingrediente(20, "manzana", 1))
+		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
+			condicionesPreexistentes, unasPreferenciasAlimentarias2)
+
 		//new (int unasCalorias, String unNombre, int unaCantidad)
-			RecetaValida = new RecetaPrivada => [
+		RecetaValida = new RecetaPrivada => [
 			nalga = new Ingrediente(99, "nalga", 1)
 			harina = new Ingrediente(25, "harina", 20)
 			huevo = new Ingrediente(10, "huevo", 3)
@@ -70,7 +77,7 @@ class nuevosTests {
 			setNombreDelPlato("Pure")
 			ingredientes.add(harina)
 		]
-		
+
 		RecetaPublica = new Receta => [
 			harina = new Ingrediente(15, "papa", 1)
 			setNombreDelPlato("Pure")
@@ -106,46 +113,48 @@ class nuevosTests {
 	//Punto 2: Averiguar si un usuario sigue una rutina saludable (hago todos los casos)
 	@Test
 	def void diabeticoSigueRutinaValida() {
-		condicionesPreexistentes.add(new Diabetico)
+		condicionesPreexistentes2.add(new Diabetico)
 		unasPreferenciasAlimentarias.add(new Ingrediente(20, "chori", 1))
 
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "Adrian", fechaValida, new Rutina(40, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
+		Usuario2 = new Usuario(52, 1.64, Masculino = new Sexo(), "Adrian", fechaValida, new Rutina(40, true),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
 
-		Usuario.sigoRutinaSaludable()
+		Usuario2.sigoRutinaSaludable()
 
 	}
 
 	@Test(expected=typeof(Exception))
 	def void diabeticoSigueRutinaInvalida() {
-		condicionesPreexistentes.add(new Diabetico)
+		condicionesPreexistentes2.add(new Diabetico)
 		unasPreferenciasAlimentarias.add(new Ingrediente(20, "pescado", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "Jose", fechaValida, new Rutina(35, false),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
+		
+		Usuario2 = new Usuario(52, 1.64, Masculino = new Sexo(), "Jose", fechaValida, new Rutina(35, false),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
 
-		Usuario.sigoRutinaSaludable()
+		Usuario2.sigoRutinaSaludable()
 
 	}
 
 	@Test
 	def void veganoSigueRutinaValida() {
-		condicionesPreexistentes.add(new Vegano)
+		condicionesPreexistentes2.add(new Vegano)
 		unasPreferenciasAlimentarias.add(new Ingrediente(20, "frutas", 1))
-		Usuario = new Usuario(52, 1.64, Femenino = new Sexo(), "Camila", fechaValida, new Rutina(20, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
+		
+		Usuario2 = new Usuario(52, 1.64, Femenino = new Sexo(), "Camila", fechaValida, new Rutina(20, true),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
 
-		Usuario.sigoRutinaSaludable()
+		Usuario2.sigoRutinaSaludable()
 
 	}
 
 	@Test(expected=typeof(Exception))
 	def void veganoSigueRutinaInvalida() {
-		condicionesPreexistentes.add(new Vegano)
+		condicionesPreexistentes2.add(new Vegano)
 		unasPreferenciasAlimentarias.add(new Ingrediente(20, "chori", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "Miguel", fechaValida, new Rutina(61, false),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
+		Usuario2 = new Usuario(52, 1.64, Masculino = new Sexo(), "Miguel", fechaValida, new Rutina(61, false),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
 
-		Usuario.sigoRutinaSaludable()
+		Usuario2.sigoRutinaSaludable()
 
 	}
 
@@ -162,116 +171,81 @@ class nuevosTests {
 
 	@Test(expected=typeof(Exception))
 	def void hipertensoSigueRutinaInvalida() {
-		condicionesPreexistentes.add(new Vegano)
+		condicionesPreexistentes2.add(new Hipertenso)
 		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Femenino = new Sexo(), "Daiana", fechaValida, new Rutina(20, true),
+		Usuario2 = new Usuario(52, 1.64, Femenino = new Sexo(), "Daiana", fechaValida, new Rutina(20, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias)
 
-		Usuario.sigoRutinaSaludable()
+		Usuario2.sigoRutinaSaludable()
 
 	}
 
 	//Punto 3: Hacer que un usuario agregue una receta
 	@Test
 	def void usuarioAgregaRecetaValida() {
-		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
-			
 		Usuario.agregarReceta(RecetaValida)
 
 	}
 
-	@Test (expected=typeof(Exception))
+	@Test(expected=typeof(Exception))
 	def void usuarioAgregaRecetaInvalida() {
-		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
-			
 		Usuario.agregarReceta(RecetaInvalida)
 	}
-	
+
 	//Punto 3: Conocer las condiciones preexistentes para la que una receta es inadecuada
 	@Test
-	def void condicionesPreexistentesDeUnaReceta(){
+	def void condicionesPreexistentesDeUnaReceta() {
 		RecetaValida.paraQueCondicionesSoyInadecuada()
 	}
-	
+
 	//Punto 4: Saber si un usuario puede ver o modificar una receta dada
 	@Test
-	def void quieroVerOModificarRecetaMiaYPuedo(){ //Receta privada mia
-		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
-			
+	def void quieroVerOModificarRecetaMiaYPuedo() { //Receta privada mia
+
 		RecetaValida.SetduenioReceta(Usuario)
-				
+
 		Assert.assertEquals(true, Usuario.puedoVerReceta(RecetaValida))
 		Assert.assertEquals(true, Usuario.puedoModificarReceta(RecetaValida))
 	}
-	
+
 	@Test(expected=typeof(Exception))
-	def void quieroVerOModificarRecetaDeOtroYNoPuedo(){ //Receta privada de otro
-		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
-			
+	def void quieroVerOModificarRecetaDeOtroYNoPuedo() { //Receta privada de otro
+
 		Usuario.puedoVerReceta(RecetaValida)
 		Usuario.puedoModificarReceta(RecetaValida)
 	}
-	
+
 	@Test
-	def void quieroVerOModificarRecetaPublica(){ //Receta publica
-		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
-			
+	def void quieroVerOModificarRecetaPublica() { //Receta publica
+
 		Usuario.puedoVerReceta(RecetaPublica)
 		Usuario.puedoModificarReceta(RecetaPublica)
 	}
-	
+
 	//Punto 4: Modificar una receta
 	@Test
-	def void modificarUnaRecetaMia(){ //Modificar receta mia
-		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
-			
+	def void modificarUnaRecetaMia() { //Modificar receta mia
+
 		RecetaValida.SetduenioReceta(Usuario)
-				
 		Usuario.modificarUnaReceta(RecetaValida, RecetaInvalida)
 	}
-	
+
 	@Test(expected=typeof(Exception))
-	def void modificarRecetaDeOtro(){ //Modificar receta privada de otro
-		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
-			
+	def void modificarRecetaDeOtro() { //Modificar receta privada de otro
+
 		Usuario.modificarUnaReceta(RecetaValida, RecetaInvalida)
 	}
-	
+
 	@Test
-	def void modificarRecetaPublica(){ //Receta publica
-		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Ingrediente(20, "manzana", 1))
-		Usuario = new Usuario(52, 1.64, Masculino = new Sexo(), "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
-			
+	def void modificarRecetaPublica() { //Receta publica
+
 		Usuario.modificarUnaReceta(RecetaPublica, RecetaInvalida)
 	}
-	
+
 	//Punto 5: Poder crear una receta con subrecetas
 	@Test
-	def void crearRecetaConSubrecetas(){
+	def void crearRecetaConSubrecetas() {
 		RecetaValida.agregarSubReceta(RecetaPublica)
 	}
-		
+
 }
