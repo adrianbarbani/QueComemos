@@ -1,21 +1,12 @@
 package ar.algo.adriba.tp1
 
-class Condimento {
-	
+class Condimento extends Ingrediente{
+
 	String nombre
 	int cantidad
 	
-	
-	def boolean sosSaloCaldo() {
-		nombre == "Sal" || nombre == "Caldo"
+	new(int unasCalorias, String unNombre, int unaCantidad) {
+		super(unasCalorias, unNombre, unaCantidad)
 	}
-	
-	def boolean sosAzucarYtenesMasDe100gr() {
-		if(nombre == "Azucar"){
-			cantidad>100
-		}else{false}
-	}
-	
-
 	
 }

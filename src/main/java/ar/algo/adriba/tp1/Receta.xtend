@@ -12,26 +12,16 @@ public class Receta {
 	List<Condimento> condimentos = new ArrayList<Condimento>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
 	List<CondicionPreexistente> condicionesInadecuadas = new ArrayList<CondicionPreexistente>
-	List<Receta> subRecetas = new ArrayList<Receta> 
+	List<Receta> subRecetas = new ArrayList<Receta>
 	Usuario duenioReceta
-	int caloriasReceta 
-	String dificultad 
-	Temporada temporada   
-	
-	
-	
-	new() {
-		condicionesInadecuadas.add(new Diabetico) // agrego todas las condiciones posibles
-		condicionesInadecuadas.add(new Hipertenso)
-		condicionesInadecuadas.add(new Celiaco)
-		condicionesInadecuadas.add(new Vegano)
-		this.filtrarCondiciones() // las filtro
-	}
+	int caloriasReceta
+	String dificultad
+	Temporada temporada
 
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
 	def boolean esvalida() {
-		this.unIngrediente() && this.rangoCalorias()		
+		this.unIngrediente() && this.rangoCalorias()
 	}
 
 	def boolean unIngrediente() {
@@ -49,58 +39,49 @@ public class Receta {
 	def int caloriasSubRecetas() {
 		subRecetas.fold(0, [acumulado, subRecetas|acumulado + subRecetas.caloriasReceta]) //suma las calorias de las subrecetas
 	}
-	 
+
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
-	def filtrarCondiciones() {
-		condicionesInadecuadas.filter[condicion|condicion.sosInadecuada(this)] 
-	}
-	
-	def paraQueCondicionesSoyInadecuada() {
-		condicionesInadecuadas
+	def paraQueCondicionesSoyInadecuada(List<CondicionPreexistente> unasCondicionesPreexistentesCompletas) {
+		unasCondicionesPreexistentesCompletas.filter[condicion|condicion.sosInadecuada(this)]
 	}
 
-	def boolean contenesSaloCaldo() {
-		condimentos.exists[condimentos|condimentos.sosSaloCaldo]
+	def boolean tenesSalOCaldo() {
+		condimentos.exists[condimentos|condimentos.tenes("Sal")] ||	condimentos.exists[condimentos|condimentos.tenes("Caldo")]
 	}
 
 	def boolean tenesDemasiadaAzucar() {
-		condimentos.exists[condimentos|condimentos.sosAzucarYtenesMasDe100gr]
+		condimentos.exists[condimentos|condimentos.tenes("Azucar") && condimentos.tenesMasDelLimite(100)]
 	}
 
 	def boolean tenesCarne() {
-		ingredientes.exists[comida|comida.sosCarne]
+		ingredientes.exists[ingrediente|ingrediente.tenes("pollo||carne||chivito||chori")]
 	}
 
-	
 	def boolean usuarioSosDuenio(Usuario unUsuario) {
 		false
 	}
-	
-	def agregarSubReceta(Receta unaSubreceta){
+
+	def agregarSubReceta(Receta unaSubreceta) {
 		subRecetas.add(unaSubreceta)
 	}
-	
 
-		def void setearValores(Receta unaReceta) {
+	def void setearValores(Receta unaReceta) {
 		this => [
-		nombreDelPlato = unaReceta.nombreDelPlato
-		ingredientes = unaReceta.ingredientes
-		condimentos = unaReceta.condimentos
-		explicacionDeLaPreparacion = unaReceta.explicacionDeLaPreparacion
-		caloriasReceta = unaReceta.caloriasReceta 
-		dificultad = unaReceta.dificultad
-		temporada = unaReceta.temporada
-		subRecetas = unaReceta.subRecetas
+			nombreDelPlato = unaReceta.nombreDelPlato
+			ingredientes = unaReceta.ingredientes
+			condimentos = unaReceta.condimentos
+			explicacionDeLaPreparacion = unaReceta.explicacionDeLaPreparacion
+			caloriasReceta = unaReceta.caloriasReceta
+			dificultad = unaReceta.dificultad
+			temporada = unaReceta.temporada
+			subRecetas = unaReceta.subRecetas
 		]
 	}
-	
-	
 
 	def boolean sosPublica() {
 
 		true
 	}
-	
 
 }

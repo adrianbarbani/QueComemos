@@ -10,21 +10,15 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Usuario {
 	int peso
 	double altura
-
-	//Sexo sexo
-
 	Sexo sexo
-
 	String nombre
 	Fecha fechaDeNacimiento
-
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
 	List<Ingrediente> preferenciasAlimentarias = new ArrayList<Ingrediente> //cree la clase comida (cosa que tendria que discutir con ustedes por que hay un par de cosas raras)
-	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>	
-
+	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
-	
+
 	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
 	new(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
 		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Ingrediente> unasPreferenciasAlimentarias) {
@@ -57,30 +51,24 @@ class Usuario {
 
 	}
 
-	// creo el constructor vacio solo para que no se rompan todos los tests, hay que sacarlo despues!
-	new() {
-		super()
-	}
-
 	//-------------------------------------------------------------------------------------------
 	// parte1 "validar un usuario"
-
 	def boolean validacionCondicionesPreexistentes() {
+
 		// si no tiene condiciones devuelvo true y ya
-		if (condicionesPreexistentes.size == 0) {
+		if (notengocondiciones()) {
 			true
 		} else {
 			condicionesPreexistentes.forall[condicion|condicion.validacion(this)]
 		}
 	}
 
-
 	//===============================================================
 	// validacion de Datos Obligatorios
 	def boolean validacionPeso() {
 		peso != 0
 	}
-	
+
 	def boolean validacionAltura() {
 		altura != 0
 	}
@@ -101,19 +89,10 @@ class Usuario {
 	//--------------------------------------------------------------------------------
 	//Parte 2
 	def double imc() {
-
 		this.peso / (this.altura * this.altura) //devuelve el indice de masa corporal
 	}
 
 	def boolean sigoRutinaSaludable() {
-		if (this.tengoUnaRutinaSaludable) {
-			true
-		} else {
-			throw new Exception("Mi rutina no es saludable")
-		}
-	}
-
-	def boolean tengoUnaRutinaSaludable() {
 		this.imcenrango() && (this.notengocondiciones() || this.puedosubsanar())
 	}
 
@@ -127,11 +106,6 @@ class Usuario {
 
 	def boolean puedosubsanar() {
 		condicionesPreexistentes.forall[i|i.loSatisface(this)]
-	}
-
-	
-	def boolean leGustaLaFruta() {
-		preferenciasAlimentarias.exists[comida|comida.sosFruta]
 	}
 
 	def boolean tenesUnaRutinaActivaIntensivaConEjercicioAdicional() {
@@ -164,15 +138,14 @@ class Usuario {
 	}
 
 	def boolean puedoVerReceta(Receta unaReceta) {
-		if((unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica)){
+		if ((unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica)) {
 			true
 		} else {
 			throw new Exception("Esta Receta no puede ser vista o modificada por este usuario")
 		}
 	}
 
-
-	def boolean puedoModificarReceta(Receta unaReceta) {//a
+	def boolean puedoModificarReceta(Receta unaReceta) { //a
 
 		if (this.puedoVerReceta(unaReceta)) {
 			true
@@ -181,7 +154,7 @@ class Usuario {
 		}
 	}
 
-	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {//Metodo principal
+	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) { //Metodo principal
 		if (this.puedoModificarReceta(unaReceta)) {
 			this.EditarReceta(unaReceta, unaRecetaConModificaciones)
 		} else {
@@ -190,15 +163,11 @@ class Usuario {
 	}
 
 	def EditarReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
-		if (unaReceta.sosPublica==false) {
+		if (unaReceta.sosPublica == false) {
 			unaReceta.setearValores(unaRecetaConModificaciones)
-		} else { 
-			copiar(unaReceta).setearValores(unaRecetaConModificaciones)		
-	}}
-	
-	def boolean sexoValido() {
-		sexo!=null
+		} else {
+			copiar(unaReceta).setearValores(unaRecetaConModificaciones)
+		}
 	}
 
-	
 }
