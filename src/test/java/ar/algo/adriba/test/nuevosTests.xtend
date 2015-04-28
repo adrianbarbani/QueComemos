@@ -45,7 +45,7 @@ class nuevosTests {
 	Ingrediente huevo
 	Ingrediente panRallado
 
-	@Before
+	@Before 
 	def void init() {
 
 		// Usamos la fecha de ayer como fecha VALIDA
