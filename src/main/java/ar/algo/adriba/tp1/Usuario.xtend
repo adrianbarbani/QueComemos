@@ -14,14 +14,14 @@ class Usuario {
 	String nombre
 	Fecha fechaDeNacimiento
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
-	List<Ingrediente> preferenciasAlimentarias = new ArrayList<Ingrediente> //cree la clase comida (cosa que tendria que discutir con ustedes por que hay un par de cosas raras)
+	List<Comida> preferenciasAlimentarias = new ArrayList<Comida>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
 
 	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
 	new(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
-		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Ingrediente> unasPreferenciasAlimentarias) {
+		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Comida> unasPreferenciasAlimentarias) {
 
 		this => [
 			peso = unPeso

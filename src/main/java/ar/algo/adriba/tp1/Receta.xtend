@@ -9,7 +9,7 @@ public class Receta {
 
 	String nombreDelPlato
 	List<Ingrediente> ingredientes = new ArrayList<Ingrediente>
-	List<Condimento> condimentos = new ArrayList<Condimento>
+	List<Ingrediente> condimentos = new ArrayList<Ingrediente>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
 	List<Receta> subRecetas = new ArrayList<Receta>
 	Usuario duenioReceta
