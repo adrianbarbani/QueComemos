@@ -18,7 +18,7 @@ class Ingrediente {
 		nombre.matches(unaCosa)
 	}
 
-	def boolean tenesMasDeLimite(int limite) {
+	def boolean tenesMasDelLimite(int limite) {
 		cantidad > limite
 	}
 
