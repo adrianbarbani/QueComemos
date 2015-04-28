@@ -4,8 +4,7 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
-//DIAGRAMA DE CLASES (viejo) -- http://yuml.me/edit/bfbcad0e (Final).
-//http://yuml.me/edit/7755799e - nuevo diagrama
+//http://yuml.me/edit/9f1e3245 - nuevo diagrama -- 
 @Accessors
 class Usuario {
 	int peso
@@ -107,6 +106,7 @@ class Usuario {
 	def boolean puedosubsanar() {
 		condicionesPreexistentes.forall[i|i.loSatisface(this)]
 	}
+
 
 	def boolean tenesUnaRutinaActivaIntensivaConEjercicioAdicional() {
 		rutinaUsuario.sosActivaeIntesiva()
