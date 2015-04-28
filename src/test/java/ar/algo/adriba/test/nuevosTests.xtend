@@ -28,7 +28,8 @@ class nuevosTests {
 	List<CondicionPreexistente> unasCondicionesPreexistentesConVeganismo = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> condicionesPreexistentes2 = new ArrayList<CondicionPreexistente>
-	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas =  new ArrayList<CondicionPreexistente>
+	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas = new ArrayList<CondicionPreexistente>
+ 	List<CondicionPreexistente> algunaCondicionInadecuada = new ArrayList<CondicionPreexistente>
 
 	Usuario Usuario
 	Usuario Usuario2
@@ -39,7 +40,7 @@ class nuevosTests {
 	RecetaPrivada RecetaValida
 	RecetaPrivada RecetaInvalida
 	Receta RecetaPublica
-	Ingrediente nalga
+	Ingrediente carne
 	Ingrediente harina
 	Ingrediente huevo
 	Ingrediente panRallado
@@ -76,7 +77,7 @@ class nuevosTests {
 
 		//new (int unasCalorias, String unNombre, int unaCantidad)
 		RecetaValida = new RecetaPrivada => [
-			nalga = new Ingrediente(99, "nalga", 1)
+			carne = new Ingrediente(99, "carne", 1)
 			harina = new Ingrediente(25, "harina", 20)
 			huevo = new Ingrediente(10, "huevo", 3)
 			panRallado = new Ingrediente(12, "pan rallado", 50)
@@ -84,7 +85,7 @@ class nuevosTests {
 			ingredientes.add(harina)
 			ingredientes.add(huevo)
 			ingredientes.add(panRallado)
-			ingredientes.add(nalga)
+			ingredientes.add(carne)
 		]
 
 		RecetaInvalida = new RecetaPrivada => [
@@ -139,7 +140,7 @@ class nuevosTests {
 	}
 
 	@Test
-	def void diabeticoSigueRutinaInvalida() {
+	def void diabeticoSigueRutinaInvalidaPeroTienePesoBajo() {
 		condicionesPreexistentes2.add(new Diabetico)
 		unasPreferenciasAlimentarias.add(new Ingrediente(20, "pescado", 1))
 
@@ -150,6 +151,17 @@ class nuevosTests {
 
 	}
 
+	@Test
+	def void diabeticoSigueRutinaInvalidayTienePesoAlto() {
+		condicionesPreexistentes2.add(new Diabetico)
+		unasPreferenciasAlimentarias.add(new Ingrediente(20, "pescado", 1))
+
+		Usuario2 = new Usuario(102, 1.64, Masculino, "Josecito", fechaValida, new Rutina(35, false),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+
+		Assert.assertFalse(Usuario2.sigoRutinaSaludable())
+
+	}
 	@Test
 	def void veganoSigueRutinaValida() {
 		condicionesPreexistentes2.add(new Vegano)
@@ -210,8 +222,8 @@ class nuevosTests {
 	//Punto 3: Conocer las condiciones preexistentes para la que una receta es inadecuada
 	@Test
 	def void condicionesPreexistentesDeUnaReceta() {
-		RecetaValida.paraQueCondicionesSoyInadecuada(unasCondicionesPreexistentesCompletas)
-	}
+  	Assert.assertTrue(RecetaValida.paraQueCondicionesSoyInadecuada(unasCondicionesPreexistentesCompletas).size > 0)
+  	}
 
 	//Punto 4: Saber si un usuario puede ver o modificar una receta dada
 	@Test

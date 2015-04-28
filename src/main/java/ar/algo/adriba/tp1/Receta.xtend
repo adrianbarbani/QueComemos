@@ -11,12 +11,11 @@ public class Receta {
 	List<Ingrediente> ingredientes = new ArrayList<Ingrediente>
 	List<Condimento> condimentos = new ArrayList<Condimento>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
-	List<CondicionPreexistente> condicionesInadecuadas = new ArrayList<CondicionPreexistente>
 	List<Receta> subRecetas = new ArrayList<Receta>
 	Usuario duenioReceta
 	int caloriasReceta
 	String dificultad
-	Temporada temporada
+	List<String> temporada
 
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
@@ -47,7 +46,8 @@ public class Receta {
 	}
 
 	def boolean tenesSalOCaldo() {
-		condimentos.exists[condimentos|condimentos.tenes("Sal")] ||	condimentos.exists[condimentos|condimentos.tenes("Caldo")]
+		condimentos.exists[condimentos|condimentos.tenes("Sal")] ||
+			condimentos.exists[condimentos|condimentos.tenes("Caldo")]
 	}
 
 	def boolean tenesDemasiadaAzucar() {
@@ -58,6 +58,8 @@ public class Receta {
 		ingredientes.exists[ingrediente|ingrediente.tenes("pollo||carne||chivito||chori")]
 	}
 
+	//------------------------------------------------------------------------------------------------------
+	//Parte 3: Recetas privadas y publicas
 	def boolean usuarioSosDuenio(Usuario unUsuario) {
 		false
 	}
