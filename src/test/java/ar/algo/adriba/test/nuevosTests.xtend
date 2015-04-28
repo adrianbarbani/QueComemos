@@ -29,7 +29,6 @@ class nuevosTests {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> condicionesPreexistentes2 = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas = new ArrayList<CondicionPreexistente>
- 	List<CondicionPreexistente> algunaCondicionInadecuada = new ArrayList<CondicionPreexistente>
 
 	Usuario Usuario
 	Usuario Usuario2
