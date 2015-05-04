@@ -14,8 +14,6 @@ class Ingrediente extends Comida{
 		cantidad = unaCantidad
 	}
 
-	def boolean tenesMasDelLimite(int limite) {
-		cantidad > limite
-	}
+	
 
 }

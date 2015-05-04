@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 //http://yuml.me/edit/9f1e3245 - nuevo diagrama -- 
 @Accessors
-class Usuario {
+class Usuario  {
 	int peso
 	double altura
 	Sexo sexo
