@@ -12,5 +12,7 @@ interface Cosas {
 	
 	def boolean tenes(String unaCosa)
 	
+	def boolean unIngrediente()
+	
 	
 }

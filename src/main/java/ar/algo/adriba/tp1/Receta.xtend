@@ -22,8 +22,8 @@ public class Receta implements Cosas {
 		this.unIngrediente() && this.rangoCalorias()
 	}
 
-	def boolean unIngrediente() {
-		subRecetaseIngredientes.exists[cosas|cosas == Comida] // te dice si alguna cosa es una comida osea si tiene un ingrediente (creo que esto no funciona)
+	override unIngrediente() {
+		subRecetaseIngredientes.exists[cosas|cosas.unIngrediente()] // te dice si alguna cosa es una comida osea si tiene un ingrediente (creo que esto no funciona)
 
 	//ingredientes.size > 0
 	}
@@ -86,7 +86,7 @@ public class Receta implements Cosas {
 
 	//*********************ENTREGA 2***********************************************
 	def boolean sePuedeSugerirA(Persona unaPersona) {
-		tipo.sePuedeSugerir() && unaPersona.aceptasSugerencia(this)
+		unaPersona.aceptasSugerencia(this)
 	}
 
 }

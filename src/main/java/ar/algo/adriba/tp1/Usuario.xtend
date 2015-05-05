@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 //http://yuml.me/edit/9f1e3245 - nuevo diagrama -- 
 @Accessors
-class Usuario implements Persona {
+class Usuario extends Persona {
 	int peso
 	double altura
 	Sexo sexo
@@ -17,6 +17,7 @@ class Usuario implements Persona {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
+	List<Receta> recetasFavoritas = new ArrayList<Receta>
 
 	//------------entrega2---------------
 	List<GrupoDeUsuario> grupos = new ArrayList<GrupoDeUsuario> // coleccion de grupos de los que soy miembro.
@@ -191,16 +192,25 @@ class Usuario implements Persona {
 	}
 
 	//****************************ENTREGA 2**************************************
-	override aceptasSugerencia(Receta unaReceta) {
-	this.esAptaParaMi(unaReceta) && this.mePuedeGustar(unaReceta)	
-	}
-	
 	override mePuedeGustar(Receta unaReceta) {
-	this.comidaQueLeDisgusta.filter[comida|unaReceta.tenes(comida)].empty
+		this.comidaQueLeDisgusta.filter[comida|unaReceta.tenes(comida)].empty
 	}
-	
+
 	override esAptaParaMi(Receta unaReceta) {
-	unaReceta.paraQueCondicionesSoyInadecuada(this.condicionesPreexistentes).empty
+		unaReceta.paraQueCondicionesSoyInadecuada(this.condicionesPreexistentes).empty
 	}
-	
+
+	def void marcarComoFavorita(Receta unaReceta) {
+
+		if (puedoVerReceta(unaReceta)) {
+			recetasFavoritas.add(unaReceta)
+		} else {
+			throw new Exception("No puede ver esta receta.")
+		}
 	}
+
+	def boolean tieneSobrePeso(){		
+    this.imc() > 30
+	}
+
+}

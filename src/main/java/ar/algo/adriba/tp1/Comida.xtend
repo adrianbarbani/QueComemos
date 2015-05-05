@@ -1,6 +1,8 @@
 package ar.algo.adriba.tp1
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import java.util.ArrayList
+import java.util.List
 
 @Accessors
 class Comida implements Cosas {
@@ -8,6 +10,7 @@ class Comida implements Cosas {
 	public String nombre
 	int cantidad
 	int calorias
+	List<String> ingredientesCaros = new ArrayList<String> // en el test agregar los strings salmon, lomo, alcaparras y lechon
 	
 	new(int unasCalorias, String unNombre, int unaCantidad) {
 		calorias = unasCalorias
@@ -15,6 +18,10 @@ class Comida implements Cosas {
 		cantidad = unaCantidad
 	}
 	
+	// para diferenciarlo de los condimentos que no tienen calorias, pero quizas seria mejor hacer una clase Condimentos otra vez
+	override unIngrediente(){
+	calorias > 0		
+	}
 	
 	override caloriasTotales(){
 		calorias 

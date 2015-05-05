@@ -5,7 +5,7 @@ import java.util.List
 import java.util.ArrayList
 
 @Accessors
-class GrupoDeUsuario implements Persona {
+class GrupoDeUsuario extends Persona {
 	
 	String nombre
 	List<String>preferenciasAlimenticiasGrupal = new ArrayList<String>
@@ -17,9 +17,7 @@ class GrupoDeUsuario implements Persona {
 	
 
 		//****************************ENTREGA 2**************************************
-	override aceptasSugerencia(Receta unaReceta) {
-	this.esAptaParaMi(unaReceta) && this.mePuedeGustar(unaReceta)	
-	}
+
 	
 	override mePuedeGustar(Receta unaReceta) {
 	this.preferenciasAlimenticiasGrupal.exists[comida|unaReceta.tenes(comida)]
@@ -28,5 +26,21 @@ class GrupoDeUsuario implements Persona {
 	override esAptaParaMi(Receta unaReceta) {
 	integrantes.forall[integrante|integrante.esAptaParaMi(unaReceta)]
 	
+	}
+	
+	def double imcPromedio (){
+		this.imcIntegrantes/this.cantidadDeIntegrantes
+	}
+	
+	def cantidadDeIntegrantes() {
+		integrantes.size
+	}
+	
+	def double imcIntegrantes() {
+		integrantes.fold(0, [acum, integrante|acum + integrante.imc]) // ver
+	}
+	
+	def boolean tieneSobrePeso(){		
+    this.imcPromedio() > 30
 	}
 }
