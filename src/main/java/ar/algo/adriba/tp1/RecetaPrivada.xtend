@@ -16,10 +16,6 @@ class RecetaPrivada extends Receta {
 		
 	}
 
-	override boolean usuarioSosDuenio(Usuario unUsuario) {
-		unUsuario == duenioReceta
-		}
-
 	
 	def SetduenioReceta(Usuario usuario) {
 		duenioReceta=usuario

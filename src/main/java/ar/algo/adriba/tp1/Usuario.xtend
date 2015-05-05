@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 //http://yuml.me/edit/9f1e3245 - nuevo diagrama -- 
 @Accessors
-class Usuario  {
+class Usuario	implements Persona  {
 	int peso
 	double altura
 	Sexo sexo
@@ -17,6 +17,9 @@ class Usuario  {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
+	
+	//------------entrega2---------------
+	List<GrupoDeUsuario> grupos = new ArrayList<GrupoDeUsuario>// coleccion de grupos de los que soy miembro.
 
 	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
 	new(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
@@ -138,16 +141,24 @@ class Usuario  {
 	}
 
 	def boolean puedoVerReceta(Receta unaReceta) {
-		if ((unaReceta.usuarioSosDuenio(this)) || (unaReceta.sosPublica)) {
+		if ((this.usuarioSosDuenio(unaReceta)) || (unaReceta.sosPublica)||(this.alguienDelGrupoConoce(unaReceta))) {
 			true
 		} else {
-			throw new Exception("Esta Receta no puede ser vista o modificada por este usuario")
+			throw new Exception("Esta Receta no puede ser vista por este usuario")
 		}
+	}
+	
+	def boolean usuarioSosDuenio(Receta receta) { // reemplaza a usuario sos duenio en receta
+		recetasDelUsuario.contains(receta)
+	}
+	
+	def boolean alguienDelGrupoConoce(Receta receta) {
+		grupos.exists[grupo|grupo.integranteEsDuenio(receta)]
 	}
 
 	def boolean puedoModificarReceta(Receta unaReceta) { //a
 
-		if (this.puedoVerReceta(unaReceta)) {
+		if ((this.usuarioSosDuenio(unaReceta)) || (unaReceta.sosPublica)) {
 			true
 		} else {
 			throw new Exception("Esta Receta no puede ser vista o modificada por este usuario")
@@ -170,4 +181,8 @@ class Usuario  {
 		}
 	}
 
+//****************************ENTREGA 2**************************************
+	override aceptasSugerencia(Receta receta){
+		true//ver
+	}
 }

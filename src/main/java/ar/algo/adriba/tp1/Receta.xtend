@@ -25,7 +25,7 @@ public class Receta implements Cosas {
 	}
 
 	def boolean unIngrediente() {
-		subRecetaseIngredientes.exists[cosas|cosas == Comida] // te dice si alguna cosa es una comida osea si tiene un ingrediente 
+		subRecetaseIngredientes.exists[cosas|cosas == Comida] // te dice si alguna cosa es una comida osea si tiene un ingrediente (creo que esto no funciona)
 		//ingredientes.size > 0
 	}
 
@@ -59,25 +59,8 @@ public class Receta implements Cosas {
 	override tenesCarne(){
 		subRecetaseIngredientes.exists[cosas|cosas.tenesCarne]
 	}
-/* 
-	def boolean tenesSalOCaldo() {
-		condimentos.exists[condimentos|condimentos.tenes("Sal")] ||
-			condimentos.exists[condimentos|condimentos.tenes("Caldo")]
-	}
 
-	def boolean tenesDemasiadaAzucar() {
-		condimentos.exists[condimentos|condimentos.tenes("Azucar") && condimentos.tenesMasDelLimite(100)]
-	}
-
-	def boolean tenesCarne() {
-		ingredientes.exists[ingrediente|ingrediente.tenes("pollo||carne||chivito||chori")]
-	}
-*/
 	//------------------------------------------------------------------------------------------------------
-	//Parte 3: Recetas privadas y publicas
-	def boolean usuarioSosDuenio(Usuario unUsuario) {
-		false
-	}
 
 	def agregarSubReceta(Receta unaSubreceta) {
 		subRecetaseIngredientes.add(unaSubreceta)
@@ -101,5 +84,11 @@ public class Receta implements Cosas {
 
 		true
 	}
-
+	
+	//*********************ENTREGA 2***********************************************
+	
+	def boolean sePuedeSugerirA (Persona unaPersona){
+		unaPersona.aceptasSugerencia(this)
+	} 
+	
 }
