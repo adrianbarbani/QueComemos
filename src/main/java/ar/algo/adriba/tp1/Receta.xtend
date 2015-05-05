@@ -8,15 +8,13 @@ import java.util.ArrayList
 public class Receta implements Cosas {
 
 	String nombreDelPlato
-	List<Cosas>subRecetaseIngredientes = new ArrayList <Cosas>
-	//List<Ingrediente> ingredientes = new ArrayList<Ingrediente>
-	//List<Ingrediente> condimentos = new ArrayList<Ingrediente>
+	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
-	//List<Receta> subRecetas = new ArrayList<Receta>
 	Usuario duenioReceta
 	int caloriasReceta
 	String dificultad
 	List<String> temporada
+	tipoReceta tipo
 
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
@@ -26,42 +24,37 @@ public class Receta implements Cosas {
 
 	def boolean unIngrediente() {
 		subRecetaseIngredientes.exists[cosas|cosas == Comida] // te dice si alguna cosa es una comida osea si tiene un ingrediente (creo que esto no funciona)
-		//ingredientes.size > 0
+
+	//ingredientes.size > 0
 	}
 
 	def boolean rangoCalorias() {
 		(this.caloriasTotales > 10) && (this.caloriasTotales < 5000)
 	}
 
-	override int caloriasTotales() {// se supone que calculo las calorias 
-		subRecetaseIngredientes.fold(0, [acum,cosa|acum + cosa.caloriasTotales])
-		//ingredientes.fold(0, [acum, ingrediente|acum + ingrediente.calorias]) + this.caloriasSubRecetas //suma de las calorias de los ingredientes
+	override int caloriasTotales() { // se supone que calculo las calorias 
+		subRecetaseIngredientes.fold(0, [acum, cosa|acum + cosa.caloriasTotales])
 	}
-
-	/*def int caloriasSubRecetas() { // no tendria que aparecer mas esto se tendria que poder hacer todo en el metodo de arriba
-		subRecetas.fold(0, [acumulado, subRecetas|acumulado + subRecetas.caloriasReceta]) //suma las calorias de las subrecetas
-	}*/
 
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
- 	def paraQueCondicionesSoyInadecuada(List<CondicionPreexistente> unasCondicionesPreexistentesCompletas) {
+	def paraQueCondicionesSoyInadecuada(List<CondicionPreexistente> unasCondicionesPreexistentesCompletas) {
 		unasCondicionesPreexistentesCompletas.filter[condicion|condicion.sosInadecuada(this)]
 	}
 
-	override tenesSalOCaldo(){
+	override tenesSalOCaldo() {
 		subRecetaseIngredientes.exists[cosas|cosas.tenesSalOCaldo]
 	}
-	
-	override tenesDemasiadaAzucar(){
+
+	override tenesDemasiadaAzucar() {
 		subRecetaseIngredientes.exists[cosas|cosas.tenesDemasiadaAzucar]
 	}
 
-	override tenesCarne(){
+	override tenesCarne() {
 		subRecetaseIngredientes.exists[cosas|cosas.tenesCarne]
 	}
 
 	//------------------------------------------------------------------------------------------------------
-
 	def agregarSubReceta(Receta unaSubreceta) {
 		subRecetaseIngredientes.add(unaSubreceta)
 	}
@@ -70,25 +63,27 @@ public class Receta implements Cosas {
 		this => [
 			nombreDelPlato = unaReceta.nombreDelPlato
 			subRecetaseIngredientes = unaReceta.subRecetaseIngredientes
-			//ingredientes = unaReceta.ingredientes
-			//condimentos = unaReceta.condimentos
 			explicacionDeLaPreparacion = unaReceta.explicacionDeLaPreparacion
 			caloriasReceta = unaReceta.caloriasReceta
 			dificultad = unaReceta.dificultad
 			temporada = unaReceta.temporada
-			//subRecetas = unaReceta.subRecetas
 		]
 	}
 
-	def boolean sosPublica() {
+	// Constructor para recetas PRIVADAS
+	new(Receta unaReceta, Usuario unUsuario) {
+		this.setearValores(unaReceta)
+		this.tipo = new Privada(unUsuario)
 
-		true
 	}
-	
+
+	def boolean sosPublica() {
+		tipo.sosPublica()
+	}
+
 	//*********************ENTREGA 2***********************************************
-	
-	def boolean sePuedeSugerirA (Persona unaPersona){
-		unaPersona.aceptasSugerencia(this)
-	} 
-	
+	def boolean sePuedeSugerirA(Persona unaPersona) {
+		tipo.sePuedeSugerir() && unaPersona.aceptasSugerencia(this)
+	}
+
 }

@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 //http://yuml.me/edit/9f1e3245 - nuevo diagrama -- 
 @Accessors
-class Usuario	implements Persona  {
+class Usuario implements Persona {
 	int peso
 	double altura
 	Sexo sexo
@@ -17,9 +17,9 @@ class Usuario	implements Persona  {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
-	
+
 	//------------entrega2---------------
-	List<GrupoDeUsuario> grupos = new ArrayList<GrupoDeUsuario>// coleccion de grupos de los que soy miembro.
+	List<GrupoDeUsuario> grupos = new ArrayList<GrupoDeUsuario> // coleccion de grupos de los que soy miembro.
 
 	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
 	new(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
@@ -110,7 +110,6 @@ class Usuario	implements Persona  {
 		condicionesPreexistentes.forall[i|i.loSatisface(this)]
 	}
 
-
 	def boolean tenesUnaRutinaActivaIntensivaConEjercicioAdicional() {
 		rutinaUsuario.sosActivaeIntesiva()
 	}
@@ -121,7 +120,8 @@ class Usuario	implements Persona  {
 
 	//------------------------------------------------------------------------------
 	//Parte 3 (Recetas)
-	def agregarReceta(RecetaPrivada unaReceta) {
+	// Primero chequeamos si es valida la receta.
+	def agregarReceta(Receta unaReceta) {
 		if (unaReceta.esvalida() == true) {
 			this.copiar(unaReceta)
 		} else {
@@ -129,60 +129,69 @@ class Usuario	implements Persona  {
 		}
 	}
 
-	def agregar(Receta unaReceta) {
-		recetasDelUsuario.add(unaReceta)
-	}
-
+	// Si es valida, la copiamos en una variable local que llama al constructor de recetas privadas.
 	def Receta copiar(Receta unaReceta) {
-		var RecetaPrivada miReceta = null
-		miReceta = new RecetaPrivada(unaReceta, this)
+		var Receta miReceta = null
+		miReceta = new Receta(unaReceta, this)
 		this.agregar(miReceta)
 		miReceta
 	}
 
+	// Finalmente, agregamos la receta a la coleccion de recetas del usuario.
+	def agregar(Receta unaReceta) {
+		recetasDelUsuario.add(unaReceta)
+	}
+
+	// Un usuario puede ver una receta si es de el, si es publica, o si es de alguien de su/s grupo/s
 	def boolean puedoVerReceta(Receta unaReceta) {
-		if ((this.usuarioSosDuenio(unaReceta)) || (unaReceta.sosPublica)||(this.alguienDelGrupoConoce(unaReceta))) {
+		if ((this.usuarioTiene(unaReceta)) || (unaReceta.sosPublica) || (this.alguienDelGrupoConoce(unaReceta))) {
 			true
 		} else {
 			throw new Exception("Esta Receta no puede ser vista por este usuario")
 		}
 	}
-	
-	def boolean usuarioSosDuenio(Receta receta) { // reemplaza a usuario sos duenio en receta
+
+	// Chequea si el usuario tiene una receta en su colección
+	def boolean usuarioTiene(Receta receta) { // reemplaza a usuario sos duenio en receta
 		recetasDelUsuario.contains(receta)
 	}
-	
+
+	// Chequea si alguien de un grupo tiene una receta
 	def boolean alguienDelGrupoConoce(Receta receta) {
 		grupos.exists[grupo|grupo.integranteEsDuenio(receta)]
 	}
 
-	def boolean puedoModificarReceta(Receta unaReceta) { //a
-
-		if ((this.usuarioSosDuenio(unaReceta)) || (unaReceta.sosPublica)) {
-			true
-		} else {
-			throw new Exception("Esta Receta no puede ser vista o modificada por este usuario")
-		}
+	// Un usuario puede modificar la receta si es publica o si es de el
+	def boolean puedoModificarReceta(Receta unaReceta) {
+		this.usuarioTiene(unaReceta) || unaReceta.sosPublica
 	}
 
-	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) { //Metodo principal
-		if (this.puedoModificarReceta(unaReceta)) {
-			this.EditarReceta(unaReceta, unaRecetaConModificaciones)
-		} else {
+	// Un usuario modifica una receta. 
+	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
+
+		//  Primero vemos si la puede modificar		
+		if (puedoModificarReceta(unaReceta)) {
+
+			// Si es de el la modifica de una
+			if (this.usuarioTiene(unaReceta)) {
+				unaReceta.setearValores(unaRecetaConModificaciones)
+			} else {
+
+				// Si no es de el, y es publica, primero la copia a su coleccion de recetas y luego la modifica
+				this.modificarUnaRecetaPublica(unaReceta, unaRecetaConModificaciones)
+			}
+		} 	// Y si es de otro usuario no puede modificarla.
+		else {
 			throw new Exception("No puede modificar la receta porque es de otro usuario")
 		}
 	}
 
-	def EditarReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
-		if (unaReceta.sosPublica == false) {
-			unaReceta.setearValores(unaRecetaConModificaciones)
-		} else {
-			copiar(unaReceta).setearValores(unaRecetaConModificaciones)
-		}
+	def modificarUnaRecetaPublica(Receta unaReceta, Receta unaRecetaConModificaciones) {
+		this.modificarUnaReceta(this.agregarReceta(unaReceta), unaRecetaConModificaciones)
 	}
 
-//****************************ENTREGA 2**************************************
-	override aceptasSugerencia(Receta receta){
-		true//ver
+	//****************************ENTREGA 2**************************************
+	override aceptasSugerencia(Receta receta) {
+		true //ver
 	}
 }

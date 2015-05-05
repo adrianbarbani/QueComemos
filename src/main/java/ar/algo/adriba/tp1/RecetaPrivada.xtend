@@ -5,8 +5,12 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class RecetaPrivada extends Receta {
-	Usuario duenioReceta
+	
+	//  ya está en receta
+	// Usuario duenioReceta
 
+/* Pasé esto a receta, ahora la interfaz tipoReceta delega en receta lo que tiene que hacer si es publica o privada
+ 
 	new(Receta unaReceta, Usuario unUsuario) {
 		this.setearValores(unaReceta)
 		this.duenioReceta = unUsuario
@@ -24,6 +28,6 @@ class RecetaPrivada extends Receta {
 	override def boolean sosPublica() {
 		false
 	}
-		
+ */		
 
 }
