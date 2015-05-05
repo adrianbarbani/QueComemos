@@ -12,7 +12,7 @@ class GrupoDeUsuario implements Persona {
 	List<Usuario>integrantes = new ArrayList<Usuario>
 	
 	def boolean integranteEsDuenio(Receta receta) {
-		integrantes.exists[usuario|usuario.usuarioSosDuenio(receta)]
+		integrantes.exists[usuario|usuario.usuarioTiene(receta)]
 	}
 	
 	override aceptasSugerencia(Receta receta){
