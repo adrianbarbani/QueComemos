@@ -196,7 +196,7 @@ class Usuario implements Persona {
 	}
 	
 	override mePuedeGustar(Receta unaReceta) {
-	!(this.comidaQueLeDisgusta.exists[comida|unaReceta.tenes(comida)])
+	this.comidaQueLeDisgusta.filter[comida|unaReceta.tenes(comida)].empty
 	}
 	
 	override esAptaParaMi(Receta unaReceta) {
