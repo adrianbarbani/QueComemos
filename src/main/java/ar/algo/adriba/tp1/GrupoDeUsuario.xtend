@@ -8,18 +8,25 @@ import java.util.ArrayList
 class GrupoDeUsuario implements Persona {
 	
 	String nombre
-	List<Comida>preferenciasAlimenticiasGrupal = new ArrayList<Comida>
+	List<String>preferenciasAlimenticiasGrupal = new ArrayList<String>
 	List<Usuario>integrantes = new ArrayList<Usuario>
 	
 	def boolean integranteEsDuenio(Receta receta) {
 		integrantes.exists[usuario|usuario.usuarioTiene(receta)]
 	}
 	
-	override aceptasSugerencia(Receta receta){
-		true//ver en recetas metodo para que condiciones soy inadecuada
+
+		//****************************ENTREGA 2**************************************
+	override aceptasSugerencia(Receta unaReceta) {
+	this.esAptaParaMi(unaReceta) && this.mePuedeGustar(unaReceta)	
 	}
 	
+	override mePuedeGustar(Receta unaReceta) {
+	this.preferenciasAlimenticiasGrupal.exists[comida|unaReceta.tenes(comida)]
+	}
 	
+	override esAptaParaMi(Receta unaReceta) {
+	integrantes.forall[integrante|integrante.esAptaParaMi(unaReceta)]
 	
-	
+	}
 }

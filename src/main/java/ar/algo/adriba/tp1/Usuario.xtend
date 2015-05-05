@@ -191,7 +191,16 @@ class Usuario implements Persona {
 	}
 
 	//****************************ENTREGA 2**************************************
-	override aceptasSugerencia(Receta receta) {
-		true //ver
+	override aceptasSugerencia(Receta unaReceta) {
+	this.esAptaParaMi(unaReceta) && this.mePuedeGustar(unaReceta)	
 	}
-}
+	
+	override mePuedeGustar(Receta unaReceta) {
+	!(this.comidaQueLeDisgusta.exists[comida|unaReceta.tenes(comida)])
+	}
+	
+	override esAptaParaMi(Receta unaReceta) {
+	unaReceta.paraQueCondicionesSoyInadecuada(this.condicionesPreexistentes).empty
+	}
+	
+	}

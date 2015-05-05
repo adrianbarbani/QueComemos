@@ -2,14 +2,15 @@ package ar.algo.adriba.tp1
 
 interface Cosas {
 	
-	def Boolean tenesSalOCaldo()
+	def boolean tenesSalOCaldo()
 	
-	def Boolean tenesDemasiadaAzucar()
+	def boolean tenesDemasiadaAzucar()
 	
-	def Boolean tenesCarne()
+	def boolean tenesCarne()
 	
 	def int caloriasTotales()
 	
+	def boolean tenes(String unaCosa)
 	
 	
 }

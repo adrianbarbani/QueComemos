@@ -54,6 +54,9 @@ public class Receta implements Cosas {
 		subRecetaseIngredientes.exists[cosas|cosas.tenesCarne]
 	}
 
+	override tenes(String unaCosa) {
+		subRecetaseIngredientes.exists[cosas|cosas.tenes(unaCosa)]
+	}
 	//------------------------------------------------------------------------------------------------------
 	def agregarSubReceta(Receta unaSubreceta) {
 		subRecetaseIngredientes.add(unaSubreceta)

@@ -38,7 +38,7 @@ class Comida implements Cosas {
 	
 	new(){}
 	
-	def boolean tenes(String unaCosa) {
+	override tenes(String unaCosa) {
 		nombre.matches(unaCosa)
 	}
 	
