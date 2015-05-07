@@ -6,7 +6,9 @@ abstract class Persona {
 	
 	 this.esAptaParaMi(unaReceta) && this.mePuedeGustar(unaReceta)	
 	}
+	
 	def boolean mePuedeGustar(Receta unaReceta)
-	def boolean esAptaParaMi(Receta unaReceta) 
+	def boolean esAptaParaMi(Receta unaReceta)
+	def boolean puedoVerReceta(Receta receta)
 
 }

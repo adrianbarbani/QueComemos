@@ -88,5 +88,9 @@ public class Receta implements Cosas {
 	def boolean sePuedeSugerirA(Persona unaPersona) {
 		unaPersona.aceptasSugerencia(this)
 	}
+	
+	def caloriasMayorA(int i) {
+		caloriasReceta>i
+	}
 
 }

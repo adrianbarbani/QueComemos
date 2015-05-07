@@ -144,7 +144,7 @@ class Usuario extends Persona {
 	}
 
 	// Un usuario puede ver una receta si es de el, si es publica, o si es de alguien de su/s grupo/s
-	def boolean puedoVerReceta(Receta unaReceta) {
+	override puedoVerReceta(Receta unaReceta) {
 		if ((this.usuarioTiene(unaReceta)) || (unaReceta.sosPublica) || (this.alguienDelGrupoConoce(unaReceta))) {
 			true
 		} else {

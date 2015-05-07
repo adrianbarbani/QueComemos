@@ -8,6 +8,7 @@ class Busqueda {
 	List<Filtro> filtros = new ArrayList<Filtro>
 	Persona persona
 	List<Receta> todasLasRecetasQuePuedeVer = new ArrayList<Receta>
+	RepositorioRecetas singleton = RepositorioRecetas.getInstance() // esto se supone que es el singleton???
 
 	new(List<Filtro> unosFiltros, Persona unaPersona) {
 
@@ -16,11 +17,17 @@ class Busqueda {
 
 	}
 
+	
 	//aca necesitamos el singleton de repositorioRecetas
 	def List<Receta> recetasQuePuedeVer(Persona unaPersona) {
-		todasLasRecetasQuePuedeVer = listarTodas.filter[unaReceta|unUsuario.puedoVerReceta(unaReceta)].toList
+		
+		this.llenarTodasLasRecetas.filter[unaReceta|unaPersona.puedoVerReceta(unaReceta)].toList // estoy tirando cualquiera ?
 	}
 
+	def List<Receta> llenarTodasLasRecetas (){
+			todasLasRecetasQuePuedeVer=singleton.todasLasRecetas // estoy tirando cualquiera?
+	}
+	
 	def List<Receta> filtrar() {
 		if (filtros.empty) {
 			todasLasRecetasQuePuedeVer

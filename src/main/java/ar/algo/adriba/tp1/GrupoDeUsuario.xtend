@@ -17,7 +17,9 @@ class GrupoDeUsuario extends Persona {
 	
 
 		//****************************ENTREGA 2**************************************
-
+	override puedoVerReceta(Receta receta){ //si algun usuario la puede ver 
+		integrantes.exists[usuario|usuario.puedoVerReceta(receta)]
+	}
 	
 	override mePuedeGustar(Receta unaReceta) {
 	this.preferenciasAlimenticiasGrupal.exists[comida|unaReceta.tenes(comida)]
@@ -32,7 +34,7 @@ class GrupoDeUsuario extends Persona {
 		this.imcIntegrantes/this.cantidadDeIntegrantes
 	}
 	
-	def cantidadDeIntegrantes() {
+	def int cantidadDeIntegrantes() {
 		integrantes.size
 	}
 	
