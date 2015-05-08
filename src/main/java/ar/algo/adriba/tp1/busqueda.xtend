@@ -33,7 +33,7 @@ class Busqueda {
 			todasLasRecetasQuePuedeVer
 		} else {
 			// Hacer el filtrar en cada filtro y TESTEAR
-			filtros.fold(todasLasRecetasQuePuedeVer, [col, filtro|filtro.filtrar(col)]).toList
+			filtros.fold(todasLasRecetasQuePuedeVer, [col, filtro|filtro.filtrar(col,persona)]).toList
 
 		}
 	}

@@ -15,7 +15,7 @@ public class Receta implements Cosas {
 	String dificultad
 	List<String> temporada
 	tipoReceta tipo
-
+	List<CondicionPreexistente> condicionesParaLasQueNoSoyApta = new ArrayList <CondicionPreexistente>
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
 	def boolean esvalida() {
@@ -38,8 +38,8 @@ public class Receta implements Cosas {
 
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
-	def paraQueCondicionesSoyInadecuada(List<CondicionPreexistente> unasCondicionesPreexistentesCompletas) {
-		unasCondicionesPreexistentesCompletas.filter[condicion|condicion.sosInadecuada(this)]
+	def List <CondicionPreexistente> paraQueCondicionesSoyInadecuada(List<CondicionPreexistente> unasCondicionesPreexistentesCompletas) {
+		condicionesParaLasQueNoSoyApta = unasCondicionesPreexistentesCompletas.filter[condicion|condicion.sosInadecuada(this)].toList
 	}
 
 	override tenesSalOCaldo() {
@@ -91,6 +91,10 @@ public class Receta implements Cosas {
 	
 	def caloriasMayorA(int i) {
 		caloriasReceta>i
+	}
+	
+	def boolean noEsAptaParaEsta(CondicionPreexistente unaCondicion) {
+		true //!condicionesParaLasQueNoSoyApta.contains(unaCondicion) esto tendria que andar  pero no por que bueno las condiciones no son las mismas son dos objetos de = clase, ponerle un string nombre talvez
 	}
 
 }

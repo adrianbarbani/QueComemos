@@ -212,5 +212,9 @@ class Usuario extends Persona {
 	def boolean tieneSobrePeso(){		
     this.imc() > 30
 	}
+	
+	override aceptaTusCondiciones(Receta receta) {
+		!(condicionesPreexistentes.exists[condicion|receta.noEsAptaParaEsta(condicion)]) //si para alguna condicion no es apta no acepta las condiciones 
+	}
 
 }

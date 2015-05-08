@@ -4,6 +4,6 @@ import java.util.List
 
 interface Filtro {
 	
-	def List<Receta> filtrar(List<Receta> recetas)
+	def List<Receta> filtrar(List<Receta> recetas, Persona persona)
 	
 }

@@ -45,4 +45,9 @@ class GrupoDeUsuario extends Persona {
 	def boolean tieneSobrePeso(){		
     this.imcPromedio() > 30
 	}
+	
+	override aceptaTusCondiciones(Receta receta) {
+		!integrantes.exists[integrante|/*1ra negacion*/!(integrante.aceptaTusCondiciones(receta))] // si existe alguno que no acepte las condiciones va a ser falce se convierte en true por el 1° ! despues el exists da true y se convierte en falce por el segundo !
+	}
+	
 }
