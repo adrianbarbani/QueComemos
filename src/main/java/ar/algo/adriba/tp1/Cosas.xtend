@@ -14,5 +14,7 @@ interface Cosas {
 	
 	def boolean unIngrediente()
 	
+	def String nombre()
+	
 	
 }

@@ -216,5 +216,9 @@ class Usuario extends Persona {
 	override aceptaTusCondiciones(Receta receta) {
 		!(condicionesPreexistentes.exists[condicion|receta.noEsAptaParaEsta(condicion)]) //si para alguna condicion no es apta no acepta las condiciones 
 	}
+	
+	override teDisgustaUna(Cosas cosas) {
+		comidaQueLeDisgusta.exists[comida|comida == cosas.nombre]
+	}
 
 }

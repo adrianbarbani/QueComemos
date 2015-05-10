@@ -18,6 +18,10 @@ class Comida implements Cosas {
 		cantidad = unaCantidad
 	}
 	
+	override nombre (){
+		nombre
+	}
+	
 	// para diferenciarlo de los condimentos que no tienen calorias, pero quizas seria mejor hacer una clase Condimentos otra vez
 	override unIngrediente(){
 	calorias > 0		

@@ -50,4 +50,8 @@ class GrupoDeUsuario extends Persona {
 		!integrantes.exists[integrante|/*1ra negacion*/!(integrante.aceptaTusCondiciones(receta))] // si existe alguno que no acepte las condiciones va a ser falce se convierte en true por el 1° ! despues el exists da true y se convierte en falce por el segundo !
 	}
 	
+	override teDisgustaUna(Cosas cosas) {
+		integrantes.exists[usuario|usuario.teDisgustaUna(cosas)]
+	}
+	
 }

@@ -96,5 +96,13 @@ public class Receta implements Cosas {
 	def boolean noEsAptaParaEsta(CondicionPreexistente unaCondicion) {
 		true //!condicionesParaLasQueNoSoyApta.contains(unaCondicion) esto tendria que andar  pero no por que bueno las condiciones no son las mismas son dos objetos de = clase, ponerle un string nombre talvez
 	}
+	
+	def boolean todosLosIngredientesLeGustanA(Persona persona) {
+		!subRecetaseIngredientes.exists[cosa|persona.teDisgustaUna(cosa)]
+	}
+	
+	override nombre() {
+		nombreDelPlato
+	}
 
 }
