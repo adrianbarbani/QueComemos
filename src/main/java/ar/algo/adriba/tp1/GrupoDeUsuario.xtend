@@ -39,7 +39,7 @@ class GrupoDeUsuario extends Persona {
 	}
 	
 	def double imcIntegrantes() {
-		integrantes.fold(0, [acum, integrante|acum + integrante.imc]) // ver
+		integrantes.fold(0.0, [acum, integrante|acum + integrante.imc]) // ver
 	}
 	
 	def boolean tieneSobrePeso(){		
