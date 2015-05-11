@@ -6,14 +6,16 @@ import java.util.List
 class Busqueda {
 
 	List<Filtro> filtros = new ArrayList<Filtro>
+	Ordenamiento orden
 	Persona persona
 	List<Receta> todasLasRecetasQuePuedeVer = new ArrayList<Receta>
 	RepositorioRecetas singleton = RepositorioRecetas.getInstance() // esto se supone que es el singleton???
 
-	new(List<Filtro> unosFiltros, Persona unaPersona) {
+	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden) {
 
 		filtros = unosFiltros
 		persona = unaPersona
+		orden = unOrden
 
 	}
 
@@ -33,8 +35,13 @@ class Busqueda {
 			todasLasRecetasQuePuedeVer
 		} else {
 			// Hacer el filtrar en cada filtro y TESTEAR
-			filtros.fold(todasLasRecetasQuePuedeVer, [col, filtro|filtro.filtrar(col,persona)]).toList
-
+			todasLasRecetasQuePuedeVer = filtros.fold(todasLasRecetasQuePuedeVer, [col, filtro|filtro.filtrar(col,persona)]).toList
 		}
+	}
+
+	def List<Receta> mostrar(List<Receta> todasLasRecetasQuePuedeVer){
+		
+		orden.ordenar(todasLasRecetasQuePuedeVer)
+		
 	}
 }
