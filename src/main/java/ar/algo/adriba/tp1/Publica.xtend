@@ -12,4 +12,17 @@ class Publica implements tipoReceta {
 		true
 	}
 
+	override tePuedeModificar(Receta unaReceta, Usuario usuario) {
+		true
+	}
+
+	override cambiarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones) {
+		val Receta nuevaReceta = usuario.agregarReceta(receta)
+		usuario.modificarUnaReceta(nuevaReceta, unaRecetaConModificaciones)
+	}
+	
+	override mePuedeVer(Usuario usuario, Receta unaReceta) {
+		true
+	}
+
 }

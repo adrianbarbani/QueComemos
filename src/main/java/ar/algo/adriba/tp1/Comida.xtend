@@ -57,4 +57,8 @@ class Comida implements Cosas {
 		cantidad > limite
 	}
 	
+	override esCaro() {
+		ingredientesCaros.contains(this.nombre)
+	}
+	
 }

@@ -11,13 +11,29 @@ class Privada implements tipoReceta {
 	new(Usuario unUsuario) {
 		duenioReceta = unUsuario
 	}
-	
+
 	override sosPublica() {
 		false
 	}
 
 	override sePuedeSugerir() {
 		false
+	}
+
+	override tePuedeModificar(Receta unaReceta, Usuario usuario) {
+		this.esDuenio(usuario)
+	}
+
+	override cambiarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones) {
+		receta.setearValores(unaRecetaConModificaciones)
+	}
+	
+	override mePuedeVer(Usuario unUsuario, Receta unaReceta) {
+		this.esDuenio(unUsuario) || unUsuario.alguienDelGrupoConoce(unaReceta)
+		}
+	
+	def esDuenio(Usuario usuario) {
+		duenioReceta.equals(usuario)
 	}
 
 }

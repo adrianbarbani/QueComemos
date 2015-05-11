@@ -145,11 +145,18 @@ class Usuario extends Persona {
 
 	// Un usuario puede ver una receta si es de el, si es publica, o si es de alguien de su/s grupo/s
 	override puedoVerReceta(Receta unaReceta) {
+		
+		unaReceta.tePuedeVer(this)
+		/* Abstraje este otro choclo en metodos de la clase tipoReceta
+		 
+		 
 		if ((this.usuarioTiene(unaReceta)) || (unaReceta.sosPublica) || (this.alguienDelGrupoConoce(unaReceta))) {
 			true
 		} else {
 			throw new Exception("Esta Receta no puede ser vista por este usuario")
 		}
+	
+		*/
 	}
 
 	// Chequea si el usuario tiene una receta en su colección
@@ -164,7 +171,9 @@ class Usuario extends Persona {
 
 	// Un usuario puede modificar la receta si es publica o si es de el
 	def boolean puedoModificarReceta(Receta unaReceta) {
-		this.usuarioTiene(unaReceta) || unaReceta.sosPublica
+		unaReceta.laPuedeModificar(this)
+	// quedo viejo
+	// this.usuarioTiene(unaReceta) || unaReceta.sosPublica
 	}
 
 	// Un usuario modifica una receta. 
@@ -172,24 +181,32 @@ class Usuario extends Persona {
 
 		//  Primero vemos si la puede modificar		
 		if (puedoModificarReceta(unaReceta)) {
+			// Si la puede modificar entonces dejamos que la receta vea como se modifica, si es publica va a copiarse a una nueva privada.
+			unaReceta.modificarValores(this, unaReceta, unaRecetaConModificaciones)
+		}
 
-			// Si es de el la modifica de una
+		/* Abstraje todo este choclo en metodos dentro de la receta y tipoReceta, para hacerlo mas encapsulado y bonito
+		 * 
+			Si es de el la modifica de una
 			if (this.usuarioTiene(unaReceta)) {
-				unaReceta.setearValores(unaRecetaConModificaciones)
+			unaReceta.setearValores(unaRecetaConModificaciones)
 			} else {
 
-				// Si no es de el, y es publica, primero la copia a su coleccion de recetas y luego la modifica
+				Si no es de el, y es publica, primero la copia a su coleccion de recetas y luego la modifica
 				this.modificarUnaRecetaPublica(unaReceta, unaRecetaConModificaciones)
-			}
-		} 	// Y si es de otro usuario no puede modificarla.
-		else {
-			throw new Exception("No puede modificar la receta porque es de otro usuario")
 		}
+		} 	Y si es de otro usuario no puede modificarla.
+		else {
+		
+		 */
+		throw new Exception("No puede modificar la receta porque es de otro usuario")
+
 	}
 
+/* Quedo viejo
 	def modificarUnaRecetaPublica(Receta unaReceta, Receta unaRecetaConModificaciones) {
 		this.modificarUnaReceta(this.agregarReceta(unaReceta), unaRecetaConModificaciones)
-	}
+	} */
 
 	//****************************ENTREGA 2**************************************
 	override mePuedeGustar(Receta unaReceta) {
@@ -197,7 +214,7 @@ class Usuario extends Persona {
 	}
 
 	override esAptaParaMi(Receta unaReceta) {
-		unaReceta.paraQueCondicionesSoyInadecuada(this.condicionesPreexistentes).empty
+		unaReceta.paraQueCondicionesSoyInadecuada(this.condicionesPreexistentes).isEmpty
 	}
 
 	def void marcarComoFavorita(Receta unaReceta) {
@@ -209,14 +226,16 @@ class Usuario extends Persona {
 		}
 	}
 
-	def boolean tieneSobrePeso(){		
-    this.imc() > 30
+	def boolean tieneSobrePeso() {
+		this.imc() > 30
 	}
-	
+
+	// este no hace lo mismo que "esAptaParaMi"?
 	override aceptaTusCondiciones(Receta receta) {
 		!(condicionesPreexistentes.exists[condicion|receta.noEsAptaParaEsta(condicion)]) //si para alguna condicion no es apta no acepta las condiciones 
 	}
-	
+
+	// este no hace lo mismo que "mePuedeGustar"?
 	override teDisgustaUna(Cosas cosas) {
 		comidaQueLeDisgusta.exists[comida|comida == cosas.nombre]
 	}

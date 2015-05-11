@@ -16,5 +16,7 @@ interface Cosas {
 	
 	def String nombre()
 	
+	def boolean esCaro()
+	
 	
 }

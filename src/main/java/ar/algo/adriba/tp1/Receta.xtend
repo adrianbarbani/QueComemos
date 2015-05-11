@@ -15,7 +15,10 @@ public class Receta implements Cosas {
 	String dificultad
 	List<String> temporada
 	tipoReceta tipo
-	List<CondicionPreexistente> condicionesParaLasQueNoSoyApta = new ArrayList <CondicionPreexistente>
+
+	// esto para mi no va, se calcula siempre asique no tendria que tener un atributo
+	List<CondicionPreexistente> condicionesParaLasQueNoSoyApta = new ArrayList<CondicionPreexistente>
+
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
 	def boolean esvalida() {
@@ -38,8 +41,10 @@ public class Receta implements Cosas {
 
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
-	def List <CondicionPreexistente> paraQueCondicionesSoyInadecuada(List<CondicionPreexistente> unasCondicionesPreexistentesCompletas) {
-		condicionesParaLasQueNoSoyApta = unasCondicionesPreexistentesCompletas.filter[condicion|condicion.sosInadecuada(this)].toList
+	def List<CondicionPreexistente> paraQueCondicionesSoyInadecuada(
+		List<CondicionPreexistente> unasCondicionesPreexistentesCompletas) {
+		condicionesParaLasQueNoSoyApta = unasCondicionesPreexistentesCompletas.filter[condicion|
+			condicion.sosInadecuada(this)].toList
 	}
 
 	override tenesSalOCaldo() {
@@ -57,6 +62,7 @@ public class Receta implements Cosas {
 	override tenes(String unaCosa) {
 		subRecetaseIngredientes.exists[cosas|cosas.tenes(unaCosa)]
 	}
+
 	//------------------------------------------------------------------------------------------------------
 	def agregarSubReceta(Receta unaSubreceta) {
 		subRecetaseIngredientes.add(unaSubreceta)
@@ -84,25 +90,46 @@ public class Receta implements Cosas {
 		tipo.sosPublica()
 	}
 
+	def boolean laPuedeModificar(Usuario usuario) {
+		tipo.tePuedeModificar(this, usuario)
+	}
+
+	def modificarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones) {
+		tipo.cambiarValores(usuario, receta, unaRecetaConModificaciones)
+	}
+
+	def boolean tePuedeVer(Usuario unUsuario) {
+		tipo.mePuedeVer(unUsuario, this)
+	}
+
 	//*********************ENTREGA 2***********************************************
 	def boolean sePuedeSugerirA(Persona unaPersona) {
 		unaPersona.aceptasSugerencia(this)
 	}
-	
+
 	def caloriasMayorA(int i) {
-		caloriasReceta>i
+		caloriasReceta > i
 	}
-	
+
+	// donde se usa esto?
 	def boolean noEsAptaParaEsta(CondicionPreexistente unaCondicion) {
 		true //!condicionesParaLasQueNoSoyApta.contains(unaCondicion) esto tendria que andar  pero no por que bueno las condiciones no son las mismas son dos objetos de = clase, ponerle un string nombre talvez
 	}
-	
+
 	def boolean todosLosIngredientesLeGustanA(Persona persona) {
 		!subRecetaseIngredientes.exists[cosa|persona.teDisgustaUna(cosa)]
 	}
-	
+
 	override nombre() {
 		nombreDelPlato
+	}
+	
+	def noTieneIngredientesCaros() {
+		!(subRecetaseIngredientes.exists[cosas|cosas.esCaro])
+	}
+	
+	override esCaro() {
+		false
 	}
 
 }
