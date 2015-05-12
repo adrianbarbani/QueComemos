@@ -15,7 +15,7 @@ class Busqueda {
 
 		filtros = unosFiltros
 		persona = unaPersona
-		orden = unOrden
+		orden = unOrden // new CompararPorNombre, new compararPorCalorias
 
 	}
 
