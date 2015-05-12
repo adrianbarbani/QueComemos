@@ -85,6 +85,10 @@ public class Receta implements Cosas {
 		this.tipo = new Privada(unUsuario)
 
 	}
+	
+	new() {
+		
+	}
 
 	def boolean sosPublica() {
 		tipo.sosPublica()

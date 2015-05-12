@@ -24,7 +24,7 @@ class Usuario extends Persona {
 
 	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
 	new(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
-		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Comida> unasPreferenciasAlimentarias) {
+		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Comida> unasPreferenciasAlimentarias, List<String> unasComidasQueLeDisgustan) {
 
 		this => [
 			peso = unPeso
@@ -35,6 +35,7 @@ class Usuario extends Persona {
 			rutinaUsuario = unaRutina
 			condicionesPreexistentes = unasCondicionesPreexistentes
 			preferenciasAlimentarias = unasPreferenciasAlimentarias
+			comidaQueLeDisgusta = unasComidasQueLeDisgustan
 		]
 
 		if (validacionPeso() == false)

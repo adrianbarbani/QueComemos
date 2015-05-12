@@ -30,6 +30,7 @@ class nuevosTests {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> condicionesPreexistentes2 = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas = new ArrayList<CondicionPreexistente>
+	List<String> comidasQueDisgustan1 = new ArrayList<String>
 
 	Usuario Usuario
 	Usuario Usuario2
@@ -73,7 +74,7 @@ class nuevosTests {
 		unasPreferenciasAlimentarias2.add(new Comida("manzana"))
 
 		Usuario = new Usuario(52, 1.64, Masculino, "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias2)
+			condicionesPreexistentes, unasPreferenciasAlimentarias2, comidasQueDisgustan1)
 
 		//new (int unasCalorias, String unNombre, int unaCantidad)
 		RecetaValida = new RecetaPrivada => [
