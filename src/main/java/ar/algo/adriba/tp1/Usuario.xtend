@@ -231,12 +231,12 @@ class Usuario extends Persona {
 		this.imc() > 30
 	}
 
-	// este no hace lo mismo que "esAptaParaMi"?
+	// este no hace lo mismo que "esAptaParaMi"? ver lo mismo en GrupoUsuario
 	override aceptaTusCondiciones(Receta receta) {
 		!(condicionesPreexistentes.exists[condicion|receta.noEsAptaParaEsta(condicion)]) //si para alguna condicion no es apta no acepta las condiciones 
 	}
 
-	// este no hace lo mismo que "mePuedeGustar"?
+	// este no hace lo mismo que "mePuedeGustar"? ver lo mismo en GrupoUsuario
 	override teDisgustaUna(Cosas cosas) {
 		comidaQueLeDisgusta.exists[comida|comida == cosas.nombre]
 	}

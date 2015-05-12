@@ -26,6 +26,6 @@ class MostrarResultadosPares extends Ordenamiento {
 		i++
 		}
 		
-	resultado
+	resultado.toList
 	}
 }

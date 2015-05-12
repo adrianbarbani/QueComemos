@@ -12,6 +12,7 @@ class Privada implements tipoReceta {
 		duenioReceta = unUsuario
 	}
 
+	// ver si se esta usando
 	override sosPublica() {
 		false
 	}

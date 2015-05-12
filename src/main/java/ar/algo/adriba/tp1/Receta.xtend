@@ -11,7 +11,7 @@ public class Receta implements Cosas {
 	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas>
 	String explicacionDeLaPreparacion // es un string largo no se si es el tipo adecuado
 	Usuario duenioReceta
-	int caloriasReceta
+	int caloriasReceta // clavar un valor en el constructor
 	String dificultad
 	List<String> temporada
 	tipoReceta tipo

@@ -44,4 +44,7 @@ class Busqueda {
 		orden.ordenar(todasLasRecetasQuePuedeVer)
 		
 	}
+	
+	//armar metodo busquedaposta
+	
 }
