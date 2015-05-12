@@ -29,6 +29,7 @@ class Entrega2Tests {
 	List<String> preferenciasAlimenticiasGrupal = new ArrayList<String>
 	List<String> comidasQueDisgustan1 = new ArrayList<String>
 	List<String> comidasQueDisgustan2 = new ArrayList<String>
+	List<Usuario>integrantes = new ArrayList<Usuario>
 
 	Usuario Usuario
 	Usuario Usuario2

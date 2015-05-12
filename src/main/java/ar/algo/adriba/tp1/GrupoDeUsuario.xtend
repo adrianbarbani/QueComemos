@@ -26,11 +26,11 @@ class GrupoDeUsuario extends Persona {
 	}
 	
 	override mePuedeGustar(Receta unaReceta) {
-	this.preferenciasAlimenticiasGrupal.exists[comida|unaReceta.tenes(comida)]
+		this.preferenciasAlimenticiasGrupal.exists[comida|unaReceta.tenes(comida)]
 	}
 	
 	override esAptaParaMi(Receta unaReceta) {
-	integrantes.forall[integrante|integrante.esAptaParaMi(unaReceta)]
+		integrantes.forall[integrante|integrante.esAptaParaMi(unaReceta)]
 	
 	}
 	
