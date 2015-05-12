@@ -26,6 +26,7 @@ class Entrega2Tests {
 	List<Comida> unasPreferenciasAlimentarias = new ArrayList<Comida>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas = new ArrayList<CondicionPreexistente>
+	List<String> preferenciasAlimenticiasGrupal = new ArrayList<String>
 	List<String> comidasQueDisgustan1 = new ArrayList<String>
 	List<String> comidasQueDisgustan2 = new ArrayList<String>
 
@@ -87,6 +88,7 @@ class Entrega2Tests {
 		huevo = new Comida(10, "huevo", 3)
 		panRallado = new Comida(12, "pan rallado", 50)
 
+		condicionesPreexistentes.add(new Diabetico)
 		unasPreferenciasAlimentarias.add(huevo)
 		comidasQueDisgustan1.add("verdura")
 		comidasQueDisgustan2.add("carne")
@@ -124,11 +126,15 @@ class Entrega2Tests {
 	@Test
 	def void test1() {
 		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario))
+		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario2))
+		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario3))
 	}
 
 	@Test //Deberiamos poner exception?
 	def void test2() {
 		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario4))
+		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario5))
+		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario6))
 	}
 
 	//Punto 1: Averiguar si una receta se puede sugerir a un grupo
