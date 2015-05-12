@@ -35,9 +35,9 @@ class Entrega2Tests {
 	Usuario Usuario4
 	Usuario Usuario5
 	Usuario Usuario6
-	
-	GrupoDeUsuario Grupo1
-	GrupoDeUsuario Grupo2
+
+	GrupoDeUsuario Grupo1 = new GrupoDeUsuario("Grupo de Algoritmos")
+	GrupoDeUsuario Grupo2 = new GrupoDeUsuario("Los Bortotones")
 
 	Sexo Femenino
 	Sexo Masculino
@@ -68,6 +68,20 @@ class Entrega2Tests {
 			add(new Diabetico)
 		] // esto lo usamos para ver si la receta tiene condiciones inadecuadas
 
+		Grupo1 => [
+			preferenciasAlimenticiasGrupal.add("carne")
+			integrantes.add(Usuario)
+			integrantes.add(Usuario2)
+			integrantes.add(Usuario3)
+		]
+
+		Grupo2 => [
+			preferenciasAlimenticiasGrupal.add("carne")
+			integrantes.add(Usuario4)
+			integrantes.add(Usuario5)
+			integrantes.add(Usuario6)
+		]
+
 		carne = new Comida(99, "carne", 1)
 		harina = new Comida(25, "harina", 20)
 		huevo = new Comida(10, "huevo", 3)
@@ -79,19 +93,19 @@ class Entrega2Tests {
 
 		Usuario = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(70, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
-		
+
 		Usuario2 = new Usuario(80, 1.91, Masculino, "Adrian", fechaValida, new Rutina(61, true),
-			unasCondicionesPreexistentesCompletas, unasPreferenciasAlimentarias, comidasQueDisgustan2)
-			
+			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
+
 		Usuario3 = new Usuario(52, 1.64, Masculino, "Federico", fechaValida, new Rutina(61, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
-		
+
 		Usuario4 = new Usuario(60, 1.77, Femenino, "Daiana", fechaValida, new Rutina(61, false),
 			unasCondicionesPreexistentesCompletas, unasPreferenciasAlimentarias, comidasQueDisgustan2)
-			
+
 		Usuario5 = new Usuario(65, 1.64, Masculino, "Lionel", fechaValida, new Rutina(40, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
-		
+			unasCondicionesPreexistentesCompletas, unasPreferenciasAlimentarias, comidasQueDisgustan2)
+
 		Usuario6 = new Usuario(80, 1.77, Masculino, "Ezequiel", fechaValida, new Rutina(80, true),
 			unasCondicionesPreexistentesCompletas, unasPreferenciasAlimentarias, comidasQueDisgustan2)
 
@@ -114,26 +128,25 @@ class Entrega2Tests {
 
 	@Test //Deberiamos poner exception?
 	def void test2() {
-		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario2))
+		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario4))
 	}
-	
+
 	//Punto 1: Averiguar si una receta se puede sugerir a un grupo
 	@Test
-	def void test3(){
-		
+	def void test3() {
+		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Grupo1))
 	}
-	
+
 	@Test
-	def void test4(){
-		
+	def void test4() {
+		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Grupo2))
 	}
-	
+
 	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso
 	@Test
-	def void test5(){
-		
+	def void test5() {
 	}
-	
+
 	//Punto 3:	Agregar receta a favoritos
 	@Test
 	def void test6() {
