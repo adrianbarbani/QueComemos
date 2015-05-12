@@ -1,9 +1,10 @@
 package ar.algo.adriba.tp1
 
-import ar.algo.adriba.tp1.Filtro
-import java.util.List
 
-class FiltroCondicionesPreexistentes implements Filtro {
+import java.util.List
+import java.util.ArrayList
+
+class FiltroCondicionesPreexistentes extends BusquedaDecorador{
 	
 	
 	/* O bien
@@ -14,8 +15,15 @@ class FiltroCondicionesPreexistentes implements Filtro {
 	
 	  
 	 */
+	
+	new(Busqueda unaBusqueda) {
+		super(unaBusqueda)
+	}
+	
 	override filtrar(List<Receta> recetas,Persona persona) {
-		recetas.filter[receta|persona.aceptaTusCondiciones(receta)].toList
+		var List<Receta> recetasFiltradas = new ArrayList <Receta>
+		recetasFiltradas = recetas.filter[receta|persona.aceptaTusCondiciones(receta)].toList
+		decorado.filtrar(recetasFiltradas, persona)
 	}
 	
 	

@@ -1,12 +1,20 @@
 package ar.algo.adriba.tp1
 
-import ar.algo.adriba.tp1.Filtro
-import java.util.List
 
-class FiltroDeIngredientesCaros implements Filtro {
+import java.util.List
+import java.util.ArrayList
+
+class FiltroDeIngredientesCaros extends BusquedaDecorador{
 	
-	override filtrar(List<Receta> recetas, Persona persona) {
-		recetas.filter[receta|receta.noTieneIngredientesCaros()].toList
+	new(Busqueda unaBusqueda) {
+		super(unaBusqueda)
 	}
-		
+	
+	
+	
+	override filtrar(List<Receta> recetas,Persona persona) {
+		var List<Receta> recetasFiltradas = new ArrayList <Receta>
+		recetasFiltradas = recetas.filter[receta|receta.noTieneIngredientesCaros()].toList
+		decorado.filtrar(recetasFiltradas, persona)
+	}	
 }
