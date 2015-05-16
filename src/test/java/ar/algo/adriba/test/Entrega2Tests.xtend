@@ -31,10 +31,12 @@ class Entrega2Tests {
 	List<Comida> unasPreferenciasAlimentarias = new ArrayList<Comida>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas = new ArrayList<CondicionPreexistente>
-	List<String> preferenciasAlimenticiasGrupal = new ArrayList<String>
+	List<String> preferenciasAlimenticiasGrupal1 = new ArrayList<String>
+	List<String> preferenciasAlimenticiasGrupal2 = new ArrayList<String>
 	List<String> comidasQueDisgustan1 = new ArrayList<String>
 	List<String> comidasQueDisgustan2 = new ArrayList<String>
-	List<Usuario>integrantes = new ArrayList<Usuario>
+	List<Usuario> integrantes1 = new ArrayList<Usuario>
+	List<Usuario> integrantes2 = new ArrayList<Usuario>
 
 	Usuario Usuario
 	Usuario Usuario2
@@ -43,8 +45,8 @@ class Entrega2Tests {
 	Usuario Usuario5
 	Usuario Usuario6
 
-	GrupoDeUsuario Grupo1 = new GrupoDeUsuario("Grupo de Algoritmos")
-	GrupoDeUsuario Grupo2 = new GrupoDeUsuario("Los Bortotones")
+	GrupoDeUsuario Grupo1
+	GrupoDeUsuario Grupo2
 
 	Sexo Femenino
 	Sexo Masculino
@@ -55,11 +57,11 @@ class Entrega2Tests {
 	Comida harina
 	Comida huevo
 	Comida panRallado
-	
+
 	List<Filtro> filtroVacio = new ArrayList<Filtro>
 	MostrarLosPrimerosDiez ordenamientoVacio
-	
-	Busqueda busqueda1 
+
+	Busqueda busqueda1
 
 	@Before
 	def void init() {
@@ -80,20 +82,6 @@ class Entrega2Tests {
 			add(new Diabetico)
 		] // esto lo usamos para ver si la receta tiene condiciones inadecuadas
 
-		Grupo1 => [
-			preferenciasAlimenticiasGrupal.add("carne")
-			integrantes.add(Usuario)
-			integrantes.add(Usuario2)
-			integrantes.add(Usuario3)
-		]
-
-		Grupo2 => [
-			preferenciasAlimenticiasGrupal.add("carne")
-			integrantes.add(Usuario4)
-			integrantes.add(Usuario5)
-			integrantes.add(Usuario6)
-		]
-
 		carne = new Comida(99, "carne", 1)
 		harina = new Comida(25, "harina", 20)
 		huevo = new Comida(10, "huevo", 3)
@@ -104,10 +92,10 @@ class Entrega2Tests {
 		comidasQueDisgustan1.add("verdura")
 		comidasQueDisgustan2.add("carne")
 
-		Usuario = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(70, true),
+		Usuario = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
-		Usuario2 = new Usuario(80, 1.91, Masculino, "Adrian", fechaValida, new Rutina(61, true),
+		Usuario2 = new Usuario(52, 1.64, Masculino, "Adrian", fechaValida, new Rutina(61, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Usuario3 = new Usuario(52, 1.64, Masculino, "Federico", fechaValida, new Rutina(61, true),
@@ -122,6 +110,20 @@ class Entrega2Tests {
 		Usuario6 = new Usuario(80, 1.77, Masculino, "Ezequiel", fechaValida, new Rutina(80, true),
 			unasCondicionesPreexistentesCompletas, unasPreferenciasAlimentarias, comidasQueDisgustan2)
 
+		preferenciasAlimenticiasGrupal1.add("carne")
+		preferenciasAlimenticiasGrupal2.add("carne")
+
+		integrantes1.add(Usuario)
+		integrantes1.add(Usuario2)
+		integrantes1.add(Usuario3)
+
+		integrantes2.add(Usuario4)
+		integrantes2.add(Usuario5)
+		integrantes2.add(Usuario6)
+
+		Grupo1 = new GrupoDeUsuario("Los de algo 2", integrantes1, preferenciasAlimenticiasGrupal1)
+		Grupo2 = new GrupoDeUsuario("Los Borbotones", integrantes2, preferenciasAlimenticiasGrupal2)
+
 		RecetaValida = new Receta => [
 			tipo = new Publica
 			setNombreDelPlato("Milanesas")
@@ -131,10 +133,8 @@ class Entrega2Tests {
 			subRecetaseIngredientes.add(carne)
 		]
 
-		
 		ordenamientoVacio = new MostrarLosPrimerosDiez
-		
-		
+
 	}
 
 	//Punto 1: Averiguar si una receta se puede sugerir a un usuario
