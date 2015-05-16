@@ -11,9 +11,14 @@ class GrupoDeUsuario extends Persona {
 	List<String>preferenciasAlimenticiasGrupal = new ArrayList<String>
 	List<Usuario>integrantes = new ArrayList<Usuario>
 	
-	new(String unNombre){
+	
+	
+	new(String unNombre, List<Usuario> unaListaDeIntegrantes, List<String> unaListaDePreferencias){
 		nombre = unNombre
+		integrantes = unaListaDeIntegrantes
+		preferenciasAlimenticiasGrupal = unaListaDePreferencias
 	}
+
 	
 	def boolean integranteEsDuenio(Receta receta) {
 		integrantes.exists[usuario|usuario.usuarioTiene(receta)]
