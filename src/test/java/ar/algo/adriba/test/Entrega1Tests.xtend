@@ -1,44 +1,52 @@
 package ar.algo.adriba.test
 
-import ar.algo.adriba.tp1.Celiaco
+import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Diabetico
 import ar.algo.adriba.tp1.Fecha
-import ar.algo.adriba.tp1.Femenino
 import ar.algo.adriba.tp1.Hipertenso
 import ar.algo.adriba.tp1.Ingrediente
-import ar.algo.adriba.tp1.Masculino
-import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.SedentarioConNadaDeEjercicio
+import ar.algo.adriba.tp1.Rutina
+import ar.algo.adriba.tp1.Sexo
 import ar.algo.adriba.tp1.Usuario
 import ar.algo.adriba.tp1.Vegano
-import ar.algo.adriba.tp1.carne
+import java.util.ArrayList
+import java.util.List
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import ar.algo.adriba.tp1.Receta
+import ar.algo.adriba.tp1.RecetaPrivada
+import ar.algo.adriba.tp1.Celiaco
+import ar.algo.adriba.tp1.Comida
 
 class Entrega1Tests {
 
-	Usuario federico
-	Usuario pedro
-	Usuario marina
-	Usuario adrian
-	Usuario usuarioFalsoVegano
-	Usuario usuarioDiabeticoConHipertension
 	Fecha fechaValida
 	Fecha fechaInvalida
+	List<Comida> unasPreferenciasAlimentarias = new ArrayList<Comida>
+	List<Comida> unasPreferenciasAlimentarias2 = new ArrayList<Comida>
+	List<CondicionPreexistente> unasCondicionesPreexistentesConHipertension = new ArrayList<CondicionPreexistente>
+	List<CondicionPreexistente> unasCondicionesPreexistentesConVeganismo = new ArrayList<CondicionPreexistente>
+	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
+	List<CondicionPreexistente> condicionesPreexistentes2 = new ArrayList<CondicionPreexistente>
+	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas = new ArrayList<CondicionPreexistente>
+	List<String> comidasQueDisgustan1 = new ArrayList<String>
 
-	Ingrediente chorizo
-	carne pollo
-	carne nalga
+	Usuario Usuario
+	Usuario Usuario2
 
-	Receta ensaladaCaprese
-	Receta papasAlHorno
+	Sexo Femenino
+	Sexo Masculino
 
+	RecetaPrivada RecetaValida
+	RecetaPrivada RecetaInvalida
+	Receta RecetaPublica
+	Ingrediente carne
 	Ingrediente harina
 	Ingrediente huevo
 	Ingrediente panRallado
 
-	@Before // agregué el método init para los tests y metí todos los constructores y setters ahi
+	@Before 
 	def void init() {
 
 		// Usamos la fecha de ayer como fecha VALIDA
@@ -47,179 +55,225 @@ class Entrega1Tests {
 		// Usamos la fecha de mañana como fecha INVALIDA
 		fechaInvalida = new Fecha(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
 
-		federico = new Usuario => [
-			setSexo = new Masculino
-			setNombre("Federico")
-			setAltura(1.88)
-			setPeso(83)
-			rutinaUsuario = new SedentarioConNadaDeEjercicio
-			fechaDeNacimiento = fechaValida
-		]
+		Femenino = new Sexo("Femenino")
+		Masculino = new Sexo("Masculino")
+	
+		unasCondicionesPreexistentesCompletas => [
+			
+			add(new Hipertenso)
+			add(new Vegano)
+			add(new Celiaco)
+			add(new Diabetico)		
+		
+		] // esto lo usamos para ver si la receta tiene condiciones inadecuadas
+		
+		unasCondicionesPreexistentesConHipertension.add(new Hipertenso)
+		unasCondicionesPreexistentesConVeganismo.add(new Vegano)
 
-		pedro = new Usuario => [
-			setSexo = new Masculino
-			setNombre("Pedro")
-			setAltura(1.22)
-			setPeso(53)
-			rutinaUsuario = new SedentarioConNadaDeEjercicio
-			fechaDeNacimiento = fechaInvalida
-		]
+		condicionesPreexistentes.add(new Hipertenso)
+		unasPreferenciasAlimentarias2.add(new Comida("manzana"))
 
-		adrian = new Usuario => [
-			sexo = new Masculino
-			setNombre("Adrian")
-			setAltura(2.00)
-			setPeso(75)
-		]
+		Usuario = new Usuario(52, 1.64, Masculino, "JuanJose", fechaValida, new Rutina(61, true),
+			condicionesPreexistentes, unasPreferenciasAlimentarias2, comidasQueDisgustan1)
 
-		marina = new Usuario => [
-			federico.sexo = new Femenino
-			setNombre("Marina")
-			setAltura(1.60)
-			setPeso(55)
-		]
-
-		usuarioDiabeticoConHipertension = new Usuario => [
-			chorizo = new carne
-			pollo = new carne
-			setSexo = new Femenino
-			setNombre("UsuarioDos")
-			setAltura(1.76)
-			setPeso(79)
-			rutinaUsuario = new SedentarioConNadaDeEjercicio
-			condicionesPreexistentes.add(new Diabetico)
-			condicionesPreexistentes.add(new Hipertenso)
-			preferenciasAlimentarias.add(chorizo)
-			preferenciasAlimentarias.add(pollo)
-			fechaDeNacimiento = fechaValida
-		]
-
-		usuarioFalsoVegano = new Usuario => [
-			chorizo = new carne
-			pollo = new carne
-			setSexo = new Masculino
-			setNombre("UsuarioVeganoFalso")
-			setAltura(1.76)
-			setPeso(79)
-			rutinaUsuario = new SedentarioConNadaDeEjercicio
-			condicionesPreexistentes.add(new Vegano)
-			preferenciasAlimentarias.add(chorizo)
-			fechaDeNacimiento = fechaValida
-		]
-
-		ensaladaCaprese = new Receta => [
-			nalga = new carne
-			harina = new Ingrediente
-			huevo = new Ingrediente
-			panRallado = new Ingrediente
-			harina.setCalorias(25)
-			huevo.setCalorias(10)
-			panRallado.setCalorias(12)
-			nalga.setCalorias(99)
+		//new (int unasCalorias, String unNombre, int unaCantidad)
+		RecetaValida = new RecetaPrivada => [
+			carne = new Ingrediente(99, "carne", 1)
+			harina = new Ingrediente(25, "harina", 20)
+			huevo = new Ingrediente(10, "huevo", 3)
+			panRallado = new Ingrediente(12, "pan rallado", 50)
 			setNombreDelPlato("Milanesas")
 			ingredientes.add(harina)
 			ingredientes.add(huevo)
 			ingredientes.add(panRallado)
-			ingredientes.add(nalga)
-			condicionesInadecuadas.add(new Hipertenso)
-			condicionesInadecuadas.add(new Diabetico)
-			condicionesInadecuadas.add(new Vegano)
-			condicionesInadecuadas.add(new Celiaco)
+			ingredientes.add(carne)
 		]
 
-		papasAlHorno = new Receta => [
-			harina = new Ingrediente
-			harina.setCalorias(9)
+		RecetaInvalida = new RecetaPrivada => [
+			harina = new Ingrediente(9, "papa", 1)
 			setNombreDelPlato("Pure")
 			ingredientes.add(harina)
-			condicionesInadecuadas.add(new Hipertenso)
-			condicionesInadecuadas.add(new Diabetico)
-			condicionesInadecuadas.add(new Vegano)
-			condicionesInadecuadas.add(new Celiaco)
+		]
+
+		RecetaPublica = new Receta => [
+			harina = new Ingrediente(15, "papa", 1)
+			setNombreDelPlato("Pure")
+			ingredientes.add(harina)
 		]
 
 	}
 
-	// Punto 1: Indicar si un usuario es valido, ARRANCO DE NUEVO EN la clase NUEVOSTESTS
-	
-	/*
+	//Punto 1: Validacion de usuario
+	@Test(expected=typeof(Exception))
+	def void testValidacionDeUsuarioHipertensoNoValido() {
+		new Usuario(50, 1.60, Femenino, "Marina", fechaValida, new Rutina(20, true),
+			unasCondicionesPreexistentesConHipertension, unasPreferenciasAlimentarias)
+	}
+
 	@Test
-	def void testValidacionDeUsuario() {
-		Assert.assertEquals(true, federico.usuarioValido()) //Validacion mas basica
-		Assert.assertEquals(true, usuarioDiabeticoConHipertension.usuarioValido()) //validacion basica + condiciones preexistentes (Diabetico + Hipertenso)
+	def void testValidacionDeUsuarioVeganoValido() {
+		new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(30, true),
+			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias)
+
+	}
+
+	//Punto2: Indice de masa corporal
+	@Test
+	def void indiceMasaCorporal() {
+		Usuario = new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(40, true),
+			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias)
+
+		Assert.assertEquals(19.3, Usuario.imc(), 0.5)
+
+	}
+
+	//Punto 2: Averiguar si un usuario sigue una rutina saludable (hago todos los casos)
+	@Test
+	def void diabeticoSigueRutinaValida() {
+		condicionesPreexistentes2.add(new Diabetico)
+		unasPreferenciasAlimentarias.add(new Comida("chori"))
+
+		Usuario2 = new Usuario(52, 1.64, Masculino, "Adrian", fechaValida, new Rutina(40, true),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+
+		Assert.assertTrue(Usuario2.sigoRutinaSaludable())
+
+	}
+
+	@Test
+	def void diabeticoSigueRutinaInvalidaPeroTienePesoBajo() {
+		condicionesPreexistentes2.add(new Diabetico)
+		unasPreferenciasAlimentarias.add(new Comida("pescado"))
+
+		Usuario2 = new Usuario(52, 1.64, Masculino, "Josecito", fechaValida, new Rutina(35, false),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+
+		Assert.assertTrue(Usuario2.sigoRutinaSaludable())
+
+	}
+
+	@Test
+	def void diabeticoSigueRutinaInvalidayTienePesoAlto() {
+		condicionesPreexistentes2.add(new Diabetico)
+		unasPreferenciasAlimentarias.add(new Comida("pescado"))
+
+		Usuario2 = new Usuario(102, 1.64, Masculino, "Josecito", fechaValida, new Rutina(35, false),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+
+		Assert.assertFalse(Usuario2.sigoRutinaSaludable())
+
+	}
+	@Test
+	def void veganoSigueRutinaValida() {
+		condicionesPreexistentes2.add(new Vegano)
+		unasPreferenciasAlimentarias.add(new Comida("frutas"))
+
+		Usuario2 = new Usuario(52, 1.64, Femenino, "Camila", fechaValida, new Rutina(20, true),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+
+		Assert.assertTrue(Usuario2.sigoRutinaSaludable())
+
+	}
+
+	@Test
+	def void veganoSigueRutinaInvalida() {
+		condicionesPreexistentes2.add(new Vegano)
+		unasPreferenciasAlimentarias.add(new Comida("fideos"))
+		Usuario2 = new Usuario(52, 1.64, Masculino, "Miguel", fechaValida, new Rutina(61, false),
+			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+
+		Assert.assertFalse(Usuario2.sigoRutinaSaludable())
+
+	}
+
+	@Test
+	def void hipertensoSigueRutinaValida() {
+		condicionesPreexistentes.add(new Hipertenso)
+		unasPreferenciasAlimentarias.add(new Comida("manzana"))
+		Usuario = new Usuario(52, 1.64, Masculino, "JuanJose", fechaValida, new Rutina(61, true),
+			condicionesPreexistentes, unasPreferenciasAlimentarias)
+
+		Assert.assertTrue(Usuario.sigoRutinaSaludable())
+
+	}
+
+	@Test
+	def void hipertensoSigueRutinaInvalida() {
+		condicionesPreexistentes2.add(new Hipertenso)
+		unasPreferenciasAlimentarias.add(new Comida("manzana"))
+		Usuario2 = new Usuario(52, 1.64, Femenino, "Daiana", fechaValida, new Rutina(20, true),
+			condicionesPreexistentes, unasPreferenciasAlimentarias)
+
+		Assert.assertFalse(Usuario2.sigoRutinaSaludable())
+
+	}
+
+	//Punto 3: Hacer que un usuario agregue una receta
+	@Test
+	def void usuarioAgregaRecetaValida() {
+		Usuario.agregarReceta(RecetaValida)
+
 	}
 
 	@Test(expected=typeof(Exception))
-	def void testValidacionDeUsuarioInvalido() {
-	usuarioFalsoVegano.usuarioValido() //validacion basica + condiciones preexistentes (Diabetico + Hipertenso)
+	def void usuarioAgregaRecetaInvalida() {
+		Usuario.agregarReceta(RecetaInvalida)
 	}
 
-	// Punto 2 : Averiguar el imc de un usuario
+	//Punto 3: Conocer las condiciones preexistentes para la que una receta es inadecuada
 	@Test
-	def void testImc() {
-		Assert.assertEquals(23.48, federico.imc(), 0.1)
-		Assert.assertEquals(21.48, marina.imc(), 0.1)
-		Assert.assertEquals(18.7, adrian.imc(), 0.1)
+	def void condicionesPreexistentesDeUnaReceta() {
+  	Assert.assertTrue(RecetaValida.paraQueCondicionesSoyInadecuada(unasCondicionesPreexistentesCompletas).size > 0)
+  	}
 
-	}
- 
-	 */
-	// Averiguar si un usuario sigue una rutina saludable
+	//Punto 4: Saber si un usuario puede ver o modificar una receta dada
 	@Test
-	def void usuarioSigueRutinaSaludable() {
-		Assert.assertEquals(true, federico.sigoRutinaSaludable())
-	}
+	def void quieroVerOModificarRecetaMiaYPuedo() { //Receta privada mia
 
-	// Punto 3 : Hacer que un usuario agregue una receta
-	@Test
-	def void usuarioQueAgregaUnaReceta() {
-		federico.agregarReceta(ensaladaCaprese)
-	}
+		RecetaValida.SetduenioReceta(Usuario)
 
-	// Conocer condiciones preexistentes para la que una receta es invalida
-	@Test
-	def void condicionesInadecuadasDeUnaReceta() {
-		ensaladaCaprese.paraQueCondicionesSoyInadecuada()
-	}
-
-	//Punto 4: Saber si un usuario puede ver una receta dada
-	@Test
-	def void usuarioPuedeVerReceta() {
-		federico.puedoVerReceta(ensaladaCaprese)
-	}
-	
-	@Test
-	def void usuarioNoPuedeVerReceta() {
-		marina.puedoVerReceta(ensaladaCaprese)
-	}
-
-	//Saber si un usuario puede modificar una receta dada
-	@Test
-	def void usuarioPuedeModificarReceta() {
-		federico.puedoModificarReceta(papasAlHorno)
-	}
-
-	@Test
-	def void usuarioAgregaUnaRecetaYVemosSiPuedeModificarla() {
-		federico.agregarReceta(ensaladaCaprese)
-		Assert.assertEquals(true, federico.puedoModificarReceta(ensaladaCaprese))
-	}
-
-	//Modificar una receta dada, respetando la validacion anterior
-	@Test
-	def void usuarioAgregaUnaRecetaYLuegoLaModifica() {
-		federico.agregarReceta(ensaladaCaprese)
-		federico.modificarUnaReceta(ensaladaCaprese, papasAlHorno)
+		Assert.assertEquals(true, Usuario.puedoVerReceta(RecetaValida))
+		Assert.assertEquals(true, Usuario.puedoModificarReceta(RecetaValida))
 	}
 
 	@Test(expected=typeof(Exception))
-	def void usuarioAgregaUnaRecetaYLuegoOtroUsuarioNoPuedeModificarla() {
-		adrian.agregarReceta(papasAlHorno)
-		federico.modificarUnaReceta(papasAlHorno, ensaladaCaprese)
+	def void quieroVerOModificarRecetaDeOtroYNoPuedo() { //Receta privada de otro
+
+		Usuario.puedoVerReceta(RecetaValida)
+		Usuario.puedoModificarReceta(RecetaValida)
 	}
 
-	//Punto 5: Poder construir una receta con subrecetas.
-	def void agregarSubrecetaAUnaReceta() {
-		ensaladaCaprese.agregarSubReceta(papasAlHorno)
+	@Test
+	def void quieroVerOModificarRecetaPublica() { //Receta publica
+
+		Usuario.puedoVerReceta(RecetaPublica)
+		Usuario.puedoModificarReceta(RecetaPublica)
 	}
+
+	//Punto 4: Modificar una receta
+	@Test
+	def void modificarUnaRecetaMia() { //Modificar receta mia
+
+		RecetaValida.SetduenioReceta(Usuario)
+		Usuario.modificarUnaReceta(RecetaValida, RecetaInvalida)
+	}
+
+	@Test(expected=typeof(Exception))
+	def void modificarRecetaDeOtro() { //Modificar receta privada de otro
+
+		Usuario.modificarUnaReceta(RecetaValida, RecetaInvalida)
+	}
+
+	@Test
+	def void modificarRecetaPublica() { //Receta publica
+
+		Usuario.modificarUnaReceta(RecetaPublica, RecetaInvalida)
+	}
+
+	//Punto 5: Poder crear una receta con subrecetas
+	@Test
+	def void crearRecetaConSubrecetas() {
+		RecetaValida.agregarSubReceta(RecetaPublica)
+	}
+
 }
