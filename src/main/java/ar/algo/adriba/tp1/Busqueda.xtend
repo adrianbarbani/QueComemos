@@ -18,6 +18,8 @@ class Busqueda {
 		orden = unOrden // new CompararPorNombre, new compararPorCalorias
 
 	}
+	
+	
 
 	
 	//aca necesitamos el singleton de repositorioRecetas

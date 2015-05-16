@@ -1,9 +1,17 @@
 package ar.algo.adriba.test
 
+import ar.algo.adriba.tp1.Busqueda
+import ar.algo.adriba.tp1.Celiaco
+import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Diabetico
 import ar.algo.adriba.tp1.Fecha
+import ar.algo.adriba.tp1.Filtro
+import ar.algo.adriba.tp1.GrupoDeUsuario
 import ar.algo.adriba.tp1.Hipertenso
+import ar.algo.adriba.tp1.Ordenamiento
+import ar.algo.adriba.tp1.Publica
+import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Rutina
 import ar.algo.adriba.tp1.Sexo
 import ar.algo.adriba.tp1.Usuario
@@ -13,11 +21,8 @@ import java.util.List
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.Celiaco
-import ar.algo.adriba.tp1.Comida
-import ar.algo.adriba.tp1.Publica
-import ar.algo.adriba.tp1.GrupoDeUsuario
+import ar.algo.adriba.tp1.FiltroPorGusto
+import ar.algo.adriba.tp1.MostrarLosPrimerosDiez
 
 class Entrega2Tests {
 
@@ -50,6 +55,11 @@ class Entrega2Tests {
 	Comida harina
 	Comida huevo
 	Comida panRallado
+	
+	List<Filtro> filtroVacio = new ArrayList<Filtro>
+	MostrarLosPrimerosDiez ordenamientoVacio
+	
+	Busqueda busqueda1 
 
 	@Before
 	def void init() {
@@ -121,6 +131,10 @@ class Entrega2Tests {
 			subRecetaseIngredientes.add(carne)
 		]
 
+		
+		ordenamientoVacio = new MostrarLosPrimerosDiez
+		
+		
 	}
 
 	//Punto 1: Averiguar si una receta se puede sugerir a un usuario
@@ -152,6 +166,8 @@ class Entrega2Tests {
 	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso
 	@Test
 	def void test5() {
+		busqueda1 = new Busqueda(filtroVacio, Usuario, ordenamientoVacio)
+		Assert.assertEquals(1, busqueda1.recetasQuePuedeVer(Usuario).size)
 	}
 
 	//Punto 3:	Agregar receta a favoritos
