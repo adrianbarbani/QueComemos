@@ -7,9 +7,10 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Diabetico
 import ar.algo.adriba.tp1.Fecha
 import ar.algo.adriba.tp1.Filtro
+import ar.algo.adriba.tp1.FiltroDeCalorias
 import ar.algo.adriba.tp1.GrupoDeUsuario
 import ar.algo.adriba.tp1.Hipertenso
-import ar.algo.adriba.tp1.Ordenamiento
+import ar.algo.adriba.tp1.MostrarLosPrimerosDiez
 import ar.algo.adriba.tp1.Publica
 import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Rutina
@@ -21,8 +22,6 @@ import java.util.List
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import ar.algo.adriba.tp1.FiltroPorGusto
-import ar.algo.adriba.tp1.MostrarLosPrimerosDiez
 
 class Entrega2Tests {
 
@@ -95,10 +94,10 @@ class Entrega2Tests {
 		Usuario = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
-		Usuario2 = new Usuario(52, 1.64, Masculino, "Adrian", fechaValida, new Rutina(61, true),
+		Usuario2 = new Usuario(67, 1.91, Masculino, "Adrian", fechaValida, new Rutina(74, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
-		Usuario3 = new Usuario(52, 1.64, Masculino, "Federico", fechaValida, new Rutina(61, true),
+		Usuario3 = new Usuario(80, 1.74, Masculino, "Federico", fechaValida, new Rutina(82, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Usuario4 = new Usuario(60, 1.77, Femenino, "Daiana", fechaValida, new Rutina(61, false),
@@ -134,6 +133,7 @@ class Entrega2Tests {
 		]
 
 		ordenamientoVacio = new MostrarLosPrimerosDiez
+		filtroVacio.add(new FiltroDeCalorias)
 
 	}
 
@@ -141,15 +141,13 @@ class Entrega2Tests {
 	@Test
 	def void test1() {
 		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario))
-		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario2))
-		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario3))
+
 	}
 
 	@Test //Deberiamos poner exception?
 	def void test2() {
 		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario4))
-		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario5))
-		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario6))
+
 	}
 
 	//Punto 1: Averiguar si una receta se puede sugerir a un grupo
@@ -158,6 +156,7 @@ class Entrega2Tests {
 		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Grupo1))
 	}
 
+	//Deberiamos poner exception?
 	@Test
 	def void test4() {
 		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Grupo2))
@@ -173,6 +172,8 @@ class Entrega2Tests {
 	//Punto 3:	Agregar receta a favoritos
 	@Test
 	def void test6() {
+		Assert.assertEquals(0, Usuario.recetasFavoritas.size)
 		Usuario.marcarComoFavorita(RecetaValida)
+		Assert.assertEquals(1, Usuario.recetasFavoritas.size)
 	}
 }
