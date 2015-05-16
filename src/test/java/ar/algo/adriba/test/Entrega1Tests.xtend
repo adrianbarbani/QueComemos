@@ -4,7 +4,6 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Diabetico
 import ar.algo.adriba.tp1.Fecha
 import ar.algo.adriba.tp1.Hipertenso
-import ar.algo.adriba.tp1.Ingrediente
 import ar.algo.adriba.tp1.Rutina
 import ar.algo.adriba.tp1.Sexo
 import ar.algo.adriba.tp1.Usuario
@@ -15,9 +14,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.RecetaPrivada
 import ar.algo.adriba.tp1.Celiaco
 import ar.algo.adriba.tp1.Comida
+import ar.algo.adriba.tp1.Publica
 
 class Entrega1Tests {
 
@@ -41,10 +40,10 @@ class Entrega1Tests {
 	RecetaPrivada RecetaValida
 	RecetaPrivada RecetaInvalida
 	Receta RecetaPublica
-	Ingrediente carne
-	Ingrediente harina
-	Ingrediente huevo
-	Ingrediente panRallado
+	Comida carne
+	Comida harina
+	Comida huevo
+	Comida panRallado
 
 	@Before 
 	def void init() {
@@ -76,29 +75,28 @@ class Entrega1Tests {
 		Usuario = new Usuario(52, 1.64, Masculino, "JuanJose", fechaValida, new Rutina(61, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias2, comidasQueDisgustan1)
 
+		carne = new Comida(99, "carne", 1)
+		harina = new Comida(25, "harina", 1)
+		huevo = new Comida(10, "huevo", 3)
+		panRallado = new Comida(12, "pan rallado", 50)
+		
 		//new (int unasCalorias, String unNombre, int unaCantidad)
-		RecetaValida = new RecetaPrivada => [
-			carne = new Ingrediente(99, "carne", 1)
-			harina = new Ingrediente(25, "harina", 20)
-			huevo = new Ingrediente(10, "huevo", 3)
-			panRallado = new Ingrediente(12, "pan rallado", 50)
+		RecetaValida = new Receta => [
 			setNombreDelPlato("Milanesas")
-			ingredientes.add(harina)
-			ingredientes.add(huevo)
-			ingredientes.add(panRallado)
-			ingredientes.add(carne)
+			subRecetaseIngredientes.add(harina)
+			subRecetaseIngredientes.add(huevo)
+			subRecetaseIngredientes.add(panRallado)
+			subRecetaseIngredientes.add(carne)
 		]
 
-		RecetaInvalida = new RecetaPrivada => [
-			harina = new Ingrediente(9, "papa", 1)
+		RecetaInvalida = new Receta => [
 			setNombreDelPlato("Pure")
-			ingredientes.add(harina)
+			subRecetaseIngredientes.add(harina)
 		]
 
 		RecetaPublica = new Receta => [
-			harina = new Ingrediente(15, "papa", 1)
 			setNombreDelPlato("Pure")
-			ingredientes.add(harina)
+			subRecetaseIngredientes.add(harina)
 		]
 
 	}
