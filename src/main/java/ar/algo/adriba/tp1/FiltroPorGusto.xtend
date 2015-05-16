@@ -14,7 +14,7 @@ class FiltroPorGusto extends BusquedaDecorador {
 	
 	override filtrar(List<Receta> recetas,Persona persona) {
 		var List<Receta> recetasFiltradas = new ArrayList <Receta>
-		recetasFiltradas = recetas.filter[receta|receta.todosLosIngredientesLeGustanA(persona)].toList
+		recetasFiltradas = recetas.filter[receta|persona.mePuedeGustar(receta)].toList
 		decorado.filtrar(recetasFiltradas, persona)
 	}	
 }

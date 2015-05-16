@@ -55,14 +55,15 @@ class GrupoDeUsuario extends Persona {
     this.imcPromedio() > 30
 	}
 	
+	/* Boletear
 	// esto hace lo mismo que esAptaParaMi de una forma muy rara y enroscadaaaaaaaaaa :(
 	override aceptaTusCondiciones(Receta receta) {
-		!integrantes.exists[integrante|/*1ra negacion*/!(integrante.aceptaTusCondiciones(receta))] // si existe alguno que no acepte las condiciones va a ser falce se convierte en true por el 1° ! despues el exists da true y se convierte en falce por el segundo !
+		!integrantes.exists[integrante|!(integrante.aceptaTusCondiciones(receta))] // si existe alguno que no acepte las condiciones va a ser falce se convierte en true por el 1° ! despues el exists da true y se convierte en falce por el segundo !
 	}
 	
 	// esto no se donde se usa, dps vemos
 	override teDisgustaUna(Cosas cosas) {
 		integrantes.exists[usuario|usuario.teDisgustaUna(cosas)]
-	}
+	} */
 	
 }

@@ -6,59 +6,59 @@ import java.util.List
 
 @Accessors
 class Comida implements Cosas {
-	
+
 	public String nombre
 	int cantidad
 	int calorias
 	List<String> ingredientesCaros = new ArrayList<String> // en el test agregar los strings salmon, lomo, alcaparras y lechon
-	
+
 	new(int unasCalorias, String unNombre, int unaCantidad) {
 		calorias = unasCalorias
 		nombre = unNombre
 		cantidad = unaCantidad
 	}
-	
-	override nombre (){
+
+	override nombre() {
 		nombre
 	}
-	
-	// para diferenciarlo de los condimentos que no tienen calorias, pero quizas seria mejor hacer una clase Condimentos otra vez
-	override unIngrediente(){
-	calorias > 0		
+
+	override unIngrediente() {
+		true
 	}
-	
+
+	/* no se usa
 	override caloriasTotales(){
 		calorias 
-	}
-	
-	override tenesDemasiadaAzucar(){
+	} */
+	override tenesDemasiadaAzucar() {
 		this.tenes("azucar") && this.tenesMasDelLimite(100)
 	}
-	
-	override tenesCarne(){
-		this.tenes("pollo||carne||chivito||chori")	
+
+	override tenesCarne() {
+		this.tenes("pollo||carne||chivito||chori")
 	}
-	
-	override tenesSalOCaldo(){
+
+	override tenesSalOCaldo() {
 		this.tenes("sal") || this.tenes("caldo")
 	}
-	
+
 	new(String unNombre) {
 		nombre = unNombre
 	}
-	
-	new(){}
-	
+
+	new() {
+	}
+
 	override tenes(String unaCosa) {
 		nombre.matches(unaCosa)
 	}
-	
+
 	def boolean tenesMasDelLimite(int limite) {
 		cantidad > limite
 	}
-	
+
 	override esCaro() {
 		ingredientesCaros.contains(this.nombre)
 	}
-	
+
 }

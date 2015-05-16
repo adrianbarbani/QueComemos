@@ -2,19 +2,20 @@ package ar.algo.adriba.tp1
 
 import java.util.List
 import java.util.ArrayList
-// HACER UN SINGLETON!
+
 public class RepositorioRecetas {
 	List<Receta>listarTodas = new ArrayList
+
+	static RepositorioRecetas repositorio = null  
 	
-	private static RepositorioRecetas repositorio = null //puede que este tirando a cualquiera 
-	
-	      // Exists only to defeat instantiation.
-  
-    def static RepositorioRecetas getInstance() {
+	private new() {
+	}
+	     
+    static def RepositorioRecetas getInstance() {
       if(repositorio == null) {
          repositorio = new RepositorioRecetas()
       }
-      return repositorio;
+      repositorio
    }
 	
 	
@@ -29,6 +30,5 @@ public class RepositorioRecetas {
 	def List<Receta> todasLasRecetas() {
 		listarTodas
 	}
-	
-//hola
+
 }
