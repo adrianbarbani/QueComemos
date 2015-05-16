@@ -1,13 +1,11 @@
 package ar.algo.adriba.tp1
 
-import java.util.ArrayList
 import java.util.List
 
 class MostrarResultadosPares extends Ordenamiento {
 
 	int i
-	List<Receta> resultado = new ArrayList <Receta>
-	
+
 	def boolean esPar(int num) {
 	(num % 2) == 0
 
@@ -19,13 +17,13 @@ class MostrarResultadosPares extends Ordenamiento {
 
 		for (Receta unaReceta : recetas) {
 
-			if (this.esPar(i)) {
-				resultado.add(unaReceta)
+			if (!(this.esPar(i))) {
+				recetas.remove(unaReceta)
 			}
 			
 		i++
 		}
 		
-	resultado.toList
+	recetas.toList
 	}
 }

@@ -8,45 +8,36 @@ class Busqueda {
 	List<Filtro> filtros = new ArrayList<Filtro>
 	Ordenamiento orden
 	Persona persona
-	List<Receta> todasLasRecetasQuePuedeVer = new ArrayList<Receta>
-	RepositorioRecetas singleton = RepositorioRecetas.getInstance() // esto se supone que es el singleton???
+	RepositorioRecetas repositorioDeRecetas = RepositorioRecetas.getInstance()
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden) {
-
 		filtros = unosFiltros
 		persona = unaPersona
 		orden = unOrden // new CompararPorNombre, new compararPorCalorias
-
 	}
-	
-	
 
-	
-	//aca necesitamos el singleton de repositorioRecetas
 	def List<Receta> recetasQuePuedeVer(Persona unaPersona) {
-		
-		this.llenarTodasLasRecetas.filter[unaReceta|unaPersona.puedoVerReceta(unaReceta)].toList // estoy tirando cualquiera ?
+		repositorioDeRecetas.todasLasRecetas.filter[unaReceta|unaPersona.puedoVerReceta(unaReceta)].toList // estoy tirando cualquiera ?
 	}
 
-	def List<Receta> llenarTodasLasRecetas (){
-			todasLasRecetasQuePuedeVer=singleton.todasLasRecetas // estoy tirando cualquiera?
-	}
-	
+	// este seria el busquedaPosta osea se testea con: busqueda.new(parametros) y busqueda.filtrar()
 	def List<Receta> filtrar() {
-		if (filtros.empty) {
-			todasLasRecetasQuePuedeVer
-		} else {
-			// Hacer el filtrar en cada filtro y TESTEAR
-			todasLasRecetasQuePuedeVer = filtros.fold(todasLasRecetasQuePuedeVer, [col, filtro|filtro.filtrar(col,persona)]).toList
+
+		var List<Receta> todasLasRecetasQuePuedeVer = new ArrayList<Receta>
+		todasLasRecetasQuePuedeVer = recetasQuePuedeVer(persona)
+
+		if (!(filtros.empty)) {
+			todasLasRecetasQuePuedeVer = pasarPorFiltros(todasLasRecetasQuePuedeVer)
 		}
+		this.mostrar(todasLasRecetasQuePuedeVer)
 	}
 
-	def List<Receta> mostrar(List<Receta> todasLasRecetasQuePuedeVer){
-		
-		orden.ordenar(todasLasRecetasQuePuedeVer)
-		
+	def pasarPorFiltros(List<Receta> recetas) {
+		filtros.fold(recetas, [col, filtro|filtro.filtrar(col, persona)]).toList
 	}
-	
-	//armar metodo busquedaposta
-	
+
+	def List<Receta> mostrar(List<Receta> unasRecetas) {
+		orden.ordenar(unasRecetas)
+	}
+
 }
