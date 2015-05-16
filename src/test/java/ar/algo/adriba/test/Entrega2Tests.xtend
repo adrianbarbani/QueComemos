@@ -1,9 +1,17 @@
 package ar.algo.adriba.test
 
+import ar.algo.adriba.tp1.Busqueda
+import ar.algo.adriba.tp1.Celiaco
+import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Diabetico
 import ar.algo.adriba.tp1.Fecha
+import ar.algo.adriba.tp1.FiltroDeCalorias
+import ar.algo.adriba.tp1.GrupoDeUsuario
 import ar.algo.adriba.tp1.Hipertenso
+import ar.algo.adriba.tp1.MostrarLosPrimerosDiez
+import ar.algo.adriba.tp1.Publica
+import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Rutina
 import ar.algo.adriba.tp1.Sexo
 import ar.algo.adriba.tp1.Usuario
@@ -13,11 +21,6 @@ import java.util.List
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.Celiaco
-import ar.algo.adriba.tp1.Comida
-import ar.algo.adriba.tp1.Publica
-import ar.algo.adriba.tp1.GrupoDeUsuario
 
 class Entrega2Tests {
 
@@ -26,10 +29,12 @@ class Entrega2Tests {
 	List<Comida> unasPreferenciasAlimentarias = new ArrayList<Comida>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas = new ArrayList<CondicionPreexistente>
-	List<String> preferenciasAlimenticiasGrupal = new ArrayList<String>
+	List<String> preferenciasAlimenticiasGrupal1 = new ArrayList<String>
+	List<String> preferenciasAlimenticiasGrupal2 = new ArrayList<String>
 	List<String> comidasQueDisgustan1 = new ArrayList<String>
 	List<String> comidasQueDisgustan2 = new ArrayList<String>
-	List<Usuario>integrantes = new ArrayList<Usuario>
+	List<Usuario> integrantes1 = new ArrayList<Usuario>
+	List<Usuario> integrantes2 = new ArrayList<Usuario>
 
 	Usuario Usuario
 	Usuario Usuario2
@@ -38,8 +43,8 @@ class Entrega2Tests {
 	Usuario Usuario5
 	Usuario Usuario6
 
-	GrupoDeUsuario Grupo1 = new GrupoDeUsuario("Grupo de Algoritmos")
-	GrupoDeUsuario Grupo2 = new GrupoDeUsuario("Los Bortotones")
+	GrupoDeUsuario Grupo1
+	GrupoDeUsuario Grupo2
 
 	Sexo Femenino
 	Sexo Masculino
@@ -50,6 +55,11 @@ class Entrega2Tests {
 	Comida harina
 	Comida huevo
 	Comida panRallado
+
+	List<Filtro> filtroVacio = new ArrayList<Filtro>
+	MostrarLosPrimerosDiez ordenamientoVacio
+
+	Busqueda busqueda1
 
 	@Before
 	def void init() {
@@ -70,20 +80,6 @@ class Entrega2Tests {
 			add(new Diabetico)
 		] // esto lo usamos para ver si la receta tiene condiciones inadecuadas
 
-		Grupo1 => [
-			preferenciasAlimenticiasGrupal.add("carne")
-			integrantes.add(Usuario)
-			integrantes.add(Usuario2)
-			integrantes.add(Usuario3)
-		]
-
-		Grupo2 => [
-			preferenciasAlimenticiasGrupal.add("carne")
-			integrantes.add(Usuario4)
-			integrantes.add(Usuario5)
-			integrantes.add(Usuario6)
-		]
-
 		carne = new Comida(99, "carne", 1)
 		harina = new Comida(25, "harina", 20)
 		huevo = new Comida(10, "huevo", 3)
@@ -94,13 +90,13 @@ class Entrega2Tests {
 		comidasQueDisgustan1.add("verdura")
 		comidasQueDisgustan2.add("carne")
 
-		Usuario = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(70, true),
+		Usuario = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
-		Usuario2 = new Usuario(80, 1.91, Masculino, "Adrian", fechaValida, new Rutina(61, true),
+		Usuario2 = new Usuario(67, 1.91, Masculino, "Adrian", fechaValida, new Rutina(74, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
-		Usuario3 = new Usuario(52, 1.64, Masculino, "Federico", fechaValida, new Rutina(61, true),
+		Usuario3 = new Usuario(80, 1.74, Masculino, "Federico", fechaValida, new Rutina(82, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Usuario4 = new Usuario(60, 1.77, Femenino, "Daiana", fechaValida, new Rutina(61, false),
@@ -112,6 +108,20 @@ class Entrega2Tests {
 		Usuario6 = new Usuario(80, 1.77, Masculino, "Ezequiel", fechaValida, new Rutina(80, true),
 			unasCondicionesPreexistentesCompletas, unasPreferenciasAlimentarias, comidasQueDisgustan2)
 
+		preferenciasAlimenticiasGrupal1.add("carne")
+		preferenciasAlimenticiasGrupal2.add("carne")
+
+		integrantes1.add(Usuario)
+		integrantes1.add(Usuario2)
+		integrantes1.add(Usuario3)
+
+		integrantes2.add(Usuario4)
+		integrantes2.add(Usuario5)
+		integrantes2.add(Usuario6)
+
+		Grupo1 = new GrupoDeUsuario("Los de algo 2", integrantes1, preferenciasAlimenticiasGrupal1)
+		Grupo2 = new GrupoDeUsuario("Los Borbotones", integrantes2, preferenciasAlimenticiasGrupal2)
+
 		RecetaValida = new Receta => [
 			tipo = new Publica
 			setNombreDelPlato("Milanesas")
@@ -121,21 +131,22 @@ class Entrega2Tests {
 			subRecetaseIngredientes.add(carne)
 		]
 
+		ordenamientoVacio = new MostrarLosPrimerosDiez
+		filtroVacio.add(new FiltroDeCalorias)
+
 	}
 
 	//Punto 1: Averiguar si una receta se puede sugerir a un usuario
 	@Test
 	def void test1() {
 		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario))
-		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario2))
-		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Usuario3))
+
 	}
 
 	@Test //Deberiamos poner exception?
 	def void test2() {
 		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario4))
-		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario5))
-		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario6))
+
 	}
 
 	//Punto 1: Averiguar si una receta se puede sugerir a un grupo
@@ -144,6 +155,7 @@ class Entrega2Tests {
 		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Grupo1))
 	}
 
+	//Deberiamos poner exception?
 	@Test
 	def void test4() {
 		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Grupo2))
@@ -152,11 +164,15 @@ class Entrega2Tests {
 	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso
 	@Test
 	def void test5() {
+		busqueda1 = new Busqueda(filtroVacio, Usuario, ordenamientoVacio)
+		Assert.assertEquals(1, busqueda1.recetasQuePuedeVer(Usuario).size)
 	}
 
 	//Punto 3:	Agregar receta a favoritos
 	@Test
 	def void test6() {
+		Assert.assertEquals(0, Usuario.recetasFavoritas.size)
 		Usuario.marcarComoFavorita(RecetaValida)
+		Assert.assertEquals(1, Usuario.recetasFavoritas.size)
 	}
 }
