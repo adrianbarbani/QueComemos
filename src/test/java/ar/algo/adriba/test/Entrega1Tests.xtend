@@ -17,6 +17,7 @@ import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Celiaco
 import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.Publica
+import ar.algo.adriba.tp1.Privada
 
 class Entrega1Tests {
 
@@ -37,9 +38,10 @@ class Entrega1Tests {
 	Sexo Femenino
 	Sexo Masculino
 
-	RecetaPrivada RecetaValida
-	RecetaPrivada RecetaInvalida
+	Receta RecetaValida
+	Receta RecetaInvalida
 	Receta RecetaPublica
+	Receta RecetaPrivada
 	Comida carne
 	Comida harina
 	Comida huevo
@@ -83,6 +85,7 @@ class Entrega1Tests {
 		//new (int unasCalorias, String unNombre, int unaCantidad)
 		RecetaValida = new Receta => [
 			setNombreDelPlato("Milanesas")
+			caloriasReceta = 250
 			subRecetaseIngredientes.add(harina)
 			subRecetaseIngredientes.add(huevo)
 			subRecetaseIngredientes.add(panRallado)
@@ -90,11 +93,22 @@ class Entrega1Tests {
 		]
 
 		RecetaInvalida = new Receta => [
+			tipo = new Publica()
 			setNombreDelPlato("Pure")
 			subRecetaseIngredientes.add(harina)
 		]
 
 		RecetaPublica = new Receta => [
+			tipo = new Publica()
+			caloriasReceta = 40
+			setNombreDelPlato("Pure")
+			subRecetaseIngredientes.add(harina)
+		]
+		
+				
+		RecetaPrivada = new Receta => [
+			duenioReceta = Usuario
+			caloriasReceta = 40
 			setNombreDelPlato("Pure")
 			subRecetaseIngredientes.add(harina)
 		]
@@ -105,13 +119,13 @@ class Entrega1Tests {
 	@Test(expected=typeof(Exception))
 	def void testValidacionDeUsuarioHipertensoNoValido() {
 		new Usuario(50, 1.60, Femenino, "Marina", fechaValida, new Rutina(20, true),
-			unasCondicionesPreexistentesConHipertension, unasPreferenciasAlimentarias)
+			unasCondicionesPreexistentesConHipertension, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 	}
 
 	@Test
 	def void testValidacionDeUsuarioVeganoValido() {
 		new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(30, true),
-			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias)
+			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 	}
 
@@ -119,7 +133,7 @@ class Entrega1Tests {
 	@Test
 	def void indiceMasaCorporal() {
 		Usuario = new Usuario(52, 1.64, Masculino, "JuanCarlos", fechaValida, new Rutina(40, true),
-			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias)
+			unasCondicionesPreexistentesConVeganismo, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Assert.assertEquals(19.3, Usuario.imc(), 0.5)
 
@@ -132,7 +146,7 @@ class Entrega1Tests {
 		unasPreferenciasAlimentarias.add(new Comida("chori"))
 
 		Usuario2 = new Usuario(52, 1.64, Masculino, "Adrian", fechaValida, new Rutina(40, true),
-			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Assert.assertTrue(Usuario2.sigoRutinaSaludable())
 
@@ -144,7 +158,7 @@ class Entrega1Tests {
 		unasPreferenciasAlimentarias.add(new Comida("pescado"))
 
 		Usuario2 = new Usuario(52, 1.64, Masculino, "Josecito", fechaValida, new Rutina(35, false),
-			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Assert.assertTrue(Usuario2.sigoRutinaSaludable())
 
@@ -156,7 +170,7 @@ class Entrega1Tests {
 		unasPreferenciasAlimentarias.add(new Comida("pescado"))
 
 		Usuario2 = new Usuario(102, 1.64, Masculino, "Josecito", fechaValida, new Rutina(35, false),
-			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Assert.assertFalse(Usuario2.sigoRutinaSaludable())
 
@@ -167,7 +181,7 @@ class Entrega1Tests {
 		unasPreferenciasAlimentarias.add(new Comida("frutas"))
 
 		Usuario2 = new Usuario(52, 1.64, Femenino, "Camila", fechaValida, new Rutina(20, true),
-			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Assert.assertTrue(Usuario2.sigoRutinaSaludable())
 
@@ -178,7 +192,7 @@ class Entrega1Tests {
 		condicionesPreexistentes2.add(new Vegano)
 		unasPreferenciasAlimentarias.add(new Comida("fideos"))
 		Usuario2 = new Usuario(52, 1.64, Masculino, "Miguel", fechaValida, new Rutina(61, false),
-			condicionesPreexistentes2, unasPreferenciasAlimentarias)
+			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Assert.assertFalse(Usuario2.sigoRutinaSaludable())
 
@@ -189,7 +203,7 @@ class Entrega1Tests {
 		condicionesPreexistentes.add(new Hipertenso)
 		unasPreferenciasAlimentarias.add(new Comida("manzana"))
 		Usuario = new Usuario(52, 1.64, Masculino, "JuanJose", fechaValida, new Rutina(61, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
+			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Assert.assertTrue(Usuario.sigoRutinaSaludable())
 
@@ -200,7 +214,7 @@ class Entrega1Tests {
 		condicionesPreexistentes2.add(new Hipertenso)
 		unasPreferenciasAlimentarias.add(new Comida("manzana"))
 		Usuario2 = new Usuario(52, 1.64, Femenino, "Daiana", fechaValida, new Rutina(20, true),
-			condicionesPreexistentes, unasPreferenciasAlimentarias)
+			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
 		Assert.assertFalse(Usuario2.sigoRutinaSaludable())
 
@@ -209,7 +223,7 @@ class Entrega1Tests {
 	//Punto 3: Hacer que un usuario agregue una receta
 	@Test
 	def void usuarioAgregaRecetaValida() {
-		Usuario.agregarReceta(RecetaValida)
+		Usuario.agregarReceta(RecetaPublica)
 
 	}
 
@@ -228,10 +242,8 @@ class Entrega1Tests {
 	@Test
 	def void quieroVerOModificarRecetaMiaYPuedo() { //Receta privada mia
 
-		RecetaValida.SetduenioReceta(Usuario)
-
-		Assert.assertEquals(true, Usuario.puedoVerReceta(RecetaValida))
-		Assert.assertEquals(true, Usuario.puedoModificarReceta(RecetaValida))
+		Assert.assertTrue(Usuario.puedoVerReceta(RecetaPrivada))
+		Assert.assertTrue(Usuario.puedoModificarReceta(RecetaPrivada))
 	}
 
 	@Test(expected=typeof(Exception))
@@ -244,16 +256,17 @@ class Entrega1Tests {
 	@Test
 	def void quieroVerOModificarRecetaPublica() { //Receta publica
 
-		Usuario.puedoVerReceta(RecetaPublica)
-		Usuario.puedoModificarReceta(RecetaPublica)
+		Assert.assertTrue(Usuario.puedoVerReceta(RecetaPublica))
+		Assert.assertTrue(Usuario.puedoModificarReceta(RecetaPublica))
 	}
 
 	//Punto 4: Modificar una receta
 	@Test
 	def void modificarUnaRecetaMia() { //Modificar receta mia
-
-		RecetaValida.SetduenioReceta(Usuario)
-		Usuario.modificarUnaReceta(RecetaValida, RecetaInvalida)
+		
+		
+		
+		Usuario.modificarUnaReceta(RecetaPrivada, RecetaValida)
 	}
 
 	@Test(expected=typeof(Exception))
@@ -265,7 +278,7 @@ class Entrega1Tests {
 	@Test
 	def void modificarRecetaPublica() { //Receta publica
 
-		Usuario.modificarUnaReceta(RecetaPublica, RecetaInvalida)
+		Usuario.modificarUnaReceta(RecetaPublica, RecetaValida)
 	}
 
 	//Punto 5: Poder crear una receta con subrecetas
