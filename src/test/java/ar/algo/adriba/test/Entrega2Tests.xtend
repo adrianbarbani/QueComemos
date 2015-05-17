@@ -144,9 +144,9 @@ class Entrega2Tests {
 
 	}
 
-	@Test //Deberiamos poner exception?
+	@Test (expected=typeof(Exception))
 	def void test2() {
-		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Usuario4))
+		RecetaValida.sePuedeSugerirA(Usuario4)
 
 	}
 
@@ -156,10 +156,10 @@ class Entrega2Tests {
 		Assert.assertTrue(RecetaValida.sePuedeSugerirA(Grupo1))
 	}
 
-	//Deberiamos poner exception?
-	@Test
+	
+	@Test (expected=typeof(Exception))
 	def void test4() {
-		Assert.assertFalse(RecetaValida.sePuedeSugerirA(Grupo2))
+		RecetaValida.sePuedeSugerirA(Grupo2)
 	}
 
 	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso

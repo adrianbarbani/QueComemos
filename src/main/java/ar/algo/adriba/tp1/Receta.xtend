@@ -8,8 +8,8 @@ import java.util.ArrayList
 public class Receta implements Cosas {
 
 	String nombreDelPlato
-	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas>
-	String explicacionDeLaPreparacion 
+	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas> 
+	String explicacionDeLaPreparacion
 	Usuario duenioReceta
 	int caloriasReceta
 	String dificultad
@@ -97,7 +97,11 @@ public class Receta implements Cosas {
 
 	//*********************ENTREGA 2***********************************************
 	def boolean sePuedeSugerirA(Persona unaPersona) {
-		unaPersona.aceptasSugerencia(this)
+		if (unaPersona.aceptasSugerencia(this) == true){
+			true
+		}else {
+			throw new Exception ("No se puede sugerir la receta a este usuario o grupo")
+		}
 	}
 
 	def caloriasMayorA(int i) {
