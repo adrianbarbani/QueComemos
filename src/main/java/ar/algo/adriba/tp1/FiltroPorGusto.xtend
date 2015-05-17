@@ -6,7 +6,7 @@ import java.util.List
 class FiltroPorGusto implements Filtro {
 	
 	override filtrar(List<Receta> recetas, Persona persona) {
-		recetas.filter[receta|receta.todosLosIngredientesLeGustanA(persona)].toList
+		recetas.filter[receta|persona.mePuedeGustar(receta)].toList
 	}
 	
 }

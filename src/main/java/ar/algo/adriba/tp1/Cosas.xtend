@@ -8,8 +8,6 @@ interface Cosas {
 	
 	def boolean tenesCarne()
 	
-	def int caloriasTotales()
-	
 	def boolean tenes(String unaCosa)
 	
 	def boolean unIngrediente()
