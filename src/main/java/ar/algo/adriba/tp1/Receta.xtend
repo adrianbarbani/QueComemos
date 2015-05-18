@@ -72,15 +72,12 @@ public class Receta implements Cosas {
 	// Constructor para recetas PRIVADAS
 	new(Receta unaReceta, Usuario unUsuario) {
 		this.setearValores(unaReceta)
-		this.tipo = new Privada(unUsuario)
-
+		this.tipo = new Privada(unUsuario, unaReceta)
+		RepositorioRecetas.getInstance().agregar(this)
 	}
 
 	new() {
-	}
-
-	def boolean sosPublica() {
-		tipo.sosPublica()
+		RepositorioRecetas.getInstance().agregar(this)
 	}
 
 	def boolean laPuedeModificar(Usuario usuario) {

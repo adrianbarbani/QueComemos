@@ -8,7 +8,7 @@ class FiltroDeCalorias implements Filtro {
 		if (persona.tieneSobrepeso()) {
 			recetas.filter[receta|receta.caloriasMenorA(500)].toList
 		} else {
-			recetas
+			recetas.toList
 		}
 
 	}

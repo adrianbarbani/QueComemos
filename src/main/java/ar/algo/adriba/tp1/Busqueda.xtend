@@ -29,7 +29,7 @@ class Busqueda {
 		repositorioDeRecetas.todasLasRecetas().filter[unaReceta|persona.puedoVerReceta(unaReceta)].toList
 	}
 
-	// este seria el busquedaPosta osea se testea con: busqueda.new(parametros) y busqueda.filtrar()
+	// busqueda posta
 	def List<Receta> filtrar() {
 
 		var List<Receta> todasLasRecetasQuePuedeVer = new ArrayList<Receta>

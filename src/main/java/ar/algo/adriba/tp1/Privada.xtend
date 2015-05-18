@@ -6,15 +6,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class Privada implements tipoReceta {
 
-	Usuario duenioReceta
+	//Usuario duenioReceta
 
-	new(Usuario unUsuario) {
-		duenioReceta = unUsuario
-	}
-
-	// ver si se esta usando
-	override sosPublica() {
-		false
+	new(Usuario unUsuario, Receta unaReceta) {
+		unUsuario.agregar(unaReceta)
 	}
 
 	override sePuedeSugerir() {
@@ -22,7 +17,7 @@ class Privada implements tipoReceta {
 	}
 
 	override tePuedeModificar(Receta unaReceta, Usuario usuario) {
-		this.esDuenio(usuario)
+		usuario.usuarioTiene(unaReceta)
 	}
 
 	override cambiarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones) {
@@ -30,11 +25,7 @@ class Privada implements tipoReceta {
 	}
 	
 	override mePuedeVer(Usuario unUsuario, Receta unaReceta) {
-		this.esDuenio(unUsuario) || unUsuario.alguienDelGrupoConoce(unaReceta)
+		unUsuario.usuarioTiene(unaReceta) || unUsuario.alguienDelGrupoConoce(unaReceta)
 		}
-	
-	def boolean esDuenio(Usuario usuario) {
-		duenioReceta.equals(usuario)
-	}
 
 }

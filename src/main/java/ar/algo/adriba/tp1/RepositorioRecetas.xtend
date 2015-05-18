@@ -31,4 +31,8 @@ public class RepositorioRecetas {
 		listarTodas.toList
 	}
 
+	def void limpiar() {
+		listarTodas.clear
+	}
+	
 }
