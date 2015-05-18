@@ -29,6 +29,7 @@ import java.util.List
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import ar.algo.adriba.tp1.Privada
 
 class TestsMarina {
 
@@ -49,7 +50,13 @@ class TestsMarina {
 	Receta pizza
 	Receta sopaDeVerdura
 	Receta pizzaDeVerdura
+	Receta lomoALaPlancha
+	Receta hummus
 
+	Comida garbanzos
+	Comida limon
+	Comida ajo
+	Comida lomo
 	Comida carne
 	Comida harina
 	Comida huevo
@@ -58,7 +65,7 @@ class TestsMarina {
 	Comida queso
 	Comida prepizza
 	Comida salsaDeTomate
-	Comida sal 
+	Comida sal
 	Comida salsaBlanca
 
 	List<String> comidasQueDisgustanConCarne = new ArrayList<String>
@@ -76,24 +83,17 @@ class TestsMarina {
 	List<CondicionPreexistente> unasCondicionesConDiabetes = new ArrayList<CondicionPreexistente>
 
 	Usuario usuarioVegano
-
 	Usuario usuarioConSobrePesoYDiabetesQueLeGustaLaCarne
-
 	Usuario usuarioHipertensoQueNoLeGustaElQueso
-
 	Usuario usuarioDiabeticoQueNoLeGustaLaCarne
 
 	GrupoDeUsuario grupoQueLeGustaQuesoYVerdura
-
 	GrupoDeUsuario grupoQueLeGustaFrutaYVerdura
-
 	GrupoDeUsuario grupoQueLeGustaCarneYQueso
-
 	GrupoDeUsuario grupoQueLeGustaCarneQuesoYVerdura
 
 	RepositorioRecetas stubRepositorioDeRecetas = RepositorioRecetas.getInstance()
 
-	List<Filtro> filtroVacio = new ArrayList<Filtro>
 	List<Filtro> filtroPorGusto = new ArrayList<Filtro>
 	List<Filtro> filtroDeCalorias = new ArrayList<Filtro>
 	List<Filtro> filtroDeCaloriasYGusto = new ArrayList<Filtro>
@@ -134,6 +134,10 @@ class TestsMarina {
 		salsaDeTomate = new Comida(20, "salsa de tomate", 50)
 		sal = new Comida(0, "sal", 0)
 		salsaBlanca = new Comida(50, "salsa blanca", 400)
+		lomo = new Comida(30, "lomo", 200)
+		garbanzos = new Comida(30, "garbanzos", 500)
+		limon = new Comida(1, "limon", 10)
+		ajo = new Comida(1, "ajo", 10)
 
 		milanesa = new Receta => [
 			tipo = new Publica
@@ -148,7 +152,10 @@ class TestsMarina {
 		milanesaNapolitana = new Receta => [
 			tipo = new Publica
 			setNombreDelPlato("Milanesa napolitana")
-			subRecetaseIngredientes.add(milanesa)
+			subRecetaseIngredientes.add(harina)
+			subRecetaseIngredientes.add(huevo)
+			subRecetaseIngredientes.add(panRallado)
+			subRecetaseIngredientes.add(carne)
 			subRecetaseIngredientes.add(queso)
 			subRecetaseIngredientes.add(salsaDeTomate)
 			caloriasReceta = 8000
@@ -174,17 +181,37 @@ class TestsMarina {
 		pizzaDeVerdura = new Receta => [
 			tipo = new Publica
 			setNombreDelPlato("Pizza de verdura y salsa blanca")
-			subRecetaseIngredientes.add(pizza)
+			subRecetaseIngredientes.add(prepizza)
+			subRecetaseIngredientes.add(salsaDeTomate)
+			subRecetaseIngredientes.add(queso)
 			subRecetaseIngredientes.add(salsaBlanca)
 			subRecetaseIngredientes.add(verdura)
 			caloriasReceta = 400
 		]
+
+		lomoALaPlancha = new Receta => [
+			tipo = new Publica
+			setNombreDelPlato("Lomo a la Plancha")
+			subRecetaseIngredientes.add(lomo)
+			caloriasReceta = 300
+		]
+/*
+		hummus = new Receta => [
+			tipo = new Privada(usuarioVegano)
+			setNombreDelPlato("Hummus de garbanzo")
+			subRecetaseIngredientes.add(garbanzos)
+			subRecetaseIngredientes.add(limon)
+			subRecetaseIngredientes.add(ajo)
+			caloriasReceta = 450
+		] */
 
 		stubRepositorioDeRecetas.agregar(milanesa)
 		stubRepositorioDeRecetas.agregar(milanesaNapolitana)
 		stubRepositorioDeRecetas.agregar(sopaDeVerdura)
 		stubRepositorioDeRecetas.agregar(pizza)
 		stubRepositorioDeRecetas.agregar(pizzaDeVerdura)
+		stubRepositorioDeRecetas.agregar(lomoALaPlancha)
+		//stubRepositorioDeRecetas.agregar(hummus)
 
 		unasPreferenciasConCarne.add("carne")
 		unasPreferenciasConCarneQuesoYVerdura.add("carne")
@@ -196,8 +223,10 @@ class TestsMarina {
 		unasPreferenciasConFrutayVerdura.add("verdura")
 		unasPreferenciasConCarneYQueso.add("queso")
 		unasPreferenciasConCarneYQueso.add("carne")
+
 		comidasQueDisgustanConQueso.add("queso")
 		comidasQueDisgustanConCarne.add("carne")
+
 		unasCondicionesConVeganismo.add(new Vegano)
 		unasCondicionesConHipertension.add(new Hipertenso)
 		unasCondicionesConHipertensionYVeganismo.add(new Hipertenso)
@@ -300,10 +329,27 @@ class TestsMarina {
 
 	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso
 	@Test
-	def void test5() {
-		Assert.assertTrue(new Busqueda(filtroVacio, usuarioVegano).filtrar().contains(sopaDeVerdura))
+	def void test555() {
+		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(milanesa))
+		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(milanesaNapolitana))
+		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(sopaDeVerdura))
+		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(pizza))
+		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(pizzaDeVerdura))
+		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(lomoALaPlancha))
+	//	usuarioVegano.agregar(hummus)
 	}
 
+	/*
+	@Test
+	def void test51155() {
+	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(milanesa))
+	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(milanesaNapolitana))
+	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(sopaDeVerdura))
+	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(pizza))
+	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(lomoALaPlancha))
+	Assert.assertFalse(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(hummus))
+	} */
+	
 	@Test
 	def void test533() {
 		Assert.assertTrue(new Busqueda(filtroPorGusto, usuarioVegano).filtrar().contains(sopaDeVerdura))
@@ -311,16 +357,43 @@ class TestsMarina {
 
 	@Test
 	def void test53233() {
-		Assert.assertTrue(new Busqueda(filtroDeCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().contains(milanesaNapolitana)) // VER POR QUE NO ANDA ESTE FILTRO
+		Assert.assertFalse(new Busqueda(filtroPorGusto, usuarioVegano).filtrar().contains(milanesa)) // VER POR QUE NO ANDA ESTE FILTRO
+	}
+
+	@Test
+	def void test4754() {
+		Assert.assertFalse(
+			new Busqueda(filtroDeCalorias, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).filtrar().contains(
+				milanesaNapolitana))
+	}
+
+	@Test
+	def void test43754() {
+		Assert.assertFalse(
+			new Busqueda(filtroDeCaloriasYGusto, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).filtrar().
+				contains(milanesaNapolitana))
+		Assert.assertFalse(
+			new Busqueda(filtroDeCaloriasYGusto, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).filtrar().
+				contains(pizza))
+	}
+
+	@Test
+	def void test4373354() {
+		Assert.assertFalse(
+			new Busqueda(filtroDeIngredientesCarosYCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().contains(milanesaNapolitana))
+		Assert.assertFalse(
+			new Busqueda(filtroDeIngredientesCarosYCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().
+				contains(lomoALaPlancha))
+		Assert.assertTrue(
+			new Busqueda(filtroDeIngredientesCarosYCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().
+				contains(sopaDeVerdura))
 	}
 
 	//Punto 3:	Agregar receta a favoritos
 	@Test
 	def void test6() {
-		/*
-		Assert.assertEquals(0, Usuario.recetasFavoritas.size)
-		Usuario.marcarComoFavorita(RecetaValida)
-		Assert.assertEquals(1, Usuario.recetasFavoritas.size)
-*/
+		usuarioVegano.marcarComoFavorita(sopaDeVerdura)
+		Assert.assertTrue(usuarioVegano.recetasFavoritas.contains(sopaDeVerdura))
 	}
+
 }

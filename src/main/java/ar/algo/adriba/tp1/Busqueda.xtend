@@ -13,11 +13,15 @@ class Busqueda {
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden) {
 		filtros = unosFiltros
 		persona = unaPersona
-		orden = unOrden 
+		orden = unOrden
 	}
-	
-		new(List<Filtro> unosFiltros, Persona unaPersona) {
+
+	new(List<Filtro> unosFiltros, Persona unaPersona) {
 		filtros = unosFiltros
+		persona = unaPersona
+	}
+
+	new(Persona unaPersona) {
 		persona = unaPersona
 	}
 
@@ -35,8 +39,7 @@ class Busqueda {
 		if (!(filtros.empty)) {
 			todasLasRecetasQuePuedeVer = this.pasarPorFiltros(todasLasRecetasQuePuedeVer)
 		}
-		
-		
+
 		this.mostrar(todasLasRecetasQuePuedeVer)
 	}
 
@@ -45,11 +48,12 @@ class Busqueda {
 	}
 
 	def List<Receta> mostrar(List<Receta> unasRecetas) {
-		if(orden != null) {
-		orden.ordenar(unasRecetas)
-		} else
-		{ unasRecetas }
-		
+		if (orden != null) {
+			orden.ordenar(unasRecetas)
+		} else {
+			unasRecetas
+		}
+
 	}
 
 }

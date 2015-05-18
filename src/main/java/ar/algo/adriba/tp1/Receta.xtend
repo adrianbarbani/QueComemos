@@ -97,22 +97,18 @@ public class Receta implements Cosas {
 
 	//*********************ENTREGA 2***********************************************
 	def boolean sePuedeSugerirA(Persona unaPersona) {
-		if (unaPersona.aceptasSugerencia(this) == true){
-			true
-		}else {
-			throw new Exception ("No se puede sugerir la receta a este usuario o grupo")
-		}
+		unaPersona.aceptasSugerencia(this)
 	}
 
-	def caloriasMayorA(int i) {
-		caloriasReceta > i
+	def boolean caloriasMenorA(int i) {
+		caloriasReceta < i
 	}
 
 	override nombre() {
 		nombreDelPlato
 	}
 
-	def noTieneIngredientesCaros() {
+	def boolean noTieneIngredientesCaros() {
 		!(subRecetaseIngredientes.exists[cosas|cosas.esCaro])
 	}
 

@@ -147,8 +147,7 @@ class Usuario extends Persona {
 
 	// Un usuario puede ver una receta si es de el, si es publica, o si es de alguien de su/s grupo/s
 	override puedoVerReceta(Receta unaReceta) {
-
-		unaReceta.tePuedeVer(this)
+		unaReceta.tePuedeVer(this) || this.alguienDelGrupoConoce(unaReceta) 
 	}
 
 	// Chequea si el usuario tiene una receta en su colección
@@ -198,7 +197,7 @@ class Usuario extends Persona {
 		}
 	}
 
-	def boolean tieneSobrePeso() {
+	override tieneSobrepeso() {
 		this.imc() > 30
 	}
 

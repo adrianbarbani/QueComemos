@@ -21,7 +21,7 @@ class GrupoDeUsuario extends Persona {
 
 	
 	def boolean integranteEsDuenio(Receta receta) {
-		integrantes.exists[usuario|usuario.usuarioTiene(receta)]
+		integrantes.exists[usuario|receta.tePuedeVer(usuario)]
 	}
 	
 
@@ -51,7 +51,7 @@ class GrupoDeUsuario extends Persona {
 		integrantes.fold(0.0, [acum, integrante|acum + integrante.imc]) // ver
 	}
 	
-	def boolean tieneSobrePeso(){		
+	override tieneSobrepeso(){		
     this.imcPromedio() > 30
 	}
 	

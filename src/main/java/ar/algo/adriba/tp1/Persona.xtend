@@ -11,6 +11,8 @@ abstract class Persona {
 	def boolean esAptaParaMi(Receta unaReceta)
 
 	def boolean puedoVerReceta(Receta receta)
+	
+	def boolean tieneSobrepeso()
 
 	
 

@@ -33,7 +33,7 @@ class Privada implements tipoReceta {
 		this.esDuenio(unUsuario) || unUsuario.alguienDelGrupoConoce(unaReceta)
 		}
 	
-	def esDuenio(Usuario usuario) {
+	def boolean esDuenio(Usuario usuario) {
 		duenioReceta.equals(usuario)
 	}
 
