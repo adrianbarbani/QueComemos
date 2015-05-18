@@ -13,7 +13,7 @@ class Usuario extends Persona {
 	String nombre
 	Fecha fechaDeNacimiento
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
-	List<Comida> preferenciasAlimentarias = new ArrayList<Comida>
+	List<String> preferenciasAlimentarias = new ArrayList<String>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
@@ -24,7 +24,7 @@ class Usuario extends Persona {
 
 	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
 	new(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
-		List<CondicionPreexistente> unasCondicionesPreexistentes, List<Comida> unasPreferenciasAlimentarias,
+		List<CondicionPreexistente> unasCondicionesPreexistentes, List<String> unasPreferenciasAlimentarias,
 		List<String> unasComidasQueLeDisgustan) {
 
 		this => [
@@ -201,17 +201,6 @@ class Usuario extends Persona {
 	def boolean tieneSobrePeso() {
 		this.imc() > 30
 	}
-
-/* Boletear 
-	// este no hace lo mismo que "esAptaParaMi"? ver lo mismo en GrupoUsuario
-	override aceptaTusCondiciones(Receta receta) {
-		!(condicionesPreexistentes.exists[condicion|receta.noEsAptaParaEsta(condicion)]) //si para alguna condicion no es apta no acepta las condiciones 
-	}
-
-	// este no hace lo mismo que "mePuedeGustar"? ver lo mismo en GrupoUsuario
-	override teDisgustaUna(Cosas cosas) {
-		comidaQueLeDisgusta.exists[comida|comida == cosas.nombre]
-	} */
 
 }
 	

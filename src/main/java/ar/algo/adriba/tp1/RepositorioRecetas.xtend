@@ -4,14 +4,15 @@ import java.util.List
 import java.util.ArrayList
 
 public class RepositorioRecetas {
-	List<Receta> listarTodas = new ArrayList
+	
+	public List<Receta> listarTodas = new ArrayList<Receta>
 
 	static RepositorioRecetas repositorio = null
 
 	private new() {
 	}
 
-	static def RepositorioRecetas getInstance() {
+	static public def RepositorioRecetas getInstance() {
 		if (repositorio == null) {
 			repositorio = new RepositorioRecetas()
 		}
@@ -27,7 +28,7 @@ public class RepositorioRecetas {
 	}
 
 	def List<Receta> todasLasRecetas() {
-		listarTodas
+		listarTodas.toList
 	}
 
 }
