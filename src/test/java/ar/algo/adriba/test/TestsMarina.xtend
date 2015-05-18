@@ -30,6 +30,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import ar.algo.adriba.tp1.Privada
+import ar.algo.adriba.tp1.FiltroCondicionesPreexistentes
 
 class TestsMarina {
 
@@ -76,12 +77,16 @@ class TestsMarina {
 	List<String> unasPreferenciasConFrutayVerdura = new ArrayList<String>
 	List<String> unasPreferenciasConCarneYQueso = new ArrayList<String>
 	List<String> unasPreferenciasConCarne = new ArrayList<String>
+	List<String> unasPreferenciasVacias = new ArrayList<String>
 
 	List<CondicionPreexistente> unasCondicionesConVeganismo = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesConHipertension = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesConHipertensionYVeganismo = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesConDiabetes = new ArrayList<CondicionPreexistente>
+	List<CondicionPreexistente> unasCondicionesVacias = new ArrayList<CondicionPreexistente>
+	
 
+	Usuario usuarioSinCondiciones
 	Usuario usuarioVegano
 	Usuario usuarioConSobrePesoYDiabetesQueLeGustaLaCarne
 	Usuario usuarioHipertensoQueNoLeGustaElQueso
@@ -99,6 +104,7 @@ class TestsMarina {
 	List<Filtro> filtroDeCaloriasYGusto = new ArrayList<Filtro>
 	List<Filtro> filtroDeIngredientesCaros = new ArrayList<Filtro>
 	List<Filtro> filtroDeIngredientesCarosYCalorias = new ArrayList<Filtro>
+	List<Filtro> filtroCondicionesPreexistentes = new ArrayList<Filtro>
 
 	Ordenamiento mostrarLosPrimerosDiez
 	Ordenamiento mostrarResultadosPares
@@ -211,6 +217,7 @@ class TestsMarina {
 		hummus.setTipo = new Privada
 		usuarioVegano.agregar(hummus)
 		*/
+		
 		unasPreferenciasConCarne.add("carne")
 		unasPreferenciasConCarneQuesoYVerdura.add("carne")
 		unasPreferenciasConCarneQuesoYVerdura.add("queso")
@@ -231,6 +238,9 @@ class TestsMarina {
 		unasCondicionesConHipertensionYVeganismo.add(new Vegano)
 		unasCondicionesConDiabetes.add(new Diabetico)
 
+		usuarioSinCondiciones = new Usuario(52, 1.64, Femenino, "Esteban", fechaValida, new Rutina(61, true),
+			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
+		
 		usuarioVegano = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
 			unasCondicionesConVeganismo, unasPreferenciasConFrutayVerdura, comidasQueDisgustanConCarne)
 
@@ -275,6 +285,8 @@ class TestsMarina {
 
 		filtroDeIngredientesCarosYCalorias.add(new FiltroDeCalorias)
 
+		filtroCondicionesPreexistentes.add(new FiltroCondicionesPreexistentes)
+		
 		mostrarLosPrimerosDiez = new MostrarLosPrimerosDiez
 		mostrarResultadosPares = new MostrarResultadosPares
 		compararPorCalorias = new CompararPorCalorias
@@ -375,6 +387,29 @@ class TestsMarina {
 	}
 
 	@Test
+	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYOrdenamosRecetasPorNombre(){
+		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorNombre).filtrar().size == 6)	
+		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorNombre).filtrar().get(0).equals(lomoALaPlancha))	
+		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorNombre).filtrar().get(5).equals(sopaDeVerdura))		
+	}
+
+	@Test
+	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYOrdenamosRecetasPorCalorias(){
+		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorCalorias).filtrar().get(0).equals(sopaDeVerdura))	
+		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorCalorias).filtrar().get(5).equals(milanesaNapolitana))		
+	}
+	
+	@Test
+	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYMostramosResultadosPares(){
+		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, mostrarResultadosPares).filtrar().size == 3)		
+	}
+	
+	@Test
+	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYMostramosLosPrimerosDiezResultados(){
+		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, mostrarLosPrimerosDiez).filtrar().size <= 10)		
+	}
+	
+	@Test
 	def void busquedaConfiltroDeIngredientesCarosYCaloriasParaUnGrupoConSobrePeso() {
 		Assert.assertFalse(
 			new Busqueda(filtroDeIngredientesCarosYCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().contains(milanesaNapolitana))
@@ -384,6 +419,5 @@ class TestsMarina {
 			new Busqueda(filtroDeIngredientesCarosYCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().contains(sopaDeVerdura))
 	}
 
- // Falta testear los ordenamientos
  
 }
