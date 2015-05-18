@@ -23,8 +23,8 @@ class Entrega1Tests {
 
 	Fecha fechaValida
 	Fecha fechaInvalida
-	List<Comida> unasPreferenciasAlimentarias = new ArrayList<Comida>
-	List<Comida> unasPreferenciasAlimentarias2 = new ArrayList<Comida>
+	List<String> unasPreferenciasAlimentarias = new ArrayList<String>
+	List<String> unasPreferenciasAlimentarias2 = new ArrayList<String>
 	List<CondicionPreexistente> unasCondicionesPreexistentesConHipertension = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesConVeganismo = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
@@ -72,7 +72,7 @@ class Entrega1Tests {
 		unasCondicionesPreexistentesConVeganismo.add(new Vegano)
 
 		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias2.add(new Comida("manzana"))
+		unasPreferenciasAlimentarias2.add("manzana")
 
 		Usuario = new Usuario(52, 1.64, Masculino, "JuanJose", fechaValida, new Rutina(61, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias2, comidasQueDisgustan1)
@@ -143,7 +143,7 @@ class Entrega1Tests {
 	@Test
 	def void diabeticoSigueRutinaValida() {
 		condicionesPreexistentes2.add(new Diabetico)
-		unasPreferenciasAlimentarias.add(new Comida("chori"))
+		unasPreferenciasAlimentarias.add("chori")
 
 		Usuario2 = new Usuario(52, 1.64, Masculino, "Adrian", fechaValida, new Rutina(40, true),
 			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
@@ -155,7 +155,7 @@ class Entrega1Tests {
 	@Test
 	def void diabeticoSigueRutinaInvalidaPeroTienePesoBajo() {
 		condicionesPreexistentes2.add(new Diabetico)
-		unasPreferenciasAlimentarias.add(new Comida("pescado"))
+		unasPreferenciasAlimentarias.add("pescado")
 
 		Usuario2 = new Usuario(52, 1.64, Masculino, "Josecito", fechaValida, new Rutina(35, false),
 			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
@@ -167,7 +167,7 @@ class Entrega1Tests {
 	@Test
 	def void diabeticoSigueRutinaInvalidayTienePesoAlto() {
 		condicionesPreexistentes2.add(new Diabetico)
-		unasPreferenciasAlimentarias.add(new Comida("pescado"))
+		unasPreferenciasAlimentarias.add("pescado")
 
 		Usuario2 = new Usuario(102, 1.64, Masculino, "Josecito", fechaValida, new Rutina(35, false),
 			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
@@ -178,7 +178,7 @@ class Entrega1Tests {
 	@Test
 	def void veganoSigueRutinaValida() {
 		condicionesPreexistentes2.add(new Vegano)
-		unasPreferenciasAlimentarias.add(new Comida("frutas"))
+		unasPreferenciasAlimentarias.add("frutas")
 
 		Usuario2 = new Usuario(52, 1.64, Femenino, "Camila", fechaValida, new Rutina(20, true),
 			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
@@ -190,7 +190,7 @@ class Entrega1Tests {
 	@Test
 	def void veganoSigueRutinaInvalida() {
 		condicionesPreexistentes2.add(new Vegano)
-		unasPreferenciasAlimentarias.add(new Comida("fideos"))
+		unasPreferenciasAlimentarias.add("fideos")
 		Usuario2 = new Usuario(52, 1.64, Masculino, "Miguel", fechaValida, new Rutina(61, false),
 			condicionesPreexistentes2, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
@@ -201,7 +201,7 @@ class Entrega1Tests {
 	@Test
 	def void hipertensoSigueRutinaValida() {
 		condicionesPreexistentes.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Comida("manzana"))
+		unasPreferenciasAlimentarias.add("manzana")
 		Usuario = new Usuario(52, 1.64, Masculino, "JuanJose", fechaValida, new Rutina(61, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
@@ -212,7 +212,7 @@ class Entrega1Tests {
 	@Test
 	def void hipertensoSigueRutinaInvalida() {
 		condicionesPreexistentes2.add(new Hipertenso)
-		unasPreferenciasAlimentarias.add(new Comida("manzana"))
+		unasPreferenciasAlimentarias.add("manzana")
 		Usuario2 = new Usuario(52, 1.64, Femenino, "Daiana", fechaValida, new Rutina(20, true),
 			condicionesPreexistentes, unasPreferenciasAlimentarias, comidasQueDisgustan1)
 
