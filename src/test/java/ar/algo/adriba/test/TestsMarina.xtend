@@ -147,7 +147,44 @@ class TestsMarina {
 		limon = new Comida(1, "limon", 10)
 		ajo = new Comida(1, "ajo", 10)
 
-		milanesa = new Receta => [
+		unasPreferenciasConCarne.add("carne")
+		unasPreferenciasConCarneQuesoYVerdura.add("carne")
+		unasPreferenciasConCarneQuesoYVerdura.add("queso")
+		unasPreferenciasConCarneQuesoYVerdura.add("verdura")
+		unasPreferenciasConQuesoYVerdura.add("queso")
+		unasPreferenciasConQuesoYVerdura.add("verdura")
+		unasPreferenciasConFrutayVerdura.add("fruta")
+		unasPreferenciasConFrutayVerdura.add("verdura")
+		unasPreferenciasConCarneYQueso.add("queso")
+		unasPreferenciasConCarneYQueso.add("carne")
+
+		comidasQueDisgustanConQueso.add("queso")
+		comidasQueDisgustanConCarne.add("carne")
+
+		unasCondicionesConVeganismo.add(new Vegano)
+		unasCondicionesConHipertension.add(new Hipertenso)
+		unasCondicionesConHipertensionYVeganismo.add(new Hipertenso)
+		unasCondicionesConHipertensionYVeganismo.add(new Vegano)
+		unasCondicionesConDiabetes.add(new Diabetico)
+
+		usuarioSinCondiciones = new Usuario(52, 1.64, Femenino, "Esteban", fechaValida, new Rutina(61, true),
+			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
+		
+		usuarioVegano = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
+			unasCondicionesConVeganismo, unasPreferenciasConFrutayVerdura, comidasQueDisgustanConCarne)
+
+		usuarioHipertensoQueNoLeGustaElQueso = new Usuario(67, 1.91, Masculino, "Adrian", fechaValida,
+			new Rutina(74, true), unasCondicionesConHipertension, unasPreferenciasConCarneYQueso,
+			comidasQueDisgustanConQueso)
+
+		usuarioDiabeticoQueNoLeGustaLaCarne = new Usuario(80, 1.74, Masculino, "Federico", fechaValida,
+			new Rutina(82, true), unasCondicionesConDiabetes, unasPreferenciasConQuesoYVerdura,
+			comidasQueDisgustanConCarne)
+
+		usuarioConSobrePesoYDiabetesQueLeGustaLaCarne = new Usuario(1500, 1.44, Masculino, "Juan Pedro", fechaValida,
+			new Rutina(10, true), unasCondicionesConDiabetes, unasPreferenciasConCarne, comidasQueDisgustanConQueso)
+
+			milanesa = new Receta => [
 			tipo = new Publica
 			setNombreDelPlato("Milanesas")
 			subRecetaseIngredientes.add(harina)
@@ -204,8 +241,9 @@ class TestsMarina {
 			caloriasReceta = 300
 		]
 
-		/*
+		
 		 hummus = new Receta => [
+		 	tipo = new Privada(usuarioVegano, hummus)
 			setNombreDelPlato("Hummus de garbanzo")
 			subRecetaseIngredientes.add(garbanzos)
 			subRecetaseIngredientes.add(limon)
@@ -213,48 +251,6 @@ class TestsMarina {
 			caloriasReceta = 450
 		]
 		
-		
-		hummus.setTipo = new Privada
-		usuarioVegano.agregar(hummus)
-		*/
-		
-		unasPreferenciasConCarne.add("carne")
-		unasPreferenciasConCarneQuesoYVerdura.add("carne")
-		unasPreferenciasConCarneQuesoYVerdura.add("queso")
-		unasPreferenciasConCarneQuesoYVerdura.add("verdura")
-		unasPreferenciasConQuesoYVerdura.add("queso")
-		unasPreferenciasConQuesoYVerdura.add("verdura")
-		unasPreferenciasConFrutayVerdura.add("fruta")
-		unasPreferenciasConFrutayVerdura.add("verdura")
-		unasPreferenciasConCarneYQueso.add("queso")
-		unasPreferenciasConCarneYQueso.add("carne")
-
-		comidasQueDisgustanConQueso.add("queso")
-		comidasQueDisgustanConCarne.add("carne")
-
-		unasCondicionesConVeganismo.add(new Vegano)
-		unasCondicionesConHipertension.add(new Hipertenso)
-		unasCondicionesConHipertensionYVeganismo.add(new Hipertenso)
-		unasCondicionesConHipertensionYVeganismo.add(new Vegano)
-		unasCondicionesConDiabetes.add(new Diabetico)
-
-		usuarioSinCondiciones = new Usuario(52, 1.64, Femenino, "Esteban", fechaValida, new Rutina(61, true),
-			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
-		
-		usuarioVegano = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
-			unasCondicionesConVeganismo, unasPreferenciasConFrutayVerdura, comidasQueDisgustanConCarne)
-
-		usuarioHipertensoQueNoLeGustaElQueso = new Usuario(67, 1.91, Masculino, "Adrian", fechaValida,
-			new Rutina(74, true), unasCondicionesConHipertension, unasPreferenciasConCarneYQueso,
-			comidasQueDisgustanConQueso)
-
-		usuarioDiabeticoQueNoLeGustaLaCarne = new Usuario(80, 1.74, Masculino, "Federico", fechaValida,
-			new Rutina(82, true), unasCondicionesConDiabetes, unasPreferenciasConQuesoYVerdura,
-			comidasQueDisgustanConCarne)
-
-		usuarioConSobrePesoYDiabetesQueLeGustaLaCarne = new Usuario(1500, 1.44, Masculino, "Juan Pedro", fechaValida,
-			new Rutina(10, true), unasCondicionesConDiabetes, unasPreferenciasConCarne, comidasQueDisgustanConQueso)
-
 		integrantesVeganoEHipertenso.add(usuarioVegano)
 		integrantesVeganoEHipertenso.add(usuarioHipertensoQueNoLeGustaElQueso)
 		integrantesDiabeticoEHipertenso.add(usuarioDiabeticoQueNoLeGustaLaCarne)
@@ -338,9 +334,10 @@ class TestsMarina {
 	}
 
 	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso, acá se me rompe todo con la receta privada de "hummus"
-	/*
+	
 	@Test
 	def void usuarioVeganoPuedeVerRecetasPublicasYSuRecetaPrivada() {
+		usuarioVegano.agregar(hummus)
 		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(milanesa))
 		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(milanesaNapolitana))
 		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(sopaDeVerdura))
@@ -348,7 +345,6 @@ class TestsMarina {
 		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(pizzaDeVerdura))
 		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(lomoALaPlancha))
 		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(hummus))
-
 	}
 	
 	@Test
@@ -359,7 +355,7 @@ class TestsMarina {
 	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(pizza))
 	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(lomoALaPlancha))
 	Assert.assertFalse(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(hummus))
-	} */
+	} 
 	
 	//Punto 3:	Agregar receta a favoritos
 	@Test
