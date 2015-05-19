@@ -5,6 +5,10 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 //http://yuml.me/edit/9f1e3245 - nuevo diagrama -- 
+
+//http://yuml.me/edit/683518e6
+
+// strategy --- http://yuml.me/edit/6902476b
 @Accessors
 class Usuario extends Persona {
 	int peso
