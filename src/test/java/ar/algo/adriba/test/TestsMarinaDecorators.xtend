@@ -276,15 +276,15 @@ class TestsMarina {
 	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso
 	@Test
 	def void usuarioVeganoPuedeVerRecetasPublicasYsuRecetaPrivada() {
-		usuarioVegano.agregar(hummus)
+		usuarioVegano.agregarReceta(hummus)
 		busqueda = new BusquedaPosta(usuarioVegano)
-		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(milanesa))
-		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(milanesaNapolitana))
-		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(sopaDeVerdura))
-		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(pizza))
-		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(pizzaDeVerdura))
-		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(lomoALaPlancha))
-		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(hummus))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioVegano).contains(milanesa))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioVegano).contains(milanesaNapolitana))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioVegano).contains(sopaDeVerdura))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioVegano).contains(pizza))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioVegano).contains(pizzaDeVerdura))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioVegano).contains(lomoALaPlancha))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioVegano).contains(hummus))
 	}
 
 	@Test
