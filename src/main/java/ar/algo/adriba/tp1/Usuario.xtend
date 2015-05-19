@@ -9,6 +9,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 //http://yuml.me/edit/683518e6
 
 // strategy --- http://yuml.me/edit/6902476b
+// decorator ---- http://yuml.me/edit/bc2d9244
 @Accessors
 class Usuario extends Persona {
 	int peso
