@@ -1,9 +1,13 @@
 package ar.algo.adriba.test
 
+import ar.algo.adriba.tp1.Celiaco
+import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Diabetico
 import ar.algo.adriba.tp1.Fecha
 import ar.algo.adriba.tp1.Hipertenso
+import ar.algo.adriba.tp1.Publica
+import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Rutina
 import ar.algo.adriba.tp1.Sexo
 import ar.algo.adriba.tp1.Usuario
@@ -13,11 +17,6 @@ import java.util.List
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.Celiaco
-import ar.algo.adriba.tp1.Comida
-import ar.algo.adriba.tp1.Publica
-import ar.algo.adriba.tp1.Privada
 
 class Entrega1Tests {
 
