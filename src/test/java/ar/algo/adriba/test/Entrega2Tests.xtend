@@ -27,7 +27,7 @@ class Entrega2Tests {
 
 	Fecha fechaValida
 	Fecha fechaInvalida
-	List<Comida> unasPreferenciasAlimentarias = new ArrayList<Comida>
+	List<String> unasPreferenciasAlimentarias = new ArrayList<String>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesPreexistentesCompletas = new ArrayList<CondicionPreexistente>
 	List<String> preferenciasAlimenticiasGrupal1 = new ArrayList<String>
@@ -87,7 +87,7 @@ class Entrega2Tests {
 		panRallado = new Comida(12, "pan rallado", 50)
 
 		condicionesPreexistentes.add(new Diabetico)
-		unasPreferenciasAlimentarias.add(huevo)
+		unasPreferenciasAlimentarias.add("huevo")
 		comidasQueDisgustan1.add("verdura")
 		comidasQueDisgustan2.add("carne")
 
