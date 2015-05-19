@@ -25,6 +25,12 @@ import java.util.List
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import ar.algo.adriba.tp1.Busqueda
+import ar.algo.adriba.tp1.FiltroCondicionesPreexistentes
+import ar.algo.adriba.tp1.BusquedaPosta
+import ar.algo.adriba.tp1.FiltroPorGusto
+import ar.algo.adriba.tp1.FiltroDeCalorias
+import ar.algo.adriba.tp1.FiltroDeIngredientesCaros
 
 class TestsMarina {
 
@@ -96,6 +102,8 @@ class TestsMarina {
 	Ordenamiento mostrarResultadosPares
 	Ordenamiento compararPorCalorias
 	Ordenamiento compararPorNombre
+
+	Busqueda busqueda
 
 	@Before
 	def void init() {
@@ -260,7 +268,6 @@ class TestsMarina {
 	}
 
 	//Punto 1: Averiguar si una receta se puede sugerir a un usuario
-
 	@Test
 	def void milanesaNoSePuedeSugerirAlVeganoPorquetieneCarne() {
 		Assert.assertFalse(milanesa.sePuedeSugerirA(usuarioVegano))
@@ -303,29 +310,32 @@ class TestsMarina {
 		Assert.assertTrue(milanesaNapolitana.sePuedeSugerirA(grupoQueLeGustaCarneYQueso))
 	}
 
-//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso, acá se me rompe todo con la receta privada de "hummus"
-/*
+	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso
 	@Test
-	def void usuarioVeganoPuedeVerRecetasPublicasYSuRecetaPrivada() {
-		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(milanesa))
-		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(milanesaNapolitana))
-		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(sopaDeVerdura))
-		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(pizza))
-		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(pizzaDeVerdura))
-		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(lomoALaPlancha))
-		Assert.assertTrue(new Busqueda(usuarioVegano).filtrar().contains(hummus))
-
+	def void usuarioVeganoPuedeVerRecetasPublicasYsuRecetaPrivada() {
+		usuarioVegano.agregar(hummus)
+		busqueda = new BusquedaPosta(usuarioVegano)
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(milanesa))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(milanesaNapolitana))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(sopaDeVerdura))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(pizza))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(pizzaDeVerdura))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(lomoALaPlancha))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(hummus))
 	}
-	
+
 	@Test
 	def void otroUsuarioPuedeVerSoloLasPublicasPorqueNoTienePrivadas() {
-	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(milanesa))
-	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(milanesaNapolitana))
-	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(sopaDeVerdura))
-	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(pizza))
-	Assert.assertTrue(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(lomoALaPlancha))
-	Assert.assertFalse(new Busqueda(usuarioHipertensoQueNoLeGustaElQueso).filtrar().contains(hummus))
-	} 
+		busqueda = new BusquedaPosta(usuarioSinCondiciones)
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(milanesa))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(milanesaNapolitana))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(sopaDeVerdura))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(pizza))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(pizzaDeVerdura))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).contains(lomoALaPlancha))
+		Assert.assertFalse(busqueda.doFiltrar(usuarioSinCondiciones).contains(hummus))
+	}
+
 	//Punto 3:	Agregar receta a favoritos
 	@Test
 	def void unVeganoMarcaLaSopaComoFavorita() {
@@ -336,51 +346,61 @@ class TestsMarina {
 	//Punto 4: Resolver los filtros y el manejo de resultados mediante Strategies
 	@Test
 	def void busquedaPorGustoParaElVegano() {
-		Assert.assertTrue(new Busqueda(filtroPorGusto, usuarioVegano).filtrar().contains(sopaDeVerdura))
-		Assert.assertFalse(new Busqueda(filtroPorGusto, usuarioVegano).filtrar().contains(milanesa))
+		busqueda = new FiltroPorGusto(new BusquedaPosta(usuarioVegano))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioVegano).contains(sopaDeVerdura))
+		Assert.assertFalse(busqueda.doFiltrar(usuarioVegano).contains(milanesa))
 	}
 
 	@Test
 	def void busquedaConFiltroDeCaloriasYUnUsuarioConSobrePesoDejaAfueraLaMilaNapolitana() {
-		Assert.assertFalse(new Busqueda(filtroDeCalorias, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).filtrar().contains(milanesaNapolitana))
+		busqueda = new FiltroDeCalorias(new BusquedaPosta(usuarioVegano))
+		Assert.assertFalse(
+			busqueda.doFiltrar(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).contains(milanesaNapolitana))
 	}
 
 	@Test
 	def void busquedaConFiltroDeCaloriasYGustoParaUnUsuarioConSobrePesoDejaAfueraLaMilaNapolitanaYLaPizzaDeVerdura() {
-		Assert.assertFalse(new Busqueda(filtroDeCaloriasYGusto, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).filtrar().contains(milanesaNapolitana))
-		Assert.assertFalse(new Busqueda(filtroDeCaloriasYGusto, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).filtrar().contains(pizzaDeVerdura))
+		busqueda = new FiltroDeCalorias(new FiltroPorGusto(new BusquedaPosta(usuarioVegano)))
+		Assert.assertFalse(
+			busqueda.doFiltrar(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).contains(milanesaNapolitana))
+		Assert.assertFalse(busqueda.doFiltrar(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne).contains(pizzaDeVerdura))
 	}
 
 	@Test
-	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYOrdenamosRecetasPorNombre(){
-		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorNombre).filtrar().size == 6)	
-		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorNombre).filtrar().get(0).equals(lomoALaPlancha))	
-		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorNombre).filtrar().get(5).equals(sopaDeVerdura))		
+	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYOrdenamosRecetasPorNombre() {
+
+		busqueda = new FiltroCondicionesPreexistentes(new BusquedaPosta(usuarioSinCondiciones, compararPorNombre))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).size == 6)
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).get(0).equals(lomoALaPlancha))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).get(5).equals(sopaDeVerdura))
 	}
 
 	@Test
-	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYOrdenamosRecetasPorCalorias(){
-		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorCalorias).filtrar().get(0).equals(sopaDeVerdura))	
-		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, compararPorCalorias).filtrar().get(5).equals(milanesaNapolitana))		
+	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYOrdenamosRecetasPorCalorias() {
+		busqueda = new FiltroCondicionesPreexistentes(new BusquedaPosta(usuarioSinCondiciones, compararPorCalorias))
+		
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).get(0).equals(sopaDeVerdura))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).get(5).equals(milanesaNapolitana))
 	}
-	
+
 	@Test
-	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYMostramosResultadosPares(){
-		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, mostrarResultadosPares).filtrar().size == 3)		
+	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYMostramosResultadosPares() {
+		busqueda = new FiltroCondicionesPreexistentes(new BusquedaPosta(usuarioSinCondiciones, mostrarResultadosPares))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).size ==3)
 	}
-	
+
 	@Test
-	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYMostramosLosPrimerosDiezResultados(){
-		Assert.assertTrue(new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, mostrarLosPrimerosDiez).filtrar().size <= 10)		
+	def void busquedaConFiltroDeCondicionesPreexistentesParaUnUsuarioSinCondicionesYMostramosLosPrimerosDiezResultados() {
+		busqueda = new FiltroCondicionesPreexistentes(new BusquedaPosta(usuarioSinCondiciones, mostrarLosPrimerosDiez))
+		Assert.assertTrue(busqueda.doFiltrar(usuarioSinCondiciones).size <=10)
 	}
-	
+
 	@Test
 	def void busquedaConfiltroDeIngredientesCarosYCaloriasParaUnGrupoConSobrePeso() {
-		Assert.assertFalse(
-			new Busqueda(filtroDeIngredientesCarosYCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().contains(milanesaNapolitana))
-		Assert.assertFalse(
-			new Busqueda(filtroDeIngredientesCarosYCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().contains(lomoALaPlancha))
-		Assert.assertTrue(
-			new Busqueda(filtroDeIngredientesCarosYCalorias, grupoQueLeGustaCarneQuesoYVerdura).filtrar().contains(sopaDeVerdura))
-	}*/
+		busqueda = new FiltroDeIngredientesCaros(new FiltroDeCalorias(new BusquedaPosta(grupoQueLeGustaCarneQuesoYVerdura)))
+		Assert.assertFalse(busqueda.doFiltrar(grupoQueLeGustaCarneQuesoYVerdura).contains(milanesaNapolitana))
+		Assert.assertFalse(busqueda.doFiltrar(grupoQueLeGustaCarneQuesoYVerdura).contains(lomoALaPlancha))
+		Assert.assertTrue(busqueda.doFiltrar(grupoQueLeGustaCarneQuesoYVerdura).contains(sopaDeVerdura))
+	}
+
 }
