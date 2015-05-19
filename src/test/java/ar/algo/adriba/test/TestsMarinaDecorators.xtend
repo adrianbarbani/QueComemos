@@ -119,23 +119,7 @@ class TestsMarina {
 		Femenino = new Sexo("Femenino")
 		Masculino = new Sexo("Masculino")
 
-		usuarioSinCondiciones = new Usuario(52, 1.64, Femenino, "Esteban", fechaValida, new Rutina(61, true),
-			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
-
-		usuarioVegano = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
-			unasCondicionesConVeganismo, unasPreferenciasConFrutayVerdura, comidasQueDisgustanConCarne)
-
-		usuarioHipertensoQueNoLeGustaElQueso = new Usuario(67, 1.91, Masculino, "Adrian", fechaValida,
-			new Rutina(74, true), unasCondicionesConHipertension, unasPreferenciasConCarneYQueso,
-			comidasQueDisgustanConQueso)
-
-		usuarioDiabeticoQueNoLeGustaLaCarne = new Usuario(80, 1.74, Masculino, "Federico", fechaValida,
-			new Rutina(82, true), unasCondicionesConDiabetes, unasPreferenciasConQuesoYVerdura,
-			comidasQueDisgustanConCarne)
-
-		usuarioConSobrePesoYDiabetesQueLeGustaLaCarne = new Usuario(1500, 1.44, Masculino, "Juan Pedro", fechaValida,
-			new Rutina(10, true), unasCondicionesConDiabetes, unasPreferenciasConCarne, comidasQueDisgustanConQueso)
-
+		
 		unasCondicionesPreexistentesCompletas => [
 			add(new Hipertenso)
 			add(new Vegano)
@@ -158,6 +142,45 @@ class TestsMarina {
 		limon = new Comida(1, "limon", 10)
 		ajo = new Comida(1, "ajo", 10)
 
+		unasPreferenciasConCarne.add("carne")
+		unasPreferenciasConCarneQuesoYVerdura.add("carne")
+		unasPreferenciasConCarneQuesoYVerdura.add("queso")
+		unasPreferenciasConCarneQuesoYVerdura.add("verdura")
+		unasPreferenciasConQuesoYVerdura.add("queso")
+		unasPreferenciasConQuesoYVerdura.add("verdura")
+		unasPreferenciasConFrutayVerdura.add("fruta")
+		unasPreferenciasConFrutayVerdura.add("verdura")
+		unasPreferenciasConCarneYQueso.add("queso")
+		unasPreferenciasConCarneYQueso.add("carne")
+
+		comidasQueDisgustanConQueso.add("queso")
+		comidasQueDisgustanConCarne.add("carne")
+
+		unasCondicionesConVeganismo.add(new Vegano)
+		unasCondicionesConHipertension.add(new Hipertenso)
+		unasCondicionesConHipertensionYVeganismo.add(new Hipertenso)
+		unasCondicionesConHipertensionYVeganismo.add(new Vegano)
+		unasCondicionesConDiabetes.add(new Diabetico)
+		
+		
+		usuarioSinCondiciones = new Usuario(52, 1.64, Femenino, "Esteban", fechaValida, new Rutina(61, true),
+			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
+
+		usuarioVegano = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
+			unasCondicionesConVeganismo, unasPreferenciasConFrutayVerdura, comidasQueDisgustanConCarne)
+
+		usuarioHipertensoQueNoLeGustaElQueso = new Usuario(67, 1.91, Masculino, "Adrian", fechaValida,
+			new Rutina(74, true), unasCondicionesConHipertension, unasPreferenciasConCarneYQueso,
+			comidasQueDisgustanConQueso)
+
+		usuarioDiabeticoQueNoLeGustaLaCarne = new Usuario(80, 1.74, Masculino, "Federico", fechaValida,
+			new Rutina(82, true), unasCondicionesConDiabetes, unasPreferenciasConQuesoYVerdura,
+			comidasQueDisgustanConCarne)
+
+		usuarioConSobrePesoYDiabetesQueLeGustaLaCarne = new Usuario(1500, 1.44, Masculino, "Juan Pedro", fechaValida,
+			new Rutina(10, true), unasCondicionesConDiabetes, unasPreferenciasConCarne, comidasQueDisgustanConQueso)
+		
+		
 		milanesa = new Receta => [
 			tipo = new Publica
 			setNombreDelPlato("Milanesas")
@@ -224,25 +247,7 @@ class TestsMarina {
 			caloriasReceta = 450
 		]
 
-		unasPreferenciasConCarne.add("carne")
-		unasPreferenciasConCarneQuesoYVerdura.add("carne")
-		unasPreferenciasConCarneQuesoYVerdura.add("queso")
-		unasPreferenciasConCarneQuesoYVerdura.add("verdura")
-		unasPreferenciasConQuesoYVerdura.add("queso")
-		unasPreferenciasConQuesoYVerdura.add("verdura")
-		unasPreferenciasConFrutayVerdura.add("fruta")
-		unasPreferenciasConFrutayVerdura.add("verdura")
-		unasPreferenciasConCarneYQueso.add("queso")
-		unasPreferenciasConCarneYQueso.add("carne")
-
-		comidasQueDisgustanConQueso.add("queso")
-		comidasQueDisgustanConCarne.add("carne")
-
-		unasCondicionesConVeganismo.add(new Vegano)
-		unasCondicionesConHipertension.add(new Hipertenso)
-		unasCondicionesConHipertensionYVeganismo.add(new Hipertenso)
-		unasCondicionesConHipertensionYVeganismo.add(new Vegano)
-		unasCondicionesConDiabetes.add(new Diabetico)
+	
 
 		integrantesVeganoEHipertenso.add(usuarioVegano)
 		integrantesVeganoEHipertenso.add(usuarioHipertensoQueNoLeGustaElQueso)
