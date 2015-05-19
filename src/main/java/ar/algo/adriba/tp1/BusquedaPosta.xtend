@@ -10,7 +10,7 @@ class BusquedaPosta extends Busqueda {
 	new(Persona unaPersona, Ordenamiento unOrden) {
 
 		persona = unaPersona
-		orden = unOrden // new CompararPorNombre, new compararPorCalorias
+		orden = unOrden // new CompararPorNombre, new compararPorCalorias // armarlo como otro decorator
 
 	}
 
