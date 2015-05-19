@@ -42,11 +42,13 @@ class Entrega1Tests {
 	Receta RecetaInvalida
 	Receta RecetaPublica
 	Receta RecetaPrivada
+	Receta milanesa
 	Comida carne
 	Comida harina
 	Comida huevo
 	Comida panRallado
-
+	
+	
 	@Before 
 	def void init() {
 
@@ -79,11 +81,12 @@ class Entrega1Tests {
 
 		carne = new Comida(99, "carne", 1)
 		harina = new Comida(25, "harina", 1)
-		huevo = new Comida(10, "huevo", 3)
-		panRallado = new Comida(12, "pan rallado", 50)
+		huevo = new Comida(46, "huevo", 3)
+		panRallado = new Comida(35, "pan rallado", 50)
 		
 		//new (int unasCalorias, String unNombre, int unaCantidad)
 		RecetaValida = new Receta => [
+			tipo = new Publica
 			setNombreDelPlato("Milanesas")
 			caloriasReceta = 250
 			subRecetaseIngredientes.add(harina)
@@ -93,13 +96,13 @@ class Entrega1Tests {
 		]
 
 		RecetaInvalida = new Receta => [
-			tipo = new Publica()
+			tipo = new Publica
 			setNombreDelPlato("Pure")
 			subRecetaseIngredientes.add(harina)
 		]
 
 		RecetaPublica = new Receta => [
-			tipo = new Publica()
+			tipo = new Publica
 			caloriasReceta = 40
 			setNombreDelPlato("Pure")
 			subRecetaseIngredientes.add(harina)
@@ -112,7 +115,16 @@ class Entrega1Tests {
 			setNombreDelPlato("Pure")
 			subRecetaseIngredientes.add(harina)
 		]
-
+		
+		milanesa = new Receta => [
+			tipo = new Publica
+			setNombreDelPlato("Milanesas")
+			subRecetaseIngredientes.add(harina)
+			subRecetaseIngredientes.add(huevo)
+			subRecetaseIngredientes.add(panRallado)
+			subRecetaseIngredientes.add(carne)
+			caloriasReceta = 5000
+		]
 	}
 
 	//Punto 1: Validacion de usuario
@@ -249,15 +261,15 @@ class Entrega1Tests {
 	@Test(expected=typeof(Exception))
 	def void quieroVerOModificarRecetaDeOtroYNoPuedo() { //Receta privada de otro
 
-		Usuario.puedoVerReceta(RecetaValida)
-		Usuario.puedoModificarReceta(RecetaValida)
+		Usuario.puedoVerReceta(RecetaPrivada)
+		Usuario.puedoModificarReceta(RecetaPrivada)
 	}
 
 	@Test
 	def void quieroVerOModificarRecetaPublica() { //Receta publica
 
-		Assert.assertTrue(Usuario.puedoVerReceta(RecetaPublica))
-		Assert.assertTrue(Usuario.puedoModificarReceta(RecetaPublica))
+		Assert.assertTrue(Usuario.puedoVerReceta(RecetaValida))
+		Assert.assertTrue(Usuario.puedoModificarReceta(RecetaValida))
 	}
 
 	//Punto 4: Modificar una receta
@@ -265,8 +277,7 @@ class Entrega1Tests {
 	def void modificarUnaRecetaMia() { //Modificar receta mia
 		
 		
-		
-		Usuario.modificarUnaReceta(RecetaPrivada, RecetaValida)
+		Usuario.modificarUnaReceta(milanesa, RecetaValida)
 	}
 
 	@Test(expected=typeof(Exception))
@@ -278,7 +289,7 @@ class Entrega1Tests {
 	@Test
 	def void modificarRecetaPublica() { //Receta publica
 
-		Usuario.modificarUnaReceta(RecetaPublica, RecetaValida)
+		Usuario.modificarUnaReceta(milanesa, RecetaPublica)
 	}
 
 	//Punto 5: Poder crear una receta con subrecetas
