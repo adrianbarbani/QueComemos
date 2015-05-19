@@ -3,7 +3,7 @@ package ar.algo.adriba.tp1
 import java.util.Comparator
 import java.util.List
 
-abstract class compararPorNombre extends Ordenamiento implements Comparator<Receta> {
+class CompararPorNombre extends Ordenamiento implements Comparator<Receta> {
 	
 	override ordenar(List<Receta> recetas){
 	recetas.sortBy[nombreDelPlato]

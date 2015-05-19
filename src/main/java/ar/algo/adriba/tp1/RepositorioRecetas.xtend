@@ -4,31 +4,35 @@ import java.util.List
 import java.util.ArrayList
 
 public class RepositorioRecetas {
-	List<Receta>listarTodas = new ArrayList
-
-	static RepositorioRecetas repositorio = null  
 	
+	public List<Receta> listarTodas = new ArrayList<Receta>
+
+	static RepositorioRecetas repositorio = null
+
 	private new() {
 	}
-	     
-    static def RepositorioRecetas getInstance() {
-      if(repositorio == null) {
-         repositorio = new RepositorioRecetas()
-      }
-      repositorio
-   }
-	
-	
-	def void agregar (Receta unaReceta){
-		listarTodas.add(unaReceta)
-	}
-	
-	def void quitar(Receta unaReceta){
-		listarTodas.remove(unaReceta)
-	}
-	
-	def List<Receta> todasLasRecetas() {
-		listarTodas
+
+	static public def RepositorioRecetas getInstance() {
+		if (repositorio == null) {
+			repositorio = new RepositorioRecetas()
+		}
+      repositorio;
 	}
 
+	def void agregar(Receta unaReceta) {
+		listarTodas.add(unaReceta)
+	}
+
+	def void quitar(Receta unaReceta) {
+		listarTodas.remove(unaReceta)
+	}
+
+	def List<Receta> todasLasRecetas() {
+		listarTodas.toList
+	}
+
+	def void limpiar() {
+		listarTodas.clear
+	}
+	
 }

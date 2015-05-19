@@ -8,8 +8,8 @@ import java.util.ArrayList
 public class Receta implements Cosas {
 
 	String nombreDelPlato
-	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas>
-	String explicacionDeLaPreparacion 
+	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas> 
+	String explicacionDeLaPreparacion
 	Usuario duenioReceta
 	int caloriasReceta
 	String dificultad
@@ -72,15 +72,12 @@ public class Receta implements Cosas {
 	// Constructor para recetas PRIVADAS
 	new(Receta unaReceta, Usuario unUsuario) {
 		this.setearValores(unaReceta)
-		this.tipo = new Privada(unUsuario)
-
+		this.tipo = new Privada(unUsuario, unaReceta)
+		RepositorioRecetas.getInstance().agregar(this)
 	}
 
 	new() {
-	}
-
-	def boolean sosPublica() {
-		tipo.sosPublica()
+		RepositorioRecetas.getInstance().agregar(this)
 	}
 
 	def boolean laPuedeModificar(Usuario usuario) {
@@ -100,15 +97,15 @@ public class Receta implements Cosas {
 		unaPersona.aceptasSugerencia(this)
 	}
 
-	def caloriasMayorA(int i) {
-		caloriasReceta > i
+	def boolean caloriasMenorA(int i) {
+		caloriasReceta < i
 	}
 
 	override nombre() {
 		nombreDelPlato
 	}
 
-	def noTieneIngredientesCaros() {
+	def boolean noTieneIngredientesCaros() {
 		!(subRecetaseIngredientes.exists[cosas|cosas.esCaro])
 	}
 

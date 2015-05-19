@@ -18,3 +18,4 @@ class FiltroPorGusto extends BusquedaDecorador {
 		decorado.filtrar(recetasFiltradas, persona)
 	}	
 }
+

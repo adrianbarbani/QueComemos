@@ -10,12 +10,18 @@ class Comida implements Cosas {
 	public String nombre
 	int cantidad
 	int calorias
-	List<String> ingredientesCaros = new ArrayList<String> // en el test agregar los strings salmon, lomo, alcaparras y lechon
-
+	List<String> ingredientesCaros = new ArrayList<String> 
+	
 	new(int unasCalorias, String unNombre, int unaCantidad) {
 		calorias = unasCalorias
 		nombre = unNombre
 		cantidad = unaCantidad
+		ingredientesCaros => [
+			add("salmon")
+			add("lomo")
+			add("alcaparras")
+			add("lechon")
+		]
 	}
 
 	override nombre() {
@@ -26,10 +32,6 @@ class Comida implements Cosas {
 		true
 	}
 
-	/* no se usa
-	override caloriasTotales(){
-		calorias 
-	} */
 	override tenesDemasiadaAzucar() {
 		this.tenes("azucar") && this.tenesMasDelLimite(100)
 	}

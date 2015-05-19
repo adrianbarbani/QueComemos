@@ -19,14 +19,9 @@ class GrupoDeUsuario extends Persona {
 		preferenciasAlimenticiasGrupal = unaListaDePreferencias
 	}
 
-	
-	def boolean integranteEsDuenio(Receta receta) {
-		integrantes.exists[usuario|usuario.usuarioTiene(receta)]
-	}
-	
 
 		//****************************ENTREGA 2**************************************
-	override puedoVerReceta(Receta receta){ //si algun usuario la puede ver 
+	override puedoVerReceta(Receta receta){
 		integrantes.exists[usuario|usuario.puedoVerReceta(receta)]
 	}
 	
@@ -51,19 +46,9 @@ class GrupoDeUsuario extends Persona {
 		integrantes.fold(0.0, [acum, integrante|acum + integrante.imc]) // ver
 	}
 	
-	def boolean tieneSobrePeso(){		
+	override tieneSobrepeso(){		
     this.imcPromedio() > 30
 	}
 	
-	/* Boletear
-	// esto hace lo mismo que esAptaParaMi de una forma muy rara y enroscadaaaaaaaaaa :(
-	override aceptaTusCondiciones(Receta receta) {
-		!integrantes.exists[integrante|!(integrante.aceptaTusCondiciones(receta))] // si existe alguno que no acepte las condiciones va a ser falce se convierte en true por el 1° ! despues el exists da true y se convierte en falce por el segundo !
-	}
-	
-	// esto no se donde se usa, dps vemos
-	override teDisgustaUna(Cosas cosas) {
-		integrantes.exists[usuario|usuario.teDisgustaUna(cosas)]
-	} */
 	
 }

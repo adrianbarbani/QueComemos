@@ -14,9 +14,18 @@ class BusquedaPosta extends Busqueda {
 
 	}
 
+	new(Persona unaPersona) {
+
+		persona = unaPersona
+
+	}
 
 	override filtrar(List<Receta> recetas, Persona persona) {
-		orden.ordenar(recetas)
+		if (orden != null) {
+			orden.ordenar(recetas)
+		} else {
+			recetas
+		}
 	}
 
 }
