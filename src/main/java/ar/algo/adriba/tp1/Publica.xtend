@@ -13,7 +13,8 @@ class Publica implements tipoReceta {
 	}
 
 	override cambiarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones) {
-		val Receta nuevaReceta = usuario.agregarReceta(receta)
+		val Receta nuevaReceta = receta
+		nuevaReceta.tipo = new Privada(usuario, receta)
 		usuario.modificarUnaReceta(nuevaReceta, unaRecetaConModificaciones)
 	}
 	

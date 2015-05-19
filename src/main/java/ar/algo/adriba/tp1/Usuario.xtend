@@ -136,7 +136,6 @@ class Usuario extends Persona {
 	def Receta copiar(Receta unaReceta) {
 		var Receta miReceta = null
 		miReceta = new Receta(unaReceta, this)
-		this.agregar(miReceta)
 		miReceta
 	}
 
@@ -168,14 +167,11 @@ class Usuario extends Persona {
 	// Un usuario modifica una receta. 
 	def void modificarUnaReceta(Receta unaReceta, Receta unaRecetaConModificaciones) {
 
-		//  Primero vemos si la puede modificar		
-		if (puedoModificarReceta(unaReceta)) {
-
-			// Si la puede modificar entonces dejamos que la receta vea como se modifica, si es publica va a copiarse a una nueva privada.
+		if (this.puedoModificarReceta(unaReceta)) {
 			unaReceta.modificarValores(this, unaReceta, unaRecetaConModificaciones)
+		} else {
+			throw new Exception("No puede modificar la receta porque es de otro usuario")
 		}
-
-		throw new Exception("No puede modificar la receta porque es de otro usuario")
 
 	}
 
@@ -202,4 +198,3 @@ class Usuario extends Persona {
 	}
 
 }
-	

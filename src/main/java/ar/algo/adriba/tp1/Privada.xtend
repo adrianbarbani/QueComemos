@@ -6,8 +6,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class Privada implements tipoReceta {
 
-	//Usuario duenioReceta
-
 	new(Usuario unUsuario, Receta unaReceta) {
 		unUsuario.agregar(unaReceta)
 	}
