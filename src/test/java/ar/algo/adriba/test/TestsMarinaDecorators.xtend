@@ -267,49 +267,7 @@ class TestsMarina {
 
 	}
 
-	//Punto 1: Averiguar si una receta se puede sugerir a un usuario
-	@Test
-	def void milanesaNoSePuedeSugerirAlVeganoPorquetieneCarne() {
-		Assert.assertFalse(milanesa.sePuedeSugerirA(usuarioVegano))
-
-	}
-
-	@Test
-	def void sopaDeVerduraSiSePuedeSugerirAlVegano() {
-		Assert.assertTrue(sopaDeVerdura.sePuedeSugerirA(usuarioVegano))
-
-	}
-
-	@Test
-	def void sopaDeVerduraNoSePuedeSugerirAlHipertensoPorqueTieneSal() {
-		Assert.assertFalse(sopaDeVerdura.sePuedeSugerirA(usuarioHipertensoQueNoLeGustaElQueso))
-
-	}
-
-	@Test
-	def void piizaNoSePuedeSugerirAlusuarioHipertensoQueNoLeGustaElQuesoPorqueTieneQueso() {
-		Assert.assertFalse(pizza.sePuedeSugerirA(usuarioHipertensoQueNoLeGustaElQueso))
-
-	}
-
-	//Punto 1: Averiguar si una receta se puede sugerir a un grupo
-	@Test
-	def void pizzaSePuedeSugerirAgrupoQueLeGustaQuesoYVerduraPorqueTieneQueso() {
-		Assert.assertTrue(pizza.sePuedeSugerirA(grupoQueLeGustaQuesoYVerdura))
-	}
-
-	def void milanesaNoSePuedeSugerirAGrupoQueLeGustaQuesoYVerduraPorqueNoTieneNadaQueLesGuste() {
-		Assert.assertFalse(milanesa.sePuedeSugerirA(grupoQueLeGustaQuesoYVerdura))
-	}
-
-	def void sopaDeVerduraNoSePuedeSugerirAGrupoQueLeGustaFrutaYVerduraPorqueTienenUnHipertenso() {
-		Assert.assertFalse(sopaDeVerdura.sePuedeSugerirA(grupoQueLeGustaFrutaYVerdura))
-	}
-
-	def void milanesaNapolitanaSePuedeSugerirAgrupoQueLeGustaCarneYQuesoPorqueLesGustaEso() {
-		Assert.assertTrue(milanesaNapolitana.sePuedeSugerirA(grupoQueLeGustaCarneYQueso))
-	}
-
+	
 	//Punto 2: Conocer todas las recetas a las que un usuario tiene acceso
 	@Test
 	def void usuarioVeganoPuedeVerRecetasPublicasYsuRecetaPrivada() {
@@ -336,14 +294,8 @@ class TestsMarina {
 		Assert.assertFalse(busqueda.doFiltrar(usuarioSinCondiciones).contains(hummus))
 	}
 
-	//Punto 3:	Agregar receta a favoritos
-	@Test
-	def void unVeganoMarcaLaSopaComoFavorita() {
-		usuarioVegano.marcarComoFavorita(sopaDeVerdura)
-		Assert.assertTrue(usuarioVegano.recetasFavoritas.contains(sopaDeVerdura))
-	}
-
-	//Punto 4: Resolver los filtros y el manejo de resultados mediante Strategies
+	
+	//Punto 4: Resolver los filtros y el manejo de resultados mediante Decorators
 	@Test
 	def void busquedaPorGustoParaElVegano() {
 		busqueda = new FiltroPorGusto(new BusquedaPosta(usuarioVegano))
