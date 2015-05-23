@@ -200,5 +200,15 @@ class Usuario extends Persona {
 	override tieneSobrepeso() {
 		this.imc() > 30
 	}
+	
+	//---------------Entrega 3----------------------------
+	
+	def boolean esTuNombre(String unNombre) {
+		nombre.matches(unNombre)
+	}
+	
+	def boolean tenesCondicionPreexistente(CondicionPreexistente unaCondicion) {
+		
+	}
 
 }
