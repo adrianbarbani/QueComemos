@@ -32,21 +32,13 @@ class Busqueda {
 	// busqueda posta
 	def List<Receta> filtrar() {
 
-		var List<Receta> todasLasRecetasQuePuedeVer = new ArrayList<Receta>
-
-		todasLasRecetasQuePuedeVer = this.recetasQuePuedeVer()
-
-		if (!(filtros.empty)) {
-			todasLasRecetasQuePuedeVer = this.pasarPorFiltros(todasLasRecetasQuePuedeVer)
-		}
-
-		this.mostrar(todasLasRecetasQuePuedeVer)
+		this.mostrar(pasarPorFiltros(recetasQuePuedeVer()))
 	}
 
 	def List<Receta> pasarPorFiltros(List<Receta> recetas) {
 		filtros.fold(recetas, [col, filtro|filtro.filtrar(col, persona)]).toList
 	}
-
+// TODO: aremar un ordenamiento x default
 	def List<Receta> mostrar(List<Receta> unasRecetas) {
 		if (orden != null) {
 			orden.ordenar(unasRecetas)
