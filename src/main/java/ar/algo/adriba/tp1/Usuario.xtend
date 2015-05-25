@@ -209,7 +209,7 @@ class Usuario extends Persona {
 	}
 	
 	def boolean tenesCondicionPreexistente(CondicionPreexistente unaCondicion) {
-		
+		condicionesPreexistentes.exists[condicion | condicion.equals(unaCondicion)]
 	}
 
 }

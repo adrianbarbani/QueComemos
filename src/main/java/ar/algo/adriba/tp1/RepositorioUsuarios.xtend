@@ -20,7 +20,8 @@ class RepositorioUsuarios {
 	}
 	
 	def update(Usuario unUsuario){
-		
+		todosLosUsuarios.remove(unUsuario)
+		todosLosUsuarios.add(unUsuario)	
 	}
 	
 	def listar(Usuario unUsuario){
