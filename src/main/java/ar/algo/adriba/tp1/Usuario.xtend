@@ -201,7 +201,7 @@ class Usuario extends Persona {
 		this.imc() > 30
 	}
 	
-	//---------------Entrega 3----------------------------
+	//----------------Entrega 3----------------------------
 	
 	def boolean esTuNombre(String unNombre) {
 		nombre.matches(unNombre)
