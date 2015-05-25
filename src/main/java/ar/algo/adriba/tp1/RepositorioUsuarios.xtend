@@ -15,7 +15,7 @@ class RepositorioUsuarios {
 		todosLosUsuarios.remove(unUsuario)
 	}
 
-	def Usuario get(String unNombre){ // la consigna dice "devuelve un usuario por su nombre" nosotros manejamos nombres con strings
+	def Usuario get(String unNombre){ //la consigna dice "devuelve un usuario por su nombre" nosotros manejamos nombres con strings
 		todosLosUsuarios.findFirst[usuario| usuario.esTuNombre(unNombre)]
 	}
 	
