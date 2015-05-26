@@ -38,11 +38,11 @@ class RepositorioUsuarios {
 	}
 	
 	def List<Usuario> listar(Usuario unUsuario){
-		todosLosUsuarios.filter[usuario | usuario.esTuNombre(unUsuario.nombre)]
+		todosLosUsuarios.filter[usuario | usuario.esTuNombre(unUsuario.nombre)].toList
 	}
 	
 	def List<Usuario> listar(CondicionPreexistente unaCondicion){
-		todosLosUsuarios.filter[usuario | usuario.tenesCondicionPreexistente(unaCondicion)]
+		todosLosUsuarios.filter[usuario | usuario.tenesCondicionPreexistente(unaCondicion)].toList
 	}
 	
 	def solicitarIncorporacion(Usuario unUsuario) {
