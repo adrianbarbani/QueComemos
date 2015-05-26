@@ -3,6 +3,7 @@ package ar.algo.adriba.tp1
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.List
 import java.util.ArrayList
+import queComemos.entrega3.dominio.Dificultad
 
 @Accessors
 public class Receta implements Cosas {
@@ -10,9 +11,9 @@ public class Receta implements Cosas {
 	String nombreDelPlato
 	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas> 
 	String explicacionDeLaPreparacion
-	Usuario duenioReceta
+//	Usuario duenioReceta NO SE USA ESTO
 	int caloriasReceta
-	String dificultad
+	Dificultad dificultad
 	List<String> temporada
 	tipoReceta tipo
 
