@@ -58,6 +58,8 @@ class Usuario extends Persona {
 
 		if (validacionCondicionesPreexistentes() == false)
 			throw new Exception("ERROR: condiciones Preexistentes no validas")
+			
+		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 
 	}
 

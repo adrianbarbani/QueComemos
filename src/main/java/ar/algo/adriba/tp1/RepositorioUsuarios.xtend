@@ -6,7 +6,20 @@ import java.util.ArrayList
 class RepositorioUsuarios {
 	
 	public List<Usuario> todosLosUsuarios = new ArrayList<Usuario>
-		
+	public List<Usuario> usuariosPendientes = new ArrayList<Usuario>
+
+	static RepositorioUsuarios repositorio = null
+
+	private new() {
+	}
+
+	static public def RepositorioUsuarios getInstance() {
+		if (repositorio == null) {
+			repositorio = new RepositorioUsuarios()
+		}
+      repositorio;
+	}
+	
 	def void agregar(Usuario unUsuario) {
 		todosLosUsuarios.add(unUsuario)
 	}
@@ -31,4 +44,19 @@ class RepositorioUsuarios {
 	def listar(CondicionPreexistente unaCondicion){
 		todosLosUsuarios.filter[tenesCondicionPreexistente(unaCondicion)]
 	}
+	
+	def solicitarIncorporacion(Usuario unUsuario) {
+		usuariosPendientes.add(unUsuario)
+	}
+	
+	def aceptarIncorporacion(Usuario unUsuario) {
+		usuariosPendientes.remove(unUsuario)
+		this.agregar(unUsuario)
+	}
+	
+	def rechazarIncorporacion(Usuario unUsuario) {
+		usuariosPendientes.remove(unUsuario)
+		throw new Exception ("Motivo de rechazo: ...")
+	}
+	
 }
