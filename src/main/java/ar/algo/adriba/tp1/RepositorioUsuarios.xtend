@@ -37,12 +37,12 @@ class RepositorioUsuarios {
 		todosLosUsuarios.add(unUsuario)	
 	}
 	
-	def listar(Usuario unUsuario){
-		todosLosUsuarios.filter[esTuNombre(unUsuario.nombre)]
+	def List<Usuario> listar(Usuario unUsuario){
+		todosLosUsuarios.filter[usuario | usuario.esTuNombre(unUsuario.nombre)]
 	}
 	
-	def listar(CondicionPreexistente unaCondicion){
-		todosLosUsuarios.filter[tenesCondicionPreexistente(unaCondicion)]
+	def List<Usuario> listar(CondicionPreexistente unaCondicion){
+		todosLosUsuarios.filter[usuario | usuario.tenesCondicionPreexistente(unaCondicion)]
 	}
 	
 	def solicitarIncorporacion(Usuario unUsuario) {
@@ -57,6 +57,15 @@ class RepositorioUsuarios {
 	def rechazarIncorporacion(Usuario unUsuario) {
 		usuariosPendientes.remove(unUsuario)
 		throw new Exception ("Motivo de rechazo: ...")
+	}
+	
+	def void limpiarTodo() {
+		todosLosUsuarios.clear
+				
+	}
+	
+	def void limpiarPendientes(){
+		usuariosPendientes.clear
 	}
 	
 }
