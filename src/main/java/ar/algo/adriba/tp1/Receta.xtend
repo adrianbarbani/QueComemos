@@ -13,7 +13,7 @@ public class Receta implements Cosas {
 	String explicacionDeLaPreparacion
 //	Usuario duenioReceta NO SE USA ESTO
 	int caloriasReceta
-	Dificultad dificultad
+	String dificultad
 	List<String> temporada
 	tipoReceta tipo
 

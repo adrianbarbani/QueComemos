@@ -12,8 +12,7 @@ class ObserverDeLasMasConsultadas extends ObserversConsulta {
 	override send(List<Receta> recetas, Persona persona) {
 
 		for (Receta receta : recetas) {
-
-			val valor = recetasMasConsultadas.get(receta)
+			val int valor = recetasMasConsultadas.get(receta)//si no esta la receta dentro del map esto es un 0? 
 			recetasMasConsultadas.put(receta, valor + 1)
 
 		}

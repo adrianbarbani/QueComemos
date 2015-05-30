@@ -15,5 +15,6 @@ class ObserverDeHora extends ObserversConsulta {
 		cantidadDeConsultasPorHora.put(hour,cantidad+1);
 		
 	}
+//supongo que hay que hacer un metodo para consultar por una hora en particular
 
 }
