@@ -11,18 +11,11 @@ class ObserverMasConsultadaPorSexo extends ObserversConsulta {
 
 	override send(List<Receta> recetas, Persona persona) {
 		if (persona.miSexo == "mujer") { // TODO: hacer el metodo persona.miSexo (no se como se comporta para los grupos de usuarios) y cambiar == por equals antes de que se muera algo
-			this.consultasPor(recetas, recetasMasConsultadasPorMujeres)
+			super.consultasPor(recetas, recetasMasConsultadasPorMujeres)
 		} else {
-			this.consultasPor(recetas, recetasMasConsultadasPorHombres)
+			super.consultasPor(recetas, recetasMasConsultadasPorHombres)
 		}
 	}
 
-	def consultasPor(List<Receta> recetas, Map<Receta, Integer> map) {
-		for (Receta receta : recetas) {
-			val int valor = map.get(receta)
-			map.put(receta, valor + 1)
-
-		}
-	}
 // TODO: Hacer metodo para sacar el max 
 }
