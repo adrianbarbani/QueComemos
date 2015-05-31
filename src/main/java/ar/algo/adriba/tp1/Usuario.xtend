@@ -230,11 +230,15 @@ class Usuario extends Persona {
 	}
 	
 	def boolean tenesCondicionPreexistente(CondicionPreexistente unaCondicion) {
-		condicionesPreexistentes.exists[condicion | condicion.equals(unaCondicion)]
+		condicionesPreexistentes.exists[condicion | condicion.nombre.equals(unaCondicion.nombre)]
 	}
 
 	override String miSexo(){
 		sexo.nombre
+	}
+	
+	override boolean esVegana(){
+		condicionesPreexistentes.exists[condicion | condicion.nombre.equals("Vegano")] 
 	}
 	
 }

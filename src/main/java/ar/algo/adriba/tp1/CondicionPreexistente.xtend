@@ -1,7 +1,12 @@
 package ar.algo.adriba.tp1
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
 // esta clase deberia ser abstracta y los metodos no retornar nada
+@Accessors
 class CondicionPreexistente {
+	
+	String nombre
 	
 	def boolean validacion(Usuario unUsuario){
 		true
@@ -15,5 +20,10 @@ class CondicionPreexistente {
 	
 	def boolean sosInadecuada(Receta receta) {
 		false
-	}	
+	}
+	
+	def boolean sosVegana() {
+		false
+	}
+	
 }

@@ -12,8 +12,8 @@ int veganosQueConsultaron
 		}
 	}
 	
-	def consultastePorUnaRecetaDificil(List <Receta> recetas) {
-		recetas.exists[receta|receta.tuDificultadEs("dificil")]
+	def boolean consultastePorUnaRecetaDificil(List <Receta> recetas) {
+		recetas.exists[receta|receta.tuDificultadEs("Dificil")]
 	}
 	
 }

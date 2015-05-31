@@ -16,6 +16,8 @@ abstract class Persona {
 	
 	def String miSexo()
 	
+	def boolean esVegana()
+	
 	
 
 }
