@@ -233,4 +233,8 @@ class Usuario extends Persona {
 		condicionesPreexistentes.exists[condicion | condicion.equals(unaCondicion)]
 	}
 
+	override String miSexo(){
+		sexo.nombre
+	}
+	
 }

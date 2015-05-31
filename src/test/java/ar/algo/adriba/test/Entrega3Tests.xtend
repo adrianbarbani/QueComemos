@@ -45,7 +45,7 @@ class Entrega3Tests {
 
 	Sexo Femenino
 	Sexo Masculino
-
+	
 	Receta milanesa
 	Receta milanesaNapolitana
 	Receta pizza
