@@ -50,5 +50,13 @@ class GrupoDeUsuario extends Persona {
     this.imcPromedio() > 30
 	}
 	
+	override miSexo() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")// TODO: ver esto
+	}
+	
+	override esVegana() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")// TODO: ver esto
+	}
+	
 	
 }

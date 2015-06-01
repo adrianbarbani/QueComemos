@@ -12,6 +12,7 @@ class MonitorDeConsultas {
 	Map<Receta, Integer> recetasMasConsultadas = new HashMap<Receta, Integer>
 	public Map<Hora, Integer> cantidadDeConsultasPorHora = new HashMap<Hora, Integer>
 
+
 	def consultasPor(List<Receta> recetas, Map<Receta, Integer> map) {
 		for (Receta receta : recetas) {
 			val int valor = map.get(receta)
@@ -20,6 +21,14 @@ class MonitorDeConsultas {
 		}
 	}
 
+	def observer(List<Receta> recetas, Persona persona){
+		this.consultaVegano(recetas,persona)
+		this.consultaDeHora(recetas,persona)
+		this.consultaPorSexo(recetas,persona)
+		this.masConsultada(recetas,persona)
+	}
+	
+	
 	//Monitor 1---------------------------
 	def consultaVegano(List<Receta> recetas, Persona persona) {
 		if (persona.esVegana && this.consultastePorUnaRecetaDificil(recetas)) {
