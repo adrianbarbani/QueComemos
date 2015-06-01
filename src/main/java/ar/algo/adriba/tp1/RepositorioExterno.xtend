@@ -13,7 +13,7 @@ class RepositorioExterno implements Repositorio {
 	val BusquedaRecetas busqueda = new BusquedaRecetas
 	val RepoRecetas repositorioRecetas = new RepoRecetas
 	
-	def void armarBusqueda(String nombre, Dificultad dificultad, List<String> palabrasClave) {
+	new(String nombre, Dificultad dificultad, List<String> palabrasClave) {
 
 		busqueda => [
 			setNombre(nombre)
