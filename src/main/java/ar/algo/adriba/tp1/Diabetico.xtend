@@ -4,6 +4,12 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 
 class Diabetico extends CondicionPreexistente {
 	
+	String nombre
+	
+	new(){
+		nombre=("Diabetico")
+	}
+	
 	override validacion(Usuario unUsuario) {
 
 		(unUsuario.tamañoPreferencias() > 0) && (unUsuario.sexo != null)  

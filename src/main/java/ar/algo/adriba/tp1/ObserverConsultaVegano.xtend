@@ -10,10 +10,14 @@ int veganosQueConsultaron
 		if (persona.esVegana && this.consultastePorUnaRecetaDificil(recetas)){
 			veganosQueConsultaron = veganosQueConsultaron +1 
 		}
+	
+		 System.out.println(veganosQueConsultaron + " veganos consultaron recetas dificiles")
+	
 	}
 	
-	def consultastePorUnaRecetaDificil(List <Receta> recetas) {
-		recetas.exists[receta|receta.tuDificultadEs("dificil")]
+	
+	def boolean consultastePorUnaRecetaDificil(List <Receta> recetas) {
+		recetas.exists[receta|receta.tuDificultadEs("Dificil")]
 	}
 	
 }

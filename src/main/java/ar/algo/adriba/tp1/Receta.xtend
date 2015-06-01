@@ -113,5 +113,9 @@ public class Receta implements Cosas {
 	override esCaro() {
 		false
 	}
+	
+	def tuDificultadEs(String unaDificultad) {
+		dificultad.equals(unaDificultad)
+	}
 
 }

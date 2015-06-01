@@ -13,7 +13,11 @@ abstract class Persona {
 	def boolean puedoVerReceta(Receta receta)
 	
 	def boolean tieneSobrepeso()
-
+	
+	def String miSexo()
+	
+	def boolean esVegana()
+	
 	
 
 }

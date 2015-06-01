@@ -1,13 +1,15 @@
 package ar.algo.adriba.tp1
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
+@Accessors
 class Sexo {
 	
-	String Nombre
+	String nombre
 	
 	new(String unNombre) {
-		Nombre = unNombre
+		nombre = unNombre
 	}
 
-	new(){}
-		
+			
 }
