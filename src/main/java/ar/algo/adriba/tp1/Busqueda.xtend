@@ -10,6 +10,7 @@ class Busqueda {
 	Persona persona
 	RepositorioRecetas repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
+	MonitorDeConsultas monitor = new MonitorDeConsultas
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden) {
 		filtros = unosFiltros
@@ -54,6 +55,18 @@ class Busqueda {
 			unasRecetas
 		}
 
+	}
+	
+	//------Forma alternativa
+	
+	def List<Receta> filtrarAlternativo(){
+		
+		monitor.consultaVegano(filtrar(), persona)
+		monitor.consultaDeHora(filtrar(), persona)
+		monitor.consultaPorSexo(filtrar(), persona)
+		monitor.masConsultada(filtrar(), persona)
+		
+		this.mostrar(pasarPorFiltros(recetasQuePuedeVer()))
 	}
 
 }
