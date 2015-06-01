@@ -3,7 +3,7 @@ package ar.algo.adriba.tp1
 import java.util.List
 import java.util.ArrayList
 
-public class RepositorioRecetas {
+public class RepositorioRecetas implements Repositorio {
 	
 	public List<Receta> listarTodas = new ArrayList<Receta>
 
@@ -27,7 +27,7 @@ public class RepositorioRecetas {
 		listarTodas.remove(unaReceta)
 	}
 
-	def List<Receta> todasLasRecetas() {
+	override List<Receta> todasLasRecetas() {
 		listarTodas.toList
 	}
 

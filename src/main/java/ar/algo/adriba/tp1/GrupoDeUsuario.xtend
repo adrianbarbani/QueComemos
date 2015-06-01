@@ -55,7 +55,7 @@ class GrupoDeUsuario extends Persona {
 	}
 	
 	override esVegana() {
-		integrantes.exists[usuario|usuario.esVegana()]
+		integrantes.forall[usuario|usuario.esVegana()]
 	}
 	
 	

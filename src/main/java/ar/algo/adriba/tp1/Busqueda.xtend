@@ -8,26 +8,39 @@ class Busqueda {
 	List<Filtro> filtros = new ArrayList<Filtro>
 	Ordenamiento orden
 	Persona persona
-	RepositorioRecetas repositorioDeRecetas = RepositorioRecetas.getInstance()
+	Repositorio repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
 	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa
+
+
+	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden, Repositorio unRepo) {
+		filtros = unosFiltros
+		persona = unaPersona
+		orden = unOrden
+		repositorioDeRecetas = unRepo
+		
+	}
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden) {
 		filtros = unosFiltros
 		persona = unaPersona
 		orden = unOrden
+		repositorioDeRecetas = RepositorioRecetas.getInstance()
+		
 	}
 
 	new(List<Filtro> unosFiltros, Persona unaPersona) {
 		filtros = unosFiltros
 		persona = unaPersona
 		orden = new DefaultOrden
+		repositorioDeRecetas = RepositorioRecetas.getInstance()
 	}
 
 	new(Persona unaPersona) {
 		persona = unaPersona
 		filtros = new ArrayList<Filtro>
 		orden = new DefaultOrden
+		repositorioDeRecetas = RepositorioRecetas.getInstance()
 	}
 
 	def List<Receta> recetasQuePuedeVer() {
