@@ -17,5 +17,5 @@ class ObserverMasConsultadaPorSexo extends ObserversConsulta {
 		}
 	}
 
-// TODO: Hacer metodo para sacar el max 
+
 }

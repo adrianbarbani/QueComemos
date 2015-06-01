@@ -8,10 +8,9 @@ abstract class ObserversConsulta {
 	def void send(List<Receta> recetas, Persona persona)
 
 	def maximo(Map<Receta, Integer> map) {
-
-
+	// TODO: Hacer metodo para sacar el max 
 	}
-
+		
 	def consultasPor(List<Receta> recetas, Map<Receta, Integer> map) {
 		for (Receta receta : recetas) {
 			val int valor = map.get(receta)
