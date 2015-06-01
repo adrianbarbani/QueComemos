@@ -10,12 +10,8 @@ class ObserverDeLasMasConsultadas extends ObserversConsulta {
 	Map<Receta, Integer> recetasMasConsultadas = new HashMap<Receta, Integer>
 
 	override send(List<Receta> recetas, Persona persona) {
-		
+
 		super.consultasPor(recetas, recetasMasConsultadas)
 	}
-
-	def Receta laMasConsultada() {
-		// TODO: hacer este metodo que trae la mas consultada del map
-	}
-
+	
 }

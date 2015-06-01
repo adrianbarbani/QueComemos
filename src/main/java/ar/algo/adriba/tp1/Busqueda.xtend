@@ -11,7 +11,6 @@ class Busqueda {
 	RepositorioRecetas repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
 	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa
-	
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden) {
 		filtros = unosFiltros
@@ -22,10 +21,13 @@ class Busqueda {
 	new(List<Filtro> unosFiltros, Persona unaPersona) {
 		filtros = unosFiltros
 		persona = unaPersona
+		orden = new DefaultOrden
 	}
 
 	new(Persona unaPersona) {
 		persona = unaPersona
+		filtros = new ArrayList<Filtro>
+		orden = new DefaultOrden
 	}
 
 	def List<Receta> recetasQuePuedeVer() {
@@ -40,7 +42,7 @@ class Busqueda {
 
 	def void loguear() {
 
-		observers.forEach[observer|observer.send(filtrar(), persona)]
+		observers.forEach[observer|observer.send(pasarPorFiltros(recetasQuePuedeVer()), persona)] // habia un loop infinito :P
 
 	}
 
@@ -48,20 +50,14 @@ class Busqueda {
 		filtros.fold(recetas, [col, filtro|filtro.filtrar(col, persona)]).toList
 	}
 
-	// TODO: aremar un ordenamiento x default
 	def List<Receta> mostrar(List<Receta> unasRecetas) {
-		if (orden != null) {
-			orden.ordenar(unasRecetas)
-		} else {
-			unasRecetas
-		}
+		orden.ordenar(unasRecetas)
 
 	}
-	
+
 	//------Forma alternativa
-	
-	def List<Receta> filtrarAlternativo(){	
-		monitor.observer(filtrar(), persona)
+	def List<Receta> filtrarAlternativo() {
+		monitor.observer(pasarPorFiltros(recetasQuePuedeVer()), persona) // rescatando otro loop infinito
 		this.mostrar(pasarPorFiltros(recetasQuePuedeVer()))
 	}
 
