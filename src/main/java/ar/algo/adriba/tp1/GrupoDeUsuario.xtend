@@ -51,11 +51,11 @@ class GrupoDeUsuario extends Persona {
 	}
 	
 	override miSexo() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")// TODO: ver esto
+		throw new UnsupportedOperationException("No se puede segmentar por sexo un grupo de usuarios!")// Que tire exception suena logico
 	}
 	
 	override esVegana() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")// TODO: ver esto
+		integrantes.exists[usuario|usuario.esVegana()]
 	}
 	
 	
