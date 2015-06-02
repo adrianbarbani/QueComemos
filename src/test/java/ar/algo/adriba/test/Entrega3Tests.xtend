@@ -55,7 +55,7 @@ class Entrega3Tests {
 
 	Sexo Femenino
 	Sexo Masculino
-	
+
 	Receta milanesa
 	Receta milanesaNapolitana
 	Receta pizza
@@ -94,7 +94,6 @@ class Entrega3Tests {
 	List<CondicionPreexistente> unasCondicionesConHipertensionYVeganismo = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesConDiabetes = new ArrayList<CondicionPreexistente>
 	List<CondicionPreexistente> unasCondicionesVacias = new ArrayList<CondicionPreexistente>
-	
 
 	Usuario usuarioSinCondiciones
 	Usuario usuarioVegano
@@ -117,7 +116,7 @@ class Entrega3Tests {
 	List<Filtro> filtroDeIngredientesCaros = new ArrayList<Filtro>
 	List<Filtro> filtroDeIngredientesCarosYCalorias = new ArrayList<Filtro>
 	List<Filtro> filtroCondicionesPreexistentes = new ArrayList<Filtro>
-	
+
 	Busqueda busquedaVegana
 	Busqueda busquedaVeganaSegunda
 	Busqueda busquedaNoVegana
@@ -125,18 +124,17 @@ class Entrega3Tests {
 	Busqueda busquedaMasculinaSegunda
 	Busqueda busquedaFemenina
 	Busqueda busquedaFemeninaSegunda
-	
+
 	Ordenamiento mostrarLosPrimerosDiez
 	Ordenamiento mostrarResultadosPares
 	Ordenamiento compararPorCalorias
 	Ordenamiento compararPorNombre
-	
+
 	ObserverConsultaVegano observerConsultaVegano
 	ObserversConsulta observerDeHora
 	ObserversConsulta observerMasConsultadaPorSexo
 	ObserversConsulta observerDeLasMasConsultadas
-	
-		
+
 	@Before
 	def void init() {
 
@@ -195,10 +193,10 @@ class Entrega3Tests {
 
 		usuarioSinCondiciones = new Usuario(52, 1.64, Femenino, "Esteban", fechaValida, new Rutina(61, true),
 			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
-		
+
 		usuarioVegano = new Usuario(52, 1.64, Femenino, "Marina", fechaValida, new Rutina(61, true),
 			unasCondicionesConVeganismo, unasPreferenciasConFrutayVerdura, comidasQueDisgustanConCarne)
-			
+
 		usuarioVeganoSegundo = new Usuario(52, 1.64, Masculino, "Carlos", fechaValida, new Rutina(61, true),
 			unasCondicionesConVeganismo, unasPreferenciasConFrutayVerdura, comidasQueDisgustanConCarne)
 
@@ -213,7 +211,7 @@ class Entrega3Tests {
 		usuarioConSobrePesoYDiabetesQueLeGustaLaCarne = new Usuario(1500, 1.44, Femenino, "Camila", fechaValida,
 			new Rutina(10, true), unasCondicionesConDiabetes, unasPreferenciasConCarne, comidasQueDisgustanConQueso)
 
-			milanesa = new Receta => [
+		milanesa = new Receta => [
 			tipo = new Publica
 			setNombreDelPlato("Milanesas")
 			subRecetaseIngredientes.add(harina)
@@ -221,7 +219,7 @@ class Entrega3Tests {
 			subRecetaseIngredientes.add(panRallado)
 			subRecetaseIngredientes.add(carne)
 			caloriasReceta = 150
-			dificultad=("Dificil")
+			dificultad = ("Dificil")
 		]
 
 		milanesaNapolitana = new Receta => [
@@ -242,7 +240,7 @@ class Entrega3Tests {
 			subRecetaseIngredientes.add(verdura)
 			subRecetaseIngredientes.add(sal)
 			caloriasReceta = 200
-			dificultad=("Dificil")
+			dificultad = ("Dificil")
 		]
 
 		pizza = new Receta => [
@@ -272,16 +270,15 @@ class Entrega3Tests {
 			caloriasReceta = 300
 		]
 
-		
-		 hummus = new Receta => [
-		 	tipo = new Privada(usuarioVegano, hummus)
+		hummus = new Receta => [
+			tipo = new Privada(usuarioVegano, hummus)
 			setNombreDelPlato("Hummus de garbanzo")
 			subRecetaseIngredientes.add(garbanzos)
 			subRecetaseIngredientes.add(limon)
 			subRecetaseIngredientes.add(ajo)
 			caloriasReceta = 600
 		]
-		
+
 		integrantesVeganoEHipertenso.add(usuarioVegano)
 		integrantesVeganoEHipertenso.add(usuarioHipertensoQueNoLeGustaElQueso)
 		integrantesDiabeticoEHipertenso.add(usuarioDiabeticoQueNoLeGustaLaCarne)
@@ -313,177 +310,180 @@ class Entrega3Tests {
 		filtroDeIngredientesCarosYCalorias.add(new FiltroDeCalorias)
 
 		filtroCondicionesPreexistentes.add(new FiltroCondicionesPreexistentes)
-		
+
 		mostrarLosPrimerosDiez = new MostrarLosPrimerosDiez
 		mostrarResultadosPares = new MostrarResultadosPares
 		compararPorCalorias = new CompararPorCalorias
 		compararPorNombre = new CompararPorNombre
-		
+
 		observerConsultaVegano = new ObserverConsultaVegano
 		observerDeHora = new ObserverDeHora
-	 	observerMasConsultadaPorSexo = new ObserverMasConsultadaPorSexo
+		observerMasConsultadaPorSexo = new ObserverMasConsultadaPorSexo
 		observerDeLasMasConsultadas = new ObserverDeLasMasConsultadas
-		
+
 		observers.add(observerConsultaVegano)
 		observers.add(observerDeHora)
 		observers.add(observerMasConsultadaPorSexo)
 		observers.add(observerDeLasMasConsultadas)
 
 	}
-		
-		//Punto 1: Repositorio De Usuarios-------------------------------	
-		//Hago el limpiartodo() al principio de cada test porque no arranca de cero en cada uno, si en el test 1 agregue un usuario al repo, en el test 2 ya aparece como agregado
-			
-		@Test
-		def void agregoYQuitoUsuariosDelRepositorio(){
-			stubRepositorioDeUsuarios.limpiarTodo()
-			stubRepositorioDeUsuarios.limpiarPendientes()
-			
-			Assert.assertEquals(0, stubRepositorioDeUsuarios.todosLosUsuarios.size)
-			stubRepositorioDeUsuarios.agregar(usuarioSinCondiciones)
-			stubRepositorioDeUsuarios.agregar(usuarioVegano)
-			Assert.assertEquals(2, stubRepositorioDeUsuarios.todosLosUsuarios.size)
-			stubRepositorioDeUsuarios.quitar(usuarioSinCondiciones)
-			Assert.assertEquals(1, stubRepositorioDeUsuarios.todosLosUsuarios.size)
-		}
-		
-		@Test
-		def void actualizoUnUsuario(){
-			stubRepositorioDeUsuarios.limpiarTodo()
-			stubRepositorioDeUsuarios.limpiarPendientes()
-			
-			stubRepositorioDeUsuarios.agregar(usuarioSinCondiciones)			
-			Assert.assertEquals(1, stubRepositorioDeUsuarios.todosLosUsuarios.size)
-			
-			//Cambio algunos datos
-			val Usuario nuevoUsuario = new Usuario(60, 1.64, Masculino, "Ariel", fechaValida, new Rutina(61, true),
-			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
-			
-			stubRepositorioDeUsuarios.update(usuarioSinCondiciones, nuevoUsuario)
-			Assert.assertTrue(stubRepositorioDeUsuarios.get("Ariel").equals(usuarioSinCondiciones))
-			
-		}
-		
-		@Test
-		def void todosLosUsuariosEnListaPendienteAceptoUnoYDisminuye() {
-			stubRepositorioDeUsuarios.limpiarTodo()
-			
-			//Hay 6 usuarios creados en el @Before pendientes de aceptar solicitud
-			Assert.assertEquals(6, stubRepositorioDeUsuarios.usuariosPendientes.size)
-			stubRepositorioDeUsuarios.aceptarIncorporacion(usuarioVegano)
-			Assert.assertEquals(5, stubRepositorioDeUsuarios.usuariosPendientes.size)
-		}
-		
-		@Test(expected=typeof(Exception))
-		def void noAceptoIncorporacionDeUsuarioMuestraMotivoDeRechazo() {
-			stubRepositorioDeUsuarios.limpiarTodo()
-			
-			stubRepositorioDeUsuarios.rechazarIncorporacion(usuarioVegano)
-			
-		}
-		
-		@Test
-		def void buscoUsuarioPorNombre(){
-			stubRepositorioDeUsuarios.limpiarTodo()
-			
-			stubRepositorioDeUsuarios.agregar(usuarioSinCondiciones)
-			stubRepositorioDeUsuarios.agregar(usuarioVegano)
-			//El Usuario vegano se llama 'Marina'
-			Assert.assertTrue(stubRepositorioDeUsuarios.get("Marina").equals(usuarioVegano))
-		}
-		
-		@Test
-		def void buscoVariosUsuariosPorElMismoNombre(){
-			stubRepositorioDeUsuarios.limpiarTodo()
-			
-			stubRepositorioDeUsuarios.agregar(usuarioSinCondiciones)
-			stubRepositorioDeUsuarios.agregar(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne)
-			//Los dos usuarios se llaman 'Esteban'
-			Assert.assertTrue(stubRepositorioDeUsuarios.listar(usuarioSinCondiciones).contains(usuarioSinCondiciones))
-			Assert.assertTrue(stubRepositorioDeUsuarios.listar(usuarioSinCondiciones).contains(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne))
-		}
-		
-		@Test
-		def void buscoVariosUsuariosPorCondicionPreexistente(){
-			stubRepositorioDeUsuarios.limpiarTodo()
-			
-			stubRepositorioDeUsuarios.agregar(usuarioVegano)
-			stubRepositorioDeUsuarios.agregar(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne)
-			
-			Assert.assertTrue(stubRepositorioDeUsuarios.listar(new Vegano).contains(usuarioVegano))
-			Assert.assertTrue(stubRepositorioDeUsuarios.listar(new Diabetico).contains(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne))
-		}
-		
-		//Punto 2:json parser y repo externo ------------------------------------------------
-		@Test 
-		def void testRepoExternoRecetas(){
-			val Repositorio repoExterno = new RepositorioExterno("ensalada caesar", Dificultad.FACIL, new ArrayList<String>)
-			val Busqueda busqueda = new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, new Ordenamiento, repoExterno)
-			Assert.assertTrue(busqueda.filtrar().exists[receta|receta.nombreDelPlato.matches("ensalada caesar")])
-		}
-		
-		
-		//Punto 3: Observers---------------------------------------------
-		
-		@Test
-		def void observerVeganosConsultanRecetasDificiles(){
-			busquedaVegana = new Busqueda(usuarioVegano)
-			busquedaVegana.observers.add(observerConsultaVegano)
-			busquedaVegana.filtrar()
-			
-			busquedaVeganaSegunda = new Busqueda(filtroPorGusto, usuarioVeganoSegundo)
-			busquedaVeganaSegunda.observers.add(observerConsultaVegano)
-			busquedaVeganaSegunda.filtrar()
-			
-			busquedaNoVegana = new Busqueda(usuarioDiabeticoQueNoLeGustaLaCarne)
-			busquedaNoVegana.observers.add(observerConsultaVegano)
-			busquedaNoVegana.filtrar()
-			
-			Assert.assertEquals(2, observerConsultaVegano.cantidadDeVeganosQueConsultaronRecetasDificiles())
-		}
-		
-		@Test
-		def void observerRecetasMasConsultadas(){
-			busquedaVegana = new Busqueda(usuarioVegano)
-			busquedaVegana.observers.add(observerDeLasMasConsultadas)
-			busquedaVegana.filtrar()
-			
-			busquedaVeganaSegunda = new Busqueda(filtroDeCalorias, usuarioVeganoSegundo)
-			busquedaVeganaSegunda.observers.add(observerDeLasMasConsultadas)
-			busquedaVeganaSegunda.filtrar()
-			
-			//Aca va el assert, si no me fallan los calculos la receta mas consultada aca es sopaDeVerdura
-		}
-		
-		@Test
-		def void observerRecetasMasConsultadasEnBaseAlSexo(){
-			//Masculinos
-			busquedaMasculina = new Busqueda(filtroCondicionesPreexistentes, usuarioVeganoSegundo)
-			busquedaMasculina.observers.add(observerMasConsultadaPorSexo)
-			busquedaMasculina.filtrar()
-			
-			busquedaMasculinaSegunda = new Busqueda(filtroDeCalorias, usuarioDiabeticoQueNoLeGustaLaCarne)
-			busquedaMasculinaSegunda.observers.add(observerMasConsultadaPorSexo)
-			busquedaMasculinaSegunda.filtrar()
-			
-			//Femeninos
-			busquedaFemenina = new Busqueda(filtroPorGusto, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne)
-			busquedaFemenina.observers.add(observerMasConsultadaPorSexo)
-			busquedaFemenina.filtrar()
-			
-			busquedaFemeninaSegunda = new Busqueda(filtroDeCalorias, usuarioSinCondiciones)
-			busquedaFemeninaSegunda.observers.add(observerMasConsultadaPorSexo)
-			busquedaFemeninaSegunda.filtrar()
-			
-			//Asserts (creo que ir pensando que receta da cada observer es mas dificil que codificar jaja)
-			
-			//Masculino deberia dar sopaDeVerdura
-			//Femenino deberia dar milanesa
-		}
-		
-		@Test
-		def void observerDeLaHora(){
-			
-		}
-		
+
+	//Punto 1: Repositorio De Usuarios-------------------------------	
+	//Hago el limpiartodo() al principio de cada test porque no arranca de cero en cada uno, si en el test 1 agregue un usuario al repo, en el test 2 ya aparece como agregado
+	@Test
+	def void agregoYQuitoUsuariosDelRepositorio() {
+		stubRepositorioDeUsuarios.limpiarTodo()
+		stubRepositorioDeUsuarios.limpiarPendientes()
+
+		Assert.assertEquals(0, stubRepositorioDeUsuarios.todosLosUsuarios.size)
+		stubRepositorioDeUsuarios.agregar(usuarioSinCondiciones)
+		stubRepositorioDeUsuarios.agregar(usuarioVegano)
+		Assert.assertEquals(2, stubRepositorioDeUsuarios.todosLosUsuarios.size)
+		stubRepositorioDeUsuarios.quitar(usuarioSinCondiciones)
+		Assert.assertEquals(1, stubRepositorioDeUsuarios.todosLosUsuarios.size)
 	}
+
+	@Test
+	def void actualizoUnUsuario() {
+		stubRepositorioDeUsuarios.limpiarTodo()
+		stubRepositorioDeUsuarios.limpiarPendientes()
+
+		stubRepositorioDeUsuarios.agregar(usuarioSinCondiciones)
+		Assert.assertEquals(1, stubRepositorioDeUsuarios.todosLosUsuarios.size)
+
+		//Creo un usuario que se llame igual y le cambio el peso
+		val Usuario nuevoUsuario = new Usuario(40, 1.64, Femenino, "Esteban", fechaValida, new Rutina(61, true),
+			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
+
+		stubRepositorioDeUsuarios.update(nuevoUsuario)
+		Assert.assertTrue(stubRepositorioDeUsuarios.get("Esteban").equals(usuarioSinCondiciones))
+		Assert.assertTrue(stubRepositorioDeUsuarios.get("Esteban").peso.equals(40))
+
+	}
+
+	@Test
+	def void todosLosUsuariosEnListaPendienteAceptoUnoYDisminuye() {
+		stubRepositorioDeUsuarios.limpiarTodo()
+
+		//Hay 6 usuarios creados en el @Before pendientes de aceptar solicitud
+		Assert.assertEquals(6, stubRepositorioDeUsuarios.usuariosPendientes.size)
+		stubRepositorioDeUsuarios.aceptarIncorporacion(usuarioVegano)
+		Assert.assertEquals(5, stubRepositorioDeUsuarios.usuariosPendientes.size)
+	}
+
+	@Test(expected=typeof(Exception))
+	def void noAceptoIncorporacionDeUsuarioMuestraMotivoDeRechazo() {
+		stubRepositorioDeUsuarios.limpiarTodo()
+
+		stubRepositorioDeUsuarios.rechazarIncorporacion(usuarioVegano)
+
+	}
+
+	@Test
+	def void buscoUsuarioPorNombre() {
+		stubRepositorioDeUsuarios.limpiarTodo()
+
+		stubRepositorioDeUsuarios.agregar(usuarioSinCondiciones)
+		stubRepositorioDeUsuarios.agregar(usuarioVegano)
+
+		//El Usuario vegano se llama 'Marina'
+		Assert.assertTrue(stubRepositorioDeUsuarios.get("Marina").equals(usuarioVegano))
+	}
+
+	@Test
+	def void buscoVariosUsuariosPorElMismoNombre() {
+		stubRepositorioDeUsuarios.limpiarTodo()
+
+		stubRepositorioDeUsuarios.agregar(usuarioSinCondiciones)
+		stubRepositorioDeUsuarios.agregar(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne)
+
+		//Los dos usuarios se llaman 'Esteban'
+		Assert.assertTrue(stubRepositorioDeUsuarios.listar(usuarioSinCondiciones).contains(usuarioSinCondiciones))
+		Assert.assertTrue(
+			stubRepositorioDeUsuarios.listar(usuarioSinCondiciones).contains(
+				usuarioConSobrePesoYDiabetesQueLeGustaLaCarne))
+	}
+
+	@Test
+	def void buscoVariosUsuariosPorCondicionPreexistente() {
+		stubRepositorioDeUsuarios.limpiarTodo()
+
+		stubRepositorioDeUsuarios.agregar(usuarioVegano)
+		stubRepositorioDeUsuarios.agregar(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne)
+
+		Assert.assertTrue(stubRepositorioDeUsuarios.listar(new Vegano).contains(usuarioVegano))
+		Assert.assertTrue(
+			stubRepositorioDeUsuarios.listar(new Diabetico).contains(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne))
+	}
+
+	//Punto 2:json parser y repo externo ------------------------------------------------
+	@Test
+	def void testRepoExternoRecetas() {
+		val Repositorio repoExterno = new RepositorioExterno("ensalada caesar", Dificultad.FACIL, new ArrayList<String>)
+		val Busqueda busqueda = new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, new Ordenamiento,
+			repoExterno)
+		Assert.assertTrue(busqueda.filtrar().exists[receta|receta.nombreDelPlato.matches("ensalada caesar")])
+	}
+
+	//Punto 3: Observers---------------------------------------------
+	@Test
+	def void observerVeganosConsultanRecetasDificiles() {
+		busquedaVegana = new Busqueda(usuarioVegano)
+		busquedaVegana.observers.add(observerConsultaVegano)
+		busquedaVegana.filtrar()
+
+		busquedaVeganaSegunda = new Busqueda(filtroPorGusto, usuarioVeganoSegundo)
+		busquedaVeganaSegunda.observers.add(observerConsultaVegano)
+		busquedaVeganaSegunda.filtrar()
+
+		busquedaNoVegana = new Busqueda(usuarioDiabeticoQueNoLeGustaLaCarne)
+		busquedaNoVegana.observers.add(observerConsultaVegano)
+		busquedaNoVegana.filtrar()
+
+		Assert.assertEquals(2, observerConsultaVegano.cantidadDeVeganosQueConsultaronRecetasDificiles())
+	}
+
+	@Test
+	def void observerRecetasMasConsultadas() {
+		busquedaVegana = new Busqueda(usuarioVegano)
+		busquedaVegana.observers.add(observerDeLasMasConsultadas)
+		busquedaVegana.filtrar()
+
+		busquedaVeganaSegunda = new Busqueda(filtroDeCalorias, usuarioVeganoSegundo)
+		busquedaVeganaSegunda.observers.add(observerDeLasMasConsultadas)
+		busquedaVeganaSegunda.filtrar()
+
+	//Aca va el assert, si no me fallan los calculos la receta mas consultada aca es sopaDeVerdura
+	}
+
+	@Test
+	def void observerRecetasMasConsultadasEnBaseAlSexo() {
+
+		//Masculinos
+		busquedaMasculina = new Busqueda(filtroCondicionesPreexistentes, usuarioVeganoSegundo)
+		busquedaMasculina.observers.add(observerMasConsultadaPorSexo)
+		busquedaMasculina.filtrar()
+
+		busquedaMasculinaSegunda = new Busqueda(filtroDeCalorias, usuarioDiabeticoQueNoLeGustaLaCarne)
+		busquedaMasculinaSegunda.observers.add(observerMasConsultadaPorSexo)
+		busquedaMasculinaSegunda.filtrar()
+
+		//Femeninos
+		busquedaFemenina = new Busqueda(filtroPorGusto, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne)
+		busquedaFemenina.observers.add(observerMasConsultadaPorSexo)
+		busquedaFemenina.filtrar()
+
+		busquedaFemeninaSegunda = new Busqueda(filtroDeCalorias, usuarioSinCondiciones)
+		busquedaFemeninaSegunda.observers.add(observerMasConsultadaPorSexo)
+		busquedaFemeninaSegunda.filtrar()
+
+	//Asserts (creo que ir pensando que receta da cada observer es mas dificil que codificar jaja)
+	//Masculino deberia dar sopaDeVerdura
+	//Femenino deberia dar milanesa
+	}
+
+	@Test
+	def void observerDeLaHora() {
+	}
+
+}

@@ -212,7 +212,6 @@ class Usuario extends Persona {
 			peso = unUsuarioNuevo.peso
 			altura = unUsuarioNuevo.altura
 			sexo = unUsuarioNuevo.sexo
-			nombre = unUsuarioNuevo.nombre
 			fechaDeNacimiento = unUsuarioNuevo.fechaDeNacimiento
 			rutinaUsuario = unUsuarioNuevo.rutinaUsuario
 			condicionesPreexistentes = unUsuarioNuevo.condicionesPreexistentes

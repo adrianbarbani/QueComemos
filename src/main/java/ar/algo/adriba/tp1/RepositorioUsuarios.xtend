@@ -4,7 +4,7 @@ import java.util.List
 import java.util.ArrayList
 
 class RepositorioUsuarios {
-	
+
 	public List<Usuario> todosLosUsuarios = new ArrayList<Usuario>
 	public List<Usuario> usuariosPendientes = new ArrayList<Usuario>
 
@@ -19,7 +19,7 @@ class RepositorioUsuarios {
 		}
       repositorio;
 	}
-	
+
 	def void agregar(Usuario unUsuario) {
 		todosLosUsuarios.add(unUsuario)
 	}
@@ -28,46 +28,43 @@ class RepositorioUsuarios {
 		todosLosUsuarios.remove(unUsuario)
 	}
 
-	def Usuario get(String unNombre){ //la consigna dice "devuelve un usuario por su nombre" nosotros manejamos nombres con strings
-		todosLosUsuarios.findFirst[usuario| usuario.esTuNombre(unNombre)]
+	def Usuario get(String unNombre) { //la consigna dice "devuelve un usuario por su nombre" nosotros manejamos nombres con strings
+		todosLosUsuarios.findFirst[usuario|usuario.esTuNombre(unNombre)]
 	}
-	
-	def update(Usuario unUsuarioViejo,Usuario unUsuarioNuevo){//esto está mal, el usuario ya está actualizado en eltest cuando se envia el update()
-	
-	unUsuarioViejo.actualizarDatos(unUsuarioNuevo)
-	//	todosLosUsuarios.remove(unUsuario)
-	//	todosLosUsuarios.add(unUsuario)		
+
+	def update(Usuario unUsuario) {
+		this.get(unUsuario.nombre).actualizarDatos(unUsuario)
 	}
-	
-	def List<Usuario> listar(Usuario unUsuario){
-		todosLosUsuarios.filter[usuario | usuario.esTuNombre(unUsuario.nombre)].toList
+
+	def List<Usuario> listar(Usuario unUsuario) {
+		todosLosUsuarios.filter[usuario|usuario.esTuNombre(unUsuario.nombre)].toList
 	}
-	
-	def List<Usuario> listar(CondicionPreexistente unaCondicion){
-		todosLosUsuarios.filter[usuario | usuario.tenesCondicionPreexistente(unaCondicion)].toList
+
+	def List<Usuario> listar(CondicionPreexistente unaCondicion) {
+		todosLosUsuarios.filter[usuario|usuario.tenesCondicionPreexistente(unaCondicion)].toList
 	}
-	
+
 	def solicitarIncorporacion(Usuario unUsuario) {
 		usuariosPendientes.add(unUsuario)
 	}
-	
+
 	def aceptarIncorporacion(Usuario unUsuario) {
 		usuariosPendientes.remove(unUsuario)
 		this.agregar(unUsuario)
 	}
-	
+
 	def rechazarIncorporacion(Usuario unUsuario) {
 		usuariosPendientes.remove(unUsuario)
-		throw new Exception ("Motivo de rechazo: ...")
+		throw new Exception("Motivo de rechazo: ...")
 	}
-	
+
 	def void limpiarTodo() {
 		todosLosUsuarios.clear
-				
+
 	}
-	
-	def void limpiarPendientes(){
+
+	def void limpiarPendientes() {
 		usuariosPendientes.clear
 	}
-	
+
 }
