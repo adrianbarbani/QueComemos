@@ -8,41 +8,50 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Busqueda {
 
 	List<Filtro> filtros = new ArrayList<Filtro>
-	Ordenamiento orden
+	Ordenamiento orden = new DefaultOrden
 	Persona persona
 	Repositorio repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
-	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa
 
+	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden, Repositorio unRepo) {
 		filtros = unosFiltros
 		persona = unaPersona
 		orden = unOrden
 		repositorioDeRecetas = unRepo
-		
+		this.agregarObservers()
+
 	}
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden) {
 		filtros = unosFiltros
 		persona = unaPersona
 		orden = unOrden
-		repositorioDeRecetas = RepositorioRecetas.getInstance()
-		
+		this.agregarObservers()
+
 	}
 
 	new(List<Filtro> unosFiltros, Persona unaPersona) {
 		filtros = unosFiltros
 		persona = unaPersona
-		orden = new DefaultOrden
-		repositorioDeRecetas = RepositorioRecetas.getInstance()
+		this.agregarObservers()
+
 	}
 
 	new(Persona unaPersona) {
 		persona = unaPersona
-		filtros = new ArrayList<Filtro>
-		orden = new DefaultOrden
-		repositorioDeRecetas = RepositorioRecetas.getInstance()
+		this.agregarObservers()
+	}
+
+	def void agregarObservers() {
+		observers => [
+			add(ObserverDeLasMasConsultadas.getInstance())
+			add(ObserverDeHora.getInstance())
+			add(ObserverConsultaVegano.getInstance())
+			add(ObserverMasConsultadaPorSexo.getInstance())
+		]
+
 	}
 
 	def List<Receta> recetasQuePuedeVer() {

@@ -51,8 +51,8 @@ class Entrega3Tests {
 	List<Usuario> integrantesVeganoEHipertenso = new ArrayList<Usuario>
 	List<Usuario> integrantesDiabeticoEHipertenso = new ArrayList<Usuario>
 	List<Usuario> integrantesGordoYDiabetico = new ArrayList<Usuario>
-	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
 
+	//List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
 	Sexo Femenino
 	Sexo Masculino
 
@@ -208,7 +208,7 @@ class Entrega3Tests {
 			new Rutina(82, true), unasCondicionesConDiabetes, unasPreferenciasConQuesoYVerdura,
 			comidasQueDisgustanConCarne)
 
-		usuarioConSobrePesoYDiabetesQueLeGustaLaCarne = new Usuario(1500, 1.44, Femenino, "Camila", fechaValida,
+		usuarioConSobrePesoYDiabetesQueLeGustaLaCarne = new Usuario(1500, 1.44, Femenino, "Esteban", fechaValida,
 			new Rutina(10, true), unasCondicionesConDiabetes, unasPreferenciasConCarne, comidasQueDisgustanConQueso)
 
 		milanesa = new Receta => [
@@ -316,16 +316,15 @@ class Entrega3Tests {
 		compararPorCalorias = new CompararPorCalorias
 		compararPorNombre = new CompararPorNombre
 
-		observerConsultaVegano = new ObserverConsultaVegano
-		observerDeHora = new ObserverDeHora
-		observerMasConsultadaPorSexo = new ObserverMasConsultadaPorSexo
-		observerDeLasMasConsultadas = new ObserverDeLasMasConsultadas
+		observerConsultaVegano = ObserverConsultaVegano.getInstance()
+		observerDeHora = ObserverDeHora.getInstance()
+		observerMasConsultadaPorSexo = ObserverMasConsultadaPorSexo.getInstance()
+		observerDeLasMasConsultadas = ObserverDeLasMasConsultadas.getInstance()
 
-		observers.add(observerConsultaVegano)
-		observers.add(observerDeHora)
-		observers.add(observerMasConsultadaPorSexo)
-		observers.add(observerDeLasMasConsultadas)
-
+	//observers.add(observerConsultaVegano)
+	//observers.add(observerDeHora)
+	//observers.add(observerMasConsultadaPorSexo)
+	//observers.add(observerDeLasMasConsultadas)
 	}
 
 	//Punto 1: Repositorio De Usuarios-------------------------------	
@@ -427,33 +426,28 @@ class Entrega3Tests {
 
 	//Punto 3: Observers---------------------------------------------
 	@Test
-	def void observerVeganosConsultanRecetasDificiles() {
-		busquedaVegana = new Busqueda(usuarioVegano)
-		busquedaVegana.observers.add(observerConsultaVegano)
-		busquedaVegana.filtrar()
-
-		busquedaVeganaSegunda = new Busqueda(filtroPorGusto, usuarioVeganoSegundo)
-		busquedaVeganaSegunda.observers.add(observerConsultaVegano)
-		busquedaVeganaSegunda.filtrar()
-
-		busquedaNoVegana = new Busqueda(usuarioDiabeticoQueNoLeGustaLaCarne)
-		busquedaNoVegana.observers.add(observerConsultaVegano)
-		busquedaNoVegana.filtrar()
-
-		Assert.assertEquals(2, observerConsultaVegano.cantidadDeVeganosQueConsultaronRecetasDificiles())
-	}
-
-	@Test
 	def void observerRecetasMasConsultadas() {
 		busquedaVegana = new Busqueda(usuarioVegano)
-		busquedaVegana.observers.add(observerDeLasMasConsultadas)
 		busquedaVegana.filtrar()
 
 		busquedaVeganaSegunda = new Busqueda(filtroDeCalorias, usuarioVeganoSegundo)
-		busquedaVeganaSegunda.observers.add(observerDeLasMasConsultadas)
 		busquedaVeganaSegunda.filtrar()
 
-	//Aca va el assert, si no me fallan los calculos la receta mas consultada aca es sopaDeVerdura
+	}
+
+	@Test
+	def void observerVeganosConsultanRecetasDificiles() {
+
+		busquedaVegana = new Busqueda(usuarioVegano)
+		busquedaVegana.filtrar()
+
+		busquedaVeganaSegunda = new Busqueda(filtroPorGusto, usuarioVeganoSegundo)
+		busquedaVeganaSegunda.filtrar()
+
+		busquedaNoVegana = new Busqueda(usuarioDiabeticoQueNoLeGustaLaCarne)
+		busquedaNoVegana.filtrar()
+
+		Assert.assertEquals(4, observerConsultaVegano.cantidadDeVeganosQueConsultaronRecetasDificiles())
 	}
 
 	@Test
@@ -461,20 +455,24 @@ class Entrega3Tests {
 
 		//Masculinos
 		busquedaMasculina = new Busqueda(filtroCondicionesPreexistentes, usuarioVeganoSegundo)
-		busquedaMasculina.observers.add(observerMasConsultadaPorSexo)
+
+		//busquedaMasculina.observers.add(observerMasConsultadaPorSexo)
 		busquedaMasculina.filtrar()
 
 		busquedaMasculinaSegunda = new Busqueda(filtroDeCalorias, usuarioDiabeticoQueNoLeGustaLaCarne)
-		busquedaMasculinaSegunda.observers.add(observerMasConsultadaPorSexo)
+
+		//busquedaMasculinaSegunda.observers.add(observerMasConsultadaPorSexo)
 		busquedaMasculinaSegunda.filtrar()
 
 		//Femeninos
 		busquedaFemenina = new Busqueda(filtroPorGusto, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne)
-		busquedaFemenina.observers.add(observerMasConsultadaPorSexo)
+
+		//busquedaFemenina.observers.add(observerMasConsultadaPorSexo)
 		busquedaFemenina.filtrar()
 
 		busquedaFemeninaSegunda = new Busqueda(filtroDeCalorias, usuarioSinCondiciones)
-		busquedaFemeninaSegunda.observers.add(observerMasConsultadaPorSexo)
+
+		//busquedaFemeninaSegunda.observers.add(observerMasConsultadaPorSexo)
 		busquedaFemeninaSegunda.filtrar()
 
 	//Asserts (creo que ir pensando que receta da cada observer es mas dificil que codificar jaja)

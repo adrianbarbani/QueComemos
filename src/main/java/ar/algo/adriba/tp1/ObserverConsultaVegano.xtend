@@ -4,15 +4,24 @@ import java.util.List
 
 class ObserverConsultaVegano extends ObserversConsulta {
 
-	int veganosQueConsultaron
+	int veganosQueConsultaron = 0
+	
+	static ObserverConsultaVegano observerConsultaVegano = null
+	
+	private new() {
+	}
+
+	static public def ObserverConsultaVegano getInstance() {
+		if (observerConsultaVegano == null) {
+			observerConsultaVegano = new ObserverConsultaVegano()
+		}
+      observerConsultaVegano
+	}
 
 	override send(List<Receta> recetas, Persona persona) {
 		if (persona.esVegana && this.consultastePorUnaRecetaDificil(recetas)) {
 			veganosQueConsultaron = veganosQueConsultaron + 1
 		}
-
-	// mejor no imprimir cosas en el codigo
-	//System.out.println(veganosQueConsultaron + " veganos consultaron recetas dificiles") 
 	}
 
 	def boolean consultastePorUnaRecetaDificil(List<Receta> recetas) {
