@@ -4,7 +4,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 // esta clase deberia ser abstracta y los metodos no retornar nada
 @Accessors
-class CondicionPreexistente {
+abstract class CondicionPreexistente {
 	
 	String nombre
 	
@@ -22,8 +22,7 @@ class CondicionPreexistente {
 		false
 	}
 	
-	def boolean sosVegana() {
-		false
-	}
 	
+	
+		
 }
