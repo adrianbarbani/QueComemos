@@ -8,7 +8,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 //http://yuml.me/edit/683518e6
 
-// strategy --- http://yuml.me/edit/6902476b   / 	http://yuml.me/edit/6004cf5a
+// strategy --- http://yuml.me/edit/6902476b   / 	http://yuml.me/edit/6879b795
 // decorator ---- http://yuml.me/edit/bc2d9244
 @Accessors
 class Usuario extends Persona {

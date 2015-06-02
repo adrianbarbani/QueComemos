@@ -8,6 +8,7 @@ class CondicionPreexistente {
 	
 	String nombre
 	
+	
 	def boolean validacion(Usuario unUsuario){
 		true
 		// lo hago directamente en hipertenso y diabetico, asi el celiaco no tiene que overridear con un true hardcodeado
