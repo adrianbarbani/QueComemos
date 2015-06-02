@@ -356,11 +356,11 @@ class Entrega3Tests {
 			Assert.assertEquals(1, stubRepositorioDeUsuarios.todosLosUsuarios.size)
 			
 			//Cambio algunos datos
-			usuarioSinCondiciones.actualizarDatos(60, 1.64, Masculino, "Ariel", fechaValida, new Rutina(61, true),
+			val Usuario nuevoUsuario = new Usuario(60, 1.64, Masculino, "Ariel", fechaValida, new Rutina(61, true),
 			unasCondicionesVacias, unasPreferenciasVacias, unasPreferenciasVacias)
 			
-			stubRepositorioDeUsuarios.update(usuarioSinCondiciones)
-			Assert.assertEquals(1, stubRepositorioDeUsuarios.todosLosUsuarios.size)
+			stubRepositorioDeUsuarios.update(usuarioSinCondiciones, nuevoUsuario)
+			Assert.assertTrue(stubRepositorioDeUsuarios.get("Ariel").equals(usuarioSinCondiciones))
 			
 		}
 		
