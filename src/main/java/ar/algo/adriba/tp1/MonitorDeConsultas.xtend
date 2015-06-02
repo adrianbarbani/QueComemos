@@ -53,7 +53,7 @@ class MonitorDeConsultas {
 
 	//Monitor 3-------------------------
 	def consultaPorSexo(List<Receta> recetas, Persona persona) {
-		if (persona.miSexo.equals("Femenino")) { //nunca dice que las consultas las puede hacer un grupo, dejamos que se hagan individualmente por persona
+		if (persona.miSexo.equals("Femenino")) { 
 			this.consultasPor(recetas, recetasMasConsultadasPorMujeres)
 		} else {
 			this.consultasPor(recetas, recetasMasConsultadasPorHombres)
