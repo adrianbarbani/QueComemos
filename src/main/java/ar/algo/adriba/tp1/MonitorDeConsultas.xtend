@@ -34,12 +34,14 @@ class MonitorDeConsultas {
 		if (persona.esVegana && this.consultastePorUnaRecetaDificil(recetas)) {
 			veganosQueConsultaron = veganosQueConsultaron + 1
 		}
-
-		System.out.println(veganosQueConsultaron + " veganos consultaron recetas dificiles")
 	}
 
 	def boolean consultastePorUnaRecetaDificil(List<Receta> recetas) {
 		recetas.exists[receta|receta.tuDificultadEs("Dificil")]
+	}
+	
+	def int cantidadDeVeganosQueConsultaronRecetasDificiles() {
+		veganosQueConsultaron
 	}
 
 	//Monitor 2-------------------------
@@ -64,8 +66,6 @@ class MonitorDeConsultas {
 		this.consultasPor(recetas, recetasMasConsultadas)
 	}
 
-	def Receta laMasConsultada() {
-		// TODO: hacer este metodo que trae la mas consultada del map
-	}
+	
 
 }
