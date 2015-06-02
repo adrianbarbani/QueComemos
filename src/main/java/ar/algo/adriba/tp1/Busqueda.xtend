@@ -2,7 +2,9 @@ package ar.algo.adriba.tp1
 
 import java.util.ArrayList
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class Busqueda {
 
 	List<Filtro> filtros = new ArrayList<Filtro>

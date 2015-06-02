@@ -4,7 +4,7 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 
 class Hipertenso extends CondicionPreexistente {
 
-	String nombre
+	
 	new(){
 		nombre=("Hipertenso")
 	}

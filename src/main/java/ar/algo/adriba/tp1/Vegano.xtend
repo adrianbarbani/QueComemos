@@ -5,7 +5,7 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 
 class Vegano extends CondicionPreexistente {
 	
-	String nombre
+	
 	
 	new(){
 		nombre=("Vegano")
@@ -23,7 +23,6 @@ class Vegano extends CondicionPreexistente {
 		unaReceta.tenesCarne()
 	}
 	
-	override boolean sosVegana() {
-		true
+	
+	
 	}
-}

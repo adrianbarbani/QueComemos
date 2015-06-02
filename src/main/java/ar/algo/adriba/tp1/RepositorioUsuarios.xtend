@@ -32,9 +32,11 @@ class RepositorioUsuarios {
 		todosLosUsuarios.findFirst[usuario| usuario.esTuNombre(unNombre)]
 	}
 	
-	def update(Usuario unUsuario){
-		todosLosUsuarios.remove(unUsuario)
-		todosLosUsuarios.add(unUsuario)	
+	def update(Usuario unUsuarioViejo,Usuario unUsuarioNuevo){//esto está mal, el usuario ya está actualizado en eltest cuando se envia el update()
+	
+	unUsuarioViejo.actualizarDatos(unUsuarioNuevo)
+	//	todosLosUsuarios.remove(unUsuario)
+	//	todosLosUsuarios.add(unUsuario)		
 	}
 	
 	def List<Usuario> listar(Usuario unUsuario){

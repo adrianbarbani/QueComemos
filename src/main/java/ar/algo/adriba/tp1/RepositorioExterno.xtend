@@ -40,7 +40,7 @@ class RepositorioExterno implements Repositorio {
 		for (JsonValue value : jsonArray) {
 
 			val int j = 0
-			val Receta unaReceta = null
+			val Receta unaReceta = new Receta
 			val JsonArray ingredientes = jsonArray.get(i).asObject().get("ingredientes").asArray()
 
 			for (JsonValue valor : ingredientes) {
@@ -50,7 +50,6 @@ class RepositorioExterno implements Repositorio {
 			unaReceta.nombreDelPlato = jsonArray.get(i).asObject().get("nombre").asString()
 			unaReceta.caloriasReceta = jsonArray.get(i).asObject().get("totalCalorias").asInt()
 			unaReceta.dificultad = jsonArray.get(i).asObject().get("dificultadReceta").asString()
-
 			recetas.add(unaReceta)
 		}
 

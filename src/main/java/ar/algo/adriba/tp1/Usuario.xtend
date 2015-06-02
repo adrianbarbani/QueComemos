@@ -206,20 +206,18 @@ class Usuario extends Persona {
 	
 	//----------------Entrega 3----------------------------
 	
-	def void actualizarDatos(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
-		List<CondicionPreexistente> unasCondicionesPreexistentes, List<String> unasPreferenciasAlimentarias,
-		List<String> unasComidasQueLeDisgustan) {
+	def void actualizarDatos(Usuario unUsuarioNuevo) {
 
 		this => [
-			peso = unPeso
-			altura = unaAltura
-			sexo = unSexo
-			nombre = unNombre
-			fechaDeNacimiento = unaFechaDeNacimiento
-			rutinaUsuario = unaRutina
-			condicionesPreexistentes = unasCondicionesPreexistentes
-			preferenciasAlimentarias = unasPreferenciasAlimentarias
-			comidaQueLeDisgusta = unasComidasQueLeDisgustan
+			peso = unUsuarioNuevo.peso
+			altura = unUsuarioNuevo.altura
+			sexo = unUsuarioNuevo.sexo
+			nombre = unUsuarioNuevo.nombre
+			fechaDeNacimiento = unUsuarioNuevo.fechaDeNacimiento
+			rutinaUsuario = unUsuarioNuevo.rutinaUsuario
+			condicionesPreexistentes = unUsuarioNuevo.condicionesPreexistentes
+			preferenciasAlimentarias = unUsuarioNuevo.preferenciasAlimentarias
+			comidaQueLeDisgusta = unUsuarioNuevo.comidaQueLeDisgusta
 		]
 	
 	}
