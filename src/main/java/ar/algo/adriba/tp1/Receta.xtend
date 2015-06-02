@@ -78,6 +78,7 @@ public class Receta implements Cosas {
 	}
 
 	new() {
+		this.tipo = new Publica
 		RepositorioRecetas.getInstance().agregar(this)
 	}
 

@@ -39,6 +39,7 @@ import ar.algo.adriba.tp1.ObserverDeLasMasConsultadas
 import ar.algo.adriba.tp1.ObserverMasConsultadaPorSexo
 import ar.algo.adriba.tp1.ObserversConsulta
 import ar.algo.adriba.tp1.Busqueda
+import ar.algo.adriba.tp1.Repositorio
 
 class Entrega3Tests {
 
@@ -413,7 +414,13 @@ class Entrega3Tests {
 			Assert.assertTrue(stubRepositorioDeUsuarios.listar(new Diabetico).contains(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne))
 		}
 		
-		//Punto 2:json------------------------------------------------
+		//Punto 2:json parser y repo externo ------------------------------------------------
+		@Test 
+		def void testRepoExternoRecetas(){
+			val Repositorio repoExterno = new RepositorioExterno("ensalada caesar", Dificultad.FACIL, new ArrayList<String>)
+			val Busqueda busqueda = new Busqueda(filtroCondicionesPreexistentes, usuarioSinCondiciones, new Ordenamiento, repoExterno)
+			Assert.assertTrue(busqueda.filtrar().exists[receta|receta.nombreDelPlato.matches("ensalada caesar")])
+		}
 		
 		
 		//Punto 3: Observers---------------------------------------------
