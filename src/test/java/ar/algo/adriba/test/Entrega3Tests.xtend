@@ -33,6 +33,12 @@ import org.junit.Before
 import org.junit.Test
 import queComemos.entrega3.dominio.Dificultad
 import ar.algo.adriba.tp1.RepositorioExterno
+import ar.algo.adriba.tp1.ObserverConsultaVegano
+import ar.algo.adriba.tp1.ObserverDeHora
+import ar.algo.adriba.tp1.ObserverDeLasMasConsultadas
+import ar.algo.adriba.tp1.ObserverMasConsultadaPorSexo
+import ar.algo.adriba.tp1.ObserversConsulta
+import ar.algo.adriba.tp1.Busqueda
 
 class Entrega3Tests {
 
@@ -44,6 +50,7 @@ class Entrega3Tests {
 	List<Usuario> integrantesVeganoEHipertenso = new ArrayList<Usuario>
 	List<Usuario> integrantesDiabeticoEHipertenso = new ArrayList<Usuario>
 	List<Usuario> integrantesGordoYDiabetico = new ArrayList<Usuario>
+	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
 
 	Sexo Femenino
 	Sexo Masculino
@@ -108,12 +115,20 @@ class Entrega3Tests {
 	List<Filtro> filtroDeIngredientesCaros = new ArrayList<Filtro>
 	List<Filtro> filtroDeIngredientesCarosYCalorias = new ArrayList<Filtro>
 	List<Filtro> filtroCondicionesPreexistentes = new ArrayList<Filtro>
-
+	
+	Busqueda busquedaVegana
+	
 	Ordenamiento mostrarLosPrimerosDiez
 	Ordenamiento mostrarResultadosPares
 	Ordenamiento compararPorCalorias
 	Ordenamiento compararPorNombre
-
+	
+	ObserverConsultaVegano observerConsultaVegano
+	ObserversConsulta observerDeHora
+	ObserversConsulta observerMasConsultadaPorSexo
+	ObserversConsulta observerDeLasMasConsultadas
+	
+		
 	@Before
 	def void init() {
 
@@ -195,6 +210,7 @@ class Entrega3Tests {
 			subRecetaseIngredientes.add(panRallado)
 			subRecetaseIngredientes.add(carne)
 			caloriasReceta = 5000
+			dificultad=("Dificil")
 		]
 
 		milanesaNapolitana = new Receta => [
@@ -215,6 +231,7 @@ class Entrega3Tests {
 			subRecetaseIngredientes.add(verdura)
 			subRecetaseIngredientes.add(sal)
 			caloriasReceta = 200
+			dificultad=("Dificil")
 		]
 
 		pizza = new Receta => [
@@ -290,6 +307,16 @@ class Entrega3Tests {
 		mostrarResultadosPares = new MostrarResultadosPares
 		compararPorCalorias = new CompararPorCalorias
 		compararPorNombre = new CompararPorNombre
+		
+		observerConsultaVegano = new ObserverConsultaVegano
+		observerDeHora = new ObserverDeHora
+	 	observerMasConsultadaPorSexo = new ObserverMasConsultadaPorSexo
+		observerDeLasMasConsultadas = new ObserverDeLasMasConsultadas
+		
+		observers.add(observerConsultaVegano)
+		observers.add(observerDeHora)
+		observers.add(observerMasConsultadaPorSexo)
+		observers.add(observerDeLasMasConsultadas)
 
 	}
 	
@@ -375,5 +402,12 @@ class Entrega3Tests {
 			Assert.assertTrue(stubRepositorioDeUsuarios.listar(new Diabetico).contains(usuarioConSobrePesoYDiabetesQueLeGustaLaCarne))
 		}*/
 		
+		@Test
+		def void observerVeganoConsultaRecetasDificiles(){
+			busquedaVegana = new Busqueda(usuarioVegano)
+			busquedaVegana.filtrar()
+			Assert.assertTrue(usuarioVegano.esVegana())
+			Assert.assertEquals(2, observerConsultaVegano.cantidadDeVeganosQueConsultaronRecetasDificiles())
+		}
 
 	}
