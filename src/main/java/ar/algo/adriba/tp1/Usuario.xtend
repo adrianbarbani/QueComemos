@@ -62,6 +62,10 @@ class Usuario extends Persona {
 		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 
 	}
+	
+	new() {
+		
+	}
 
 	//-------------------------------------------------------------------------------------------
 	// parte1 "validar un usuario"
@@ -236,6 +240,31 @@ class Usuario extends Persona {
 	
 	override boolean esVegana(){
 		condicionesPreexistentes.exists[condicion | condicion.nombre.equals("Vegano")] 
+	}
+	
+	//---------Entrega 4 (para el builder, igualmente no borro ni comento la forma en que lo hicimos antes)
+	
+	def validacionDeDatos() {
+		if (validacionPeso() == false)
+			throw new Exception("El peso debe ser distinto de 0")
+
+		if (validacionAltura() == false)
+			throw new Exception("La altura debe ser distinta de 0")
+
+		if (validacionRutina() == false)
+			throw new Exception("La rutina no fue ingresada")
+
+		if (validacionNombre() == false)
+			throw new Exception("El nombre debe tener un minimo de 5 caracteres")
+
+		if (validacionCondicionesPreexistentes() == false)
+			throw new Exception("ERROR: condiciones Preexistentes no validas")
+			
+		
+	}
+	
+	def solicitarIncorporacion() {
+		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 	}
 	
 }
