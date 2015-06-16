@@ -14,6 +14,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Usuario extends Persona {
 	int peso
 	double altura
+	boolean marcarTodasLasRecetasConsultadasComoFavoritas
 	Sexo sexo
 	String nombre
 	Fecha fechaDeNacimiento
@@ -23,7 +24,7 @@ class Usuario extends Persona {
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
 	List<Receta> recetasFavoritas = new ArrayList<Receta>
-
+	
 	//------------entrega2---------------
 	List<GrupoDeUsuario> grupos = new ArrayList<GrupoDeUsuario> // coleccion de grupos de los que soy miembro.
 
@@ -195,7 +196,7 @@ class Usuario extends Persona {
 		unaReceta.paraQueCondicionesSoyInadecuada(this.condicionesPreexistentes).empty
 	}
 
-	def void marcarComoFavorita(Receta unaReceta) {
+	override marcarComoFavorita(Receta unaReceta) {
 
 		if (puedoVerReceta(unaReceta)) {
 			recetasFavoritas.add(unaReceta)
@@ -265,6 +266,10 @@ class Usuario extends Persona {
 	
 	def solicitarIncorporacion() {
 		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
+	}
+	
+	override marcarTodoComoFavorito() {
+		marcarTodasLasRecetasConsultadasComoFavoritas
 	}
 	
 }

@@ -12,9 +12,11 @@ class Busqueda {
 	Persona persona
 	Repositorio repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
-	List <ReglaDeMonitoreo> reglas = new ArrayList // agregue para entrega 4
+	//List <ReglaDeMonitoreo> reglas = new ArrayList // metodo alternativo que me parecio largo al pedo
+	Monitor mejorasMonitor
 
 	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa
+	
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden, Repositorio unRepo) {
 		filtros = unosFiltros
