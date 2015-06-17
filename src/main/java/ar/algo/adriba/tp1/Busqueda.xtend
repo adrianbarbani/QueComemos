@@ -12,7 +12,6 @@ class Busqueda {
 	Persona persona
 	Repositorio repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
-	//List <ReglaDeMonitoreo> reglas = new ArrayList // metodo alternativo que me parecio largo al pedo
 	Monitor mejorasMonitor
 
 	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa
