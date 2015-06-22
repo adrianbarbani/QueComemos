@@ -1,17 +1,36 @@
 package ar.algo.adriba.tp1
 
-import ar.algo.adriba.tp1.Monitor
-import java.util.ArrayList
 import java.util.List
 
 class MonitorMail extends Monitor {
-	
-	List<Persona>destinatariosDeMails = new ArrayList<Persona>
-		
-	override execute(List<Receta> recetas, Persona persona) {
-		if (destinatariosDeMails.contains(persona)){
-			this.enviarMail(this.cantidadDeRecetas(recetas))// tambien tendria que enviar los parametros de busqueda que no se como se hace
-		}
+
+	String para = null // en el test le clavamos "administrador@quecomemos.com"
+	MessageSender messageSender
+			
+	new(MessageSender pMessageSender, String destinatario) {
+		messageSender = pMessageSender
+		para = destinatario
 	}
-	
+			
+	override doExecute(List<Receta> recetas, Persona persona, List<Filtro> filtros){
+		
+			this.enviarMail(recetas, persona, filtros)
+		
+	}
+
+	def void enviarMail(List<Receta> recetas, Persona persona, List<Filtro> filtros) {
+
+		val nuevoMail = new Mail => [
+			to = para
+			from = "que@comemos.com"
+			titulo = "Notificacion de consulta de usuario " + persona.getNombre()
+			message = 
+			"Cantidad de recetas: " + String.valueOf(this.cantidadDeRecetas(recetas)) + " " + "Filtros usados: " + String.join(", ", filtros.map[filtro|filtro.nombreFiltro])
+				
+		]
+		
+		messageSender.send(nuevoMail)
+	}
+
+
 }

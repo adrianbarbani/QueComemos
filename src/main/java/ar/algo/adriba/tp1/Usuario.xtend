@@ -5,9 +5,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 //http://yuml.me/edit/9f1e3245 - nuevo diagrama -- 
-
 //http://yuml.me/edit/683518e6
-
 // strategy --- http://yuml.me/edit/6902476b   / 	http://yuml.me/edit/6879b795
 // decorator ---- http://yuml.me/edit/bc2d9244
 @Accessors
@@ -24,7 +22,7 @@ class Usuario extends Persona {
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
 	List<Receta> recetasFavoritas = new ArrayList<Receta>
-	
+
 	//------------entrega2---------------
 	List<GrupoDeUsuario> grupos = new ArrayList<GrupoDeUsuario> // coleccion de grupos de los que soy miembro.
 
@@ -59,13 +57,12 @@ class Usuario extends Persona {
 
 		if (validacionCondicionesPreexistentes() == false)
 			throw new Exception("ERROR: condiciones Preexistentes no validas")
-			
+
 		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 
 	}
-	
+
 	new() {
-		
 	}
 
 	//-------------------------------------------------------------------------------------------
@@ -208,9 +205,8 @@ class Usuario extends Persona {
 	override tieneSobrepeso() {
 		this.imc() > 30
 	}
-	
+
 	//----------------Entrega 3----------------------------
-	
 	def void actualizarDatos(Usuario unUsuarioNuevo) {
 
 		this => [
@@ -223,28 +219,26 @@ class Usuario extends Persona {
 			preferenciasAlimentarias = unUsuarioNuevo.preferenciasAlimentarias
 			comidaQueLeDisgusta = unUsuarioNuevo.comidaQueLeDisgusta
 		]
-	
+
 	}
-	
-	
+
 	def boolean esTuNombre(String unNombre) {
 		nombre.matches(unNombre)
 	}
-	
+
 	def boolean tenesCondicionPreexistente(CondicionPreexistente unaCondicion) {
-		condicionesPreexistentes.exists[condicion | condicion.nombre.equals(unaCondicion.nombre)]
+		condicionesPreexistentes.exists[condicion|condicion.nombre.equals(unaCondicion.nombre)]
 	}
 
-	override String miSexo(){
+	override String miSexo() {
 		sexo.nombre
 	}
-	
-	override boolean esVegana(){
-		condicionesPreexistentes.exists[condicion | condicion.nombre.equals("Vegano")] 
+
+	override boolean esVegana() {
+		condicionesPreexistentes.exists[condicion|condicion.nombre.equals("Vegano")]
 	}
-	
+
 	//---------Entrega 4 (para el builder, igualmente no borro ni comento la forma en que lo hicimos antes)
-	
 	def validacionDeDatos() {
 		if (validacionPeso() == false)
 			throw new Exception("El peso debe ser distinto de 0")
@@ -260,16 +254,19 @@ class Usuario extends Persona {
 
 		if (validacionCondicionesPreexistentes() == false)
 			throw new Exception("ERROR: condiciones Preexistentes no validas")
-			
-		
+
 	}
-	
+
 	def solicitarIncorporacion() {
 		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 	}
-	
+
 	override marcarTodoComoFavorito() {
 		marcarTodasLasRecetasConsultadasComoFavoritas
 	}
-	
+
+	override es(String unNombre) {
+		nombre.matches(unNombre)
+	}
+
 }

@@ -116,5 +116,9 @@ public class Receta implements Cosas {
 	def tuDificultadEs(String unaDificultad) {
 		dificultad.equals(unaDificultad)
 	}
+	
+	def String getNombreDelplato() {
+	nombreDelPlato
+	}
 
 }

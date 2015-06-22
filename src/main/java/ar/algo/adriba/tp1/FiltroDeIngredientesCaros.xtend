@@ -2,11 +2,15 @@ package ar.algo.adriba.tp1
 
 import ar.algo.adriba.tp1.Filtro
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
-class FiltroDeIngredientesCaros implements Filtro {
-	
+@Accessors
+class FiltroDeIngredientesCaros extends Filtro {
+
+	String nombreFiltro = "Filtro de ingredientes caros"
+
 	override filtrar(List<Receta> recetas, Persona persona) {
 		recetas.filter[receta|receta.noTieneIngredientesCaros()].toList
 	}
-		
+
 }

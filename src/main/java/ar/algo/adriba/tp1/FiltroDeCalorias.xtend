@@ -1,8 +1,12 @@
 package ar.algo.adriba.tp1
 
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
-class FiltroDeCalorias implements Filtro {
+@Accessors
+class FiltroDeCalorias extends Filtro {
+
+	String nombreFiltro = "Filtro por calorias"
 
 	override filtrar(List<Receta> recetas, Persona persona) {
 		if (persona.tieneSobrepeso()) {

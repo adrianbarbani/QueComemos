@@ -1,5 +1,8 @@
 package ar.algo.adriba.tp1
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
+@Accessors
 abstract class Persona {
 	
 	
@@ -23,6 +26,9 @@ abstract class Persona {
 	
 	def void marcarComoFavorita(Receta receta)
 	
+	def boolean es(String unNombre)
+	
+	def String getNombre()
 	
 
 }

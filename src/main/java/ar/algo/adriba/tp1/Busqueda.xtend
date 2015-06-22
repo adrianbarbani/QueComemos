@@ -12,10 +12,9 @@ class Busqueda {
 	Persona persona
 	Repositorio repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
-	Monitor mejorasMonitor
+	List<Monitor> acciones = new ArrayList<Monitor> // en el test los creamos a manopla y los agregamos a la búsqueda
 
-	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa
-	
+	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa para la entrega 3
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden, Repositorio unRepo) {
 		filtros = unosFiltros
@@ -67,9 +66,8 @@ class Busqueda {
 	}
 
 	def void loguear() {
-
-		observers.forEach[observer|observer.send(pasarPorFiltros(recetasQuePuedeVer()), persona)] // habia un loop infinito :P
-
+		
+		observers.forEach[observer|observer.send(pasarPorFiltros(recetasQuePuedeVer()), persona)]
 	}
 
 	def List<Receta> pasarPorFiltros(List<Receta> recetas) {
@@ -83,7 +81,7 @@ class Busqueda {
 
 	//------Forma alternativa
 	def List<Receta> filtrarAlternativo() {
-		monitor.observer(pasarPorFiltros(recetasQuePuedeVer()), persona) // rescatando otro loop infinito
+		monitor.observer(pasarPorFiltros(recetasQuePuedeVer()), persona)
 		this.mostrar(pasarPorFiltros(recetasQuePuedeVer()))
 	}
 

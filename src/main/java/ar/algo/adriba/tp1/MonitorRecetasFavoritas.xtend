@@ -4,11 +4,13 @@ import java.util.List
 
 class MonitorRecetasFavoritas extends Monitor {
 	
-	override execute(List<Receta> recetas, Persona persona) {
-		if(persona.marcarTodoComoFavorito){
-			recetas.forEach[receta|persona.marcarComoFavorita(receta)]
-		}
+	override doExecute(List<Receta> recetas, Persona persona, List<Filtro> filtros) {
+		
+	recetas.forEach[receta|persona.marcarComoFavorita(receta)]
+		
 	}
 	
 	
 }
+
+

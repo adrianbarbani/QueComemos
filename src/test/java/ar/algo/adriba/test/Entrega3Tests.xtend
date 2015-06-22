@@ -321,10 +321,6 @@ class Entrega3Tests {
 		observerMasConsultadaPorSexo = ObserverMasConsultadaPorSexo.getInstance()
 		observerDeLasMasConsultadas = ObserverDeLasMasConsultadas.getInstance()
 
-	//observers.add(observerConsultaVegano)
-	//observers.add(observerDeHora)
-	//observers.add(observerMasConsultadaPorSexo)
-	//observers.add(observerDeLasMasConsultadas)
 	}
 
 	//Punto 1: Repositorio De Usuarios-------------------------------	
@@ -456,28 +452,22 @@ class Entrega3Tests {
 		//Masculinos
 		busquedaMasculina = new Busqueda(filtroCondicionesPreexistentes, usuarioVeganoSegundo)
 
-		//busquedaMasculina.observers.add(observerMasConsultadaPorSexo)
 		busquedaMasculina.filtrar()
 
 		busquedaMasculinaSegunda = new Busqueda(filtroDeCalorias, usuarioDiabeticoQueNoLeGustaLaCarne)
 
-		//busquedaMasculinaSegunda.observers.add(observerMasConsultadaPorSexo)
 		busquedaMasculinaSegunda.filtrar()
 
 		//Femeninos
 		busquedaFemenina = new Busqueda(filtroPorGusto, usuarioConSobrePesoYDiabetesQueLeGustaLaCarne)
 
-		//busquedaFemenina.observers.add(observerMasConsultadaPorSexo)
 		busquedaFemenina.filtrar()
 
 		busquedaFemeninaSegunda = new Busqueda(filtroDeCalorias, usuarioSinCondiciones)
 
-		//busquedaFemeninaSegunda.observers.add(observerMasConsultadaPorSexo)
 		busquedaFemeninaSegunda.filtrar()
 
-	//Asserts (creo que ir pensando que receta da cada observer es mas dificil que codificar jaja)
-	//Masculino deberia dar sopaDeVerdura
-	//Femenino deberia dar milanesa
+	
 	}
 
 	@Test

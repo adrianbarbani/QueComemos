@@ -10,6 +10,7 @@ import java.util.Collections
 import java.util.LinkedHashMap
 import java.util.Map.Entry
 
+// esto se uso solo para la entrega 3, no se USA
 class MonitorDeConsultas {
 
 	int veganosQueConsultaron
