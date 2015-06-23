@@ -51,17 +51,6 @@ class GrupoDeUsuario extends Persona {
 		integrantes.forall[usuario|usuario.esVegana()]
 	}
 
-	override marcarTodoComoFavorito() {
-		false
-	}
 
-	override marcarComoFavorita(Receta receta) {
-		throw new Exception("No se puede llegar nunca hasta aca, igual no se puede agregar fav en grupo de usuario")
-	}
-
-	override es(String unNombre) {
-		nombre.matches(unNombre)
-	}
-	
 	
 }

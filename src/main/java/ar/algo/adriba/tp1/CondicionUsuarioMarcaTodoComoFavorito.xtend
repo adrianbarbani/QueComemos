@@ -7,7 +7,7 @@ class CondicionUsuarioMarcaTodoComoFavorito implements CondicionCommand {
 	
 	override satisface(List<Receta> recetas, Persona persona) {
 		
-	persona.marcarTodoComoFavorito
+	persona.marcarTodoComoFavorito()
 	
 	}
 	

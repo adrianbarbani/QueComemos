@@ -1,13 +1,16 @@
 package ar.algo.adriba.tp1
 
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class MonitorMail extends Monitor {
 
 	String para = null // en el test le clavamos "administrador@quecomemos.com"
 	MessageSender messageSender
 			
-	new(MessageSender pMessageSender, String destinatario) {
+	new(MessageSender pMessageSender, String destinatario, CondicionCommand unaCondicion) {
+		super(unaCondicion)
 		messageSender = pMessageSender
 		para = destinatario
 	}

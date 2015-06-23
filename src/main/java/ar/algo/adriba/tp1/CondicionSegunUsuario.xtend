@@ -19,4 +19,9 @@ class CondicionSegunUsuario implements CondicionCommand {
 		usuarioEnLaMira
 	}
 
+	new(String unNombre) {
+		usuarioEnLaMira = unNombre
+
+	}
+
 }

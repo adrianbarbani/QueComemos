@@ -9,6 +9,10 @@ class MonitorLog extends Monitor {
 	
 	// usamos SLF4J para logging
 	final Logger logger = LoggerFactory.getLogger(MonitorLog)
+	
+	new(CondicionCommand unaCondicion) {
+		super(unaCondicion)
+	}
 
 	override doExecute(List<Receta> recetas, Persona persona, List<Filtro> filtros) {
 		this.log(String.join(", ", recetas.map[receta|receta.nombreDelplato]))

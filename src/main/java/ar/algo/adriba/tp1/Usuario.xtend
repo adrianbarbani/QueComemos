@@ -12,7 +12,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Usuario extends Persona {
 	int peso
 	double altura
-	boolean marcarTodasLasRecetasConsultadasComoFavoritas
 	Fecha fechaDeNacimiento
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
 	List<String> preferenciasAlimentarias = new ArrayList<String>
@@ -150,15 +149,7 @@ class Usuario extends Persona {
 		unaReceta.paraQueCondicionesSoyInadecuada(this.condicionesPreexistentes).empty
 	}
 
-	override marcarComoFavorita(Receta unaReceta) {
-
-		if (puedoVerReceta(unaReceta)) {
-			recetasFavoritas.add(unaReceta)
-		} else {
-			throw new Exception("No puede ver esta receta.")
-		}
-	}
-
+	
 	override tieneSobrepeso() {
 		this.imc() > 30
 	}
@@ -216,12 +207,5 @@ class Usuario extends Persona {
 		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 	}
 
-	override marcarTodoComoFavorito() {
-		marcarTodasLasRecetasConsultadasComoFavoritas
-	}
-
-	override es(String unNombre) {
-		nombre.matches(unNombre)
-	}
 
 }

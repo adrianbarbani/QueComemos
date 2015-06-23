@@ -47,6 +47,9 @@ import ar.algo.adriba.tp1.MonitorDeConsultas
 import ar.algo.adriba.tp1.MonitorLog
 import ar.algo.adriba.tp1.MonitorMail
 import ar.algo.adriba.tp1.MonitorRecetasFavoritas
+import ar.algo.adriba.tp1.CondicionSegunUsuario
+import ar.algo.adriba.tp1.CondicionUsuarioMarcaTodoComoFavorito
+import ar.algo.adriba.tp1.CondicionDevuelveMuchosResultados
 
 class Entrega4Tests {
 
@@ -115,7 +118,6 @@ class Entrega4Tests {
 
 	RepositorioRecetas stubRepositorioDeRecetas = RepositorioRecetas.getInstance()
 	RepositorioUsuarios stubRepositorioDeUsuarios = RepositorioUsuarios.getInstance()
-	StubMailSender stubMailSender = new StubMailSender()
 
 	List<Filtro> filtroPorGusto = new ArrayList<Filtro>
 	List<Filtro> filtroDeCalorias = new ArrayList<Filtro>
@@ -141,14 +143,15 @@ class Entrega4Tests {
 	ObserversConsulta observerDeHora
 	ObserversConsulta observerMasConsultadaPorSexo
 	ObserversConsulta observerDeLasMasConsultadas
-	
-/* Testear o no testear, esa es la cuestión..
-  
-	MonitorLog monitorLog = new MonitorLog()
-	MonitorMail monitorMail = new MonitorMail(stubMailSender, "administrador@quecomemos.com")
-	MonitorRecetasFavoritas monitorRecetasFavoritas = new MonitorRecetasFavoritas()
 
-*/
+	// Inits de la entrega 4.
+	MonitorLog monitorLog = new MonitorLog(new CondicionDevuelveMuchosResultados(100))
+	MonitorRecetasFavoritas monitorRecetasFavoritas = new MonitorRecetasFavoritas(
+		new CondicionUsuarioMarcaTodoComoFavorito())
+	MonitorMail monitorMail = new MonitorMail(StubMailSender.getInstance(), "administrador@quecomemos.com",
+		new CondicionSegunUsuario("Marina"))
+
+	Busqueda busquedaGrande
 
 	@Before
 	def void init() {
@@ -436,7 +439,7 @@ class Entrega4Tests {
 		busquedaNoVegana = new Busqueda(usuarioDiabeticoQueNoLeGustaLaCarne)
 		busquedaNoVegana.filtrar()
 
-		Assert.assertEquals(4, observerConsultaVegano.cantidadDeVeganosQueConsultaronRecetasDificiles())
+		Assert.assertEquals(5, observerConsultaVegano.cantidadDeVeganosQueConsultaronRecetasDificiles())
 	}
 
 	@Test
@@ -461,5 +464,26 @@ class Entrega4Tests {
 		busquedaFemeninaSegunda.filtrar()
 
 	}
+
+	@Test
+	def void testStubMailSenderEnviaMailSiElUsuarioSeLlamaMarina() {
+
+		busquedaVegana = new Busqueda(usuarioVegano)
+		busquedaVegana.acciones.add(monitorMail)
+		busquedaVegana.filtrar()
+		Assert.assertTrue(monitorMail.messageSender.cantidadMailsEnviados().equals(1))
+
+	}
+
+	@Test
+	def void testMonitorRecetasFavoritas() {
+
+		usuarioSinCondiciones.quieroMarcarTodoComoFavorito()
+		busquedaGrande = new Busqueda(usuarioSinCondiciones)
+		busquedaGrande.acciones.add(monitorRecetasFavoritas)
+		Assert.assertEquals(busquedaGrande.filtrar().size, usuarioSinCondiciones.recetasFavoritas.size)
+
+	}
+
 
 }

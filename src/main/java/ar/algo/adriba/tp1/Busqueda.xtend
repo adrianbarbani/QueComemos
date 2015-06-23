@@ -22,7 +22,6 @@ class Busqueda {
 		orden = unOrden
 		repositorioDeRecetas = unRepo
 		this.agregarObservers()
-
 	}
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden) {
@@ -30,14 +29,12 @@ class Busqueda {
 		persona = unaPersona
 		orden = unOrden
 		this.agregarObservers()
-
 	}
 
 	new(List<Filtro> unosFiltros, Persona unaPersona) {
 		filtros = unosFiltros
 		persona = unaPersona
 		this.agregarObservers()
-
 	}
 
 	new(Persona unaPersona) {
@@ -54,6 +51,7 @@ class Busqueda {
 		]
 
 	}
+
 
 	def List<Receta> recetasQuePuedeVer() {
 		repositorioDeRecetas.todasLasRecetas().filter[unaReceta|persona.puedoVerReceta(unaReceta)].toList

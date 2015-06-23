@@ -2,13 +2,15 @@ package ar.algo.adriba.tp1
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.List
+import java.util.ArrayList
 
 @Accessors
 abstract class Persona {
-	
+
 	String nombre
 	Sexo sexo
-	List<Receta> recetasFavoritas
+	List<Receta> recetasFavoritas = new ArrayList<Receta>
+	boolean marcarTodasLasRecetasConsultadasComoFavoritas
 	
 	def boolean aceptasSugerencia(Receta unaReceta) {
 		this.esAptaParaMi(unaReceta) && this.mePuedeGustar(unaReceta)
@@ -19,19 +21,30 @@ abstract class Persona {
 	def boolean esAptaParaMi(Receta unaReceta)
 
 	def boolean puedoVerReceta(Receta receta)
-	
+
 	def boolean tieneSobrepeso()
-	
+
 	def boolean esVegana()
+
+	def void marcarComoFavorita(Receta receta){
+
+		if (puedoVerReceta(receta)) {
+			recetasFavoritas.add(receta)
+		} else {
+			throw new Exception("No puede ver esta receta.")
+		}
+	}
+
+	def boolean es(String unNombre) {
+		nombre.matches(unNombre)
+	}
+
+	def boolean marcarTodoComoFavorito() {
+		marcarTodasLasRecetasConsultadasComoFavoritas
+	}
 	
-	def boolean marcarTodoComoFavorito()
-	
-	def void marcarComoFavorita(Receta receta)
-	
-	def boolean es(String unNombre)
-	
-	// def String getNombre()
-	
-	// def Sexo getSexo()
+	def void quieroMarcarTodoComoFavorito() {
+		marcarTodasLasRecetasConsultadasComoFavoritas = true
+	}
 
 }
