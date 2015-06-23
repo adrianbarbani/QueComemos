@@ -11,7 +11,7 @@ abstract class Persona {
 	Sexo sexo
 	List<Receta> recetasFavoritas = new ArrayList<Receta>
 	boolean marcarTodasLasRecetasConsultadasComoFavoritas
-	
+
 	def boolean aceptasSugerencia(Receta unaReceta) {
 		this.esAptaParaMi(unaReceta) && this.mePuedeGustar(unaReceta)
 	}
@@ -26,10 +26,13 @@ abstract class Persona {
 
 	def boolean esVegana()
 
-	def void marcarComoFavorita(Receta receta){
+	def void marcarComoFavorita(Receta receta) {
 
 		if (puedoVerReceta(receta)) {
-			recetasFavoritas.add(receta)
+			if (!recetasFavoritas.contains(receta)) {
+
+				recetasFavoritas.add(receta)
+			}
 		} else {
 			throw new Exception("No puede ver esta receta.")
 		}
@@ -42,7 +45,7 @@ abstract class Persona {
 	def boolean marcarTodoComoFavorito() {
 		marcarTodasLasRecetasConsultadasComoFavoritas
 	}
-	
+
 	def void quieroMarcarTodoComoFavorito() {
 		marcarTodasLasRecetasConsultadasComoFavoritas = true
 	}

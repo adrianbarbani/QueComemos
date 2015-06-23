@@ -12,9 +12,7 @@ class Busqueda {
 	Persona persona
 	Repositorio repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
-	List<Monitor> acciones = new ArrayList<Monitor> // en el test los creamos a manopla y los agregamos a la búsqueda
-
-	MonitorDeConsultas monitor = new MonitorDeConsultas // forma alternativa para la entrega 3
+	List<Monitor> acciones = new ArrayList<Monitor> 
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden, Repositorio unRepo) {
 		filtros = unosFiltros
@@ -52,7 +50,6 @@ class Busqueda {
 
 	}
 
-
 	def List<Receta> recetasQuePuedeVer() {
 		repositorioDeRecetas.todasLasRecetas().filter[unaReceta|persona.puedoVerReceta(unaReceta)].toList
 	}
@@ -79,12 +76,6 @@ class Busqueda {
 	def List<Receta> mostrar(List<Receta> unasRecetas) {
 		orden.ordenar(unasRecetas)
 
-	}
-
-	//------Forma alternativa
-	def List<Receta> filtrarAlternativo() {
-		monitor.observer(pasarPorFiltros(recetasQuePuedeVer()), persona)
-		this.mostrar(pasarPorFiltros(recetasQuePuedeVer()))
 	}
 
 }
