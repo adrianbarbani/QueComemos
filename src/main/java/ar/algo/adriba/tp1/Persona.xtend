@@ -1,10 +1,14 @@
 package ar.algo.adriba.tp1
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import java.util.List
 
 @Accessors
 abstract class Persona {
 	
+	String nombre
+	Sexo sexo
+	List<Receta> recetasFavoritas
 	
 	def boolean aceptasSugerencia(Receta unaReceta) {
 		this.esAptaParaMi(unaReceta) && this.mePuedeGustar(unaReceta)
@@ -18,8 +22,6 @@ abstract class Persona {
 	
 	def boolean tieneSobrepeso()
 	
-	def String miSexo()
-	
 	def boolean esVegana()
 	
 	def boolean marcarTodoComoFavorito()
@@ -28,7 +30,8 @@ abstract class Persona {
 	
 	def boolean es(String unNombre)
 	
-	def String getNombre()
+	// def String getNombre()
 	
+	// def Sexo getSexo()
 
 }

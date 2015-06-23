@@ -7,7 +7,6 @@ import java.util.ArrayList
 @Accessors
 class GrupoDeUsuario extends Persona {
 
-	String nombre
 	List<String> preferenciasAlimenticiasGrupal = new ArrayList<String>
 	List<Usuario> integrantes = new ArrayList<Usuario>
 
@@ -15,6 +14,7 @@ class GrupoDeUsuario extends Persona {
 		nombre = unNombre
 		integrantes = unaListaDeIntegrantes
 		preferenciasAlimenticiasGrupal = unaListaDePreferencias
+		sexo = Sexo.DEFAULT
 	}
 
 	//****************************ENTREGA 2**************************************
@@ -47,10 +47,6 @@ class GrupoDeUsuario extends Persona {
 		this.imcPromedio() > 30
 	}
 
-	override miSexo() {
-		throw new UnsupportedOperationException("No se puede segmentar por sexo un grupo de usuarios!") // Que tire exception suena logico
-	}
-
 	override esVegana() {
 		integrantes.forall[usuario|usuario.esVegana()]
 	}
@@ -66,4 +62,6 @@ class GrupoDeUsuario extends Persona {
 	override es(String unNombre) {
 		nombre.matches(unNombre)
 	}
+	
+	
 }

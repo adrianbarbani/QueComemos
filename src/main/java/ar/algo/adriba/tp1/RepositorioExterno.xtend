@@ -50,7 +50,9 @@ class RepositorioExterno implements Repositorio {
 			unaReceta.nombreDelPlato = jsonArray.get(i).asObject().get("nombre").asString()
 			unaReceta.caloriasReceta = jsonArray.get(i).asObject().get("totalCalorias").asInt()
 			unaReceta.dificultad = jsonArray.get(i).asObject().get("dificultadReceta").asString()
-			recetas.add(unaReceta)
+			unaReceta.tipo = new Publica
+			recetas.add(unaReceta)		
+			
 		}
 
 		recetas.toList

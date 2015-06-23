@@ -62,11 +62,15 @@ class Busqueda {
 	// busqueda posta
 	def List<Receta> filtrar() {
 		this.loguear()
+		this.ejecutarAcciones()
 		this.mostrar(pasarPorFiltros(recetasQuePuedeVer()))
 	}
 
+	def void ejecutarAcciones() {
+		acciones.forEach[accion|accion.execute((pasarPorFiltros(recetasQuePuedeVer())), persona, filtros)]
+	}
+
 	def void loguear() {
-		
 		observers.forEach[observer|observer.send(pasarPorFiltros(recetasQuePuedeVer()), persona)]
 	}
 

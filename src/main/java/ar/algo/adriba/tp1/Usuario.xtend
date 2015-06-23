@@ -13,59 +13,17 @@ class Usuario extends Persona {
 	int peso
 	double altura
 	boolean marcarTodasLasRecetasConsultadasComoFavoritas
-	Sexo sexo
-	String nombre
 	Fecha fechaDeNacimiento
 	List<String> comidaQueLeDisgusta = new ArrayList<String>
 	List<String> preferenciasAlimentarias = new ArrayList<String>
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
-	List<Receta> recetasFavoritas = new ArrayList<Receta>
-
+	
 	//------------entrega2---------------
 	List<GrupoDeUsuario> grupos = new ArrayList<GrupoDeUsuario> // coleccion de grupos de los que soy miembro.
 
-	//----------- Constructor que valida los datos --------------------------------------------------------------------------------
-	new(int unPeso, double unaAltura, Sexo unSexo, String unNombre, Fecha unaFechaDeNacimiento, Rutina unaRutina,
-		List<CondicionPreexistente> unasCondicionesPreexistentes, List<String> unasPreferenciasAlimentarias,
-		List<String> unasComidasQueLeDisgustan) {
-
-		this => [
-			peso = unPeso
-			altura = unaAltura
-			sexo = unSexo
-			nombre = unNombre
-			fechaDeNacimiento = unaFechaDeNacimiento
-			rutinaUsuario = unaRutina
-			condicionesPreexistentes = unasCondicionesPreexistentes
-			preferenciasAlimentarias = unasPreferenciasAlimentarias
-			comidaQueLeDisgusta = unasComidasQueLeDisgustan
-		]
-
-		if (validacionPeso() == false)
-			throw new Exception("El peso debe ser distinto de 0")
-
-		if (validacionAltura() == false)
-			throw new Exception("La altura debe ser distinta de 0")
-
-		if (validacionRutina() == false)
-			throw new Exception("La rutina no fue ingresada")
-
-		if (validacionNombre() == false)
-			throw new Exception("El nombre debe tener un minimo de 5 caracteres")
-
-		if (validacionCondicionesPreexistentes() == false)
-			throw new Exception("ERROR: condiciones Preexistentes no validas")
-
-		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
-
-	}
-
-	new() {
-	}
-
-	//-------------------------------------------------------------------------------------------
+	//===============================================================
 	// parte1 "validar un usuario"
 	def boolean validacionCondicionesPreexistentes() {
 
@@ -77,7 +35,6 @@ class Usuario extends Persona {
 		}
 	}
 
-	//===============================================================
 	// validacion de Datos Obligatorios
 	def boolean validacionPeso() {
 		peso != 0
@@ -220,6 +177,8 @@ class Usuario extends Persona {
 			comidaQueLeDisgusta = unUsuarioNuevo.comidaQueLeDisgusta
 		]
 
+	this.validacionDeDatos()
+	
 	}
 
 	def boolean esTuNombre(String unNombre) {
@@ -230,15 +189,11 @@ class Usuario extends Persona {
 		condicionesPreexistentes.exists[condicion|condicion.nombre.equals(unaCondicion.nombre)]
 	}
 
-	override String miSexo() {
-		sexo.nombre
-	}
-
 	override boolean esVegana() {
 		condicionesPreexistentes.exists[condicion|condicion.nombre.equals("Vegano")]
 	}
 
-	//---------Entrega 4 (para el builder, igualmente no borro ni comento la forma en que lo hicimos antes)
+	//---------Entrega 4 
 	def validacionDeDatos() {
 		if (validacionPeso() == false)
 			throw new Exception("El peso debe ser distinto de 0")
@@ -257,7 +212,7 @@ class Usuario extends Persona {
 
 	}
 
-	def solicitarIncorporacion() {
+	def void solicitarIncorporacion() {
 		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 	}
 

@@ -65,12 +65,15 @@ class MonitorDeConsultas {
 
 	//Monitor 3-------------------------
 	def consultaPorSexo(List<Receta> recetas, Persona persona) {
-		if (persona.miSexo.equals("Femenino")) {
+		if (persona.sexo.equals(Sexo.FEMENINO)) {
 			this.consultasPor(recetas, recetasMasConsultadasPorMujeres)
 		} else {
-			this.consultasPor(recetas, recetasMasConsultadasPorHombres)
+			if (persona.sexo.equals(Sexo.MASCULINO)) {
+				this.consultasPor(recetas, recetasMasConsultadasPorHombres)
+			}
 		}
 	}
+
 
 	//Monitor 4----------------------------
 	def masConsultada(List<Receta> recetas, Persona persona) {

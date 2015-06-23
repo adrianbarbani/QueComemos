@@ -1,8 +1,8 @@
 package ar.algo.adriba.tp1
 
-import ar.algo.adriba.tp1.tipoReceta
+import ar.algo.adriba.tp1.TipoReceta
 
-class Publica implements tipoReceta {
+class Publica implements TipoReceta {
 
 	override sePuedeSugerir() {
 		true

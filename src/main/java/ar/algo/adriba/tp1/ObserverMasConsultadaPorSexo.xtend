@@ -9,7 +9,7 @@ class ObserverMasConsultadaPorSexo extends ObserversConsulta {
 	Map<Receta, Integer> recetasMasConsultadasPorMujeres = new HashMap<Receta, Integer>
 	Map<Receta, Integer> recetasMasConsultadasPorHombres = new HashMap<Receta, Integer>
 	static ObserverMasConsultadaPorSexo observerDeConsultasPorSexo = null
-	
+
 	private new() {
 	}
 
@@ -21,12 +21,12 @@ class ObserverMasConsultadaPorSexo extends ObserversConsulta {
 	}
 
 	override send(List<Receta> recetas, Persona persona) {
-		if (persona.miSexo.equals("Femenino")) {  //nunca dice que las consultas las puede hacer un grupo, dejamos que se hagan individualmente por persona
+		if (persona.sexo.equals(Sexo.FEMENINO)){
 			super.consultasPor(recetas, recetasMasConsultadasPorMujeres)
 		} else {
-			super.consultasPor(recetas, recetasMasConsultadasPorHombres)
+			if (persona.sexo.equals(Sexo.MASCULINO)){
+				super.consultasPor(recetas, recetasMasConsultadasPorHombres)
+			}
 		}
 	}
-
-
 }

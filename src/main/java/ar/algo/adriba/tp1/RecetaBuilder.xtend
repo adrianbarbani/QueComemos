@@ -9,7 +9,7 @@ class RecetaBuilder {
 		receta = new Receta
 	}
 	
-	def RecetaBuilder tipoDeReceta(tipoReceta unTipo){
+	def RecetaBuilder tipoDeReceta(TipoReceta unTipo){
 		receta.tipo=unTipo
 		this
 	}
@@ -46,7 +46,9 @@ class RecetaBuilder {
 	}
 	
 	def Receta build(){
+		RepositorioRecetas.getInstance().agregar(receta)
 		receta
+		
 	}
 	
 	

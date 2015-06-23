@@ -316,6 +316,7 @@ class Entrega3Tests {
 		compararPorCalorias = new CompararPorCalorias
 		compararPorNombre = new CompararPorNombre
 
+
 		observerConsultaVegano = ObserverConsultaVegano.getInstance()
 		observerDeHora = ObserverDeHora.getInstance()
 		observerMasConsultadaPorSexo = ObserverMasConsultadaPorSexo.getInstance()

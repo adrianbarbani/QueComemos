@@ -11,7 +11,7 @@ class MonitorLog extends Monitor {
 	final Logger logger = LoggerFactory.getLogger(MonitorLog)
 
 	override doExecute(List<Receta> recetas, Persona persona, List<Filtro> filtros) {
-		this.log(String.join(", ", recetas.map[receta|receta.nombreDelplato]))// falta integrar el framework de log
+		this.log(String.join(", ", recetas.map[receta|receta.nombreDelplato]))
 	}
 
 	def void log(String string) {

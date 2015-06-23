@@ -8,12 +8,12 @@ import org.eclipse.xtend.lib.annotations.Accessors
 public class Receta implements Cosas {
 
 	String nombreDelPlato
-	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas> 
+	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas>
 	String explicacionDeLaPreparacion
 	int caloriasReceta
 	String dificultad
 	List<String> temporada
-	tipoReceta tipo
+	TipoReceta tipo
 
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
@@ -74,10 +74,8 @@ public class Receta implements Cosas {
 		this.tipo = new Privada(unUsuario, unaReceta)
 		RepositorioRecetas.getInstance().agregar(this)
 	}
-
+	
 	new() {
-		this.tipo = new Publica
-		RepositorioRecetas.getInstance().agregar(this)
 	}
 
 	def boolean laPuedeModificar(Usuario usuario) {
@@ -112,13 +110,13 @@ public class Receta implements Cosas {
 	override esCaro() {
 		false
 	}
-	
+
 	def tuDificultadEs(String unaDificultad) {
 		dificultad.equals(unaDificultad)
 	}
-	
+
 	def String getNombreDelplato() {
-	nombreDelPlato
+		nombreDelPlato
 	}
 
 }

@@ -2,12 +2,15 @@ package ar.algo.adriba.tp1
 
 import java.util.List
 import java.util.ArrayList
+import java.util.Map
+import java.util.HashMap
 
 class RepositorioUsuarios {
 
 	public List<Usuario> todosLosUsuarios = new ArrayList<Usuario>
 	public List<Usuario> usuariosPendientes = new ArrayList<Usuario>
-
+	public Map<Usuario,String> usuariosRechazados = new HashMap<Usuario,String> // pinto un refactor de la entrega 3
+	
 	static RepositorioUsuarios repositorio = null
 
 	private new() {
@@ -28,7 +31,7 @@ class RepositorioUsuarios {
 		todosLosUsuarios.remove(unUsuario)
 	}
 
-	def Usuario get(String unNombre) { //la consigna dice "devuelve un usuario por su nombre" nosotros manejamos nombres con strings
+	def Usuario get(String unNombre) { 
 		todosLosUsuarios.findFirst[usuario|usuario.esTuNombre(unNombre)]
 	}
 
@@ -53,14 +56,13 @@ class RepositorioUsuarios {
 		this.agregar(unUsuario)
 	}
 
-	def rechazarIncorporacion(Usuario unUsuario) {
+	def String rechazarIncorporacion(Usuario unUsuario, String motivoRechazo) {
 		usuariosPendientes.remove(unUsuario)
-		throw new Exception("Motivo de rechazo: ...")
+		usuariosRechazados.put(unUsuario, motivoRechazo)
 	}
 
 	def void limpiarTodo() {
 		todosLosUsuarios.clear
-
 	}
 
 	def void limpiarPendientes() {
