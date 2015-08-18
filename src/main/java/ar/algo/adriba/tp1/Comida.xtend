@@ -1,9 +1,11 @@
 package ar.algo.adriba.tp1
 
-import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.utils.Observable
 
+@Observable
 @Accessors
 class Comida implements Cosas {
 
