@@ -40,7 +40,7 @@ class RecetaBuilder {
 		this
 	}
 	
-	def RecetaBuilder setearTemporadas(List<String> temporadas){
+	def RecetaBuilder setearTemporadas(String temporadas){
 		receta.temporada=temporadas
 		this
 	}

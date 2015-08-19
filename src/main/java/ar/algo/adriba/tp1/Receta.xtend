@@ -14,7 +14,7 @@ public class Receta implements Cosas {
 	String explicacionDeLaPreparacion
 	int caloriasReceta
 	String dificultad
-	List<String> temporada
+	String temporada
 	TipoReceta tipo
 
 	//-----------------------------------------------------------------------------------------------------
