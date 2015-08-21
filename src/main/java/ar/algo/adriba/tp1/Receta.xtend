@@ -109,6 +109,9 @@ public class Receta implements Cosas {
 		!(subRecetaseIngredientes.exists[cosas|cosas.esCaro])
 	}
 
+	override unCondimento() {
+		false
+	}
 	override esCaro() {
 		false
 	}
@@ -119,6 +122,15 @@ public class Receta implements Cosas {
 
 	def String getNombreDelplato() {
 		nombreDelPlato
+	}
+	
+	def List<Cosas> getIngredientes() {
+		subRecetaseIngredientes.filter[unaCosa|unaCosa.unIngrediente].toList
+	}
+	
+	def List<Cosas> getCondimentos(){
+		subRecetaseIngredientes.filter[unaCosa|unaCosa.unCondimento].toList
+		
 	}
 
 }

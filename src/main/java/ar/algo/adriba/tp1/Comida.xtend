@@ -12,7 +12,9 @@ class Comida implements Cosas {
 	public String nombre
 	int cantidad
 	int calorias
-	List<String> ingredientesCaros = new ArrayList<String> 
+	List<String> ingredientesCaros = new ArrayList<String>
+	 
+	
 	
 	new(int unasCalorias, String unNombre, int unaCantidad) {
 		calorias = unasCalorias
@@ -31,8 +33,11 @@ class Comida implements Cosas {
 	}
 
 	override unIngrediente() {
-		true
+		calorias == 0
+		
 	}
+	
+	
 
 	override tenesDemasiadaAzucar() {
 		this.tenes("azucar") && this.tenesMasDelLimite(100)
@@ -53,6 +58,7 @@ class Comida implements Cosas {
 	new() {
 	}
 
+	
 	override tenes(String unaCosa) {
 		nombre.matches(unaCosa)
 	}
@@ -64,5 +70,10 @@ class Comida implements Cosas {
 	override esCaro() {
 		ingredientesCaros.contains(this.nombre)
 	}
+	
+	override unCondimento() {
+		cantidad == 0
+	}
 
+ 	
 }

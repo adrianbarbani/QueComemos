@@ -45,6 +45,12 @@ class RecetaBuilder {
 		this
 	}
 	
+	def RecetaBuilder setearPreparacion (String preparacion){
+		receta.explicacionDeLaPreparacion=preparacion
+		this
+		
+	}
+	
 	def Receta build(){
 		RepositorioRecetas.getInstance().agregar(receta)
 		receta
