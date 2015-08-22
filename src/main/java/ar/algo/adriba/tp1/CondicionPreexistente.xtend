@@ -1,9 +1,11 @@
 package ar.algo.adriba.tp1
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.utils.Observable
 
 // esta clase deberia ser abstracta y los metodos no retornar nada
 @Accessors
+@Observable 
 abstract class CondicionPreexistente {
 	
 	String nombre

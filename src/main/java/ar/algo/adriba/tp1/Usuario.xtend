@@ -147,7 +147,8 @@ class Usuario extends Persona {
 	}
 
 	override esAptaParaMi(Receta unaReceta) {
-		unaReceta.getParaQueCondicionesSoyInadecuada.empty//(this.condicionesPreexistentes).empty
+		unaReceta.getParaQueCondicionesSoyInadecuada.empty//(this.condicionesPreexistentes).empty // toque este metodo despues de que cambie el metodo de 	def List<CondicionPreexistente> getParaQueCondicionesSoyInadecuada() {
+		
 	}
 
 	
