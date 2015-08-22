@@ -147,7 +147,7 @@ class Usuario extends Persona {
 	}
 
 	override esAptaParaMi(Receta unaReceta) {
-		unaReceta.paraQueCondicionesSoyInadecuada(this.condicionesPreexistentes).empty
+		unaReceta.getParaQueCondicionesSoyInadecuada.empty//(this.condicionesPreexistentes).empty
 	}
 
 	

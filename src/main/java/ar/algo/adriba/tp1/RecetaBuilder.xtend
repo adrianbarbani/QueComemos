@@ -1,7 +1,5 @@
 package ar.algo.adriba.tp1
 
-import java.util.List
-
 class RecetaBuilder {
 	Receta receta
 	

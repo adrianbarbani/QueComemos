@@ -315,6 +315,6 @@ class TestImc { // le puse un nombre descriptivo
 
 	@Test
 	def void test15CondicionesDeUnaReceta() {
-		receta1.paraQueCondicionesSoyInadecuada()
+		receta1.getParaQueCondicionesSoyInadecuada()
 	}
 }

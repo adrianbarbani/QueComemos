@@ -232,7 +232,7 @@ class Entrega1Tests {
 	//Punto 3: Conocer las condiciones preexistentes para la que una receta es inadecuada
 	@Test
 	def void condicionesPreexistentesDeUnaReceta() {
-		Assert.assertTrue(recetaValida.paraQueCondicionesSoyInadecuada(unasCondicionesPreexistentesCompletas).size > 0)
+		Assert.assertTrue(recetaValida.getParaQueCondicionesSoyInadecuada(unasCondicionesPreexistentesCompletas).size > 0)
 	}
 
 	//Punto 4: Saber si un usuario puede ver o modificar una receta dada

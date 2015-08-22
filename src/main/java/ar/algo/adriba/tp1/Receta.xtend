@@ -33,9 +33,8 @@ public class Receta implements Cosas {
 
 	//------------------------------------------------------------------------------------------------------
 	//Parte 2: Conciciones preexistentes para la que es inadecuada una receta
-	def List<CondicionPreexistente> paraQueCondicionesSoyInadecuada(
-		List<CondicionPreexistente> unasCondicionesPreexistentesCompletas) {
-		unasCondicionesPreexistentesCompletas.filter[condicion|condicion.sosInadecuada(this)].toList
+	def List<CondicionPreexistente> getParaQueCondicionesSoyInadecuada() {
+		RepoDeCondiciones.getInstance().todasLasCondiciones.filter[condicion|condicion.sosInadecuada(this)].toList
 	}
 
 	override tenesSalOCaldo() {
