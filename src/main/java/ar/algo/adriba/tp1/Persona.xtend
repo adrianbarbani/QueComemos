@@ -1,9 +1,12 @@
 package ar.algo.adriba.tp1
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.List
 import java.util.ArrayList
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.utils.Dependencies
 
+@Observable
 @Accessors
 abstract class Persona {
 
@@ -27,10 +30,8 @@ abstract class Persona {
 	def boolean esVegana()
 
 	def void marcarComoFavorita(Receta receta) {
-
 		if (puedoVerReceta(receta)) {
 			if (!recetasFavoritas.contains(receta)) {
-
 				recetasFavoritas.add(receta)
 			}
 		} else {
@@ -49,5 +50,17 @@ abstract class Persona {
 	def void quieroMarcarTodoComoFavorito() {
 		marcarTodasLasRecetasConsultadasComoFavoritas = true
 	}
-
+	
+	def void desmarcarComoFavorita(Receta receta){
+		recetasFavoritas.remove(receta)
+	}
+	
+	@Dependencies("recetasFavoritas")
+	def int getCantidadDeFavorita(){
+		recetasFavoritas.size
+	}
+	
+	def boolean esRecetaFavorita(Receta receta){
+		recetasFavoritas.contains(receta)
+		}
 }

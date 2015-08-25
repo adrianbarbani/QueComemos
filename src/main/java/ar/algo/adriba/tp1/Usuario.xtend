@@ -209,5 +209,6 @@ class Usuario extends Persona {
 		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 	}
 
+	
 
 }
