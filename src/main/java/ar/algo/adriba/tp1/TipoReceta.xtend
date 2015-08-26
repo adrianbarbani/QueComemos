@@ -10,5 +10,7 @@ interface TipoReceta {
 	def void cambiarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones)
 	
 	def boolean mePuedeVer(Usuario usuario, Receta unaReceta)
+	
+	
 
 }

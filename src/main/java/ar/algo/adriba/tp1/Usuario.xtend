@@ -208,6 +208,13 @@ class Usuario extends Persona {
 	def void solicitarIncorporacion() {
 		RepositorioUsuarios.getInstance().solicitarIncorporacion(this)
 	}
+	
+	override sosDuenioDe(Receta receta) {
+		if(recetasDelUsuario.contains(receta)){
+			"Creado por vos"
+		}else {"Publica"}
+		
+	}
 
 	
 

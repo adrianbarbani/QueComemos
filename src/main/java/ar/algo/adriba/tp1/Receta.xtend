@@ -131,5 +131,6 @@ public class Receta implements Cosas {
 		subRecetaseIngredientes.filter[unaCosa|unaCosa.unCondimento].toList
 		
 	}
-
+	
+	
 }

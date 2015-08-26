@@ -25,5 +25,7 @@ class Privada implements TipoReceta {
 	override mePuedeVer(Usuario unUsuario, Receta unaReceta) {
 		unUsuario.usuarioTiene(unaReceta) || unUsuario.alguienDelGrupoConoce(unaReceta)
 	}
+	
+	
 
 }

@@ -63,4 +63,7 @@ abstract class Persona {
 	def boolean esRecetaFavorita(Receta receta){
 		recetasFavoritas.contains(receta)
 		}
+	
+	def String sosDuenioDe(Receta receta)
+	
 }

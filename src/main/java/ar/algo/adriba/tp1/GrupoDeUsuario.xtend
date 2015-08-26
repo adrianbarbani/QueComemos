@@ -50,6 +50,12 @@ class GrupoDeUsuario extends Persona {
 	override esVegana() {
 		integrantes.forall[usuario|usuario.esVegana()]
 	}
+	
+	override sosDuenioDe(Receta receta) {
+		if(integrantes.exists[usr|usr.usuarioTiene(receta)]){
+			"Creada por un integrante del grupo"
+		}else{"publica"}
+	}
 
 
 	
