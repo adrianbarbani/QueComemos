@@ -4,10 +4,11 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.model.Entity
 
 @Observable
 @Accessors
-public class Receta implements Cosas {
+public class Receta extends Entity implements Cosas {
 
 	String nombreDelPlato
 	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas>

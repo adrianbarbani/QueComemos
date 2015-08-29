@@ -23,6 +23,12 @@ class RepositorioExterno implements Repositorio {
 		palabrasClave.forEach[palabra|busqueda.agregarPalabraClave(palabra)]
 
 	}
+	
+	new() {
+		this.todasLasRecetas()
+	}
+	
+	
 
 	override List<Receta> todasLasRecetas() {
 		

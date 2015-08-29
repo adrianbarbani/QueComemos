@@ -12,7 +12,7 @@ class Busqueda {
 	Persona persona
 	Repositorio repositorioDeRecetas = RepositorioRecetas.getInstance()
 	List<ObserversConsulta> observers = new ArrayList<ObserversConsulta>
-	List<Monitor> acciones = new ArrayList<Monitor> 
+	List<Monitor> acciones = new ArrayList<Monitor>
 
 	new(List<Filtro> unosFiltros, Persona unaPersona, Ordenamiento unOrden, Repositorio unRepo) {
 		filtros = unosFiltros
@@ -37,6 +37,12 @@ class Busqueda {
 
 	new(Persona unaPersona) {
 		persona = unaPersona
+		this.agregarObservers()
+	}
+
+	new(Persona unaPersona, Repositorio unRepo) {
+		persona = unaPersona
+		repositorioDeRecetas = unRepo
 		this.agregarObservers()
 	}
 

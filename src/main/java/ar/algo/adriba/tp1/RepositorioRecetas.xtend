@@ -9,7 +9,15 @@ public class RepositorioRecetas implements Repositorio {
 
 	static RepositorioRecetas repositorio = null
 
+	Comida prepizza = new Comida(0, "Prepizza", 1)
+	Comida queso = new Comida(0, "Muzzarella", 200)
+	Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200)
+	Comida jamon = new Comida(0, "Jamon", 100)
+	Comida oregano = new Comida(100, "Oregano", 0)
+	Comida azucar = new Comida(0, "azucar", 200)
+	
 	private new() {
+				
 	}
 
 	static public def RepositorioRecetas getInstance() {
