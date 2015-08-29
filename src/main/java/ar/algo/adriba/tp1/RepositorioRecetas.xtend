@@ -1,8 +1,10 @@
 package ar.algo.adriba.tp1
 
-import java.util.List
 import java.util.ArrayList
+import java.util.List
+import org.uqbar.commons.utils.Observable
 
+@Observable
 public class RepositorioRecetas implements Repositorio {
 	
 	public List<Receta> listarTodas = new ArrayList<Receta>
