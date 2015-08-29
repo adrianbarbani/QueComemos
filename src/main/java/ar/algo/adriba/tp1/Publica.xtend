@@ -21,5 +21,8 @@ class Publica implements TipoReceta {
 	override mePuedeVer(Usuario usuario, Receta unaReceta) {
 		true
 	}
-
+	
+	override boolean sosPublica(){
+		true
+	}
 }

@@ -11,6 +11,6 @@ interface TipoReceta {
 	
 	def boolean mePuedeVer(Usuario usuario, Receta unaReceta)
 	
-	
+	def boolean sosPublica()
 
 }

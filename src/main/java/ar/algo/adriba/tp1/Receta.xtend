@@ -133,5 +133,7 @@ public class Receta extends Entity implements Cosas {
 		
 	}
 	
-	
+	def boolean sosPublica(){
+		tipo.sosPublica
+	}
 }

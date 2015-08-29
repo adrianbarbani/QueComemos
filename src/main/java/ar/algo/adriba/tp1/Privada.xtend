@@ -26,6 +26,8 @@ class Privada implements TipoReceta {
 		unUsuario.usuarioTiene(unaReceta) || unUsuario.alguienDelGrupoConoce(unaReceta)
 	}
 	
-	
+	override boolean sosPublica(){
+		false
+	}
 
 }
