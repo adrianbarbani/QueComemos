@@ -4,6 +4,7 @@ import ar.algo.adriba.tp1.TipoReceta
 
 class Publica implements TipoReceta {
 
+
 	override sePuedeSugerir() {
 		true
 	}
@@ -25,4 +26,10 @@ class Publica implements TipoReceta {
 	override boolean sosPublica(){
 		true
 	}
+	
+	override setearReceta(Receta receta) {
+		
+	}
+	
+	
 }

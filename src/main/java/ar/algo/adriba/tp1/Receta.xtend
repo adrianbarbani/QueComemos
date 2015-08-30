@@ -18,6 +18,16 @@ public class Receta extends Entity implements Cosas {
 	String temporada
 	TipoReceta tipo
 
+	
+	
+	new() {
+			
+	}
+	
+	def void setearTipo() {
+		tipo.setearReceta(this)
+	}
+	
 	//-----------------------------------------------------------------------------------------------------
 	// Parte 1: validacion de una receta
 	def boolean esvalida() {
@@ -77,8 +87,6 @@ public class Receta extends Entity implements Cosas {
 		RepositorioRecetas.getInstance().agregar(this)
 	}
 	
-	new() {
-	}
 
 	def boolean laPuedeModificar(Usuario usuario) {
 		tipo.tePuedeModificar(this, usuario)

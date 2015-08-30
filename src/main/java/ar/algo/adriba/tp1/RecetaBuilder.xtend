@@ -51,6 +51,7 @@ class RecetaBuilder {
 	
 	def Receta build(){
 		RepositorioRecetas.getInstance().agregar(receta)
+		receta.setearTipo
 		receta
 		
 	}

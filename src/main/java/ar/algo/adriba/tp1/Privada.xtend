@@ -6,8 +6,20 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class Privada implements TipoReceta {
 
+	Usuario duenio 
+	
+	
 	new(Usuario unUsuario, Receta unaReceta) {
-		unUsuario.agregar(unaReceta)
+		duenio = unUsuario
+		this.agregarRecetaADuenio(unaReceta)
+	}
+	
+	def agregarRecetaADuenio(Receta receta) {
+		duenio.agregar(receta)
+	}
+	
+	new (Usuario unUsuario){
+		duenio = unUsuario
 	}
 
 	override sePuedeSugerir() {
@@ -29,5 +41,10 @@ class Privada implements TipoReceta {
 	override boolean sosPublica(){
 		false
 	}
+	
+	override setearReceta(Receta receta) {
+		this.agregarRecetaADuenio(receta)
+	}
+	
 
 }
