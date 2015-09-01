@@ -43,7 +43,7 @@ class Busqueda {
 	new(Persona unaPersona, Repositorio unRepo) {
 		persona = unaPersona
 		repositorioDeRecetas = unRepo
-		this.agregarObservers()
+		this.agregarObservers()//asd
 	}
 	
 	new(Persona unaPersona, Repositorio unRepo, Ordenamiento unOrden) {
