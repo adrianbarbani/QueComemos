@@ -46,6 +46,13 @@ class Busqueda {
 		this.agregarObservers()
 	}
 	
+	new(Persona unaPersona, Repositorio unRepo, Ordenamiento unOrden) {
+		persona = unaPersona
+		repositorioDeRecetas = unRepo
+		orden = unOrden
+		this.agregarObservers()
+	}
+	
 	
 
 	def void agregarObservers() {
