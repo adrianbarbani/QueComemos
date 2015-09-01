@@ -45,6 +45,8 @@ class Busqueda {
 		repositorioDeRecetas = unRepo
 		this.agregarObservers()
 	}
+	
+	
 
 	def void agregarObservers() {
 		observers => [
@@ -83,5 +85,48 @@ class Busqueda {
 		orden.ordenar(unasRecetas)
 
 	}
+	
+	def buscarReceta(String nombre, String dificultad, String temporada, String ingrediente, int caloriaDesde, int caloriaHasta) {
+		pasarPorFiltros(this.recetasQuePuedeVer.filter[receta|
+			this.match(nombre, receta.nombre) && this.match(dificultad, receta.dificultad) && this.match(temporada, receta.temporada) && this.contiene(ingrediente,receta) && 
+			this.tieneMasCalorias(caloriaDesde, receta) && this.tieneMenosCalorias(caloriaHasta, receta)
+		].toList)//ver lo de los filtros
+	}
+	
+	def tieneMenosCalorias(int i, Receta receta) {
+		if (i==0){
+			true
+		}else{
+			i>receta.caloriasReceta
+		}
+	}
+	
+	def boolean tieneMasCalorias(int i, Receta receta) {
+		if (i==0){
+			true
+		}else{
+			i<receta.caloriasReceta
+		}
+	}
+					
+	def contiene(String ingrediente, Receta receta) {
+		if(ingrediente == null){
+			return true
+		}else{
+		receta.tenes(ingrediente)
+		
+		}
+	}
 
+	def match(Object expectedValue, Object realValue) {
+		if (expectedValue == null) {
+			return true
+		}
+		if (realValue == null) {
+			return false
+		}
+		realValue.toString().toLowerCase().contains(expectedValue.toString().toLowerCase())
+	}
 }
+
+
