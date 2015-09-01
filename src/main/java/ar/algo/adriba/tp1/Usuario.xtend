@@ -19,6 +19,7 @@ class Usuario extends Persona {
 	List<CondicionPreexistente> condicionesPreexistentes = new ArrayList<CondicionPreexistente>
 	Rutina rutinaUsuario //ejemplo una rutina, de 5 posibles interface
 	List<Receta> recetasDelUsuario = new ArrayList<Receta>
+	List<Filtro>filtrosPerfilUsuario = new ArrayList<Filtro>
 	
 	//------------entrega2---------------
 	List<GrupoDeUsuario> grupos = new ArrayList<GrupoDeUsuario> // coleccion de grupos de los que soy miembro.
