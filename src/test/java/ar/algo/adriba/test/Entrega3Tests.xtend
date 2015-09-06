@@ -40,7 +40,7 @@ import ar.algo.adriba.tp1.ObserverMasConsultadaPorSexo
 import ar.algo.adriba.tp1.ObserversConsulta
 import ar.algo.adriba.tp1.Busqueda
 import ar.algo.adriba.tp1.Repositorio
-
+/* 
 class Entrega3Tests {
 
 	Fecha fechaValida
@@ -475,4 +475,4 @@ class Entrega3Tests {
 	def void observerDeLaHora() {
 	}
 
-}
+}*/

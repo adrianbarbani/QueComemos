@@ -17,7 +17,7 @@ import java.util.List
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-
+/* 
 class Entrega1Tests {
 
 	Fecha fechaValida
@@ -281,3 +281,4 @@ class Entrega1Tests {
 	}
 
 }
+*/

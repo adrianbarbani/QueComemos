@@ -1,5 +1,6 @@
 package ar.algo.adriba.test
 
+/* 
 import ar.algo.adriba.tp1.carne
 import ar.algo.adriba.tp1.Diabetico
 import ar.algo.adriba.tp1.Femenino
@@ -317,4 +318,4 @@ class TestImc { // le puse un nombre descriptivo
 	def void test15CondicionesDeUnaReceta() {
 		receta1.getParaQueCondicionesSoyInadecuada()
 	}
-}
+}*/
