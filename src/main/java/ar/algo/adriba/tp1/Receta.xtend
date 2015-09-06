@@ -71,7 +71,6 @@ public class Receta extends Entity implements Cosas {
 
 	def void setearValores(Receta unaReceta) {
 		this => [
-			nombreDelPlato = unaReceta.nombreDelPlato
 			subRecetaseIngredientes = unaReceta.subRecetaseIngredientes
 			explicacionDeLaPreparacion = unaReceta.explicacionDeLaPreparacion
 			caloriasReceta = unaReceta.caloriasReceta
@@ -144,4 +143,9 @@ public class Receta extends Entity implements Cosas {
 	def boolean sosPublica(){
 		tipo.sosPublica
 	}
+	
+	def crearCopia(Usuario usuario, String nombre) {
+		tipo.crearUnaCopiaPropia(this,usuario, nombre)
+	}
+	
 }

@@ -10,7 +10,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 // decorator ---- http://yuml.me/edit/bc2d9244
 // entrega 4 command http://yuml.me/edit/f9ab3fab
 @Accessors
-class Usuario extends Persona {
+class  Usuario extends Persona {
 	int peso
 	double altura
 	Fecha fechaDeNacimiento

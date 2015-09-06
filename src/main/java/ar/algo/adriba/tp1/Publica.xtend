@@ -4,7 +4,6 @@ import ar.algo.adriba.tp1.TipoReceta
 
 class Publica implements TipoReceta {
 
-
 	override sePuedeSugerir() {
 		true
 	}
@@ -13,23 +12,31 @@ class Publica implements TipoReceta {
 		true
 	}
 
-	 override cambiarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones) {
-        val Receta nuevaReceta = usuario.copiar(receta)
-        usuario.agregar(nuevaReceta)
-        usuario.modificarUnaReceta(nuevaReceta, unaRecetaConModificaciones)
-    }
-	
+	override cambiarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones) {
+		val Receta nuevaReceta = usuario.copiar(receta)
+		usuario.agregar(nuevaReceta)
+		usuario.modificarUnaReceta(nuevaReceta, unaRecetaConModificaciones)
+	}
+
 	override mePuedeVer(Usuario usuario, Receta unaReceta) {
 		true
 	}
-	
-	override boolean sosPublica(){
+
+	override boolean sosPublica() {
 		true
 	}
-	
+
 	override setearReceta(Receta receta) {
-		
 	}
-	
-	
+
+	override crearUnaCopiaPropia(Receta receta, Usuario usuario, String string) {
+		val recetaAModificar = new Receta
+		if (string == null) {
+			recetaAModificar.nombreDelPlato = receta.nombreDelPlato
+		} else {
+			recetaAModificar.nombreDelPlato = string
+		}
+		this.cambiarValores(usuario, receta, recetaAModificar)
+	}
+
 }
