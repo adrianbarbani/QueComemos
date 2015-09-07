@@ -8,7 +8,7 @@ import org.uqbar.commons.model.Entity
 
 @Observable
 @Accessors
-public class Receta extends Entity implements Cosas {
+public class Receta extends Entity implements Cosas  {
 
 	String nombreDelPlato
 	List<Cosas> subRecetaseIngredientes = new ArrayList<Cosas>
@@ -71,6 +71,7 @@ public class Receta extends Entity implements Cosas {
 
 	def void setearValores(Receta unaReceta) {
 		this => [
+			nombreDelPlato = unaReceta.nombreDelPlato
 			subRecetaseIngredientes = unaReceta.subRecetaseIngredientes
 			explicacionDeLaPreparacion = unaReceta.explicacionDeLaPreparacion
 			caloriasReceta = unaReceta.caloriasReceta
