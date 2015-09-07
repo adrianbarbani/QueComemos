@@ -12,7 +12,7 @@ class RepoDeUsuariosMock {
 	Map<Usuario, String> usuarioContrasenia = new HashMap<Usuario, String>
 	
 	public new() {
-		//agregar usuarios
+		
 	}
 
 	

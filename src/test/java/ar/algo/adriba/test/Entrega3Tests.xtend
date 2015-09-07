@@ -1,5 +1,5 @@
 package ar.algo.adriba.test
-
+/* 
 import ar.algo.adriba.tp1.Celiaco
 import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.CompararPorCalorias
@@ -40,7 +40,7 @@ import ar.algo.adriba.tp1.ObserverMasConsultadaPorSexo
 import ar.algo.adriba.tp1.ObserversConsulta
 import ar.algo.adriba.tp1.Busqueda
 import ar.algo.adriba.tp1.Repositorio
-/* 
+
 class Entrega3Tests {
 
 	Fecha fechaValida
