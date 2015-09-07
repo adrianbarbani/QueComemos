@@ -55,9 +55,10 @@ class UsuarioBuilder {
 		this
 	}
 
-	def Usuario build() {
+	def Usuario build(String contraseña) {
 		usuario.validacionDeDatos()
 		usuario.solicitarIncorporacion()
+		RepoDeUsuariosMock.getInstance().agregarUsuarioConContraseña(usuario, contraseña)
 		usuario
 	}
 
