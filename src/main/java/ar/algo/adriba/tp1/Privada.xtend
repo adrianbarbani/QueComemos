@@ -7,7 +7,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Privada implements TipoReceta {
 
 	Usuario duenio 
-	
+	String nombre
 	
 	new(Usuario unUsuario, Receta unaReceta) {
 		duenio = unUsuario
@@ -32,6 +32,13 @@ class Privada implements TipoReceta {
 
 	override cambiarValores(Usuario usuario, Receta receta, Receta unaRecetaConModificaciones) {
 		receta.setearValores(unaRecetaConModificaciones)
+		if (nombre == null) {
+			receta.nombreDelPlato = unaRecetaConModificaciones.nombreDelPlato
+		} else {
+			receta.setearNombre(nombre)
+		}
+		usuario.agregar(receta)
+	
 	}
 
 	override mePuedeVer(Usuario unUsuario, Receta unaReceta) {
@@ -47,13 +54,9 @@ class Privada implements TipoReceta {
 	}
 	
 	override crearUnaCopiaPropia(Receta receta, Usuario usuario, String string) {
-		val recetaAModificar = new Receta
-		if (string == null) {
-			recetaAModificar.nombreDelPlato = receta.nombreDelPlato
-		} else {
-			recetaAModificar.nombreDelPlato = string
-		}
-		this.cambiarValores(usuario, receta, recetaAModificar)
+		var recetaAModificar = new Receta(receta, usuario)
+		this.cambiarValores(usuario, recetaAModificar, receta)
+		nombre = string
 	}
 	
 	

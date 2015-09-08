@@ -149,4 +149,8 @@ public class Receta extends Entity implements Cosas  {
 		tipo.crearUnaCopiaPropia(this,usuario, nombre)
 	}
 	
+	def setearNombre(String string) {
+		nombreDelPlato = string
+	}
+	
 }
