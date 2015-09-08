@@ -55,8 +55,8 @@ class Privada implements TipoReceta {
 	
 	override crearUnaCopiaPropia(Receta receta, Usuario usuario, String string) {
 		var recetaAModificar = new Receta(receta, usuario)
-		this.cambiarValores(usuario, recetaAModificar, receta)
 		nombre = string
+		this.cambiarValores(usuario, recetaAModificar, receta)
 	}
 	
 	

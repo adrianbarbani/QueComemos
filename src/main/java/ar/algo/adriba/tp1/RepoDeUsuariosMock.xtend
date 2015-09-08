@@ -29,7 +29,7 @@ class RepoDeUsuariosMock {
 	
 	def Usuario compararContraseña(String usr, String contraseniaIngresada){
 		val Usuario usuario = this.obtenerUsuario(usr)
-		if(usuarioContrasenia.get(usuario).equals(contraseniaIngresada)==false)
+		if(!usuarioContrasenia.get(usuario).equals(contraseniaIngresada))
 		throw new UserException("Contraseña incorrecta")else{usuario}	
 	} 
 	
