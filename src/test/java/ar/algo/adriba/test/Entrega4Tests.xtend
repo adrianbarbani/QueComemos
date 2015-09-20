@@ -1,5 +1,5 @@
 package ar.algo.adriba.test
-
+/* 
 import ar.algo.adriba.tp1.Busqueda
 import ar.algo.adriba.tp1.Celiaco
 import ar.algo.adriba.tp1.Comida
@@ -486,4 +486,4 @@ class Entrega4Tests {
 	}
 
 
-}
+}*/
